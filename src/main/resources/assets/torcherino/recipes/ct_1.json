@@ -1,0 +1,15 @@
+{
+	"result": {
+		"item": "torcherino:compressed_torch_lvl1"
+	},
+	"pattern" : [
+		"TTT",
+		"TAT",
+		"TTT"
+	],
+	"type" : "minecraft:crafting_shaped",
+	"key" : {
+		"T": {"item": "torcherino:torch_lvl1"},
+		"A": {"item": "torcherino:bindingelement2"}
+	}
+}   

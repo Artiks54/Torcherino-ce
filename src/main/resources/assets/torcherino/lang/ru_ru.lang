@@ -1,0 +1,27 @@
+
+tooltip.torcherino.descriptionInfo=Use RightClick by torch to get information
+tooltip.torcherino.descriptionConfig=Use RightClick by configuration torch
+
+item.config.name=§eКонфигурационный изменитель
+item.torchinfo.name=§eИнформационный обозреватель
+item.diamondclock.name=§bАлмазные часы
+item.emeraldclock.name=§aИзумрудные часы
+item.goldclock.name=§6Золатые часы
+item.lapisclock.name=§9Лазуритовые часы
+item.redstoneclock.name=§cРедстоун часы
+item.compressedtorch.name=§eСжатый факел
+item.bindingelement.name=§dСвязующий элемент
+item.bindingelement2.name=§5Улучшенный связующий элемент
+itemGroup.torcherinoTab=Torcherino CE
+
+tile.torch_lvl1.name=§9Ускоряющий факел 1 уровня
+tile.torch_lvl2.name=§aУскоряющий факел 2 уровня
+tile.torch_lvl3.name=§cУскоряющий факел 3 уровня
+tile.torch_lvl4.name=§6Ускоряющий факел 4 уровня
+tile.torch_lvl5.name=§bУскоряющий факел 5 уровня
+
+tile.compressed_torch_lvl1.name=§9Сжатый ускоряющий факел 1 уровня
+tile.compressed_torch_lvl2.name=§aСжатый ускоряющий факел 2 уровня
+tile.compressed_torch_lvl3.name=§cСжатый ускоряющий факел 3 уровня
+tile.compressed_torch_lvl4.name=§dСжатый ускоряющий факел 4 уровня
+tile.compressed_torch_lvl5.name=§bСжатый ускоряющий факел 5 уровня

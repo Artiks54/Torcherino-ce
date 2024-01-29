@@ -1,0 +1,89 @@
+package com.ariks.torcherino;
+
+import java.io.File;
+import com.ariks.torcherino.Register.RegisterBlackList;
+import com.ariks.torcherino.Tiles.TileCompresedTorch.*;
+import com.ariks.torcherino.Tiles.TileTorch.*;
+import com.ariks.torcherino.debug.DebugEvent;
+import com.ariks.torcherino.network.AccelerationRegistry;
+import com.ariks.torcherino.network.TorchTab;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraftforge.common.MinecraftForge;
+import org.apache.logging.log4j.Logger;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLInterModComms;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import static com.ariks.torcherino.Config.*;
+
+@Mod(modid=Torcherino.MOD_ID, name=Torcherino.MOD_NAME,useMetadata = true,acceptedMinecraftVersions = "[1.12]",version = "7.6.8")
+public class Torcherino 
+{
+	public static File config;
+	public static CreativeTabs torcherinoTab = new TorchTab("torcherinoTab");
+	public static Logger logger;
+	public static SimpleNetworkWrapper network;
+	public static final String MOD_ID = "torcherino", MOD_NAME = "Torcherinagit statuso";
+	@Mod.Instance(Torcherino.MOD_ID)
+	public static Torcherino instance;
+	@SidedProxy(clientSide="com.ariks.torcherino.ClientProxy", serverSide="com.ariks.torcherino.CommonProxy")
+	public static CommonProxy proxy;
+	@Mod.EventHandler
+	public void preInit(FMLPreInitializationEvent event)
+	{
+		logger = event.getModLog();
+		network = NetworkRegistry.INSTANCE.newSimpleChannel(Torcherino.MOD_NAME);
+		proxy.preInit();
+		Config.registerConfig(event);
+	}
+	@Mod.EventHandler
+	public void init(FMLInitializationEvent event) {
+			logger.info(TileBase1.class);
+			logger.info(TileBase2.class);
+			logger.info(TileBase3.class);
+			logger.info(TileBase4.class);
+			logger.info(TileBase5.class);
+			logger.info(CompressedTileBase1.class);
+			logger.info(CompressedTileBase2.class);
+			logger.info(CompressedTileBase3.class);
+			logger.info(CompressedTileBase4.class);
+			logger.info(CompressedTileBase5.class);
+			RegisterBlackList.preInit();
+			MinecraftForge.EVENT_BUS.register(new DebugEvent());
+	}
+	@Mod.EventHandler
+	public void postInit(FMLPostInitializationEvent event)
+	{
+		if(Loader.isModLoaded("projecte"))
+		{
+			AccelerationRegistry.blacklistString("projecte:dm_pedestal");
+		}
+		for(String block : blacklistedBlocks)
+		{
+			AccelerationRegistry.blacklistString(block);
+		}
+        for(String tile : blacklistedTiles)
+        {
+        	AccelerationRegistry.blacklistString(tile);
+        }
+	}
+	@Mod.EventHandler
+    public void imcMessage(FMLInterModComms.IMCEvent event)
+	{
+        for(FMLInterModComms.IMCMessage message : event.getMessages())
+        {
+            if(!message.isStringMessage())
+            {
+                logger.info("Received non-string message! Ignoring");
+                continue;
+            }
+            String s = message.getStringValue();
+            AccelerationRegistry.blacklistString(s);
+        }
+    }
+}

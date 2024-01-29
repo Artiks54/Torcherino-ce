@@ -1,0 +1,27 @@
+
+tooltip.torcherino.descriptionInfo=Use RightClick by torch to get information
+tooltip.torcherino.descriptionConfig=Use RightClick by configuration torch
+
+item.config.name=§eConfiguration item
+item.torchinfo.name=§eInformation item
+item.diamondclock.name=§bDiamond Clock
+item.emeraldclock.name=§aEmerald Clock
+item.goldclock.name=§6Gold clock
+item.lapisclock.name=§9Lapis clock
+item.redstoneclock.name=§cRedstone clock
+item.compressedtorch.name=§eCompressed Torch
+item.bindingelement.name=§dBinding Element
+item.bindingelement2.name=§5Advanced Binding Element
+itemGroup.torcherinoTab=Torcherino CE
+
+tile.torch_lvl1.name=§9Torcherino lvl 1
+tile.torch_lvl2.name=§aTorcherino lvl 2
+tile.torch_lvl3.name=§cTorcherino lvl 3
+tile.torch_lvl4.name=§6Torcherino lvl 4
+tile.torch_lvl5.name=§bTorcherino lvl 5
+
+tile.compressed_torch_lvl1.name=§9Compressed torcherino lvl 1
+tile.compressed_torch_lvl2.name=§aCompressed torcherino lvl 2
+tile.compressed_torch_lvl3.name=§cCompressed torcherino lvl 3
+tile.compressed_torch_lvl4.name=§dCompressed torcherino lvl 4
+tile.compressed_torch_lvl5.name=§bCompressed torcherino lvl 5
