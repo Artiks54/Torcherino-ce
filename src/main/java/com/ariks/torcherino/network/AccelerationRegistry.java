@@ -5,6 +5,7 @@ import com.ariks.torcherino.Torcherino;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+
 public class AccelerationRegistry
 {
 	public static void blacklistString(String string)

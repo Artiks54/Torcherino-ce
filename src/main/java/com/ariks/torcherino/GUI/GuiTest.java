@@ -18,7 +18,6 @@ public class GuiTest extends GuiScreen {
     public int TextureWidth = 256;
     public int TextureHeight = 256;
     private static final ResourceLocation BACKGROUND = new ResourceLocation(Torcherino.MOD_ID, "textures/gui/gui.png");
-
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         int screenWidth = this.width;
         int screenHeight = this.height;
@@ -97,7 +96,6 @@ public class GuiTest extends GuiScreen {
             fr.drawString("14)Maximum working radius: " + Config.CTorch_lvl5_R, textX, textY += Step, 0x5555FF);
         }
     }
-
     @Override
     public void updateScreen() {
         super.updateScreen();

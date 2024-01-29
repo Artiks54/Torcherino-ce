@@ -15,9 +15,10 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.fluids.BlockFluidBase;
+import org.jetbrains.annotations.NotNull;
 
 
-
+import java.text.DecimalFormat;
 import java.util.Random;
 
 public class TileTorcherinoBase extends TileEntity implements ITickable {
@@ -28,23 +29,18 @@ public class TileTorcherinoBase extends TileEntity implements ITickable {
     public EnumParticleTypes prac;
     public int count, currentMode,modPrac, speed, xMin, yMin, zMin, xMax, yMax, zMax;
     public double xMinPrac, yMinPrac, zMinPrac, xMaxPrac, yMaxPrac, zMaxPrac;
-
     public TileTorcherinoBase() {
         this.rand = new Random();
     }
-
-    protected int Radius(int area) {
-        return area;
+    protected int Radius() {
+        return 1;
     }
-
     protected int speedBase(int base) {
         return base;
     }
-
-    protected int SpeedModes(int newSpeed) {
-        return newSpeed;
+    protected int SpeedModes() {
+        return 1;
     }
-
     @Override
     public void update() {
         if (this.world.isRemote) return;
@@ -57,7 +53,6 @@ public class TileTorcherinoBase extends TileEntity implements ITickable {
             this.UpdateTickArea();
         }
     }
-
     private void UpdateChangeArea() {
         int radius = currentMode;
         xMin = pos.getX() - radius;
@@ -104,9 +99,8 @@ public class TileTorcherinoBase extends TileEntity implements ITickable {
             }
         }
     }
-
     @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound tagCompound) {
+    public @NotNull NBTTagCompound writeToNBT(@NotNull NBTTagCompound tagCompound) {
         super.writeToNBT(tagCompound);
         tagCompound.setBoolean("boleanwork",this.bolaenWork);
         tagCompound.setBoolean("boleanspawn", this.boleanSpawnPrac);
@@ -117,9 +111,8 @@ public class TileTorcherinoBase extends TileEntity implements ITickable {
         tagCompound.setDouble("stepcount",this.stepCount);
         return tagCompound;
     }
-
     @Override
-    public void readFromNBT(NBTTagCompound tagCompound) {
+    public void readFromNBT(@NotNull NBTTagCompound tagCompound) {
         super.readFromNBT(tagCompound);
         this.bolaenWork = tagCompound.getBoolean("boleanwork");
         this.boleanSpawnPrac = tagCompound.getBoolean("boleanspawn");
@@ -136,12 +129,12 @@ public class TileTorcherinoBase extends TileEntity implements ITickable {
         return new SPacketUpdateTileEntity(getPos(), -999, nbt);
     }
     @Override
-    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+    public void onDataPacket(@NotNull NetworkManager net, @NotNull SPacketUpdateTileEntity pkt) {
         super.onDataPacket(net, pkt);
         this.readFromNBT(pkt.getNbtCompound());
     }
     @Override
-    public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) {
+    public boolean shouldRefresh(@NotNull World world, @NotNull BlockPos pos, IBlockState oldState, IBlockState newState) {
         return oldState.getBlock() != newState.getBlock();
     }
     public void spawnPrac() {
@@ -188,8 +181,8 @@ public class TileTorcherinoBase extends TileEntity implements ITickable {
             }
         }
     }
-    public void increaseArea() {currentMode = (currentMode + 1) % Radius(1);}
-    public void increaseSpeed() {speed = (byte) ((speed + 1) % SpeedModes(1));}
+    public void increaseArea() {currentMode = (currentMode + 1) % Radius();}
+    public void increaseSpeed() {speed = (byte) ((speed + 1) % SpeedModes());}
     public void toggleParticle() {
         modPrac +=1;
         if(modPrac >2){
@@ -207,9 +200,7 @@ public class TileTorcherinoBase extends TileEntity implements ITickable {
             prac = EnumParticleTypes.REDSTONE;
         }
     }
-    public void toggleWork() {
-        bolaenWork = !bolaenWork;
-    }
+    public void toggleWork() {bolaenWork = !bolaenWork;}
     public void toggleSpawnPrac() {boleanSpawnPrac = !boleanSpawnPrac;}
     public void toggleStepCount(){
         stepCount +=0.05;
@@ -236,5 +227,4 @@ public class TileTorcherinoBase extends TileEntity implements ITickable {
             }
             return message;
         }
-
 }

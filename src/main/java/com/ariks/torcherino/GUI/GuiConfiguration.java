@@ -12,18 +12,15 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
-
 import java.io.IOException;
 
 public class GuiConfiguration extends GuiScreen {
-
     public static TileEntity lastClickedTileEntity;
     public static String tileName;
     TileTorcherinoBase torch = (TileTorcherinoBase) lastClickedTileEntity;
     public int TextureWidth = 256;
     public int TextureHeight = 256;
     private static final ResourceLocation BACKGROUND = new ResourceLocation(Torcherino.MOD_ID, "textures/gui/gui.png");
-
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         int screenWidth = this.width;
         int screenHeight = this.height;
@@ -31,18 +28,16 @@ public class GuiConfiguration extends GuiScreen {
         int TextureY = (screenHeight - TextureHeight) / 2;
         mc.getTextureManager().bindTexture(BACKGROUND);
         drawModalRectWithCustomSizedTexture(TextureX, TextureY, 0, 0, TextureWidth, TextureHeight, TextureWidth, TextureHeight);
-
         int textX = TextureX + 12;
         int textY = TextureY + 12;
         int Step = 12;
         FontRenderer fr = fontRenderer;
-        fr.drawString("\u00A7nCONFIGURATION TORCHERINO", textX + 65, textY, 0x55FF55);
-        fr.drawString("NAME: " +"\u00A79"+ tileName, textX, textY+=Step, 0xFF5555);
-        fr.drawString("Currently working: " +"\u00A79"+ torch.bolaenWork, textX, textY+=Step, 0xFF5555);
+        fr.drawString("\u00A7n"+"CONFIGURATION TORCHERINO", textX + 65, textY, 0x55FF55);
+        fr.drawString("NAME: "+"\u00A79"+tileName, textX, textY+=Step, 0xFF5555);
+        fr.drawString("Currently working: "+"\u00A79"+torch.bolaenWork, textX, textY+=Step, 0xFF5555);
         fr.drawString("Spawn Particle: "+"\u00A79"+torch.boleanSpawnPrac,textX,textY+=Step,0xFF5555);
         fr.drawString("Step Count: "+"\u00A79"+torch.stepCount,textX,textY+=Step,0xFF5555);
-        fr.drawString("Radius: " +"\u00A79"+ torch.debugGetRadius() + "x" +"\u00A79"+ torch.debugGetRadius() + "x" + "\u00A79"+torch.debugGetRadius(), textX, textY += Step, 0xFF5555);
-
+        fr.drawString("Radius: "+"\u00A79"+torch.debugGetRadius() + "x" +"\u00A79"+ torch.debugGetRadius() + "x" + "\u00A79"+torch.debugGetRadius(), textX, textY += Step, 0xFF5555);
         if (lastClickedTileEntity instanceof TileTorch.TileBase1) {
             fr.drawString("Acceleration: " +"\u00A79"+ torch.debugGetSpeed() * Config.Torch_lvl1_S * 100 + "\u00A79"+"%", textX, textY += Step, 0xFF5555);
         }
@@ -73,7 +68,6 @@ public class GuiConfiguration extends GuiScreen {
         if (lastClickedTileEntity instanceof TileCompresedTorch.CompressedTileBase5) {
             fr.drawString("Acceleration: " +"\u00A79"+ torch.debugGetSpeed() * Config.CTorch_lvl5_S * 100 + "\u00A79"+"%", textX, textY += Step, 0xFF5555);
         }
-
         if(torch.modPrac == 0) {
             fr.drawString("\u00A7eParticle Flame", textX, textY+=Step, 0xFF5555);
         }
@@ -83,11 +77,8 @@ public class GuiConfiguration extends GuiScreen {
         if(torch.modPrac == 2) {
             fr.drawString("\u00A74Particle Redstone", textX, textY+=Step, 0xFF5555);
         }
-
-
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
-
     @Override
     public void initGui() {
         super.initGui();
@@ -124,7 +115,6 @@ public class GuiConfiguration extends GuiScreen {
             torch.toggleParticle();
         }
     }
-
     @Override
     protected void keyTyped(char typedChar, int keyCode) throws IOException {
         Minecraft mine = Minecraft.getMinecraft();
@@ -133,7 +123,6 @@ public class GuiConfiguration extends GuiScreen {
             this.mc.displayGuiScreen(null);
         }
     }
-
     @Override
     public void updateScreen() {
         super.updateScreen();

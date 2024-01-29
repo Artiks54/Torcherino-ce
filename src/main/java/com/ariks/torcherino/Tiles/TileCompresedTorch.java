@@ -9,11 +9,11 @@ public abstract class TileCompresedTorch {
             return base * CTorch_lvl1_S;
         }
         @Override
-        protected int SpeedModes(int newSpeed) {
+        protected int SpeedModes() {
             return CTorch_lvl1_M+1;
         }
         @Override
-        protected int Radius(int area) {
+        protected int Radius() {
             return CTorch_lvl1_R+1;
         }
     }
@@ -24,11 +24,11 @@ public abstract class TileCompresedTorch {
             return base * CTorch_lvl2_S;
         }
         @Override
-        protected int SpeedModes(int newSpeed) {
+        protected int SpeedModes() {
             return CTorch_lvl2_M+1;
         }
         @Override
-        protected int Radius(int area) {
+        protected int Radius() {
             return CTorch_lvl2_R+1;
         }
     }
@@ -39,11 +39,11 @@ public abstract class TileCompresedTorch {
             return base * CTorch_lvl3_S;
         }
         @Override
-        protected int SpeedModes(int newSpeed) {
+        protected int SpeedModes() {
             return CTorch_lvl3_M+1;
         }
         @Override
-        protected int Radius(int area) {
+        protected int Radius() {
             return CTorch_lvl3_R+1;
         }
     }
@@ -54,11 +54,11 @@ public abstract class TileCompresedTorch {
             return base * CTorch_lvl4_S;
         }
         @Override
-        protected int SpeedModes(int newSpeed) {
+        protected int SpeedModes() {
             return CTorch_lvl4_M+1;
         }
         @Override
-        protected int Radius(int area) {
+        protected int Radius() {
             return CTorch_lvl4_R+1;
         }
     }
@@ -69,11 +69,11 @@ public abstract class TileCompresedTorch {
             return base * CTorch_lvl5_S;
         }
         @Override
-        protected int SpeedModes(int newSpeed) {
+        protected int SpeedModes() {
             return CTorch_lvl5_M+1;
         }
         @Override
-        protected int Radius(int area) {
+        protected int Radius() {
             return CTorch_lvl5_R+1;
         }
     }

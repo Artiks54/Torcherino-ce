@@ -10,11 +10,11 @@ public abstract class TileTorch
             return base * Torch_lvl1_S;
         }
         @Override
-        protected int SpeedModes(int newSpeed) {
+        protected int SpeedModes() {
             return Torch_lvl1_M+1;
         }
         @Override
-        protected int Radius(int area) {
+        protected int Radius() {
             return Torch_lvl1_R+1;
         }
     }
@@ -25,11 +25,11 @@ public abstract class TileTorch
             return base * Torch_lvl2_S;
         }
         @Override
-        protected int SpeedModes(int newSpeed) {
+        protected int SpeedModes() {
             return Torch_lvl2_M+1;
         }
         @Override
-        protected int Radius(int area) {
+        protected int Radius() {
             return Torch_lvl2_R+1;
         }
     }
@@ -40,11 +40,11 @@ public abstract class TileTorch
             return base * Torch_lvl3_S;
         }
         @Override
-        protected int SpeedModes(int newSpeed) {
+        protected int SpeedModes() {
             return Torch_lvl3_M + 1;
         }
         @Override
-        protected int Radius(int area) {
+        protected int Radius() {
             return Torch_lvl3_R + 1;
         }
     }
@@ -55,11 +55,11 @@ public abstract class TileTorch
                 return base * Torch_lvl4_S;
             }
         @Override
-        protected int SpeedModes(int newSpeed) {
+        protected int SpeedModes() {
                 return Torch_lvl4_M + 1;
             }
         @Override
-        protected int Radius(int area) {
+        protected int Radius() {
                 return Torch_lvl4_R + 1;
             }
     }
@@ -70,11 +70,11 @@ public abstract class TileTorch
                     return base * Torch_lvl5_S;
                 }
         @Override
-        protected int SpeedModes(int newSpeed) {
+        protected int SpeedModes() {
                     return Torch_lvl5_M + 1;
                 }
         @Override
-        protected int Radius(int area) {
+        protected int Radius() {
                     return Torch_lvl5_R + 1;
                 }
     }

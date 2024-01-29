@@ -3,6 +3,7 @@ import com.ariks.torcherino.Register.RegistryArray;
 import com.ariks.torcherino.Torcherino;
 import com.ariks.torcherino.network.IHasModel;
 import net.minecraft.item.Item;
+
 public class itemBase extends Item implements IHasModel {
         public itemBase(String name){
         this.setRegistryName(name);

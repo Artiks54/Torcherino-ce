@@ -17,31 +17,29 @@ public class RegisterBlackList {
         AccelerationRegistry.blacklistBlock(Blocks.GRASS_PATH);
         AccelerationRegistry.blacklistBlock(Blocks.GRASS);
         AccelerationRegistry.blacklistBlock(Blocks.DIRT);
-        //Block Mods
+        //Torch
         AccelerationRegistry.blacklistBlock(RegistryArray.Torch_lvl_1);
         AccelerationRegistry.blacklistBlock(RegistryArray.Torch_lvl_2);
         AccelerationRegistry.blacklistBlock(RegistryArray.Torch_lvl_3);
         AccelerationRegistry.blacklistBlock(RegistryArray.Torch_lvl_4);
         AccelerationRegistry.blacklistBlock(RegistryArray.Torch_lvl_5);
-
+        //C-Torch
         AccelerationRegistry.blacklistBlock(RegistryArray.Compressed_Torch_lvl1);
         AccelerationRegistry.blacklistBlock(RegistryArray.Compressed_Torch_lvl2);
         AccelerationRegistry.blacklistBlock(RegistryArray.Compressed_Torch_lvl3);
         AccelerationRegistry.blacklistBlock(RegistryArray.Compressed_Torch_lvl4);
         AccelerationRegistry.blacklistBlock(RegistryArray.Compressed_Torch_lvl5);
-
-        //Tile Mode
+        //Tile-Torch
         AccelerationRegistry.blacklistTile(TileBase1.class);
         AccelerationRegistry.blacklistTile(TileBase2.class);
         AccelerationRegistry.blacklistTile(TileBase3.class);
         AccelerationRegistry.blacklistTile(TileBase4.class);
         AccelerationRegistry.blacklistTile(TileBase5.class);
-
+        //Tile-C-Torch
         AccelerationRegistry.blacklistTile(TileCompresedTorch.CompressedTileBase1.class);
         AccelerationRegistry.blacklistTile(TileCompresedTorch.CompressedTileBase2.class);
         AccelerationRegistry.blacklistTile(TileCompresedTorch.CompressedTileBase3.class);
         AccelerationRegistry.blacklistTile(TileCompresedTorch.CompressedTileBase4.class);
         AccelerationRegistry.blacklistTile(TileCompresedTorch.CompressedTileBase5.class);
-
     }
 }

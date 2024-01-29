@@ -27,7 +27,6 @@ public class BlockBase extends BlockTorch implements IHasModel {
         RegistryArray.BLOCKS.add(this);
         RegistryArray.ITEMS.add(new ItemBlock(this).setRegistryName(Objects.requireNonNull(this.getRegistryName())));
     }
-
    @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState blockState, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
        if (Config.defaultModes) {

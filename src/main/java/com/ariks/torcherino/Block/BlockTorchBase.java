@@ -1,5 +1,4 @@
 package com.ariks.torcherino.Block;
-
 import com.ariks.torcherino.Block.Base.BlockBase;
 import com.ariks.torcherino.Register.RegistryArray;
 import com.ariks.torcherino.Tiles.TileTorch;

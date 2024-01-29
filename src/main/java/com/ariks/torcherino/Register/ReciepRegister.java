@@ -6,6 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import static com.ariks.torcherino.Register.RegistryArray.*;
+
 public class ReciepRegister {
     public static void preInit() {
         //GoldClock

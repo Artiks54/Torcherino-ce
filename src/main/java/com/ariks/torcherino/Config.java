@@ -35,8 +35,7 @@ public class Config {
             String General = "General";
             String Particle = "Particle";
             String ColorText = "ColorText";
-            Short maxShort = 32767;
-
+            short maxShort = 32767;
             //Mod
             blacklistedBlocks = config.getStringList("blacklistedBlocks", "blacklist", new String[]{}, "modid:unlocalized");
             blacklistedTiles = config.getStringList("blacklistedTiles", "blacklist", new String[]{}, "Fully qualified class name");
@@ -74,37 +73,32 @@ public class Config {
             Torch_lvl5_S = config.getInt("Speed",TileName,1,minValue,maxShort,TextS);
             Torch_lvl5_M = config.getInt("Modes",TileName,25,minValue,maxShort,TextM);
             Torch_lvl5_R = config.getInt("WorkR",TileName,25,minValue, maxShort,TextR);
-
             //Compressed_Torch_lvl_1
-            TileName2 = "Compressed_Torch_lvl_1";
+            TileName2 = "Torcherino_lvl_1_Compressed";
             CTorch_lvl1_S = config.getInt("Speed",TileName2,9,minValue,maxShort,TextS);
             CTorch_lvl1_M = config.getInt("Modes",TileName2,5,minValue,maxShort,TextM);
             CTorch_lvl1_R = config.getInt("WorkR",TileName2,5,minValue, maxShort,TextR);
             //Compressed_Torch_lvl_2
-            TileName2 = "Compressed_Torch_lvl_2";
+            TileName2 = "Torcherino_lvl_2_Compressed";
             CTorch_lvl2_S = config.getInt("Speed",TileName2,9,minValue,maxShort,TextS);
             CTorch_lvl2_M = config.getInt("Modes",TileName2,10,minValue,maxShort,TextM);
             CTorch_lvl2_R = config.getInt("WorkR",TileName2,10,minValue, maxShort,TextR);
             //Compressed_Torch_lvl_3
-            TileName2 = "Compressed_Torch_lvl_3";
+            TileName2 = "Torcherino_lvl_3_Compressed";
             CTorch_lvl3_S = config.getInt("Speed",TileName2,9,minValue,maxShort,TextS);
             CTorch_lvl3_M = config.getInt("Modes",TileName2,15,minValue,maxShort,TextM);
             CTorch_lvl3_R = config.getInt("WorkR",TileName2,15,minValue, maxShort,TextR);
             //Compressed_Torch_lvl_4
-            TileName2 = "Compressed_Torch_lvl_4";
+            TileName2 = "Torcherino_lvl_4_Compressed";
             CTorch_lvl4_S = config.getInt("Speed",TileName2,9,minValue,maxShort,TextS);
             CTorch_lvl4_M = config.getInt("Modes",TileName2,20,minValue,maxShort,TextM);
             CTorch_lvl4_R = config.getInt("WorkR",TileName2,20,minValue, maxShort,TextR);
             //Compressed_Torch_lvl_5
-            TileName2 = "Compressed_Torch_lvl_5";
+            TileName2 = "Torcherino_lvl_5_Compressed";
             CTorch_lvl5_S = config.getInt("Speed",TileName2,9,minValue,maxShort,TextS);
             CTorch_lvl5_M = config.getInt("Modes",TileName2,25,minValue,maxShort,TextM);
             CTorch_lvl5_R = config.getInt("WorkR",TileName2,25,minValue, maxShort,TextR);
-
-
-
         } finally {if(config.hasChanged()) config.save();}}
-
     public static void registerConfig(FMLPreInitializationEvent event){
         Torcherino.config = new File(event.getModConfigurationDirectory()+"/"+Torcherino.MOD_ID);
         Torcherino.config.mkdirs();

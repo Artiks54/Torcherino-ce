@@ -1,5 +1,4 @@
 package com.ariks.torcherino.Block;
-
 import com.ariks.torcherino.Block.Base.BlockBase;
 import com.ariks.torcherino.Register.RegistryArray;
 import com.ariks.torcherino.Tiles.TileCompresedTorch.*;
@@ -14,7 +13,6 @@ public class CompressedTorch extends BlockBase {
     public CompressedTorch(String name) {
         super(name);
     }
-
     @Nullable
     @Override
     public TileEntity createTileEntity(@NotNull World world, IBlockState state) {
