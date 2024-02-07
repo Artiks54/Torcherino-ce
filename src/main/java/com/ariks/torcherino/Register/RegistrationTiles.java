@@ -1,10 +1,10 @@
 package com.ariks.torcherino.Register;
+
 import com.ariks.torcherino.Tiles.TileCompresedTorch;
 import com.ariks.torcherino.Tiles.TileTorch;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import static com.ariks.torcherino.Torcherino.MOD_ID;
-
 public final class RegistrationTiles{
     public static void preInit()
     {

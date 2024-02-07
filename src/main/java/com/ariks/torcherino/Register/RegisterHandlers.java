@@ -1,5 +1,5 @@
-package com.ariks.torcherino.network;
-import com.ariks.torcherino.Register.RegistryArray;
+package com.ariks.torcherino.Register;
+import com.ariks.torcherino.util.IHasModel;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;

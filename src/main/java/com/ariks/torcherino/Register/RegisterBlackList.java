@@ -1,22 +1,38 @@
 package com.ariks.torcherino.Register;
 import com.ariks.torcherino.Tiles.TileCompresedTorch;
-import com.ariks.torcherino.network.AccelerationRegistry;
 import net.minecraft.init.Blocks;
 import static com.ariks.torcherino.Tiles.TileTorch.*;
 
 public class RegisterBlackList {
     public static void preInit() {
-        //Main Block
+        //Minecraft block
+        AccelerationRegistry.blacklistBlock(Blocks.COMMAND_BLOCK);
         AccelerationRegistry.blacklistBlock(Blocks.WATER);
         AccelerationRegistry.blacklistBlock(Blocks.FLOWING_WATER);
         AccelerationRegistry.blacklistBlock(Blocks.LAVA);
         AccelerationRegistry.blacklistBlock(Blocks.FLOWING_LAVA);
-        AccelerationRegistry.blacklistBlock(Blocks.SAND);
-        AccelerationRegistry.blacklistBlock(Blocks.COMMAND_BLOCK);
-        AccelerationRegistry.blacklistBlock(Blocks.GRAVEL);
-        AccelerationRegistry.blacklistBlock(Blocks.GRASS_PATH);
+        AccelerationRegistry.blacklistBlock(Blocks.REDSTONE_ORE);
         AccelerationRegistry.blacklistBlock(Blocks.GRASS);
+        AccelerationRegistry.blacklistBlock(Blocks.GRASS_PATH);
         AccelerationRegistry.blacklistBlock(Blocks.DIRT);
+        AccelerationRegistry.blacklistBlock(Blocks.DROPPER);
+        AccelerationRegistry.blacklistBlock(Blocks.DISPENSER);
+        AccelerationRegistry.blacklistBlock(Blocks.OBSERVER);
+        AccelerationRegistry.blacklistBlock(Blocks.DAYLIGHT_DETECTOR);
+        AccelerationRegistry.blacklistBlock(Blocks.DAYLIGHT_DETECTOR_INVERTED);
+        AccelerationRegistry.blacklistBlock(Blocks.HOPPER);
+        AccelerationRegistry.blacklistBlock(Blocks.PISTON);
+        AccelerationRegistry.blacklistBlock(Blocks.PISTON_EXTENSION);
+        AccelerationRegistry.blacklistBlock(Blocks.PISTON_HEAD);
+        AccelerationRegistry.blacklistBlock(Blocks.STICKY_PISTON);
+        AccelerationRegistry.blacklistBlock(Blocks.REDSTONE_LAMP);
+        AccelerationRegistry.blacklistBlock(Blocks.REPEATING_COMMAND_BLOCK);
+        AccelerationRegistry.blacklistBlock(Blocks.POWERED_REPEATER);
+        AccelerationRegistry.blacklistBlock(Blocks.UNPOWERED_REPEATER);
+        AccelerationRegistry.blacklistBlock(Blocks.POWERED_COMPARATOR);
+        AccelerationRegistry.blacklistBlock(Blocks.UNPOWERED_COMPARATOR);
+        AccelerationRegistry.blacklistBlock(Blocks.JUKEBOX);
+        AccelerationRegistry.blacklistBlock(Blocks.ENCHANTING_TABLE);
         //Torch
         AccelerationRegistry.blacklistBlock(RegistryArray.Torch_lvl_1);
         AccelerationRegistry.blacklistBlock(RegistryArray.Torch_lvl_2);

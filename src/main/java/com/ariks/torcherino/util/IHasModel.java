@@ -1,4 +1,4 @@
-package com.ariks.torcherino.network;
+package com.ariks.torcherino.util;
 public interface IHasModel {
     void registerModels();
 }

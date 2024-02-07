@@ -1,4 +1,4 @@
-package com.ariks.torcherino.network;
+package com.ariks.torcherino.Register;
 import java.util.HashSet;
 import java.util.Set;
 import com.ariks.torcherino.Torcherino;
@@ -49,6 +49,6 @@ public class AccelerationRegistry
     public static void blacklistTile(Class<? extends TileEntity> tile) {AccelerationRegistry.blacklistedTiles.add(tile);}
     public static boolean isBlockBlacklisted(Block block) {return AccelerationRegistry.blacklistedBlocks.contains(block);}
     public static boolean isTileBlacklisted(Class<? extends TileEntity> tile) {return AccelerationRegistry.blacklistedTiles.contains(tile);}
-    private static Set<Block> blacklistedBlocks = new HashSet<Block>();
-    private static Set<Class<? extends TileEntity>> blacklistedTiles = new HashSet<Class<? extends TileEntity>>();
+    private static final Set<Block> blacklistedBlocks = new HashSet<Block>();
+    private static final Set<Class<? extends TileEntity>> blacklistedTiles = new HashSet<Class<? extends TileEntity>>();
 }

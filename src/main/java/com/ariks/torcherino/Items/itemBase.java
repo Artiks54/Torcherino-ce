@@ -1,7 +1,7 @@
 package com.ariks.torcherino.Items;
 import com.ariks.torcherino.Register.RegistryArray;
 import com.ariks.torcherino.Torcherino;
-import com.ariks.torcherino.network.IHasModel;
+import com.ariks.torcherino.util.IHasModel;
 import net.minecraft.item.Item;
 
 public class itemBase extends Item implements IHasModel {

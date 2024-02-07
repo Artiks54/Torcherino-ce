@@ -1,5 +1,6 @@
 package com.ariks.torcherino.Tiles;
-import static com.ariks.torcherino.Config.*;
+
+import static com.ariks.torcherino.util.Config.*;
 
 public abstract class TileCompresedTorch {
     //CompressedTileBase1

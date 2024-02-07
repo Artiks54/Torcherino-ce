@@ -1,5 +1,4 @@
 package com.ariks.torcherino.Block;
-import com.ariks.torcherino.Block.Base.BlockBase;
 import com.ariks.torcherino.Register.RegistryArray;
 import com.ariks.torcherino.Tiles.TileTorch;
 import net.minecraft.block.Block;
@@ -9,7 +8,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class BlockTorchBase extends BlockBase  {
+public class BlockTorchBase extends BlockTorcherino {
     public BlockTorchBase(String name) {
         super(name);
     }

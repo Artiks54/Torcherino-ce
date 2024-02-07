@@ -1,6 +1,10 @@
 package com.ariks.torcherino.Tiles;
-import com.ariks.torcherino.Config;
-import com.ariks.torcherino.network.AccelerationRegistry;
+
+import com.ariks.torcherino.network.ModPacketHandler;
+import com.ariks.torcherino.network.UpdateGuiPacket;
+import com.ariks.torcherino.util.Config;
+import com.ariks.torcherino.Torcherino;
+import com.ariks.torcherino.Register.AccelerationRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
@@ -10,30 +14,28 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.fluids.BlockFluidBase;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import org.jetbrains.annotations.NotNull;
 
-
-import java.text.DecimalFormat;
 import java.util.Random;
 
 public class TileTorcherinoBase extends TileEntity implements ITickable {
+    protected NetworkRegistry.TargetPoint packetTargetPoint;
     private final Random rand;
-    public boolean bolaenWork;
-    public boolean boleanSpawnPrac;
-    public double stepCount = 0.25;
-    public EnumParticleTypes prac;
-    public int count, currentMode,modPrac, speed, xMin, yMin, zMin, xMax, yMax, zMax;
-    public double xMinPrac, yMinPrac, zMinPrac, xMaxPrac, yMaxPrac, zMaxPrac;
+    private EnumParticleTypes prac;
+    public int modPrac,count,radius, speed, xMin, yMin, zMin, xMax, yMax, zMax;
+    public double stepCount = 0.10;
+    public boolean booleanWork,booleanSpawnPrac;
+    private int oldRadius,oldSpeed,oldModPrac;
+    private double oldStepCount;
+    private boolean oldBooleanWork,oldBooleanSpawnPrac;
     public TileTorcherinoBase() {
         this.rand = new Random();
     }
     protected int Radius() {
-        return 1;
+        return 1 ;
     }
     protected int speedBase(int base) {
         return base;
@@ -44,17 +46,47 @@ public class TileTorcherinoBase extends TileEntity implements ITickable {
     @Override
     public void update() {
         if (this.world.isRemote) return;
-        if (Config.PracTicleSpawn) {
+        this.updateGui();
+        if(booleanSpawnPrac || booleanWork ) {
+            this.UpdateChangeArea();
+        }
+        if (Config.PracTicleSpawn && booleanSpawnPrac) {
             this.spawnPrac();
             this.UpdateModePrac();
         }
-        if (this.currentMode == 0 || this.speed == 0 || this.bolaenWork) {
-            this.UpdateChangeArea();
+        if (this.radius != 0 && this.speed != 0 && this.booleanWork) {
             this.UpdateTickArea();
         }
     }
+    public void updateGui() {
+        if (
+                oldBooleanWork != this.booleanWork
+                || oldBooleanSpawnPrac != this.booleanSpawnPrac
+                || oldRadius != this.radius
+                || oldSpeed != this.speed
+                || oldModPrac != this.modPrac
+                || oldStepCount != this.stepCount
+        ){
+        ModPacketHandler.network.sendToAllTracking(new UpdateGuiPacket
+        (
+                this.pos,
+                this.booleanWork,
+                this.booleanSpawnPrac,
+                this.radius,
+                this.speed,
+                this.modPrac,
+                this.stepCount
+        ), this.packetTargetPoint);
+            oldBooleanWork = this.booleanWork;
+            oldBooleanSpawnPrac = this.booleanSpawnPrac;
+            oldRadius = this.radius;
+            oldSpeed = this.speed;
+            oldModPrac = this.modPrac;
+            oldStepCount = this.stepCount;
+            Torcherino.logger.debug("Send Packet update GUI");
+        }
+    }
     private void UpdateChangeArea() {
-        int radius = currentMode;
         xMin = pos.getX() - radius;
         yMin = pos.getY() - radius;
         zMin = pos.getZ() - radius;
@@ -99,132 +131,129 @@ public class TileTorcherinoBase extends TileEntity implements ITickable {
             }
         }
     }
-    @Override
-    public @NotNull NBTTagCompound writeToNBT(@NotNull NBTTagCompound tagCompound) {
-        super.writeToNBT(tagCompound);
-        tagCompound.setBoolean("boleanwork",this.bolaenWork);
-        tagCompound.setBoolean("boleanspawn", this.boleanSpawnPrac);
-        tagCompound.setInteger("speed",this.speed);
-        tagCompound.setInteger("modprac",this.modPrac);
-        tagCompound.setInteger("currentmode",this.currentMode);
-        tagCompound.setInteger("count",this.count);
-        tagCompound.setDouble("stepcount",this.stepCount);
-        return tagCompound;
-    }
-    @Override
-    public void readFromNBT(@NotNull NBTTagCompound tagCompound) {
-        super.readFromNBT(tagCompound);
-        this.bolaenWork = tagCompound.getBoolean("boleanwork");
-        this.boleanSpawnPrac = tagCompound.getBoolean("boleanspawn");
-        this.speed = tagCompound.getInteger("speed");
-        this.modPrac = tagCompound.getInteger("modprac");
-        this.currentMode = tagCompound.getInteger("currentmode");
-        this.count = tagCompound.getInteger("count");
-        this.stepCount = tagCompound.getDouble("stepcount");
-    }
-    @Override
-    public SPacketUpdateTileEntity getUpdatePacket() {
-        NBTTagCompound nbt = new NBTTagCompound();
-        this.writeToNBT(nbt);
-        return new SPacketUpdateTileEntity(getPos(), -999, nbt);
-    }
-    @Override
-    public void onDataPacket(@NotNull NetworkManager net, @NotNull SPacketUpdateTileEntity pkt) {
-        super.onDataPacket(net, pkt);
-        this.readFromNBT(pkt.getNbtCompound());
-    }
-    @Override
-    public boolean shouldRefresh(@NotNull World world, @NotNull BlockPos pos, IBlockState oldState, IBlockState newState) {
-        return oldState.getBlock() != newState.getBlock();
-    }
     public void spawnPrac() {
-        if(boleanSpawnPrac){
-            this.count++;
-            if (count >= Config.tickCount) {
-                this.count = 0;
-                if (world instanceof WorldServer) {
-                    xMinPrac = xMin;
-                    xMaxPrac = xMax + 1;
-                    zMinPrac = zMin;
-                    zMaxPrac = zMax + 1;
-                    yMinPrac = yMin;
-                    yMaxPrac = yMax + 1;
-                    double step = stepCount;
-                    //Верхния сторона
-                    for (double x = xMinPrac; x <= xMaxPrac; x += step) {
-                        ((WorldServer) world).spawnParticle(prac, x, yMaxPrac, zMinPrac, 1, 0, 0, 0, 0, new int[0]);
-                        ((WorldServer) world).spawnParticle(prac, x, yMaxPrac, zMaxPrac, 1, 0, 0, 0, 0, new int[0]);
-                    }
-                    for (double z = zMinPrac; z <= zMaxPrac; z += step) {
-                        ((WorldServer) world).spawnParticle(prac, xMinPrac, yMaxPrac, z, 1, 0, 0, 0, 0, new int[0]);
-                        ((WorldServer) world).spawnParticle(prac, xMaxPrac, yMaxPrac, z, 1, 0, 0, 0, 0, new int[0]);
-                    }
-                    //Нижния сторона
-                    for (double x = xMinPrac; x <= xMaxPrac; x += step) {
-                        ((WorldServer) world).spawnParticle(prac, x, yMinPrac, zMinPrac, 1, 0, 0, 0, 0, new int[0]);
-                        ((WorldServer) world).spawnParticle(prac, x, yMinPrac, zMaxPrac, 1, 0, 0, 0, 0, new int[0]);
-                    }
-                    for (double z = zMinPrac; z <= zMaxPrac; z += step) {
-                        ((WorldServer) world).spawnParticle(prac, xMinPrac, yMinPrac, z, 1, 0, 0, 0, 0, new int[0]);
-                        ((WorldServer) world).spawnParticle(prac, xMaxPrac, yMinPrac, z, 1, 0, 0, 0, 0, new int[0]);
-                    }
-                    //Грани
-                    for (double y = yMinPrac; y <= yMaxPrac; y += step) {
-                        ((WorldServer) world).spawnParticle(prac, xMinPrac, y, zMinPrac, 1, 0, 0, 0, 0, new int[0]);
-                        ((WorldServer) world).spawnParticle(prac, xMaxPrac, y, zMaxPrac, 1, 0, 0, 0, 0, new int[0]);
-                    }
-                    for (double y = yMinPrac; y <= yMaxPrac; y += step) {
-                        ((WorldServer) world).spawnParticle(prac, xMinPrac, y, zMaxPrac, 1, 0, 0, 0, 0, new int[0]);
-                        ((WorldServer) world).spawnParticle(prac, xMaxPrac, y, zMinPrac, 1, 0, 0, 0, 0, new int[0]);
-                    }
+        this.count++;
+        if (count >= Config.tickCount) {
+            this.count = 0;
+            if (world instanceof WorldServer) {
+                double xMinPrac, yMinPrac, zMinPrac, xMaxPrac, yMaxPrac, zMaxPrac;
+                xMinPrac = xMin;
+                xMaxPrac = xMax + 1;
+                zMinPrac = zMin;
+                zMaxPrac = zMax + 1;
+                yMinPrac = yMin;
+                yMaxPrac = yMax + 1;
+                double step = stepCount;
+                //Верхния сторона Спавн частиц
+                for (double x = xMinPrac; x <= xMaxPrac; x += step) {
+                    ((WorldServer) world).spawnParticle(prac, x, yMaxPrac, zMinPrac, 1, 0, 0, 0, 0, new int[0]);
+                    ((WorldServer) world).spawnParticle(prac, x, yMaxPrac, zMaxPrac, 1, 0, 0, 0, 0, new int[0]);
+                }
+                for (double z = zMinPrac; z <= zMaxPrac; z += step) {
+                    ((WorldServer) world).spawnParticle(prac, xMinPrac, yMaxPrac, z, 1, 0, 0, 0, 0, new int[0]);
+                    ((WorldServer) world).spawnParticle(prac, xMaxPrac, yMaxPrac, z, 1, 0, 0, 0, 0, new int[0]);
+                }
+                //Нижния сторона Спан частиц
+                for (double x = xMinPrac; x <= xMaxPrac; x += step) {
+                    ((WorldServer) world).spawnParticle(prac, x, yMinPrac, zMinPrac, 1, 0, 0, 0, 0, new int[0]);
+                    ((WorldServer) world).spawnParticle(prac, x, yMinPrac, zMaxPrac, 1, 0, 0, 0, 0, new int[0]);
+                }
+                for (double z = zMinPrac; z <= zMaxPrac; z += step) {
+                    ((WorldServer) world).spawnParticle(prac, xMinPrac, yMinPrac, z, 1, 0, 0, 0, 0, new int[0]);
+                    ((WorldServer) world).spawnParticle(prac, xMaxPrac, yMinPrac, z, 1, 0, 0, 0, 0, new int[0]);
+                }
+                //Грани Спавн частиц
+                for (double y = yMinPrac; y <= yMaxPrac; y += step) {
+                    ((WorldServer) world).spawnParticle(prac, xMinPrac, y, zMinPrac, 1, 0, 0, 0, 0, new int[0]);
+                    ((WorldServer) world).spawnParticle(prac, xMaxPrac, y, zMaxPrac, 1, 0, 0, 0, 0, new int[0]);
+                }
+                for (double y = yMinPrac; y <= yMaxPrac; y += step) {
+                    ((WorldServer) world).spawnParticle(prac, xMinPrac, y, zMaxPrac, 1, 0, 0, 0, 0, new int[0]);
+                    ((WorldServer) world).spawnParticle(prac, xMaxPrac, y, zMinPrac, 1, 0, 0, 0, 0, new int[0]);
                 }
             }
         }
     }
-    public void increaseArea() {currentMode = (currentMode + 1) % Radius();}
-    public void increaseSpeed() {speed = (byte) ((speed + 1) % SpeedModes());}
-    public void toggleParticle() {
-        modPrac +=1;
-        if(modPrac >2){
-            modPrac = 0;
-        }
-    }
+    public void toggleSpeed() {speed = (byte) ((speed + 1) % SpeedModes());}
+    public void toggleArea() {radius = (radius + 1) % Radius();}
+    public void toggleParticle() {modPrac = (modPrac + 1) % 7;}
     public void UpdateModePrac() {
-        if (modPrac == 0) {
-            prac = EnumParticleTypes.FLAME;
-        }
-        if (modPrac == 1) {
-            prac = EnumParticleTypes.DRAGON_BREATH;
-        }
-        if (modPrac == 2) {
-            prac = EnumParticleTypes.REDSTONE;
+        switch (modPrac) {
+            case 1:
+                prac = EnumParticleTypes.DRAGON_BREATH;
+                break;
+            case 2:
+                prac = EnumParticleTypes.REDSTONE;
+                break;
+            case 3:
+                prac = EnumParticleTypes.END_ROD;
+                break;
+            case 4:
+                prac = EnumParticleTypes.SPELL;
+                break;
+            case 5:
+                prac = EnumParticleTypes.VILLAGER_HAPPY;
+                break;
+            case 6:
+                prac = EnumParticleTypes.SMOKE_NORMAL;
+                break;
+            default:
+                prac = EnumParticleTypes.FLAME;
+                break;
         }
     }
-    public void toggleWork() {bolaenWork = !bolaenWork;}
-    public void toggleSpawnPrac() {boleanSpawnPrac = !boleanSpawnPrac;}
+    public void toggleWork() {booleanWork = !booleanWork;}
+    public void toggleSpawnPrac() {booleanSpawnPrac = !booleanSpawnPrac;}
     public void toggleStepCount(){
         stepCount +=0.05;
-        if(stepCount > 1.01){
-            stepCount = 0.1;
+        if(stepCount > 5.00){
+            stepCount = 0.10;
         }
     }
-    public int debugGetCount(){return count;}
-    public int debugGetSpeed(){return speed;}
-    public int debugGetRadius(){return currentMode;}
-    public TextComponentString getDiscription() {
-        TextComponentString message;
-        TextFormatting textFormattingStop = TextFormatting.valueOf(Config.colorSettingStop.toUpperCase());
-        TextFormatting textFormattingStart = TextFormatting.valueOf(Config.colorSettingStart.toUpperCase());
-            if (currentMode == 0) {
-                message = new TextComponentString(textFormattingStop + "Mode: " + currentMode + "x" + currentMode + "x" + currentMode);
-            } else {
-                message = new TextComponentString(textFormattingStart + "Mode: " + currentMode + "x" + currentMode + "x" + currentMode);
-            }
-            if (speed == 0) {
-                message.appendText(textFormattingStop + "Speed: " + this.speedBase(this.speed) * 100 + "%");
-            } else {
-                message.appendText(textFormattingStart + "Speed: " + this.speedBase(this.speed) * 100 + "%");
-            }
-            return message;
+    @Override
+    public @NotNull NBTTagCompound writeToNBT(NBTTagCompound tagCompound) {
+        tagCompound.setBoolean("boleanwork",this.booleanWork);
+        tagCompound.setBoolean("boleanspawn", this.booleanSpawnPrac);
+        tagCompound.setInteger("speed",this.speed);
+        tagCompound.setInteger("modprac", modPrac);
+        tagCompound.setInteger("currentmode",this.radius);
+        tagCompound.setInteger("count",this.count);
+        tagCompound.setDouble("stepcount",this.stepCount);
+        return super.writeToNBT(tagCompound);
+    }
+    @Override
+    public void readFromNBT(NBTTagCompound tagCompound) {
+        this.booleanWork = tagCompound.getBoolean("boleanwork");
+        this.booleanSpawnPrac = tagCompound.getBoolean("boleanspawn");
+        this.speed = tagCompound.getInteger("speed");
+        this.modPrac = tagCompound.getInteger("modprac");
+        this.radius = tagCompound.getInteger("currentmode");
+        this.count = tagCompound.getInteger("count");
+        this.stepCount = tagCompound.getDouble("stepcount");
+        super.readFromNBT(tagCompound);
+    }
+    @Override
+    public SPacketUpdateTileEntity getUpdatePacket() {
+        return new SPacketUpdateTileEntity(this.pos, 3, this.getUpdateTag());
+    }
+    @Override
+    public @NotNull NBTTagCompound getUpdateTag() {
+        return this.writeToNBT(new NBTTagCompound());
+    }
+    @Override
+    public void handleUpdateTag(@NotNull NBTTagCompound tag) {
+        super.handleUpdateTag(tag);
+    }
+    @Override
+    public void onDataPacket(@NotNull NetworkManager net, SPacketUpdateTileEntity packet) {
+        this.handleUpdateTag(packet.getNbtCompound());
+        this.getWorld().markBlockRangeForRenderUpdate(this.pos,this.pos);
+    }
+    @Override
+    public void onLoad() {
+        IBlockState state = this.world.getBlockState(pos);
+        if (!this.world.isRemote) {
+                this.packetTargetPoint = new NetworkRegistry.TargetPoint(this.world.provider.getDimension(), this.pos.getX(), this.pos.getY(), this.pos.getZ(), 64);
         }
+    }
 }

@@ -72,8 +72,6 @@ dependencies {
     runtimeOnly fileTree('lib')
     compileOnly fileTree('lib')
     compileOnly fileTree('libs')
-
-
 }
 
 jar.finalizedBy('reobfJar')

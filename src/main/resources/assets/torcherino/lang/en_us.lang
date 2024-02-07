@@ -2,6 +2,26 @@
 tooltip.torcherino.descriptionInfo=Use RightClick by torch to get information
 tooltip.torcherino.descriptionConfig=Use RightClick by configuration torch
 
+gui.button.StrWork=Working:
+gui.button.StrSP=Spawn Particle:
+gui.button.StrSpeed=Speed
+gui.button.StrArea=Radius
+gui.button.StrOn=on
+gui.button.StrOff=off
+gui.button.StrStep=Step
+
+gui.prac.flame=Flame
+gui.prac.dragon=Dragon
+gui.prac.redstone=Redstone
+gui.prac.end=End
+gui.prac.spell=Spell
+gui.prac.villager=Villager
+gui.prac.smoke=Smoke
+
+gui.info.text=Information
+gui.info.modes=Number of speed modes:
+gui.info.area=Maximum radius:
+
 item.config.name=§eConfiguration item
 item.torchinfo.name=§eInformation item
 item.diamondclock.name=§bDiamond Clock
@@ -23,5 +43,5 @@ tile.torch_lvl5.name=§bTorcherino lvl 5
 tile.compressed_torch_lvl1.name=§9Compressed torcherino lvl 1
 tile.compressed_torch_lvl2.name=§aCompressed torcherino lvl 2
 tile.compressed_torch_lvl3.name=§cCompressed torcherino lvl 3
-tile.compressed_torch_lvl4.name=§dCompressed torcherino lvl 4
+tile.compressed_torch_lvl4.name=§6Compressed torcherino lvl 4
 tile.compressed_torch_lvl5.name=§bCompressed torcherino lvl 5

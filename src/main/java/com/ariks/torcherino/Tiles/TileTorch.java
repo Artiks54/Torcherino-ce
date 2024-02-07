@@ -1,9 +1,9 @@
 package com.ariks.torcherino.Tiles;
-import static com.ariks.torcherino.Config.*;
 
+import static com.ariks.torcherino.util.Config.*;
 public abstract class TileTorch
 {
-        //TileBase1
+    //TileBase1
         public static final class TileBase1 extends TileTorcherinoBase {
         @Override
         protected int speedBase(int base) {
@@ -11,14 +11,14 @@ public abstract class TileTorch
         }
         @Override
         protected int SpeedModes() {
-            return Torch_lvl1_M+1;
+            return Torch_lvl1_M + 1;
         }
         @Override
         protected int Radius() {
             return Torch_lvl1_R+1;
         }
     }
-         //TileBase2
+    //TileBase2
         public static final class TileBase2 extends TileTorcherinoBase {
         @Override
         protected int speedBase(int base) {
@@ -33,7 +33,7 @@ public abstract class TileTorch
             return Torch_lvl2_R+1;
         }
     }
-        //TileBase3
+    //TileBase3
         public static final class TileBase3 extends TileTorcherinoBase {
         @Override
         protected int speedBase(int base) {
@@ -48,7 +48,7 @@ public abstract class TileTorch
             return Torch_lvl3_R + 1;
         }
     }
-        //TileBase4
+    //TileBase4
         public static final class TileBase4 extends TileTorcherinoBase {
         @Override
         protected int speedBase(int base) {
@@ -63,7 +63,7 @@ public abstract class TileTorch
                 return Torch_lvl4_R + 1;
             }
     }
-        //TileBase5
+    //TileBase5
         public static final class TileBase5 extends TileTorcherinoBase {
         @Override
         protected int speedBase(int base) {

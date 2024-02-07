@@ -98,25 +98,5 @@ public class ReciepRegister {
                 "AAA",
                 'A', new ItemStack(Blocks.TORCH),
                 'B', new ItemStack(Binding_Element));
-        //ConfigItem
-        GameRegistry.addShapedRecipe(
-                new ResourceLocation(Torcherino.MOD_ID + ":" + "Config"),
-                new ResourceLocation(Torcherino.MOD_ID + ":" + "Config"),
-                new ItemStack(Item_Config),
-                "  G",
-                " S ",
-                "S  ",
-                'S', new ItemStack(Items.STICK),
-                'G', new ItemStack(Items.CLOCK));
-        //InfoItem
-        GameRegistry.addShapedRecipe(
-                new ResourceLocation(Torcherino.MOD_ID + ":" + "Info"),
-                new ResourceLocation(Torcherino.MOD_ID + ":" + "Info"),
-                new ItemStack(Item_Info),
-                "  G",
-                " S ",
-                "S  ",
-                'S', new ItemStack(Items.STICK),
-                'G', new ItemStack(Items.BOOK));
     }
 }

@@ -1,6 +1,27 @@
 
+
 tooltip.torcherino.descriptionInfo=Use RightClick by torch to get information
 tooltip.torcherino.descriptionConfig=Use RightClick by configuration torch
+
+gui.button.StrWork=Работа:
+gui.button.StrSP=Спавн частиц:
+gui.button.StrSpeed=Скорость
+gui.button.StrArea=Радиус
+gui.button.StrOn=Вкл
+gui.button.StrOff=Выкл
+gui.button.StrStep=Отсуп
+
+gui.prac.flame=Огонь
+gui.prac.dragon=Дракон
+gui.prac.redstone=Релстоун
+gui.prac.end=Ендер
+gui.prac.spell=Спелл
+gui.prac.villager=Житель
+gui.prac.smoke=Дым
+
+gui.info.text=Информация
+gui.info.modes=Количество режимов скорости:
+gui.info.area=Максимальный радиус работы:
 
 item.config.name=§eКонфигурационный изменитель
 item.torchinfo.name=§eИнформационный обозреватель

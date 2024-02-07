@@ -18,8 +18,6 @@ public class RegistryArray {
     public static final Item Comp_Torch = new itemBase("compressedtorch");
     public static final Item Binding_Element = new itemBase("bindingelement");
     public static final Item Binding_Element2 = new itemBase("bindingelement2");
-    public static final Item Item_Info = new ItemInfo("torchinfo");
-    public static final Item Item_Config = new ItemConfig("config");
     public static final List<Block> BLOCKS = new ArrayList<>();
     public static final Block Torch_lvl_1 = new BlockTorchBase("torch_lvl1");
     public static final Block Torch_lvl_2 = new BlockTorchBase("torch_lvl2");
