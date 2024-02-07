@@ -189,8 +189,6 @@ public class TileTorcherinoBase extends TileEntity implements ITickable {
             radius = Radius() -1;
         }
     }
-
-
     public void toggleParticle() {modPrac = (modPrac + 1) % 7;}
     public void UpdateModePrac() {
         switch (modPrac) {

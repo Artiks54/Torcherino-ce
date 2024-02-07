@@ -34,11 +34,7 @@ public class AccelerationRegistry
 		    	return;
 			}
 		    Block block = Block.REGISTRY.getObject(new ResourceLocation(parts[0], parts[1]));
-		    if(block == null) {
-		    	Torcherino.logger.info("Could not find block: " + string + ", ignoring");
-		        return;
-		    }
-		    Torcherino.logger.info("Blacklisting block: " + block.getUnlocalizedName());
+            Torcherino.logger.info("Blacklisting block: " + block.getUnlocalizedName());
 		    blacklistBlock(block);
 		}
 	}
