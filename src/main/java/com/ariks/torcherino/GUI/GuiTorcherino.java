@@ -74,10 +74,18 @@ public class GuiTorcherino extends GuiScreen {
             ModPacketHandler.network.sendToServer(new UpdateTilePacket(this.tile.getPos(), 1));
         }
         if (button.id == 2) {
-            ModPacketHandler.network.sendToServer(new UpdateTilePacket(this.tile.getPos(), 2));
+            if(!isShiftKeyDown()) {
+                ModPacketHandler.network.sendToServer(new UpdateTilePacket(this.tile.getPos(), 2));
+            }else{
+                ModPacketHandler.network.sendToServer(new UpdateTilePacket(this.tile.getPos(), 7));
+            }
         }
         if (button.id == 3) {
-            ModPacketHandler.network.sendToServer(new UpdateTilePacket(this.tile.getPos(), 3));
+            if (!isShiftKeyDown()) {
+                ModPacketHandler.network.sendToServer(new UpdateTilePacket(this.tile.getPos(), 3));
+            } else {
+                ModPacketHandler.network.sendToServer(new UpdateTilePacket(this.tile.getPos(), 8));
+            }
         }
         if (button.id == 4) {
             ModPacketHandler.network.sendToServer(new UpdateTilePacket(this.tile.getPos(), 4));

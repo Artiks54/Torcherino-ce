@@ -174,8 +174,23 @@ public class TileTorcherinoBase extends TileEntity implements ITickable {
             }
         }
     }
+
     public void toggleSpeed() {speed = (byte) ((speed + 1) % SpeedModes());}
+    public void decreaseSpeed() {
+        speed = (speed - 1) % SpeedModes();
+        if (speed < 0) {
+            speed = SpeedModes()-1 ;
+        }
+    }
     public void toggleArea() {radius = (radius + 1) % Radius();}
+    public void decreaseRadius() {
+        radius = (radius - 1) % Radius();
+        if (radius < 0) {
+            radius = Radius() -1;
+        }
+    }
+
+
     public void toggleParticle() {modPrac = (modPrac + 1) % 7;}
     public void UpdateModePrac() {
         switch (modPrac) {

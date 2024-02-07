@@ -62,6 +62,14 @@ public class UpdateTilePacket implements IMessage {
                             ((TileTorcherinoBase) tile).toggleStepCount();
                             Torcherino.logger.debug("Send packet update tile Steep");
                         }
+                        if (receivedValue == 7) {
+                            ((TileTorcherinoBase) tile).decreaseSpeed();
+                            Torcherino.logger.debug("Send packet update tile DecrSpeed");
+                        }
+                        if (receivedValue == 8) {
+                            ((TileTorcherinoBase) tile).decreaseRadius();
+                            Torcherino.logger.debug("Send packet update tile DecrArea");
+                        }
                     }
                 }
             }

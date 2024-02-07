@@ -1,6 +1,8 @@
 package com.ariks.torcherino;
 
 import java.io.File;
+
+import com.ariks.torcherino.GUI.FMLEventListener;
 import com.ariks.torcherino.Register.RegisterBlackList;
 import com.ariks.torcherino.network.ModPacketHandler;
 import com.ariks.torcherino.Tiles.TileCompresedTorch.*;
@@ -9,6 +11,7 @@ import com.ariks.torcherino.Register.AccelerationRegistry;
 import com.ariks.torcherino.util.TorchTab;
 import com.ariks.torcherino.util.Config;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.Logger;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
@@ -40,6 +43,8 @@ public class Torcherino
 	}
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
+		FMLEventListener eventListener = new FMLEventListener();
+			MinecraftForge.EVENT_BUS.register(eventListener);
 			ModPacketHandler.init();
 			logger.info(TileBase1.class);
 			logger.info(TileBase2.class);
