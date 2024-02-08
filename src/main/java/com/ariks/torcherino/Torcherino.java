@@ -1,7 +1,6 @@
 package com.ariks.torcherino;
 
 import java.io.File;
-
 import com.ariks.torcherino.Register.RegisterBlackList;
 import com.ariks.torcherino.network.ModPacketHandler;
 import com.ariks.torcherino.Tiles.TileCompresedTorch.*;
@@ -20,21 +19,18 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import static com.ariks.torcherino.util.Config.*;
 
-@Mod(modid=Torcherino.MOD_ID, name=Torcherino.MOD_NAME,useMetadata = true,acceptedMinecraftVersions = "[1.12]",version = "7.6.9")
-public class Torcherino 
-{
+@Mod(modid = Torcherino.MOD_ID, name = Torcherino.MOD_NAME, useMetadata = true, acceptedMinecraftVersions = "[1.12]", version = "7.6.9")
+public class Torcherino {
 	public static File config;
 	public static CreativeTabs torcherinoTab = new TorchTab("torcherinoTab");
 	public static Logger logger;
 	public static final String MOD_ID = "torcherino", MOD_NAME = "Torcherino";
 	@Mod.Instance(Torcherino.MOD_ID)
 	public static Torcherino instance;
-	@SidedProxy(clientSide="com.ariks.torcherino.ClientProxy", serverSide="com.ariks.torcherino.CommonProxy")
+	@SidedProxy(clientSide = "com.ariks.torcherino.ClientProxy", serverSide = "com.ariks.torcherino.CommonProxy")
 	public static CommonProxy proxy;
-
 	@Mod.EventHandler
-	public void preInit(FMLPreInitializationEvent event)
-	{
+	public void preInit(FMLPreInitializationEvent event) {
 		logger = event.getModLog();
 		proxy.preInit();
 		Config.registerConfig(event);
@@ -55,33 +51,26 @@ public class Torcherino
 			RegisterBlackList.preInit();
 	}
 	@Mod.EventHandler
-	public void postInit(FMLPostInitializationEvent event)
-	{
-		if(Loader.isModLoaded("projecte"))
-		{
+	public void postInit(FMLPostInitializationEvent event) {
+		if (Loader.isModLoaded("projecte")) {
 			AccelerationRegistry.blacklistString("projecte:dm_pedestal");
 		}
-		for(String block : blacklistedBlocks)
-		{
+		for (String block : blacklistedBlocks) {
 			AccelerationRegistry.blacklistString(block);
 		}
-        for(String tile : blacklistedTiles)
-        {
-        	AccelerationRegistry.blacklistString(tile);
-        }
+		for (String tile : blacklistedTiles) {
+			AccelerationRegistry.blacklistString(tile);
+		}
 	}
 	@Mod.EventHandler
-    public void imcMessage(FMLInterModComms.IMCEvent event)
-	{
-        for(FMLInterModComms.IMCMessage message : event.getMessages())
-        {
-            if(!message.isStringMessage())
-            {
-                logger.info("Received non-string message! Ignoring");
-                continue;
-            }
-            String s = message.getStringValue();
-            AccelerationRegistry.blacklistString(s);
-        }
-    }
+	public void imcMessage(FMLInterModComms.IMCEvent event) {
+		for (FMLInterModComms.IMCMessage message : event.getMessages()) {
+			if (!message.isStringMessage()) {
+				logger.info("Received non-string message! Ignoring");
+				continue;
+			}
+			String s = message.getStringValue();
+			AccelerationRegistry.blacklistString(s);
+		}
+	}
 }

@@ -4,8 +4,6 @@ tooltip.torcherino.descriptionConfig=Use RightClick by configuration torch
 
 gui.button.StrWork=Working:
 gui.button.StrSP=Spawn Particle:
-gui.button.StrSpeed=Speed
-gui.button.StrArea=Radius
 gui.button.StrOn=on
 gui.button.StrOff=off
 gui.button.StrStep=Step

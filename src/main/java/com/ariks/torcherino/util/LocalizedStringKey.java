@@ -15,8 +15,6 @@ public class LocalizedStringKey {
      public String prac6 = I18n.format("gui.prac.smoke");
      public  String ButtonStrWork = I18n.format("gui.button.StrWork");
      public  String ButtonStrSP = I18n.format("gui.button.StrSP");
-     public  String ButtonStrSpeed = I18n.format("gui.button.StrSpeed");
-     public  String ButtonStrArea = I18n.format("gui.button.StrArea");
      public  String StrOn = I18n.format("gui.button.StrOn");
      public  String StrOff = I18n.format("gui.button.StrOff");
      public String Info = I18n.format("gui.info.text");

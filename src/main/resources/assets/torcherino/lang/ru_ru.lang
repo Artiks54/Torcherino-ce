@@ -5,8 +5,6 @@ tooltip.torcherino.descriptionConfig=Use RightClick by configuration torch
 
 gui.button.StrWork=Работа:
 gui.button.StrSP=Спавн частиц:
-gui.button.StrSpeed=Скорость
-gui.button.StrArea=Радиус
 gui.button.StrOn=Вкл
 gui.button.StrOff=Выкл
 gui.button.StrStep=Отсуп

@@ -1,4 +1,5 @@
 package com.ariks.torcherino;
+
 import com.ariks.torcherino.Register.RegistrationTiles;
 import com.ariks.torcherino.Register.ReciepRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,5 +15,6 @@ public class CommonProxy {
 	public boolean openGui(World world, BlockPos pos, EntityPlayer player) {
 		return true;
 	}
-	public void registerItemRenderer(Item item, int meta, String id){}
+	public void registerItemRenderer(Item item, int meta, String id) {
+	}
 }

@@ -15,10 +15,7 @@ public class UpdateGuiPacket implements IMessage {
     private boolean work, spawnPrac;
     private int radius, speed, modprac;
     private double stepcount;
-
-    public UpdateGuiPacket() {
-    }
-
+    public UpdateGuiPacket() {}
     public UpdateGuiPacket(BlockPos pos, boolean work, boolean spawnPrac, int radius, int speed, int modprac, double stepcount) {
         this.pos = pos;
         this.work = work;
@@ -28,10 +25,9 @@ public class UpdateGuiPacket implements IMessage {
         this.modprac = modprac;
         this.stepcount = stepcount;
     }
-
     @Override
     public void fromBytes(ByteBuf buf) {
-        this.pos = CordUtils.readBlockPos(buf);
+        this.pos = BlockPos.fromLong(buf.readLong());
         this.work = buf.readBoolean();
         this.spawnPrac = buf.readBoolean();
         this.radius = buf.readInt();
@@ -39,18 +35,16 @@ public class UpdateGuiPacket implements IMessage {
         this.modprac = buf.readInt();
         this.stepcount = buf.readDouble();
     }
-
     @Override
     public void toBytes(ByteBuf buf) {
-        CordUtils.writeBlockPos(buf, this.pos);
-        buf.writeBoolean(work);
-        buf.writeBoolean(spawnPrac);
-        buf.writeInt(radius);
-        buf.writeInt(speed);
-        buf.writeInt(modprac);
-        buf.writeDouble(stepcount);
+        buf.writeLong(this.pos.toLong());
+        buf.writeBoolean(this.work);
+        buf.writeBoolean(this.spawnPrac);
+        buf.writeInt(this.radius);
+        buf.writeInt(this.speed);
+        buf.writeInt(this.modprac);
+        buf.writeDouble(this.stepcount);
     }
-
     public static class Handler implements IMessageHandler<UpdateGuiPacket, IMessage> {
         @Override
         public IMessage onMessage(UpdateGuiPacket message, MessageContext ctx) {
@@ -61,8 +55,8 @@ public class UpdateGuiPacket implements IMessage {
             int receivedSpeed = message.speed;
             int receivedModPrac = message.modprac;
             double receivedStepCount = message.stepcount;
-            WorldClient world = Minecraft.getMinecraft().world;
             Minecraft.getMinecraft().addScheduledTask(() -> {
+                WorldClient world = Minecraft.getMinecraft().world;
                 if (world.isBlockLoaded(pos)) {
                     TileEntity tileEntity = world.getTileEntity(pos);
                     if (tileEntity instanceof TileTorcherinoBase) {

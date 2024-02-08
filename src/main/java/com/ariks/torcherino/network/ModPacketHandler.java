@@ -6,12 +6,10 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 
 public class ModPacketHandler {
-    private static int packetId = 0;
-
     public static SimpleNetworkWrapper network;
     public static void init() {
         network = NetworkRegistry.INSTANCE.newSimpleChannel(Torcherino.MOD_ID);
-        network.registerMessage(UpdateTilePacket.Handler.class, UpdateTilePacket.class, packetId++, Side.SERVER);
-        network.registerMessage(UpdateGuiPacket.Handler.class, UpdateGuiPacket.class, packetId++, Side.CLIENT);
+        network.registerMessage(UpdateTilePacket.Handler.class, UpdateTilePacket.class, 1, Side.SERVER);
+        network.registerMessage(UpdateGuiPacket.Handler.class, UpdateGuiPacket.class, 2, Side.CLIENT);
     }
 }

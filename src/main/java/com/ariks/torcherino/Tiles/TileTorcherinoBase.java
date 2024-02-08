@@ -23,17 +23,14 @@ import java.util.Random;
 
 public class TileTorcherinoBase extends TileEntity implements ITickable {
     protected NetworkRegistry.TargetPoint packetTargetPoint;
-    private final Random rand;
+    private final Random rand = new Random();
     private EnumParticleTypes prac;
-    public int modPrac,count,radius, speed, xMin, yMin, zMin, xMax, yMax, zMax;
+    public int modPrac, count, radius, speed, xMin, yMin, zMin, xMax, yMax, zMax;
     public double stepCount = 0.10;
-    public boolean booleanWork,booleanSpawnPrac;
-    private int oldRadius,oldSpeed,oldModPrac;
+    public boolean booleanWork, booleanSpawnPrac;
+    private int oldRadius, oldSpeed, oldModPrac;
     private double oldStepCount;
-    private boolean oldBooleanWork,oldBooleanSpawnPrac;
-    public TileTorcherinoBase() {
-        this.rand = new Random();
-    }
+    private boolean oldBooleanWork, oldBooleanSpawnPrac;
     protected int Radius() {
         return 1 ;
     }
@@ -45,83 +42,77 @@ public class TileTorcherinoBase extends TileEntity implements ITickable {
     }
     @Override
     public void update() {
-        if (this.world.isRemote) return;
-        this.updateGui();
-        if(booleanSpawnPrac || booleanWork ) {
-            this.UpdateChangeArea();
+        if (world.isRemote)return;
+        updateGui();
+        if (booleanSpawnPrac || booleanWork) {
+            UpdateChangeArea();
         }
         if (Config.PracTicleSpawn && booleanSpawnPrac) {
-            this.spawnPrac();
-            this.UpdateModePrac();
+            spawnPrac();
+            UpdateModePrac();
         }
-        if (this.radius != 0 && this.speed != 0 && this.booleanWork) {
-            this.UpdateTickArea();
+        if (radius != 0 && speed != 0 && booleanWork) {
+            UpdateTickArea();
         }
     }
     public void updateGui() {
-        if (
-                oldBooleanWork != this.booleanWork
-                || oldBooleanSpawnPrac != this.booleanSpawnPrac
-                || oldRadius != this.radius
-                || oldSpeed != this.speed
-                || oldModPrac != this.modPrac
-                || oldStepCount != this.stepCount
-        ){
-        ModPacketHandler.network.sendToAllTracking(new UpdateGuiPacket
-        (
-                this.pos,
-                this.booleanWork,
-                this.booleanSpawnPrac,
-                this.radius,
-                this.speed,
-                this.modPrac,
-                this.stepCount
-        ), this.packetTargetPoint);
-            oldBooleanWork = this.booleanWork;
-            oldBooleanSpawnPrac = this.booleanSpawnPrac;
-            oldRadius = this.radius;
-            oldSpeed = this.speed;
-            oldModPrac = this.modPrac;
-            oldStepCount = this.stepCount;
+        if (shouldSendGuiUpdatePacket()) {
+            ModPacketHandler.network.sendToAllTracking(new UpdateGuiPacket(pos, booleanWork, booleanSpawnPrac, radius, speed, modPrac, stepCount), packetTargetPoint);
+            updateOldValues();
             Torcherino.logger.debug("Send Packet update GUI");
         }
     }
+    private boolean shouldSendGuiUpdatePacket() {
+        return oldBooleanWork != booleanWork || oldBooleanSpawnPrac != booleanSpawnPrac || oldRadius != radius || oldSpeed != speed || oldModPrac != modPrac || oldStepCount != stepCount;
+    }
+    private void updateOldValues() {
+        oldBooleanWork = booleanWork;
+        oldBooleanSpawnPrac = booleanSpawnPrac;
+        oldRadius = radius;
+        oldSpeed = speed;
+        oldModPrac = modPrac;
+        oldStepCount = stepCount;
+    }
     private void UpdateChangeArea() {
-        xMin = pos.getX() - radius;
-        yMin = pos.getY() - radius;
-        zMin = pos.getZ() - radius;
-        xMax = pos.getX() + radius;
-        yMax = pos.getY() + radius;
-        zMax = pos.getZ() + radius;
+        BlockPos minPos = pos.add(-radius, -radius, -radius);
+        BlockPos maxPos = pos.add(radius, radius, radius);
+        xMin = minPos.getX();
+        yMin = minPos.getY();
+        zMin = minPos.getZ();
+        xMax = maxPos.getX();
+        yMax = maxPos.getY();
+        zMax = maxPos.getZ();
     }
     private void UpdateTickArea() {
-        for (int x = xMin; x <= xMax; x++) {
-            for (int y = yMin; y <= yMax; y++) {
-                for (int z = zMin; z <= zMax; z++) {
-                    AcelerationTick(new BlockPos(x, y, z));
-                }
-            }
+        for (BlockPos pos : BlockPos.getAllInBox(xMin, yMin, zMin, xMax, yMax, zMax)) {
+            AcelerationTick(pos);
         }
     }
     private void AcelerationTick(BlockPos pos) {
-        IBlockState blockState = this.world.getBlockState(pos);
+        IBlockState blockState = world.getBlockState(pos);
         Block block = blockState.getBlock();
         if (block instanceof BlockFluidBase || AccelerationRegistry.isBlockBlacklisted(block)) {
             return;
         }
         if (block.getTickRandomly()) {
-            for (int i = 0; i < this.speedBase(this.speed); i++) {
-                if (getWorld().getBlockState(pos) != blockState) break;
-                block.updateTick(this.world, pos, blockState, this.rand);
+            int speedBase = speedBase(speed);
+            for (int i = 0; i < speedBase; i++) {
+                if (world.getBlockState(pos) != blockState) {
+                    break;
+                }
+                block.updateTick(world, pos, blockState, rand);
             }
         }
-        if (block.hasTileEntity(this.world.getBlockState(pos))) {
-            TileEntity tile = this.world.getTileEntity(pos);
+        if (block.hasTileEntity(world.getBlockState(pos))) {
+            TileEntity tile = world.getTileEntity(pos);
             if (tile == null || tile.isInvalid()) {
                 return;
             }
-            if (AccelerationRegistry.isTileBlacklisted(tile.getClass())) return;
-            for (int i = 0; i < this.speedBase(this.speed); i++) {
+            if (AccelerationRegistry.isTileBlacklisted(tile.getClass())) {
+                return;
+            }
+            int speedBase = speedBase(speed);
+            for (int i = 0; i < speedBase; i++) {
                 if (tile.isInvalid()) {
                     break;
                 }
@@ -136,62 +127,50 @@ public class TileTorcherinoBase extends TileEntity implements ITickable {
         if (count >= Config.tickCount) {
             this.count = 0;
             if (world instanceof WorldServer) {
-                double xMinPrac, yMinPrac, zMinPrac, xMaxPrac, yMaxPrac, zMaxPrac;
-                xMinPrac = xMin;
-                xMaxPrac = xMax + 1;
-                zMinPrac = zMin;
-                zMaxPrac = zMax + 1;
-                yMinPrac = yMin;
-                yMaxPrac = yMax + 1;
-                double step = stepCount;
-                //Верхния сторона Спавн частиц
-                for (double x = xMinPrac; x <= xMaxPrac; x += step) {
-                    ((WorldServer) world).spawnParticle(prac, x, yMaxPrac, zMinPrac, 1, 0, 0, 0, 0, new int[0]);
-                    ((WorldServer) world).spawnParticle(prac, x, yMaxPrac, zMaxPrac, 1, 0, 0, 0, 0, new int[0]);
+                double xMinPrac = xMin;
+                double xMaxPrac = xMax + 1;
+                double zMinPrac = zMin;
+                double zMaxPrac = zMax + 1;
+                double yMinPrac = yMin;
+                double yMaxPrac = yMax + 1;
+                WorldServer worldServer = (WorldServer) world;
+                for (double x = xMinPrac; x <= xMaxPrac; x += stepCount) {
+                    worldServer.spawnParticle(prac, x, yMaxPrac, zMinPrac, 1, 0, 0, 0, 0, new int[0]);
+                    worldServer.spawnParticle(prac, x, yMaxPrac, zMaxPrac, 1, 0, 0, 0, 0, new int[0]);
                 }
-                for (double z = zMinPrac; z <= zMaxPrac; z += step) {
-                    ((WorldServer) world).spawnParticle(prac, xMinPrac, yMaxPrac, z, 1, 0, 0, 0, 0, new int[0]);
-                    ((WorldServer) world).spawnParticle(prac, xMaxPrac, yMaxPrac, z, 1, 0, 0, 0, 0, new int[0]);
+                for (double z = zMinPrac; z <= zMaxPrac; z += stepCount) {
+                    worldServer.spawnParticle(prac, xMinPrac, yMaxPrac, z, 1, 0, 0, 0, 0, new int[0]);
+                    worldServer.spawnParticle(prac, xMaxPrac, yMaxPrac, z, 1, 0, 0, 0, 0, new int[0]);
                 }
-                //Нижния сторона Спан частиц
-                for (double x = xMinPrac; x <= xMaxPrac; x += step) {
-                    ((WorldServer) world).spawnParticle(prac, x, yMinPrac, zMinPrac, 1, 0, 0, 0, 0, new int[0]);
-                    ((WorldServer) world).spawnParticle(prac, x, yMinPrac, zMaxPrac, 1, 0, 0, 0, 0, new int[0]);
+                for (double x = xMinPrac; x <= xMaxPrac; x += stepCount) {
+                    worldServer.spawnParticle(prac, x, yMinPrac, zMinPrac, 1, 0, 0, 0, 0, new int[0]);
+                    worldServer.spawnParticle(prac, x, yMinPrac, zMaxPrac, 1, 0, 0, 0, 0, new int[0]);
                 }
-                for (double z = zMinPrac; z <= zMaxPrac; z += step) {
-                    ((WorldServer) world).spawnParticle(prac, xMinPrac, yMinPrac, z, 1, 0, 0, 0, 0, new int[0]);
-                    ((WorldServer) world).spawnParticle(prac, xMaxPrac, yMinPrac, z, 1, 0, 0, 0, 0, new int[0]);
+                for (double z = zMinPrac; z <= zMaxPrac; z += stepCount) {
+                    worldServer.spawnParticle(prac, xMinPrac, yMinPrac, z, 1, 0, 0, 0, 0, new int[0]);
+                    worldServer.spawnParticle(prac, xMaxPrac, yMinPrac, z, 1, 0, 0, 0, 0, new int[0]);
                 }
-                //Грани Спавн частиц
-                for (double y = yMinPrac; y <= yMaxPrac; y += step) {
-                    ((WorldServer) world).spawnParticle(prac, xMinPrac, y, zMinPrac, 1, 0, 0, 0, 0, new int[0]);
-                    ((WorldServer) world).spawnParticle(prac, xMaxPrac, y, zMaxPrac, 1, 0, 0, 0, 0, new int[0]);
+                for (double y = yMinPrac; y <= yMaxPrac; y += stepCount) {
+                    worldServer.spawnParticle(prac, xMinPrac, y, zMinPrac, 1, 0, 0, 0, 0, new int[0]);
+                    worldServer.spawnParticle(prac, xMaxPrac, y, zMaxPrac, 1, 0, 0, 0, 0, new int[0]);
                 }
-                for (double y = yMinPrac; y <= yMaxPrac; y += step) {
-                    ((WorldServer) world).spawnParticle(prac, xMinPrac, y, zMaxPrac, 1, 0, 0, 0, 0, new int[0]);
-                    ((WorldServer) world).spawnParticle(prac, xMaxPrac, y, zMinPrac, 1, 0, 0, 0, 0, new int[0]);
+                for (double y = yMinPrac; y <= yMaxPrac; y += stepCount) {
+                    worldServer.spawnParticle(prac, xMinPrac, y, zMaxPrac, 1, 0, 0, 0, 0, new int[0]);
+                    worldServer.spawnParticle(prac, xMaxPrac, y, zMinPrac, 1, 0, 0, 0, 0, new int[0]);
                 }
             }
         }
     }
-
     public void toggleSpeed() {speed = (byte) ((speed + 1) % SpeedModes());}
-    public void decreaseSpeed() {
-        speed = (speed - 1) % SpeedModes();
-        if (speed < 0) {
-            speed = SpeedModes()-1 ;
-        }
-    }
+    public void decreaseSpeed() {speed = (byte) ((speed - 1 + SpeedModes()) % SpeedModes());}
     public void toggleArea() {radius = (radius + 1) % Radius();}
-    public void decreaseRadius() {
-        radius = (radius - 1) % Radius();
-        if (radius < 0) {
-            radius = Radius() -1;
-        }
-    }
+    public void decreaseRadius() {radius = (radius - 1 + Radius()) % Radius();}
     public void toggleParticle() {modPrac = (modPrac + 1) % 7;}
     public void UpdateModePrac() {
         switch (modPrac) {
+            case 0:
+                prac = EnumParticleTypes.FLAME;
+                break;
             case 1:
                 prac = EnumParticleTypes.DRAGON_BREATH;
                 break;
@@ -210,9 +189,6 @@ public class TileTorcherinoBase extends TileEntity implements ITickable {
             case 6:
                 prac = EnumParticleTypes.SMOKE_NORMAL;
                 break;
-            default:
-                prac = EnumParticleTypes.FLAME;
-                break;
         }
     }
     public void toggleWork() {booleanWork = !booleanWork;}
@@ -223,21 +199,20 @@ public class TileTorcherinoBase extends TileEntity implements ITickable {
             stepCount = 0.10;
         }
     }
-    @Override
     public @NotNull NBTTagCompound writeToNBT(NBTTagCompound tagCompound) {
-        tagCompound.setBoolean("boleanwork",this.booleanWork);
-        tagCompound.setBoolean("boleanspawn", this.booleanSpawnPrac);
-        tagCompound.setInteger("speed",this.speed);
-        tagCompound.setInteger("modprac", modPrac);
-        tagCompound.setInteger("currentmode",this.radius);
-        tagCompound.setInteger("count",this.count);
-        tagCompound.setDouble("stepcount",this.stepCount);
+        tagCompound.setBoolean("work", this.booleanWork);
+        tagCompound.setBoolean("spawn", this.booleanSpawnPrac);
+        tagCompound.setInteger("speed", this.speed);
+        tagCompound.setInteger("modprac", this.modPrac);
+        tagCompound.setInteger("currentmode", this.radius);
+        tagCompound.setInteger("count", this.count);
+        tagCompound.setDouble("stepcount", this.stepCount);
         return super.writeToNBT(tagCompound);
     }
     @Override
     public void readFromNBT(NBTTagCompound tagCompound) {
-        this.booleanWork = tagCompound.getBoolean("boleanwork");
-        this.booleanSpawnPrac = tagCompound.getBoolean("boleanspawn");
+        this.booleanWork = tagCompound.getBoolean("work");
+        this.booleanSpawnPrac = tagCompound.getBoolean("spawn");
         this.speed = tagCompound.getInteger("speed");
         this.modPrac = tagCompound.getInteger("modprac");
         this.radius = tagCompound.getInteger("currentmode");
@@ -254,17 +229,13 @@ public class TileTorcherinoBase extends TileEntity implements ITickable {
         return this.writeToNBT(new NBTTagCompound());
     }
     @Override
-    public void handleUpdateTag(@NotNull NBTTagCompound tag) {
-        super.handleUpdateTag(tag);
-    }
-    @Override
     public void onDataPacket(@NotNull NetworkManager net, SPacketUpdateTileEntity packet) {
-        this.handleUpdateTag(packet.getNbtCompound());
-        this.getWorld().markBlockRangeForRenderUpdate(this.pos,this.pos);
+        this.readFromNBT(packet.getNbtCompound());
+        this.getWorld().markBlockRangeForRenderUpdate(this.pos, this.pos);
     }
     @Override
     public void onLoad() {
-        IBlockState state = this.world.getBlockState(pos);
+        this.world.getBlockState(pos);
         if (!this.world.isRemote) {
                 this.packetTargetPoint = new NetworkRegistry.TargetPoint(this.world.provider.getDimension(), this.pos.getX(), this.pos.getY(), this.pos.getZ(), 64);
         }

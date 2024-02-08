@@ -13,19 +13,19 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 public class UpdateTilePacket implements IMessage {
     private BlockPos pos;
     private int value;
-    public UpdateTilePacket() {}
-    public UpdateTilePacket(BlockPos pos,int value) {
+   public UpdateTilePacket() {}
+    public UpdateTilePacket(BlockPos pos, int value) {
         this.value = value;
         this.pos = pos;
     }
     @Override
     public void fromBytes(ByteBuf buf) {
-        this.pos = CordUtils.readBlockPos(buf);
+        this.pos = BlockPos.fromLong(buf.readLong());
         this.value = buf.readInt();
     }
     @Override
     public void toBytes(ByteBuf buf) {
-        CordUtils.writeBlockPos(buf, this.pos);
+        buf.writeLong(this.pos.toLong());
         buf.writeInt(value);
     }
     public static class Handler implements IMessageHandler<UpdateTilePacket, IMessage> {
@@ -38,42 +38,43 @@ public class UpdateTilePacket implements IMessage {
                     TileEntity tile = world.getTileEntity(pos);
                     if (tile instanceof TileTorcherinoBase) {
                         int receivedValue = message.value;
-                        if (receivedValue == 1) {
-                            ((TileTorcherinoBase) tile).toggleWork();
-                            Torcherino.logger.debug("Send packet update tile Work");
-                        }
-                        if (receivedValue == 2) {
-                            ((TileTorcherinoBase) tile).toggleSpeed();
-                            Torcherino.logger.debug("Send packet update tile Speed");
-                        }
-                        if (receivedValue == 3) {
-                            ((TileTorcherinoBase) tile).toggleArea();
-                            Torcherino.logger.debug("Send packet update tile Area");
-                        }
-                        if (receivedValue == 4) {
-                            ((TileTorcherinoBase) tile).toggleSpawnPrac();
-                            Torcherino.logger.debug("Send packet update tile Spawn Particle");
-                        }
-                        if (receivedValue == 5) {
-                            ((TileTorcherinoBase) tile).toggleParticle();
-                            Torcherino.logger.debug("Send packet update tile Particle");
-                        }
-                        if (receivedValue == 6) {
-                            ((TileTorcherinoBase) tile).toggleStepCount();
-                            Torcherino.logger.debug("Send packet update tile Steep");
-                        }
-                        if (receivedValue == 7) {
-                            ((TileTorcherinoBase) tile).decreaseSpeed();
-                            Torcherino.logger.debug("Send packet update tile DecrSpeed");
-                        }
-                        if (receivedValue == 8) {
-                            ((TileTorcherinoBase) tile).decreaseRadius();
-                            Torcherino.logger.debug("Send packet update tile DecrArea");
+                        TileTorcherinoBase torcherinoTile = (TileTorcherinoBase) tile;
+                        switch (receivedValue) {
+                            case 1:
+                                torcherinoTile.toggleWork();
+                                Torcherino.logger.debug("Send packet update tile Work");
+                                break;
+                            case 2:
+                                torcherinoTile.toggleSpeed();
+                                Torcherino.logger.debug("Send packet update tile Speed");
+                                break;
+                            case 3:
+                                torcherinoTile.toggleArea();
+                                Torcherino.logger.debug("Send packet update tile Area");
+                                break;
+                            case 4:
+                                torcherinoTile.toggleSpawnPrac();
+                                Torcherino.logger.debug("Send packet update tile Spawn Particle");
+                                break;
+                            case 5:
+                                torcherinoTile.toggleParticle();
+                                Torcherino.logger.debug("Send packet update tile Particle");
+                                break;
+                            case 6:
+                                torcherinoTile.toggleStepCount();
+                                Torcherino.logger.debug("Send packet update tile Steep");
+                                break;
+                            case 7:
+                                torcherinoTile.decreaseSpeed();
+                                break;
+                            case 8:
+                                torcherinoTile.decreaseRadius();
+                                Torcherino.logger.debug("Send packet update tile Decry Area");
+                                break;
                         }
                     }
                 }
-            }
-            );
+            });
             return null;
         }
     }
