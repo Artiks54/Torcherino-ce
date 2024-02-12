@@ -37,10 +37,10 @@ public class GuiTorcherino extends GuiScreen {
         Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
         drawModalRectWithCustomSizedTexture(textureX, textureY, 0, 0, 256, 256, 256, 256);
         FontRenderer fontRenderer = this.fontRenderer;
-        fontRenderer.drawSplitString(LS.Info, stringPositionX, stringPositionY, 230, Color.BLUE.getRGB());
-        fontRenderer.drawString(LS.Pos + " X: "+tile.getPos().getX()+" Y: "+tile.getPos().getY()+" Z: "+tile.getPos().getZ(), stringPositionX, stringPositionY + 45, Color.BLUE.getRGB());
-        fontRenderer.drawString(StrStringConfigMode, stringPositionX, stringPositionY + 60, Color.BLUE.getRGB());
-        fontRenderer.drawString(StrStringConfigArea, stringPositionX, stringPositionY + 75, Color.BLUE.getRGB());
+        fontRenderer.drawSplitString(LS.Info, stringPositionX, stringPositionY, 230, Color.WHITE.getRGB());
+        fontRenderer.drawString(LS.Pos + " X: "+tile.getPos().getX()+" Y: "+tile.getPos().getY()+" Z: "+tile.getPos().getZ(), stringPositionX, stringPositionY + 45, Color.WHITE.getRGB());
+        fontRenderer.drawString(StrStringConfigMode, stringPositionX, stringPositionY + 60, Color.WHITE.getRGB());
+        fontRenderer.drawString(StrStringConfigArea, stringPositionX, stringPositionY + 75, Color.WHITE.getRGB());
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
     @Override
