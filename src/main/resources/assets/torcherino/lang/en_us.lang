@@ -3,22 +3,14 @@ tooltip.torcherino.descriptionInfo=Use RightClick by torch to get information
 tooltip.torcherino.descriptionConfig=Use RightClick by configuration torch
 
 gui.button.StrWork=Working:
-gui.button.StrSP=Spawn Particle:
+gui.button.StrRender=Visualization:
 gui.button.StrOn=on
 gui.button.StrOff=off
-gui.button.StrStep=Step
 
-gui.prac.flame=Flame
-gui.prac.dragon=Dragon
-gui.prac.redstone=Redstone
-gui.prac.end=End
-gui.prac.spell=Spell
-gui.prac.villager=Villager
-gui.prac.smoke=Smoke
-
-gui.info.text=Information
+gui.info.text=Information: Clicking the left mouse button increases the radius or speed, left mouse click + shift decreases.
 gui.info.modes=Number of speed modes:
 gui.info.area=Maximum radius:
+gui.info.pos=Position:
 
 item.config.name=§eConfiguration item
 item.torchinfo.name=§eInformation item

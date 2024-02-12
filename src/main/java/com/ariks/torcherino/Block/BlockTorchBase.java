@@ -6,12 +6,14 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
+
 public class BlockTorchBase extends BlockTorcherino {
     public BlockTorchBase(String name) {
         super(name);
     }
     @Override
-    public TileEntity createTileEntity(World world, IBlockState state) {
+    public TileEntity createTileEntity(@NotNull World world, @NotNull IBlockState state) {
         Block block = state.getBlock();
         if (block == RegistryArray.Torch_lvl_1) {
             return new TileTorch.TileBase1();

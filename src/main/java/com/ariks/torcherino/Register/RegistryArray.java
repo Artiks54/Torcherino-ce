@@ -1,14 +1,13 @@
 package com.ariks.torcherino.Register;
 
-import com.ariks.torcherino.Block.BlockTorchBase;
-import com.ariks.torcherino.Block.CompressedTorch;
+import com.ariks.torcherino.Block.*;
 import com.ariks.torcherino.Items.*;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RegistryArray {
+public final class RegistryArray {
     public static final List<Item> ITEMS = new ArrayList<>();
     public static final Item Diamond_Clock = new itemBase("diamondclock");
     public static final Item Emerald_Clock = new itemBase("emeraldclock");

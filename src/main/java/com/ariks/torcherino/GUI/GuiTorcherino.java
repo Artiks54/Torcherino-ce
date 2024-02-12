@@ -22,13 +22,12 @@ public class GuiTorcherino extends GuiScreen {
     LocalizedStringKey LS = new LocalizedStringKey();
     final ResourceLocation texture = new ResourceLocation(Torcherino.MOD_ID, "textures/gui/gui.png");
     private final TileTorcherinoBase tile;
-    private String StrWork,StrRadius,StrSpeed,StrSpawnPrac,StrParc,StrStringConfigArea,StrStringConfigMode;
+    private String StrRadius,StrSpeed,StrRender,StrWork,StrStringConfigArea,StrStringConfigMode;
     private int SpeedModifers;
     public GuiTorcherino(TileTorcherinoBase tile) {
         this.tile = tile;
     }
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        this.updateStringConfig();
         int screenWidthPixels = width;
         int screenHeightPixels = height;
         int textureX = (screenWidthPixels - 256) / 2;
@@ -38,27 +37,26 @@ public class GuiTorcherino extends GuiScreen {
         Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
         drawModalRectWithCustomSizedTexture(textureX, textureY, 0, 0, 256, 256, 256, 256);
         FontRenderer fontRenderer = this.fontRenderer;
-        fontRenderer.drawSplitString(LS.Info, stringPositionX, stringPositionY, 240, Color.GREEN.getRGB());
-        fontRenderer.drawString(StrStringConfigMode, stringPositionX, stringPositionY + 20, Color.GREEN.getRGB());
-        fontRenderer.drawString(StrStringConfigArea, stringPositionX, stringPositionY + 40, Color.GREEN.getRGB());
+        fontRenderer.drawSplitString(LS.Info, stringPositionX, stringPositionY, 230, Color.BLUE.getRGB());
+        fontRenderer.drawString(LS.Pos + " X: "+tile.getPos().getX()+" Y: "+tile.getPos().getY()+" Z: "+tile.getPos().getZ(), stringPositionX, stringPositionY + 45, Color.BLUE.getRGB());
+        fontRenderer.drawString(StrStringConfigMode, stringPositionX, stringPositionY + 60, Color.BLUE.getRGB());
+        fontRenderer.drawString(StrStringConfigArea, stringPositionX, stringPositionY + 75, Color.BLUE.getRGB());
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
     @Override
     public void initGui() {
         super.initGui();
+        this.updateStringConfig();
         this.updateButton();
-        this.updatePrac();
         int buttonWidth = 110;
         int buttonHeight = 20;
         int x = (width - buttonWidth) / 2;
         int y = (height - buttonHeight) / 2;
         buttonList.clear();
-        buttonList.add(new GuiButton(1,x-59,y+45,buttonWidth,buttonHeight, StrWork));
-        buttonList.add(new GuiButton(2,x-59,y+75,buttonWidth,buttonHeight, StrSpeed));
-        buttonList.add(new GuiButton(3,x-59,y+105,buttonWidth,buttonHeight, StrRadius));
-        buttonList.add(new GuiButton(4,x+59,y+45,buttonWidth,buttonHeight, StrSpawnPrac));
-        buttonList.add(new GuiButton(5,x+59,y+75,buttonWidth,buttonHeight, StrParc));
-        buttonList.add(new GuiButton(6,x+59,y+105,buttonWidth,buttonHeight, ""+tile.stepCount));
+        buttonList.add(new GuiButton(1,x-59,y+75,buttonWidth,buttonHeight, StrWork));
+        buttonList.add(new GuiButton(2,x+59,y+75,buttonWidth,buttonHeight, StrSpeed));
+        buttonList.add(new GuiButton(3,x+59,y+105,buttonWidth,buttonHeight, StrRadius));
+        buttonList.add(new GuiButton(4,x-59,y+105,buttonWidth,buttonHeight, StrRender));
     }
     @Override
     protected void actionPerformed(GuiButton button) {
@@ -66,11 +64,9 @@ public class GuiTorcherino extends GuiScreen {
         int updatePacketTile;
         switch (buttonId) {
             case 1: updatePacketTile = 1;break;
-            case 2: updatePacketTile = isShiftKeyDown() ? 7 : 2;break;
-            case 3: updatePacketTile = isShiftKeyDown() ? 8 : 3;break;
-            case 4: updatePacketTile = 4;break;
-            case 5: updatePacketTile = 5;break;
-            case 6: updatePacketTile = 6;break;
+            case 2: updatePacketTile = isShiftKeyDown() ? 3 : 2;break;
+            case 3: updatePacketTile = isShiftKeyDown() ? 5 : 4;break;
+            case 4: updatePacketTile = 6;break;
             default: return;
         }
         ModPacketHandler.network.sendToServer(new UpdateTilePacket(this.tile.getPos(), updatePacketTile));
@@ -83,12 +79,6 @@ public class GuiTorcherino extends GuiScreen {
     @Override
     public boolean doesGuiPauseGame()  {
         return false;
-    }
-    public void updatePrac() {
-        String[] pracArray = {LS.prac0, LS.prac1, LS.prac2, LS.prac3, LS.prac4, LS.prac5, LS.prac6};
-        if (tile.modPrac >= 0 && tile.modPrac < pracArray.length) {
-            StrParc = pracArray[tile.modPrac];
-        }
     }
     public void updateStringConfig() {
         if (tile instanceof TileTorch.TileBase1) {
@@ -120,7 +110,7 @@ public class GuiTorcherino extends GuiScreen {
     }
     public void updateButton() {
         StrWork = tile.booleanWork ? LS.ButtonStrWork + " " + LS.ColorGreen + LS.StrOn : LS.ButtonStrWork + " " + LS.ColorRed + LS.StrOff;
-        StrSpawnPrac = tile.booleanSpawnPrac ? LS.ButtonStrSP + " " + LS.ColorGreen + LS.StrOn : LS.ButtonStrSP + " " + LS.ColorRed + LS.StrOff;
+        StrRender = tile.booleanRender ? LS.ButtonStrRender + " " + LS.ColorGreen + LS.StrOn : LS.ButtonStrRender + " " + LS.ColorRed + LS.StrOff;
         StrSpeed = (tile.speed < 1 ? LS.ColorRed : LS.ColorGreen) + (tile.speed * SpeedModifers * 100) + "%";
         StrRadius = (tile.radius < 1 ? LS.ColorRed : LS.ColorGreen) + (tile.radius + "x" + tile.radius + "x" + tile.radius);
     }

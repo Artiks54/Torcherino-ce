@@ -1,7 +1,6 @@
 package com.ariks.torcherino.network;
 
 import com.ariks.torcherino.Tiles.TileTorcherinoBase;
-import com.ariks.torcherino.Torcherino;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -42,34 +41,21 @@ public class UpdateTilePacket implements IMessage {
                         switch (receivedValue) {
                             case 1:
                                 torcherinoTile.toggleWork();
-                                Torcherino.logger.debug("Send packet update tile Work");
                                 break;
                             case 2:
                                 torcherinoTile.toggleSpeed();
-                                Torcherino.logger.debug("Send packet update tile Speed");
                                 break;
                             case 3:
-                                torcherinoTile.toggleArea();
-                                Torcherino.logger.debug("Send packet update tile Area");
-                                break;
-                            case 4:
-                                torcherinoTile.toggleSpawnPrac();
-                                Torcherino.logger.debug("Send packet update tile Spawn Particle");
-                                break;
-                            case 5:
-                                torcherinoTile.toggleParticle();
-                                Torcherino.logger.debug("Send packet update tile Particle");
-                                break;
-                            case 6:
-                                torcherinoTile.toggleStepCount();
-                                Torcherino.logger.debug("Send packet update tile Steep");
-                                break;
-                            case 7:
                                 torcherinoTile.decreaseSpeed();
                                 break;
-                            case 8:
+                            case 4:
+                                torcherinoTile.toggleArea();
+                                break;
+                            case 5:
                                 torcherinoTile.decreaseRadius();
-                                Torcherino.logger.debug("Send packet update tile Decry Area");
+                                break;
+                            case 6:
+                                torcherinoTile.toggleRender();
                                 break;
                         }
                     }

@@ -4,22 +4,14 @@ tooltip.torcherino.descriptionInfo=Use RightClick by torch to get information
 tooltip.torcherino.descriptionConfig=Use RightClick by configuration torch
 
 gui.button.StrWork=Работа:
-gui.button.StrSP=Спавн частиц:
+gui.button.StrRender=Визуализация:
 gui.button.StrOn=Вкл
 gui.button.StrOff=Выкл
-gui.button.StrStep=Отсуп
 
-gui.prac.flame=Огонь
-gui.prac.dragon=Дракон
-gui.prac.redstone=Релстоун
-gui.prac.end=Ендер
-gui.prac.spell=Спелл
-gui.prac.villager=Житель
-gui.prac.smoke=Дым
-
-gui.info.text=Информация
+gui.info.text=Информация: Клик левой кнопки мыши увеличивает радиус или скорость, лкм + щифт уменьшает.
 gui.info.modes=Количество режимов скорости:
 gui.info.area=Максимальный радиус работы:
+gui.info.pos=Позиция:
 
 item.config.name=§eКонфигурационный изменитель
 item.torchinfo.name=§eИнформационный обозреватель
