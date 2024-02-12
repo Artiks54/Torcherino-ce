@@ -5,11 +5,12 @@ import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 
 @SideOnly(Side.CLIENT)
 public class TileTorcherinoBaseRender extends TileEntitySpecialRenderer<TileTorcherinoBase> {
     @Override
-    public void render(TileTorcherinoBase tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+    public void render(@NotNull TileTorcherinoBase tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         if (!tile.hasWorld() || !tile.booleanRender)
             return;
         GlStateManager.pushMatrix();
@@ -21,11 +22,6 @@ public class TileTorcherinoBaseRender extends TileEntitySpecialRenderer<TileTorc
         GlStateManager.disableLighting();
         GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
         GlStateManager.disableCull();
-        int i = 61680;
-        int j = i % 65536;
-        int k = 0;
-        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) j, (float) k);
-        RenderGlobal.renderFilledBox(tile.getAABBForRender(), 1F, 1F, 1F, 0.75F);
         RenderGlobal.drawSelectionBoundingBox(tile.getAABBForRender(), 1F, 1F, 0F, 1F);
         GlStateManager.enableCull();
         GlStateManager.enableLighting();

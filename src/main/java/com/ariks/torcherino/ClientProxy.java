@@ -28,7 +28,8 @@ public class ClientProxy extends CommonProxy {
 		}
 		TileEntity tile = world.getTileEntity(pos);
 		if (tile instanceof TileTorcherinoBase) {
-			Minecraft.getMinecraft().displayGuiScreen(new GuiTorcherino((TileTorcherinoBase) tile));
+			GuiTorcherino gui = new GuiTorcherino((TileTorcherinoBase) tile,player);
+			Minecraft.getMinecraft().displayGuiScreen(gui);
 			return true;
 		}
 		return false;

@@ -12,9 +12,12 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
+import org.lwjgl.input.Keyboard;
 import java.awt.*;
 
 @SideOnly(Side.CLIENT)
@@ -22,10 +25,12 @@ public class GuiTorcherino extends GuiScreen {
     LocalizedStringKey LS = new LocalizedStringKey();
     final ResourceLocation texture = new ResourceLocation(Torcherino.MOD_ID, "textures/gui/gui.png");
     private final TileTorcherinoBase tile;
+    private final EntityPlayer player;
     private String StrRadius,StrSpeed,StrRender,StrWork,StrStringConfigArea,StrStringConfigMode;
     private int SpeedModifers;
-    public GuiTorcherino(TileTorcherinoBase tile) {
+    public GuiTorcherino(TileTorcherinoBase tile, EntityPlayer player) {
         this.tile = tile;
+        this.player = player;
     }
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         int screenWidthPixels = width;
@@ -59,7 +64,7 @@ public class GuiTorcherino extends GuiScreen {
         buttonList.add(new GuiButton(4,x-59,y+105,buttonWidth,buttonHeight, StrRender));
     }
     @Override
-    protected void actionPerformed(GuiButton button) {
+    protected void actionPerformed(@NotNull GuiButton button) {
         int buttonId = button.id;
         int updatePacketTile;
         switch (buttonId) {
@@ -71,10 +76,18 @@ public class GuiTorcherino extends GuiScreen {
         }
         ModPacketHandler.network.sendToServer(new UpdateTilePacket(this.tile.getPos(), updatePacketTile));
     }
-    @Override
     public void updateScreen() {
         super.updateScreen();
         this.initGui();
+        if (tile.getPos().getDistance((int) player.posX, (int) player.posY, (int) player.posZ) > 8.0) {
+            player.closeScreen();
+        }
+    }
+    @Override
+    protected void keyTyped(char typedChar, int keyCode) {
+        if(Keyboard.isKeyDown(Keyboard.KEY_E) || Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)){
+            player.closeScreen();
+        }
     }
     @Override
     public boolean doesGuiPauseGame()  {
