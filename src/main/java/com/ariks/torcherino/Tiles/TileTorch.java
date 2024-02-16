@@ -1,8 +1,8 @@
 package com.ariks.torcherino.Tiles;
 
 import static com.ariks.torcherino.util.Config.*;
-public abstract class TileTorch
-{
+
+public abstract class TileTorch {
     //TileBase1
         public static final class TileBase1 extends TileTorcherinoBase {
         @Override

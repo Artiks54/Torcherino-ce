@@ -99,5 +99,15 @@ public class ReciepRegister {
                 "AAA",
                 'A', new ItemStack(Blocks.TORCH),
                 'B', new ItemStack(Binding_Element));
+        //TimeWand
+        GameRegistry.addShapedRecipe(
+                new ResourceLocation(Torcherino.MOD_ID + ":" + "timewand"),
+                new ResourceLocation(Torcherino.MOD_ID + ":" + "timewand"),
+                new ItemStack(Time_Wand),
+                "  A",
+                " B ",
+                "B  ",
+                'A', new ItemStack(Gold_Clock),
+                'B', new ItemStack(Items.STICK));
     }
 }

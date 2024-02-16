@@ -1,37 +1,17 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "transform": "forge:default-block",
-    "textures": {
-      "torch": "torcherino:blocks/torch_lvl1"
-    }
+    "model": "torcherino:torch",
+	    "textures": {
+        "base": "torcherino:blocks/base",
+		"material": "torcherino:blocks/lapis",
+        "particle":  "torcherino:blocks/lapis"
+        },
+    "transform": "forge:default-block"
   },
   "variants": {
-    "facing=up": {
-      "model": "normal_torch"
-    },
-    "facing=east": {
-      "model": "normal_torch_wall"
-    },
-    "facing=south": {
-      "model": "normal_torch_wall",
-      "y": 90
-    },
-    "facing=west": {
-      "model": "normal_torch_wall",
-      "y": 180
-    },
-    "facing=north": {
-      "model": "normal_torch_wall",
-      "y": 270
-    }
-  },
-  "inventory": [
-    {
-      "model": "builtin/generated",
-      "textures": {
-        "layer0": "torcherino:blocks/torch_lvl1"
-      }
-    }
-  ]
+    "normal": [{}],
+    "inventory": [{}],
+    "destroyed": [{}]
+  }
 }

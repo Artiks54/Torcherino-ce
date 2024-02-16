@@ -1,7 +1,4 @@
 
-tooltip.torcherino.descriptionInfo=Use RightClick by torch to get information
-tooltip.torcherino.descriptionConfig=Use RightClick by configuration torch
-
 gui.button.StrWork=Working:
 gui.button.StrRender=Visualization:
 gui.button.StrOn=on
@@ -11,6 +8,12 @@ gui.info.text=Information: Clicking the left mouse button increases the radius o
 gui.info.modes=Number of speed modes:
 gui.info.area=Maximum radius:
 gui.info.pos=Position:
+
+item.info.wand_time=Durability:
+item.timewand.name=§6The Staff of Time
+
+top.info.speed=Speed:
+top.info.radius=Radius:
 
 item.config.name=§eConfiguration item
 item.torchinfo.name=§eInformation item

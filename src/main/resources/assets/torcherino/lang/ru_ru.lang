@@ -1,8 +1,4 @@
 
-
-tooltip.torcherino.descriptionInfo=Use RightClick by torch to get information
-tooltip.torcherino.descriptionConfig=Use RightClick by configuration torch
-
 gui.button.StrWork=Работа:
 gui.button.StrRender=Визуализация:
 gui.button.StrOn=Вкл
@@ -12,6 +8,12 @@ gui.info.text=Информация: Клик левой кнопки мыши у
 gui.info.modes=Количество режимов скорости:
 gui.info.area=Максимальный радиус работы:
 gui.info.pos=Позиция:
+
+item.info.wand_time=Прочность:
+item.timewand.name=§6Посох времени
+
+top.info.speed=Скорость:
+top.info.radius=Радиус:
 
 item.config.name=§eКонфигурационный изменитель
 item.torchinfo.name=§eИнформационный обозреватель

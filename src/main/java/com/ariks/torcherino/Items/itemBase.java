@@ -6,7 +6,7 @@ import com.ariks.torcherino.util.IHasModel;
 import net.minecraft.item.Item;
 
 public class itemBase extends Item implements IHasModel {
-        public itemBase(String name){
+    public itemBase(String name) {
         this.setRegistryName(name);
         this.setUnlocalizedName(name);
         this.setMaxStackSize(64);
@@ -15,6 +15,6 @@ public class itemBase extends Item implements IHasModel {
     }
     @Override
     public void registerModels() {
-        Torcherino.proxy.registerItemRenderer(this,0,"inventory");
+        Torcherino.proxy.registerItemRenderer(this, 0, "inventory");
     }
 }

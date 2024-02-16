@@ -50,58 +50,70 @@ minecraft {
 }
 
 repositories {
-    maven { // Мавен, который поддерживает JEI.
+    maven {
         name = "Progwml6 maven"
         url = "http://dvs1.progwml6.com/files/maven"
     }
-    maven { // Мавен, который поддерживает JEI, для резерва.
+    maven {
         name = "ModMaven"
         url = "modmaven.k-4u.nl"
     }
+    maven { // TOP
+        name = "tterrag maven"
+        url = "https://maven.tterrag.com/"
+    }
+    maven {
+        name = "curse.maven"
+        url = "https://www.cursemaven.com"
+    }
 }
 
-dependencies {
-    implementation 'org.jetbrains:annotations:23.0.0'
-    minecraft([
-            group  : "net.minecraftforge",
-            name   : "forge",
-            version: "${minecraft_version}-${forge_version}"
-    ])
-    runtimeOnly "mezz.jei:jei_${mc_version}:${jei_version}:api"
-    compileOnly "mezz.jei:jei_${mc_version}:${jei_version}"
-    runtimeOnly fileTree('lib')
-    compileOnly fileTree('lib')
-    compileOnly fileTree('libs')
-}
+    dependencies {
+        implementation 'org.jetbrains:annotations:23.0.0'
+        minecraft([
+                group  : "net.minecraftforge",
+                name   : "forge",
+                version: "${minecraft_version}-${forge_version}"
+        ])
+        runtimeOnly "mezz.jei:jei_${mc_version}:${jei_version}:api"
+        compileOnly "mezz.jei:jei_${mc_version}:${jei_version}"
+        compileOnly "mcjty.theoneprobe:TheOneProbe-1.12:1.12-1.4.28-17"
+        runtimeOnly "mcjty.theoneprobe:TheOneProbe-1.12:1.12-1.4.28-17"
+        runtimeOnly "curse.maven:top-addons-247111:2887479"
+        compileOnly "curse.maven:top-addons-247111:2887479"
+        runtimeOnly fileTree('lib')
+        compileOnly fileTree('lib')
+        compileOnly fileTree('libs')
+    }
 
-jar.finalizedBy('reobfJar')
+    jar.finalizedBy('reobfJar')
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifact jar
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                artifact jar
+            }
+        }
+        repositories {
+            maven {
+                url "file:///${project.projectDir}/mcmodsrepo"
+            }
         }
     }
-    repositories {
-        maven {
-            url "file:///${project.projectDir}/mcmodsrepo"
-        }
-    }
-}
 
-apply plugin: 'idea'
-idea {
-    module {
-        inheritOutputDirs = true
-    }
-}
-subprojects {
     apply plugin: 'idea'
-}
+    idea {
+        module {
+            inheritOutputDirs = true
+        }
+    }
+    subprojects {
+        apply plugin: 'idea'
+    }
 
-task prepareAssets(type: Copy) {
-    group = 'build'
-    from project.file('src/main/resources')
-    into project.file('build/classes/java/main')
-}
-sourceSets { main { output.resourcesDir = output.classesDir } }
+    task prepareAssets(type: Copy) {
+        group = 'build'
+        from project.file('src/main/resources')
+        into project.file('build/classes/java/main')
+    }
+    sourceSets { main { output.resourcesDir = output.classesDir } }

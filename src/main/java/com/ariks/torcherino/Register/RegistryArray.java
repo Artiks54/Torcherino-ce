@@ -9,6 +9,7 @@ import java.util.List;
 
 public final class RegistryArray {
     public static final List<Item> ITEMS = new ArrayList<>();
+    public static final Item Time_Wand = new TimeWand("timewand");
     public static final Item Diamond_Clock = new itemBase("diamondclock");
     public static final Item Emerald_Clock = new itemBase("emeraldclock");
     public static final Item Lapis_Clock = new itemBase("lapisclock");
