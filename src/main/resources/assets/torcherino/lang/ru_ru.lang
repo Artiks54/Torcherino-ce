@@ -12,9 +12,6 @@ gui.info.pos=Позиция:
 item.info.wand_time=Прочность:
 item.timewand.name=§6Посох времени
 
-top.info.speed=Скорость:
-top.info.radius=Радиус:
-
 item.config.name=§eКонфигурационный изменитель
 item.torchinfo.name=§eИнформационный обозреватель
 item.diamondclock.name=§bАлмазные часы

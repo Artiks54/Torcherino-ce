@@ -12,9 +12,6 @@ gui.info.pos=Position:
 item.info.wand_time=Durability:
 item.timewand.name=§6The Staff of Time
 
-top.info.speed=Speed:
-top.info.radius=Radius:
-
 item.config.name=§eConfiguration item
 item.torchinfo.name=§eInformation item
 item.diamondclock.name=§bDiamond Clock

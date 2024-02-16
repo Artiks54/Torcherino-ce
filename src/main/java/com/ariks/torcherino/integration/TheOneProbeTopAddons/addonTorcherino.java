@@ -4,7 +4,6 @@ import com.ariks.torcherino.Tiles.TileCompresedTorch;
 import com.ariks.torcherino.Tiles.TileTorch;
 import com.ariks.torcherino.Tiles.TileTorcherinoBase;
 import com.ariks.torcherino.util.Config;
-import com.ariks.torcherino.util.LocalizedStringKey;
 import io.github.drmanganese.topaddons.addons.AddonBlank;
 import io.github.drmanganese.topaddons.api.TOPAddon;
 import mcjty.theoneprobe.api.IProbeHitData;
@@ -19,31 +18,31 @@ import net.minecraft.world.World;
 @TOPAddon(dependency = "torcherino", order = 0)
 public class addonTorcherino extends AddonBlank {
     private int SpeedModifers;
-    LocalizedStringKey LS = new LocalizedStringKey();
+
     @Override
     public void addProbeInfo(final ProbeMode probeMode, final IProbeInfo probeInfo, final EntityPlayer entityPlayer, final World world, final IBlockState iBlockState, final IProbeHitData data) {
         TileEntity tile = world.getTileEntity(data.getPos());
         if (tile instanceof TileTorcherinoBase) {
             TileTorcherinoBase torch = (TileTorcherinoBase) tile;
             if(torch.radius >=1){
-                probeInfo.text(TextFormatting.GREEN+LS.Radius+" "+torch.radius +"x"+ torch.radius+"x"+torch.radius);
+                probeInfo.text(TextFormatting.GREEN+"Radius: "+" "+torch.radius +"x"+ torch.radius+"x"+torch.radius);
             }else{
-                probeInfo.text(TextFormatting.RED+LS.Radius+" "+torch.radius +"x"+ torch.radius+"x"+torch.radius);
+                probeInfo.text(TextFormatting.RED+"Radius: "+" "+torch.radius +"x"+ torch.radius+"x"+torch.radius);
             }
             if(torch.speed >=1){
-                probeInfo.text(TextFormatting.GREEN+LS.Speed+" "+torch.speed*SpeedModifers*100+"%");
+                probeInfo.text(TextFormatting.GREEN+"Speed: "+" "+torch.speed*SpeedModifers*100+"%");
             }else{
-                probeInfo.text(TextFormatting.RED+LS.Speed+" 0%");
+                probeInfo.text(TextFormatting.RED+"Speed: "+" 0%");
             }
             if (torch.booleanRender) {
-                probeInfo.text(TextFormatting.GREEN+LS.ButtonStrRender+" "+LS.StrOn);
+                probeInfo.text(TextFormatting.GREEN+"Visualization: "+" "+"true");
             }else{
-                probeInfo.text(TextFormatting.RED+LS.ButtonStrRender+" "+LS.StrOff);
+                probeInfo.text(TextFormatting.RED+"Visualization: "+" "+"false");
             }
             if (torch.booleanWork) {
-                probeInfo.text(TextFormatting.GREEN+LS.ButtonStrWork+" "+LS.StrOn);
+                probeInfo.text(TextFormatting.GREEN+"Work: "+" "+"true");
             }else{
-                probeInfo.text(TextFormatting.RED+LS.ButtonStrWork+" "+LS.StrOff);
+                probeInfo.text(TextFormatting.RED+"Work: "+" "+"false");
             }
         }
         if (tile instanceof TileTorch.TileBase1) {
