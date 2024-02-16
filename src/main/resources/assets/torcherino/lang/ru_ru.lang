@@ -9,7 +9,6 @@ gui.info.modes=Количество режимов скорости:
 gui.info.area=Максимальный радиус работы:
 gui.info.pos=Позиция:
 
-item.info.wand_time=Прочность:
 item.timewand.name=§6Посох времени
 
 item.config.name=§eКонфигурационный изменитель

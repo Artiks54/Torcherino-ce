@@ -18,31 +18,30 @@ import net.minecraft.world.World;
 @TOPAddon(dependency = "torcherino", order = 0)
 public class addonTorcherino extends AddonBlank {
     private int SpeedModifers;
-
     @Override
     public void addProbeInfo(final ProbeMode probeMode, final IProbeInfo probeInfo, final EntityPlayer entityPlayer, final World world, final IBlockState iBlockState, final IProbeHitData data) {
         TileEntity tile = world.getTileEntity(data.getPos());
         if (tile instanceof TileTorcherinoBase) {
             TileTorcherinoBase torch = (TileTorcherinoBase) tile;
             if(torch.radius >=1){
-                probeInfo.text(TextFormatting.GREEN+"Radius: "+" "+torch.radius +"x"+ torch.radius+"x"+torch.radius);
+                probeInfo.text(TextFormatting.GREEN+"Radius: "+torch.radius +"x"+ torch.radius+"x"+torch.radius);
             }else{
-                probeInfo.text(TextFormatting.RED+"Radius: "+" "+torch.radius +"x"+ torch.radius+"x"+torch.radius);
+                probeInfo.text(TextFormatting.RED+"Radius: "+torch.radius +"x"+ torch.radius+"x"+torch.radius);
             }
             if(torch.speed >=1){
-                probeInfo.text(TextFormatting.GREEN+"Speed: "+" "+torch.speed*SpeedModifers*100+"%");
+                probeInfo.text(TextFormatting.GREEN+"Speed: "+torch.speed*SpeedModifers*100+"%");
             }else{
-                probeInfo.text(TextFormatting.RED+"Speed: "+" 0%");
+                probeInfo.text(TextFormatting.RED+"Speed: "+"0%");
             }
             if (torch.booleanRender) {
-                probeInfo.text(TextFormatting.GREEN+"Visualization: "+" "+"true");
+                probeInfo.text(TextFormatting.GREEN+"Visualization: "+"true");
             }else{
-                probeInfo.text(TextFormatting.RED+"Visualization: "+" "+"false");
+                probeInfo.text(TextFormatting.RED+"Visualization: "+"false");
             }
             if (torch.booleanWork) {
-                probeInfo.text(TextFormatting.GREEN+"Work: "+" "+"true");
+                probeInfo.text(TextFormatting.GREEN+"Work: "+"true");
             }else{
-                probeInfo.text(TextFormatting.RED+"Work: "+" "+"false");
+                probeInfo.text(TextFormatting.RED+"Work: "+"false");
             }
         }
         if (tile instanceof TileTorch.TileBase1) {

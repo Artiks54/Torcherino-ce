@@ -9,7 +9,6 @@ gui.info.modes=Number of speed modes:
 gui.info.area=Maximum radius:
 gui.info.pos=Position:
 
-item.info.wand_time=Durability:
 item.timewand.name=§6The Staff of Time
 
 item.config.name=§eConfiguration item

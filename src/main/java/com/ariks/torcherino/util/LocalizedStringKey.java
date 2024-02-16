@@ -5,7 +5,6 @@ import net.minecraft.client.resources.I18n;
 public class LocalizedStringKey {
      public String ColorRed = "\u00A7c";
      public String ColorGreen = "\u00A7a";
-     public String StrWand = I18n.format("item.info.wand_time");
      public String ButtonStrWork = I18n.format("gui.button.StrWork");
      public String ButtonStrRender = I18n.format("gui.button.StrRender");
      public String StrOn = I18n.format("gui.button.StrOn");

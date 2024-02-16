@@ -3,7 +3,6 @@ package com.ariks.torcherino.Items;
 import com.ariks.torcherino.Register.AccelerationRegistry;
 import com.ariks.torcherino.Tiles.TileTorcherinoBase;
 import com.ariks.torcherino.util.Config;
-import com.ariks.torcherino.util.LocalizedStringKey;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
@@ -15,14 +14,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Random;
+
 public class TimeWand extends itemBase {
-    LocalizedStringKey LS = new LocalizedStringKey();
     public TimeWand(String name) {
         super(name);
         this.setMaxDamage(500);
@@ -58,14 +55,12 @@ public class TimeWand extends itemBase {
         return EnumActionResult.SUCCESS;
     }
     @Override
-    @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, @NotNull ITooltipFlag flagIn) {
         int durability = stack.getMaxDamage() - stack.getItemDamage();
-        tooltip.add(TextFormatting.GOLD + LS.StrWand+" " + durability + "/" + stack.getMaxDamage());
+        tooltip.add(TextFormatting.GOLD + "Durability: "+" " + durability + "/" + stack.getMaxDamage());
         super.addInformation(stack, worldIn, tooltip, flagIn);
     }
     @Override
-    @SideOnly(Side.CLIENT)
     public boolean showDurabilityBar(@NotNull ItemStack stack) {
         return stack.isItemDamaged();
     }
