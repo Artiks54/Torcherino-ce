@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 public class UpdateTilePacket implements IMessage {
     private BlockPos pos;
     private int value;
-   public UpdateTilePacket() {}
+    public UpdateTilePacket() {}
     public UpdateTilePacket(BlockPos pos, int value) {
         this.value = value;
         this.pos = pos;
@@ -21,7 +21,8 @@ public class UpdateTilePacket implements IMessage {
     public void fromBytes(ByteBuf buf) {
         this.pos = BlockPos.fromLong(buf.readLong());
         this.value = buf.readInt();
-    }
+
+        }
     @Override
     public void toBytes(ByteBuf buf) {
         buf.writeLong(this.pos.toLong());
@@ -43,20 +44,21 @@ public class UpdateTilePacket implements IMessage {
                                 torcherinoTile.toggleWork();
                                 break;
                             case 2:
-                                torcherinoTile.toggleSpeed();
+                                torcherinoTile.toggleSpeed(true);
                                 break;
                             case 3:
-                                torcherinoTile.decreaseSpeed();
+                                torcherinoTile.toggleSpeed(false);
                                 break;
                             case 4:
-                                torcherinoTile.toggleArea();
+                                torcherinoTile.toggleArea(true);
                                 break;
                             case 5:
-                                torcherinoTile.decreaseRadius();
+                                torcherinoTile.toggleArea(false);
                                 break;
                             case 6:
                                 torcherinoTile.toggleRender();
                                 break;
+                            default:
                         }
                     }
                 }

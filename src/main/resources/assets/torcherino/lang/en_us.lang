@@ -8,6 +8,7 @@ gui.info.text=Information: Clicking the left mouse button increases the radius o
 gui.info.modes=Number of speed modes:
 gui.info.area=Maximum radius:
 gui.info.pos=Position:
+gui.info.aceleration=Aceleration:
 
 item.timewand.name=§6The Staff of Time
 

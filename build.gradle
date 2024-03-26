@@ -13,11 +13,11 @@ buildscript {
     }
 }
 
+apply plugin: 'java'
+apply plugin: 'idea'
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
-apply plugin: 'java'
-apply plugin: 'idea'
 
 group = 'com.ariks.torcherino'
 archivesBaseName = 'torcherino'
@@ -75,19 +75,15 @@ repositories {
                 name   : "forge",
                 version: "${minecraft_version}-${forge_version}"
         ])
-        runtimeOnly "mezz.jei:jei_${mc_version}:${jei_version}:api"
-        compileOnly "mezz.jei:jei_${mc_version}:${jei_version}"
-        compileOnly "mcjty.theoneprobe:TheOneProbe-1.12:1.12-1.4.28-17"
-        runtimeOnly "mcjty.theoneprobe:TheOneProbe-1.12:1.12-1.4.28-17"
+        runtimeOnly "curse.maven:the-one-probe-245211:2667280"
+        compileOnly "curse.maven:the-one-probe-245211:2667280"
         runtimeOnly "curse.maven:top-addons-247111:2887479"
         compileOnly "curse.maven:top-addons-247111:2887479"
-        runtimeOnly fileTree('lib')
         compileOnly fileTree('lib')
+        runtimeOnly fileTree('lib')
         compileOnly fileTree('libs')
     }
-
     jar.finalizedBy('reobfJar')
-
     publishing {
         publications {
             mavenJava(MavenPublication) {
@@ -100,7 +96,6 @@ repositories {
             }
         }
     }
-
     apply plugin: 'idea'
     idea {
         module {
@@ -110,7 +105,6 @@ repositories {
     subprojects {
         apply plugin: 'idea'
     }
-
     task prepareAssets(type: Copy) {
         group = 'build'
         from project.file('src/main/resources')

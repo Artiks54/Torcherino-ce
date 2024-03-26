@@ -4,15 +4,19 @@ import com.ariks.torcherino.network.ModPacketHandler;
 import com.ariks.torcherino.network.UpdateGuiPacket;
 import com.ariks.torcherino.Torcherino;
 import com.ariks.torcherino.Register.AccelerationRegistry;
+import com.ariks.torcherino.util.Config;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
@@ -26,7 +30,7 @@ public class TileTorcherinoBase extends TileEntity implements ITickable {
     private final Random rand = new Random();
     public int radius, speed, xMin, yMin, zMin, xMax, yMax, zMax;
     public boolean booleanWork, booleanRender;
-    private int oldRadius, oldSpeed;
+    private int oldRadius, oldSpeed,cooldown;
     private boolean oldBooleanWork, oldBooleanRender;
     protected int Radius() {
         return 1 ;
@@ -41,11 +45,29 @@ public class TileTorcherinoBase extends TileEntity implements ITickable {
     public void update() {
         if (world.isRemote)return;
         updateGui();
+        if(booleanWork && Config.BooleanVisualWork) {
+            WorkVisual();
+        }
         if (booleanRender || booleanWork) {
             UpdateChangeArea();
         }
         if (radius != 0 && speed != 0 && booleanWork) {
             UpdateTickArea();
+        }
+    }
+    public void WorkVisual(){
+        cooldown++;
+        if(cooldown == 20){
+            cooldown = 0;
+            double x = pos.getX();
+            double y = pos.getY();
+            double z = pos.getZ();
+            EnumParticleTypes parc = EnumParticleTypes.FLAME;
+            ((WorldServer)world).spawnParticle(parc,x+0.5,y+1.15,z+0.5,1,0,0,0,0,new int[0]);
+            ((WorldServer)world).spawnParticle(parc,x+0.5,y+0.85,z,1,0,0,0,0,new int[0]);
+            ((WorldServer)world).spawnParticle(parc,x+1,y+0.85,z+0.5,1,0,0,0,0,new int[0]);
+            ((WorldServer)world).spawnParticle(parc,x,y+0.85,z+0.5,1,0,0,0,0,new int[0]);
+            ((WorldServer)world).spawnParticle(parc,x+0.5,y+0.85,z+1,1,0,0,0,0,new int[0]);
         }
     }
     public void updateGui() {
@@ -115,18 +137,10 @@ public class TileTorcherinoBase extends TileEntity implements ITickable {
     }
     @SideOnly(Side.CLIENT)
     public AxisAlignedBB getAABBForRender() {
-        double xMinRender = -radius;
-        double yMinRender = -radius;
-        double zMinRender = -radius;
-        double xMaxRender = 1D+radius;
-        double yMaxRender = 1D+radius;
-        double zMaxRender = 1D+radius;
-        return new AxisAlignedBB(xMinRender, yMinRender, zMinRender, xMaxRender, yMaxRender, zMaxRender);
+        return new AxisAlignedBB(-radius, -radius, -radius, radius+1, radius+1, radius+1);
     }
-    public void toggleSpeed() {speed = (byte) ((speed + 1) % SpeedModes());}
-    public void decreaseSpeed() {speed = (byte) ((speed - 1 + SpeedModes()) % SpeedModes());}
-    public void toggleArea() {radius = (radius + 1) % Radius();}
-    public void decreaseRadius() {radius = (radius - 1 + Radius()) % Radius();}
+    public void toggleSpeed(boolean increase){speed = (byte) ((speed + (increase ? 1 : -1) + SpeedModes()) % SpeedModes());}
+    public void toggleArea(boolean increase){radius = (byte) ((radius + (increase ? 1 : -1) + Radius()) % Radius());}
     public void toggleWork() {booleanWork = !booleanWork;}
     public void toggleRender() {booleanRender = !booleanRender;}
     public @NotNull NBTTagCompound writeToNBT(NBTTagCompound tagCompound) {
@@ -138,6 +152,7 @@ public class TileTorcherinoBase extends TileEntity implements ITickable {
         tagCompound.setBoolean("oldRender", this.oldBooleanRender);
         tagCompound.setInteger("oldSpeed", this.oldSpeed);
         tagCompound.setInteger("oldCurrentmode", this.oldRadius);
+        tagCompound.setInteger("cooldown",this.cooldown);
         return super.writeToNBT(tagCompound);
     }
     @Override
@@ -150,6 +165,7 @@ public class TileTorcherinoBase extends TileEntity implements ITickable {
         this.oldBooleanRender = tagCompound.getBoolean("oldRender");
         this.oldSpeed = tagCompound.getInteger("oldSpeed");
         this.oldRadius = tagCompound.getInteger("oldCurrentmode");
+        this.cooldown = tagCompound.getInteger("cooldown");
         super.readFromNBT(tagCompound);
     }
     @Override
@@ -164,6 +180,10 @@ public class TileTorcherinoBase extends TileEntity implements ITickable {
     public void onDataPacket(@NotNull NetworkManager net, SPacketUpdateTileEntity packet) {
         this.readFromNBT(packet.getNbtCompound());
         this.getWorld().markBlockRangeForRenderUpdate(this.pos, this.pos);
+    }
+    @Override
+    public boolean shouldRefresh(@NotNull World world, @NotNull BlockPos pos, @NotNull IBlockState oldState, @NotNull IBlockState newSate) {
+        return super.shouldRefresh(world, pos, oldState, newSate);
     }
     @Override
     public void onLoad() {

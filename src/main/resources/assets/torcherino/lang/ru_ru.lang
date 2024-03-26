@@ -8,6 +8,7 @@ gui.info.text=Информация: Клик левой кнопки мыши у
 gui.info.modes=Количество режимов скорости:
 gui.info.area=Максимальный радиус работы:
 gui.info.pos=Позиция:
+gui.info.aceleration=Ускорение:
 
 item.timewand.name=§6Посох времени
 

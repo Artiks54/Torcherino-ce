@@ -14,6 +14,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
@@ -26,7 +27,7 @@ public class GuiTorcherino extends GuiScreen {
     final ResourceLocation texture = new ResourceLocation(Torcherino.MOD_ID, "textures/gui/gui.png");
     private final TileTorcherinoBase tile;
     private final EntityPlayer player;
-    private String StrRadius,StrSpeed,StrRender,StrWork,StrStringConfigArea,StrStringConfigMode;
+    private String StrRadius,StrSpeed,StrRender,StrWork,StrStringConfigArea,StrStringConfigMode,StrStringConfigAceleration;
     private int SpeedModifers;
     public GuiTorcherino(TileTorcherinoBase tile, EntityPlayer player) {
         this.tile = tile;
@@ -46,6 +47,7 @@ public class GuiTorcherino extends GuiScreen {
         fontRenderer.drawString(LS.Pos + " X: "+tile.getPos().getX()+" Y: "+tile.getPos().getY()+" Z: "+tile.getPos().getZ(), stringPositionX, stringPositionY + 45, Color.WHITE.getRGB());
         fontRenderer.drawString(StrStringConfigMode, stringPositionX, stringPositionY + 60, Color.WHITE.getRGB());
         fontRenderer.drawString(StrStringConfigArea, stringPositionX, stringPositionY + 75, Color.WHITE.getRGB());
+        fontRenderer.drawString(StrStringConfigAceleration, stringPositionX, stringPositionY + 90, Color.WHITE.getRGB());
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
     @Override
@@ -58,10 +60,12 @@ public class GuiTorcherino extends GuiScreen {
         int x = (width - buttonWidth) / 2;
         int y = (height - buttonHeight) / 2;
         buttonList.clear();
-        buttonList.add(new GuiButton(1,x-59,y+75,buttonWidth,buttonHeight, StrWork));
-        buttonList.add(new GuiButton(2,x+59,y+75,buttonWidth,buttonHeight, StrSpeed));
-        buttonList.add(new GuiButton(3,x+59,y+105,buttonWidth,buttonHeight, StrRadius));
-        buttonList.add(new GuiButton(4,x-59,y+105,buttonWidth,buttonHeight, StrRender));
+        buttonList.add(new GuiButton(1, x - 59, y + 75, buttonWidth, buttonHeight, StrWork));
+        buttonList.add(new GuiButton(2, x + 59, y + 75, buttonWidth, buttonHeight, StrSpeed));
+        buttonList.add(new GuiButton(3, x + 59, y + 105, buttonWidth, buttonHeight, StrRadius));
+        if (Config.BooleanRender) {
+            buttonList.add(new GuiButton(4, x - 59, y + 105, buttonWidth, buttonHeight, StrRender));
+        }
     }
     @Override
     protected void actionPerformed(@NotNull GuiButton button) {
@@ -118,14 +122,15 @@ public class GuiTorcherino extends GuiScreen {
     }
     private void updateStringConfigForTile(int mode, int area, int speedModifier) {
         StrStringConfigMode = LS.StrModes + " " + mode;
-        StrStringConfigArea = LS.StrArea + " " + area;
+        StrStringConfigArea = LS.StrArea + " " + area+"x"+area+"x"+area;
+        StrStringConfigAceleration = LS.StrAceleration + " "+speedModifier * 100 + "%";
         SpeedModifers = speedModifier;
     }
     public void updateButton() {
-        StrWork = tile.booleanWork ? LS.ButtonStrWork + " " + LS.ColorGreen + LS.StrOn : LS.ButtonStrWork + " " + LS.ColorRed + LS.StrOff;
-        StrRender = tile.booleanRender ? LS.ButtonStrRender + " " + LS.ColorGreen + LS.StrOn : LS.ButtonStrRender + " " + LS.ColorRed + LS.StrOff;
-        StrSpeed = (tile.speed < 1 ? LS.ColorRed : LS.ColorGreen) + (tile.speed * SpeedModifers * 100) + "%";
-        StrRadius = (tile.radius < 1 ? LS.ColorRed : LS.ColorGreen) + (tile.radius + "x" + tile.radius + "x" + tile.radius);
+        StrWork = tile.booleanWork ? LS.ButtonStrWork + " " + TextFormatting.GREEN + LS.StrOn : LS.ButtonStrWork + " " + TextFormatting.RED + LS.StrOff;
+        StrRender = tile.booleanRender ? LS.ButtonStrRender + " " + TextFormatting.GREEN + LS.StrOn : LS.ButtonStrRender + " " + TextFormatting.RED + LS.StrOff;
+        StrSpeed = (tile.speed < 1 ? TextFormatting.RED : TextFormatting.GREEN) + (tile.speed * SpeedModifers * 100 + "%");
+        StrRadius = (tile.radius < 1 ? TextFormatting.RED : TextFormatting.GREEN) + (tile.radius + "x" + tile.radius + "x" + tile.radius);
     }
 }
 

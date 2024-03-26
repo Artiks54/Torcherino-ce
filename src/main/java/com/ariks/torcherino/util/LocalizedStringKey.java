@@ -3,8 +3,6 @@ package com.ariks.torcherino.util;
 import net.minecraft.client.resources.I18n;
 
 public class LocalizedStringKey {
-     public String ColorRed = "\u00A7c";
-     public String ColorGreen = "\u00A7a";
      public String ButtonStrWork = I18n.format("gui.button.StrWork");
      public String ButtonStrRender = I18n.format("gui.button.StrRender");
      public String StrOn = I18n.format("gui.button.StrOn");
@@ -12,5 +10,6 @@ public class LocalizedStringKey {
      public String Info = I18n.format("gui.info.text");
      public String Pos = I18n.format("gui.info.pos");
      public String StrModes = I18n.format("gui.info.modes");
-     public String StrArea= I18n.format("gui.info.area");
+     public String StrArea = I18n.format("gui.info.area");
+     public String StrAceleration = I18n.format("gui.info.aceleration");
 }

@@ -3,6 +3,7 @@ package com.ariks.torcherino;
 import com.ariks.torcherino.GUI.GuiTorcherino;
 import com.ariks.torcherino.Render.TileTorcherinoBaseRender;
 import com.ariks.torcherino.Tiles.TileTorcherinoBase;
+import com.ariks.torcherino.util.Config;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,7 +13,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
-
 import java.util.Objects;
 
 public class ClientProxy extends CommonProxy {

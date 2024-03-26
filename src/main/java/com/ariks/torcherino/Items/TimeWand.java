@@ -47,7 +47,7 @@ public class TimeWand extends itemBase {
                         break;
                     }
                 }
-                if(Config.BooleanParc){
+                if(Config.BooleanParcWand){
                     ((WorldServer) worldIn).spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5, 1, 0.15, 0.15, 0.15, 0.02);
                 }
                 stack.damageItem(1,player);
