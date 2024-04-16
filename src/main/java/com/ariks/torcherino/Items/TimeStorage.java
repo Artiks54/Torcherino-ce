@@ -14,13 +14,14 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class TimeStorage extends itemBase {
 
-    LocalizedStringKey LS = new LocalizedStringKey();
     public TimeStorage(String name) {
         super(name);
         this.setMaxStackSize(1);
@@ -34,13 +35,16 @@ public class TimeStorage extends itemBase {
             stack.getTagCompound().setInteger("Time", 0);
         }
     }
+    @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, @NotNull List<String> tooltip, @NotNull ITooltipFlag flagIn) {
         if (stack.hasTagCompound()) {
             assert stack.getTagCompound() != null;
             int time = stack.getTagCompound().getInteger("Time");
+            LocalizedStringKey LS = new LocalizedStringKey();
             tooltip.add(TextFormatting.GRAY + LS.TimeCollector +": " +TextFormatting.GREEN+ time);
         }
+        LocalizedStringKey LS = new LocalizedStringKey();
         tooltip.add(TextFormatting.GRAY + LS.Str_Time_Storage_Tooltip);
     }
     @Override

@@ -21,13 +21,14 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Objects;
 
 public class BlockCollector extends Block implements IHasModel {
-    LocalizedStringKey LS = new LocalizedStringKey();
     private static final AxisAlignedBB CUBE = new AxisAlignedBB(0.062, 0, 0.062, 0.938, 0.875, 0.938);
     public BlockCollector(String name) {
         super(Material.IRON);
@@ -85,8 +86,10 @@ public class BlockCollector extends Block implements IHasModel {
     public void registerModels() {
         Torcherino.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
     }
+    @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(@NotNull ItemStack stack, @Nullable World player, List<String> tooltip, @NotNull ITooltipFlag advanced) {
+        LocalizedStringKey LS = new LocalizedStringKey();
         tooltip.add(LS.StrCollectorInfoItem);
         super.addInformation(stack, player, tooltip, advanced);
     }

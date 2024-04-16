@@ -15,13 +15,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Random;
 
 public class TimeWand extends itemBase {
-    LocalizedStringKey LS = new LocalizedStringKey();
+
     protected int SpeedWand(){
         return 0;
     }
@@ -62,9 +64,11 @@ public class TimeWand extends itemBase {
             }
         return EnumActionResult.SUCCESS;
     }
+    @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, @NotNull ITooltipFlag flagIn) {
         int durability = stack.getMaxDamage() - stack.getItemDamage();
+        LocalizedStringKey LS = new LocalizedStringKey();
         tooltip.add(TextFormatting.GRAY + LS.Str_Time_Wand_Tooltip);
         tooltip.add(TextFormatting.GRAY + LS.StrWandInfoItem+" " + durability + "/" + stack.getMaxDamage());
         super.addInformation(stack, worldIn, tooltip, flagIn);
