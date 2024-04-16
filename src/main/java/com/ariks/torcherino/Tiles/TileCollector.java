@@ -10,9 +10,11 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import org.jetbrains.annotations.NotNull;
@@ -27,13 +29,11 @@ public class TileCollector extends TileEntity implements ITickable {
     private boolean OldBooleanWork;
     private int OldTimeCollect;
     public final int speed = Config.CollectorSpeed;
-    private final int AreaModifier = Config.CollectorRadius;
+    public final int AreaModifier = Config.CollectorRadius;
     private final Random rand = new Random();
-
     protected int speedBase(int base) {
         return base;
     }
-
     @Override
     public void update() {
         if (world.isRemote) return;
@@ -61,6 +61,7 @@ public class TileCollector extends TileEntity implements ITickable {
             if (CooldownDecr >= 19) {
                 TimeCollect--;
                 CooldownDecr = 0;
+                WorkVisual();
             }
         } else {
             BooleanWork = false;
@@ -70,6 +71,15 @@ public class TileCollector extends TileEntity implements ITickable {
         if (shouldSendGuiUpdatePacket()) {
             updateOldValues();
             ModPacketHandler.network.sendToAllTracking(new UpdateGuiCollectorPacket(pos, BooleanWork, TimeCollect), packetTargetPoint);
+        }
+    }
+    public void WorkVisual() {
+        if (Config.BooleanVisualWork) {
+            double x = pos.getX();
+            double y = pos.getY();
+            double z = pos.getZ();
+            EnumParticleTypes parc = EnumParticleTypes.FLAME;
+            ((WorldServer) world).spawnParticle(parc, x + 0.5, y + 1.15, z + 0.5, 1, 0, 0, 0, 0, new int[0]);
         }
     }
     private boolean shouldSendGuiUpdatePacket() {

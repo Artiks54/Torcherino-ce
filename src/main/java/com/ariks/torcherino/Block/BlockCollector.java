@@ -39,7 +39,10 @@ public class BlockCollector extends Block implements IHasModel {
         RegistryArray.ITEMS.add(new ItemBlock(this).setRegistryName(Objects.requireNonNull(this.getRegistryName())));
     }
     @Override
-    public boolean onBlockActivated(World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull EntityPlayer playerIn, @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull EntityPlayer playerIn, @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if (playerIn.getHeldItem(hand).getItem() == RegistryArray.Time_Storage) {
+            return false;
+        }
         return Torcherino.proxy.openGui(worldIn, pos, playerIn);
     }
     @Override
@@ -48,6 +51,10 @@ public class BlockCollector extends Block implements IHasModel {
     }
     @Override
     public boolean isOpaqueCube(@NotNull IBlockState state) {
+        return false;
+    }
+    @Override
+    public boolean isNormalCube(@NotNull IBlockState state, @NotNull IBlockAccess world, @NotNull BlockPos pos) {
         return false;
     }
     @Override
@@ -71,7 +78,7 @@ public class BlockCollector extends Block implements IHasModel {
         return CUBE;
     }
     @Override
-    public boolean canHarvestBlock(IBlockAccess world, BlockPos pos, EntityPlayer player) {
+    public boolean canHarvestBlock(@NotNull IBlockAccess world, @NotNull BlockPos pos, @NotNull EntityPlayer player) {
         return true;
     }
     @Override
@@ -79,7 +86,7 @@ public class BlockCollector extends Block implements IHasModel {
         Torcherino.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
     }
     @Override
-    public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
+    public void addInformation(@NotNull ItemStack stack, @Nullable World player, List<String> tooltip, @NotNull ITooltipFlag advanced) {
         tooltip.add(LS.StrCollectorInfoItem);
         super.addInformation(stack, player, tooltip, advanced);
     }

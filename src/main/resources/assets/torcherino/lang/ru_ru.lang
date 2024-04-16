@@ -7,10 +7,9 @@ gui.button.StrOff=Выкл
 gui.info.text=Информация: Клик левой кнопки мыши увеличивает радиус или скорость, лкм + щифт уменьшает.
 gui.info.modes=Количество режимов скорости:
 gui.info.area=Максимальный радиус работы:
-gui.info.pos=Позиция:
 gui.info.aceleration=Ускорение:
 gui.info.time.collector=Собранное время в секундах
-gui.info.text.collector=Собирает время когда не активиен, При активации тратит накопленное время для ускорение работы в определенном радиусе с определенной скоростью, Если время закончиться то начнеётся автоматический сбор
+gui.info.text.collector=Собирает время когда выключен, При включение тратит накопленное время для ускорение, Если время закончиться то начнется автоматический сбор
 
 item.time_wand_lvl1.name=§9Посох времени уровень 1
 item.time_wand_lvl2.name=§aПосох времени уровень 2
@@ -18,6 +17,7 @@ item.time_wand_lvl3.name=§cПосох времени уровень 3
 item.time_wand_lvl4.name=§6Посох времени уровень 4
 item.time_wand_lvl5.name=§bПосох времени уровень 5
 item.wand.info=Прочность:
+item.time_storage.name=§eВременное хранилище
 
 item.diamondclock.name=§bАлмазные часы
 item.emeraldclock.name=§aИзумрудные часы
@@ -43,3 +43,7 @@ tile.compressed_torch_lvl5.name=§bСжатый ускоряющий факел 
 
 tile.time_collector.name=§6Временной сборщик
 item.collector.info=Накапливает время и использует его для ускорения
+
+item.tooltip.time_storage=Shift + ПКМ извлекает время из сборщика, ПКМ вставляет время в сборщик
+item.tooltip.time_wand=Shift + ПКМ для ускорения
+

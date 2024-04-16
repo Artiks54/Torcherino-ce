@@ -65,6 +65,7 @@ public class TimeWand extends itemBase {
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, @NotNull ITooltipFlag flagIn) {
         int durability = stack.getMaxDamage() - stack.getItemDamage();
+        tooltip.add(TextFormatting.GRAY + LS.Str_Time_Wand_Tooltip);
         tooltip.add(TextFormatting.GRAY + LS.StrWandInfoItem+" " + durability + "/" + stack.getMaxDamage());
         super.addInformation(stack, worldIn, tooltip, flagIn);
     }

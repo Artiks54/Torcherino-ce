@@ -14,6 +14,7 @@ public final class RegistryArray {
     public static final Item Time_Wand_lvl3 = new TimeWands.TimeWand_lvl_3("time_wand_lvl3");
     public static final Item Time_Wand_lvl4 = new TimeWands.TimeWand_lvl_4("time_wand_lvl4");
     public static final Item Time_Wand_lvl5 = new TimeWands.TimeWand_lvl_5("time_wand_lvl5");
+    public static final Item Time_Storage = new TimeStorage("time_storage");
     public static final Item Diamond_Clock = new itemBase("diamondclock");
     public static final Item Emerald_Clock = new itemBase("emeraldclock");
     public static final Item Lapis_Clock = new itemBase("lapisclock");

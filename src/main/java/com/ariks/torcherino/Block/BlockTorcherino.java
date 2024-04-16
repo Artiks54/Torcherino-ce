@@ -51,6 +51,10 @@ public class BlockTorcherino extends Block implements IHasModel {
         return false;
     }
     @Override
+    public boolean isNormalCube(@NotNull IBlockState state, @NotNull IBlockAccess world, @NotNull BlockPos pos) {
+        return false;
+    }
+    @Override
     public boolean hasTileEntity(@NotNull IBlockState state) {
         return true;
     }
@@ -59,7 +63,7 @@ public class BlockTorcherino extends Block implements IHasModel {
         return BOUNDING_BOX;
     }
     @Override
-    public boolean canHarvestBlock(IBlockAccess world, BlockPos pos, EntityPlayer player) {
+    public boolean canHarvestBlock(@NotNull IBlockAccess world, @NotNull BlockPos pos, @NotNull EntityPlayer player) {
         return true;
     }
     @Override

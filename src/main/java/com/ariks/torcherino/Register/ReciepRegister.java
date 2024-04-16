@@ -18,7 +18,7 @@ public class ReciepRegister {
                 " A ",
                 "ABA",
                 " A ",
-                'A', new ItemStack(Items.GOLD_INGOT),
+                'A', new ItemStack(Blocks.GOLD_BLOCK),
                 'B', new ItemStack(Redstone_Clock));
         //EmeraldClock
         GameRegistry.addShapedRecipe(
@@ -28,7 +28,7 @@ public class ReciepRegister {
                 " A ",
                 "ABA",
                 " A ",
-                'A', new ItemStack(Items.EMERALD),
+                'A', new ItemStack(Blocks.EMERALD_BLOCK),
                 'B', new ItemStack(Lapis_Clock));
         //DiamondClock
         GameRegistry.addShapedRecipe(
@@ -38,7 +38,7 @@ public class ReciepRegister {
                 " A ",
                 "ABA",
                 " A ",
-                'A', new ItemStack(Items.DIAMOND),
+                'A', new ItemStack(Blocks.DIAMOND_BLOCK),
                 'B', new ItemStack(Gold_Clock));
         //LapisClock
         GameRegistry.addShapedRecipe(
@@ -150,5 +150,17 @@ public class ReciepRegister {
                 "B  ",
                 'A', new ItemStack(Diamond_Clock),
                 'B', new ItemStack(Items.STICK));
+        //Time_Storage
+        GameRegistry.addShapedRecipe(
+                new ResourceLocation(Torcherino.MOD_ID + ":" + "time_storage"),
+                new ResourceLocation(Torcherino.MOD_ID + ":" + "time_storage"),
+                new ItemStack(Time_Storage),
+                "IAI",
+                "IBI",
+                "ICI",
+                'A', new ItemStack(Items.GLASS_BOTTLE),
+                'I', new ItemStack(Items.GOLD_INGOT),
+                'B', new ItemStack(Blocks.HOPPER),
+                'C', new ItemStack(Redstone_Clock));
     }
 }

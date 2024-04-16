@@ -9,9 +9,11 @@ public class ModPacketHandler {
     public static SimpleNetworkWrapper network;
     public static void init() {
         network = NetworkRegistry.INSTANCE.newSimpleChannel(Torcherino.MOD_ID);
+        //Server
         network.registerMessage(UpdateTilePacket.Handler.class, UpdateTilePacket.class, 1, Side.SERVER);
-        network.registerMessage(UpdateGuiPacket.Handler.class, UpdateGuiPacket.class, 2, Side.CLIENT);
-        network.registerMessage(UpdateTilePacketCollector.Handler.class, UpdateTilePacketCollector.class, 3, Side.SERVER);
+        network.registerMessage(UpdateTilePacketCollector.Handler.class, UpdateTilePacketCollector.class, 2, Side.SERVER);
+        //Client
+        network.registerMessage(UpdateGuiPacket.Handler.class, UpdateGuiPacket.class, 3, Side.CLIENT);
         network.registerMessage(UpdateGuiCollectorPacket.Handler.class, UpdateGuiCollectorPacket.class, 4, Side.CLIENT);
     }
 }

@@ -4,6 +4,8 @@ import com.ariks.torcherino.Register.RegistryArray;
 import com.ariks.torcherino.Torcherino;
 import com.ariks.torcherino.util.IHasModel;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 public class itemBase extends Item implements IHasModel {
     public itemBase(String name) {
@@ -12,6 +14,10 @@ public class itemBase extends Item implements IHasModel {
         this.setMaxStackSize(64);
         this.setCreativeTab(Torcherino.torcherinoTab);
         RegistryArray.ITEMS.add(this);
+    }
+    @Override
+    public boolean isEnchantable(@NotNull ItemStack stack) {
+        return false;
     }
     @Override
     public void registerModels() {

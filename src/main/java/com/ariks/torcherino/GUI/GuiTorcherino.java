@@ -24,7 +24,8 @@ import java.awt.*;
 @SideOnly(Side.CLIENT)
 public class GuiTorcherino extends GuiScreen {
     LocalizedStringKey LS = new LocalizedStringKey();
-    final ResourceLocation texture = new ResourceLocation(Torcherino.MOD_ID, "textures/gui/gui.png");
+    final ResourceLocation texture = new ResourceLocation(Torcherino.MOD_ID, "textures/gui/gui_small.png");
+    private final TextFormatting green = TextFormatting.GREEN;
     private final TileTorcherinoBase tile;
     private final EntityPlayer player;
     private String StrRadius,StrSpeed,StrRender,StrWork,StrStringConfigArea,StrStringConfigMode,StrStringConfigAceleration;
@@ -37,17 +38,16 @@ public class GuiTorcherino extends GuiScreen {
         int screenWidthPixels = width;
         int screenHeightPixels = height;
         int textureX = (screenWidthPixels - 256) / 2;
-        int textureY = (screenHeightPixels - 256) / 2;
+        int textureY = (screenHeightPixels - 128) / 2;
         int stringPositionX = textureX + 15;
         int stringPositionY = textureY + 15;
         Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
-        drawModalRectWithCustomSizedTexture(textureX, textureY, 0, 0, 256, 256, 256, 256);
+        drawModalRectWithCustomSizedTexture(textureX, textureY, 0, 0, 256, 128, 256, 128);
         FontRenderer fontRenderer = this.fontRenderer;
         fontRenderer.drawSplitString(LS.Info, stringPositionX, stringPositionY, 230, Color.WHITE.getRGB());
-        fontRenderer.drawString(LS.Pos + " X: "+tile.getPos().getX()+" Y: "+tile.getPos().getY()+" Z: "+tile.getPos().getZ(), stringPositionX, stringPositionY + 45, Color.WHITE.getRGB());
-        fontRenderer.drawString(StrStringConfigMode, stringPositionX, stringPositionY + 60, Color.WHITE.getRGB());
-        fontRenderer.drawString(StrStringConfigArea, stringPositionX, stringPositionY + 75, Color.WHITE.getRGB());
-        fontRenderer.drawString(StrStringConfigAceleration, stringPositionX, stringPositionY + 90, Color.WHITE.getRGB());
+        fontRenderer.drawString(StrStringConfigMode, stringPositionX, stringPositionY + 27 , Color.WHITE.getRGB());
+        fontRenderer.drawString(StrStringConfigArea, stringPositionX, stringPositionY + 37, Color.WHITE.getRGB());
+        fontRenderer.drawString(StrStringConfigAceleration, stringPositionX, stringPositionY + 47, Color.WHITE.getRGB());
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
     @Override
@@ -60,11 +60,11 @@ public class GuiTorcherino extends GuiScreen {
         int x = (width - buttonWidth) / 2;
         int y = (height - buttonHeight) / 2;
         buttonList.clear();
-        buttonList.add(new GuiButton(1, x - 59, y + 75, buttonWidth, buttonHeight, StrWork));
-        buttonList.add(new GuiButton(2, x + 59, y + 75, buttonWidth, buttonHeight, StrSpeed));
-        buttonList.add(new GuiButton(3, x + 59, y + 105, buttonWidth, buttonHeight, StrRadius));
+        buttonList.add(new GuiButton(1, x - 59, y + 20, buttonWidth, buttonHeight, StrWork));
+        buttonList.add(new GuiButton(2, x + 59, y + 20, buttonWidth, buttonHeight, StrSpeed));
+        buttonList.add(new GuiButton(3, x + 59, y + 45, buttonWidth, buttonHeight, StrRadius));
         if (Config.BooleanRender) {
-            buttonList.add(new GuiButton(4, x - 59, y + 105, buttonWidth, buttonHeight, StrRender));
+            buttonList.add(new GuiButton(4, x - 59, y + 45, buttonWidth, buttonHeight, StrRender));
         }
     }
     @Override
@@ -121,9 +121,9 @@ public class GuiTorcherino extends GuiScreen {
         }
     }
     private void updateStringConfigForTile(int mode, int area, int speedModifier) {
-        StrStringConfigMode = LS.StrModes + " " + mode;
-        StrStringConfigArea = LS.StrArea + " " + area+"x"+area+"x"+area;
-        StrStringConfigAceleration = LS.StrAceleration + " "+speedModifier * 100 + "%";
+        StrStringConfigMode = LS.StrModes + " " + green+mode;
+        StrStringConfigArea = LS.StrArea + " " + green+(area+"x"+area+"x"+area);
+        StrStringConfigAceleration = LS.StrAceleration + " "+green+(speedModifier * 100 + "%");
         SpeedModifers = speedModifier;
     }
     public void updateButton() {

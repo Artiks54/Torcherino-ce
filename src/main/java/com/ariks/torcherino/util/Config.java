@@ -46,11 +46,11 @@ public class Config {
             blacklistedTiles = config.getStringList("blacklistedTiles", "blacklist", new String[]{}, "Fully qualified class name");
             logPlacement = config.getBoolean("logPlacement", General, true, "(For Server Owners) Is it logged when someone places a Torcherino?");
             //wand
-            SpeedWand_lvl1 = config.getInt("Time_Wand_Speed_lvl1",Item,1,1,Short.MAX_VALUE,"Speed Time Wand lvl 1. 1 = 100%.....");
-            SpeedWand_lvl2 = config.getInt("Time_Wand_Speed_lvl2",Item,5,1,Short.MAX_VALUE,"Speed Time Wand lvl 2. 1 = 100%.....");
-            SpeedWand_lvl3 = config.getInt("Time_Wand_Speed_lvl3",Item,10,1,Short.MAX_VALUE,"Speed Time Wand lvl 3. 1 = 100%.....");
-            SpeedWand_lvl4 = config.getInt("Time_Wand_Speed_lvl4",Item,20,1,Short.MAX_VALUE,"Speed Time Wand lvl 4. 1 = 100%.....");
-            SpeedWand_lvl5 = config.getInt("Time_Wand_Speed_lvl5",Item,50,1,Short.MAX_VALUE,"Speed Time Wand lvl 5. 1 = 100%.....");
+            SpeedWand_lvl1 = config.getInt("Time_Wand_Speed_lvl1",Item,3,1,Short.MAX_VALUE,"Speed Time Wand lvl 1. 1 = 100%.....");
+            SpeedWand_lvl2 = config.getInt("Time_Wand_Speed_lvl2",Item,6,1,Short.MAX_VALUE,"Speed Time Wand lvl 2. 1 = 100%.....");
+            SpeedWand_lvl3 = config.getInt("Time_Wand_Speed_lvl3",Item,9,1,Short.MAX_VALUE,"Speed Time Wand lvl 3. 1 = 100%.....");
+            SpeedWand_lvl4 = config.getInt("Time_Wand_Speed_lvl4",Item,12,1,Short.MAX_VALUE,"Speed Time Wand lvl 4. 1 = 100%.....");
+            SpeedWand_lvl5 = config.getInt("Time_Wand_Speed_lvl5",Item,15,1,Short.MAX_VALUE,"Speed Time Wand lvl 5. 1 = 100%.....");
             //Render
             BooleanParcWand = config.getBoolean("Time_Wand_Parc",Render,true,"Spawn Particle Wand");
             BooleanVisualWork = config.getBoolean("Tile_Visual_Work",Render,true,"Tile spawn Particle flame");

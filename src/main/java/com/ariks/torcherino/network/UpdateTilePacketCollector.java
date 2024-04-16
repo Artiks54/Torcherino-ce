@@ -40,16 +40,9 @@ public class UpdateTilePacketCollector implements IMessage {
                         int receivedValue = message.value;
                         TileCollector tileCollector = (TileCollector) tile;
                         switch (receivedValue) {
-                            case 1:
-                                tileCollector.toggleWork();
-                                break;
-                            case 2:
-                                tileCollector.OpenGuiCollector = true;
-                                break;
-                            case 3:
-                                tileCollector.OpenGuiCollector = false;
-                                break;
-                            default:
+                            case 1: tileCollector.toggleWork();break;
+                            case 2: tileCollector.OpenGuiCollector = true;break;
+                            case 3: tileCollector.OpenGuiCollector = false;break;
                         }
                     }
                 }

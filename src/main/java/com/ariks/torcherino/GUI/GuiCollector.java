@@ -19,6 +19,7 @@ import java.awt.*;
 public class GuiCollector extends GuiScreen {
     LocalizedStringKey LS = new LocalizedStringKey();
     final ResourceLocation texture = new ResourceLocation(Torcherino.MOD_ID, "textures/gui/gui_small.png");
+    private final TextFormatting green = TextFormatting.GREEN;
     private final TileCollector tile;
     private String StrWork;
     private final EntityPlayer player;
@@ -37,8 +38,9 @@ public class GuiCollector extends GuiScreen {
         drawModalRectWithCustomSizedTexture(textureX, textureY, 0, 0, 256, 128, 256, 128);
         FontRenderer fontRenderer = this.fontRenderer;
         fontRenderer.drawSplitString(LS.InfoCollector, stringPositionX, stringPositionY, 230, Color.WHITE.getRGB());
-        fontRenderer.drawString(LS.Pos + " X: "+tile.getPos().getX()+" Y: "+tile.getPos().getY()+" Z: "+tile.getPos().getZ(), stringPositionX, stringPositionY + 40, Color.WHITE.getRGB());
-        fontRenderer.drawString(LS.TimeCollector + " : "+tile.TimeCollect, stringPositionX, stringPositionY + 50, Color.WHITE.getRGB());
+        fontRenderer.drawString(LS.TimeCollector + " : "+green+tile.TimeCollect, stringPositionX, stringPositionY + 45, Color.WHITE.getRGB());
+        fontRenderer.drawString(LS.StrAceleration+" "+green+(tile.speed*100+"%"),stringPositionX,stringPositionY + 55, Color.WHITE.getRGB());
+        fontRenderer.drawString(LS.StrArea+" "+green+(tile.AreaModifier+"x"+ tile.AreaModifier+"x"+tile.AreaModifier),stringPositionX,stringPositionY + 65, Color.WHITE.getRGB());
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
     @Override
@@ -51,7 +53,7 @@ public class GuiCollector extends GuiScreen {
         int x = (width - buttonWidth) / 2;
         int y = (height - buttonHeight) / 2;
         buttonList.clear();
-        buttonList.add(new GuiButton(1, x - 59, y + 35, buttonWidth, buttonHeight, StrWork));
+        buttonList.add(new GuiButton(1, x - 62, y + 45, buttonWidth, buttonHeight, StrWork));
     }
     @Override
     public void onGuiClosed() {
