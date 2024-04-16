@@ -1,0 +1,17 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "torcherino:collector",
+	    "textures": {
+        "base": "torcherino:blocks/base",
+		"material": "torcherino:blocks/iron",
+        "particle":  "torcherino:blocks/iron"
+        },
+    "transform": "forge:default-block"
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{}],
+    "destroyed": [{}]
+  }
+}

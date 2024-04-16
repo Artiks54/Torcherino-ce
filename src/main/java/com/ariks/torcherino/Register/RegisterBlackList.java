@@ -1,4 +1,5 @@
 package com.ariks.torcherino.Register;
+import com.ariks.torcherino.Tiles.TileCollector;
 import com.ariks.torcherino.Tiles.TileCompresedTorch;
 import net.minecraft.init.Blocks;
 import static com.ariks.torcherino.Tiles.TileTorch.*;
@@ -57,5 +58,8 @@ public class RegisterBlackList {
         AccelerationRegistry.blacklistTile(TileCompresedTorch.CompressedTileBase3.class);
         AccelerationRegistry.blacklistTile(TileCompresedTorch.CompressedTileBase4.class);
         AccelerationRegistry.blacklistTile(TileCompresedTorch.CompressedTileBase5.class);
+        //Tile-Collector
+        AccelerationRegistry.blacklistTile(TileCollector.class);
+        AccelerationRegistry.blacklistBlock(RegistryArray.Time_Collector);
     }
 }

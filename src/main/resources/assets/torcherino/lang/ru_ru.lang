@@ -9,11 +9,16 @@ gui.info.modes=Количество режимов скорости:
 gui.info.area=Максимальный радиус работы:
 gui.info.pos=Позиция:
 gui.info.aceleration=Ускорение:
+gui.info.time.collector=Собранное время в секундах
+gui.info.text.collector=Собирает время когда не активиен, При активации тратит накопленное время для ускорение работы в определенном радиусе с определенной скоростью, Если время закончиться то начнеётся автоматический сбор
 
-item.timewand.name=§6Посох времени
+item.time_wand_lvl1.name=§9Посох времени уровень 1
+item.time_wand_lvl2.name=§aПосох времени уровень 2
+item.time_wand_lvl3.name=§cПосох времени уровень 3
+item.time_wand_lvl4.name=§6Посох времени уровень 4
+item.time_wand_lvl5.name=§bПосох времени уровень 5
+item.wand.info=Прочность:
 
-item.config.name=§eКонфигурационный изменитель
-item.torchinfo.name=§eИнформационный обозреватель
 item.diamondclock.name=§bАлмазные часы
 item.emeraldclock.name=§aИзумрудные часы
 item.goldclock.name=§6Золатые часы
@@ -35,3 +40,6 @@ tile.compressed_torch_lvl2.name=§aСжатый ускоряющий факел 
 tile.compressed_torch_lvl3.name=§cСжатый ускоряющий факел 3 уровня
 tile.compressed_torch_lvl4.name=§6Сжатый ускоряющий факел 4 уровня
 tile.compressed_torch_lvl5.name=§bСжатый ускоряющий факел 5 уровня
+
+tile.time_collector.name=§6Временной сборщик
+item.collector.info=Накапливает время и использует его для ускорения

@@ -1,5 +1,6 @@
 package com.ariks.torcherino.Register;
 
+import com.ariks.torcherino.Tiles.TileCollector;
 import com.ariks.torcherino.Tiles.TileCompresedTorch;
 import com.ariks.torcherino.Tiles.TileTorch;
 import net.minecraft.util.ResourceLocation;
@@ -18,5 +19,6 @@ public final class RegistrationTiles{
         GameRegistry.registerTileEntity(TileCompresedTorch.CompressedTileBase3.class,new ResourceLocation(MOD_ID,"Tile_Compressed_lvl3"));
         GameRegistry.registerTileEntity(TileCompresedTorch.CompressedTileBase4.class,new ResourceLocation(MOD_ID,"Tile_Compressed_lvl4"));
         GameRegistry.registerTileEntity(TileCompresedTorch.CompressedTileBase5.class,new ResourceLocation(MOD_ID,"Tile_Compressed_lvl5"));
+        GameRegistry.registerTileEntity(TileCollector.class,new ResourceLocation(MOD_ID,"Tile_Collector"));
     }
 }

@@ -10,14 +10,14 @@ public class Config {
     protected static Configuration config;
     public static String[] blacklistedBlocks;
     public static String[] blacklistedTiles;
-    public static String TileNameTorch;
+    public static String TileName;
     public static String TileNameCompressed;
     private final static String TextS = "Acceleration 1 = 100%";
     private final static String TextM = "Number of acceleration modes";
     private final static String TextR = "Working radius";
     public static boolean logPlacement,BooleanParcWand,BooleanRenderFilledBox,BooleanRender,BooleanRenderLine,BooleanVisualWork;
     public static boolean BooleanTOP;
-    public static int SpeedWand;
+    public static int SpeedWand_lvl1,SpeedWand_lvl2,SpeedWand_lvl3,SpeedWand_lvl4,SpeedWand_lvl5;
     public static int
             Torch_Color_lvl1_R,Torch_Color_lvl1_G,Torch_Color_lvl1_B,
             Torch_Color_lvl2_R,Torch_Color_lvl2_G,Torch_Color_lvl2_B,
@@ -32,19 +32,25 @@ public class Config {
             CTorch_lvl1_S, CTorch_lvl1_M, CTorch_lvl1_R, CTorch_lvl2_S, CTorch_lvl2_M, CTorch_lvl2_R,
             CTorch_lvl3_S, CTorch_lvl3_M, CTorch_lvl3_R, CTorch_lvl4_S, CTorch_lvl4_M, CTorch_lvl4_R,
             CTorch_lvl5_S, CTorch_lvl5_M, CTorch_lvl5_R;
-
+    public static int CollectorSpeed,CollectorRadius;
     public static void init(File file) {
         config = new Configuration(file);
         try {config.load();
             String General = "General";
             String Render = "Render";
+            String Item = "Item Wand";
             String ColorRenderTile = "Color render line";
             //General
             BooleanTOP = config.getBoolean("integration_top_addons",General,true,"True/false Integration TheOneProbe-TopAddons");
-            SpeedWand = config.getInt("Time_Wand_Speed",General,100,1,Short.MAX_VALUE,"Speed Time Wand 100 = 100%.....");
             blacklistedBlocks = config.getStringList("blacklistedBlocks", "blacklist", new String[]{}, "modid:unlocalized");
             blacklistedTiles = config.getStringList("blacklistedTiles", "blacklist", new String[]{}, "Fully qualified class name");
             logPlacement = config.getBoolean("logPlacement", General, true, "(For Server Owners) Is it logged when someone places a Torcherino?");
+            //wand
+            SpeedWand_lvl1 = config.getInt("Time_Wand_Speed_lvl1",Item,1,1,Short.MAX_VALUE,"Speed Time Wand lvl 1. 1 = 100%.....");
+            SpeedWand_lvl2 = config.getInt("Time_Wand_Speed_lvl2",Item,5,1,Short.MAX_VALUE,"Speed Time Wand lvl 2. 1 = 100%.....");
+            SpeedWand_lvl3 = config.getInt("Time_Wand_Speed_lvl3",Item,10,1,Short.MAX_VALUE,"Speed Time Wand lvl 3. 1 = 100%.....");
+            SpeedWand_lvl4 = config.getInt("Time_Wand_Speed_lvl4",Item,20,1,Short.MAX_VALUE,"Speed Time Wand lvl 4. 1 = 100%.....");
+            SpeedWand_lvl5 = config.getInt("Time_Wand_Speed_lvl5",Item,50,1,Short.MAX_VALUE,"Speed Time Wand lvl 5. 1 = 100%.....");
             //Render
             BooleanParcWand = config.getBoolean("Time_Wand_Parc",Render,true,"Spawn Particle Wand");
             BooleanVisualWork = config.getBoolean("Tile_Visual_Work",Render,true,"Tile spawn Particle flame");
@@ -76,31 +82,35 @@ public class Config {
             Torch_Color_lvl5_R = Integer.parseInt(rgbComponents5[0]);
             Torch_Color_lvl5_G = Integer.parseInt(rgbComponents5[1]);
             Torch_Color_lvl5_B = Integer.parseInt(rgbComponents5[2]);
+            //Collector
+            TileName = "Collector";
+            CollectorSpeed = config.getInt("Speed",TileName,5,1, Short.MAX_VALUE,TextS);
+            CollectorRadius = config.getInt("WorkR",TileName,3,1,Short.MAX_VALUE,TextR);
             //Torch_lvl_1
-            TileNameTorch = "Torcherino_lvl_1";
-            Torch_lvl1_S = config.getInt("Speed",TileNameTorch,1,1, Short.MAX_VALUE,TextS);
-            Torch_lvl1_M = config.getInt("Modes",TileNameTorch,3,1,Short.MAX_VALUE,TextM);
-            Torch_lvl1_R = config.getInt("WorkR",TileNameTorch,3,1, Short.MAX_VALUE,TextR);
+            TileName = "Torcherino_lvl_1";
+            Torch_lvl1_S = config.getInt("Speed",TileName,1,1, Short.MAX_VALUE,TextS);
+            Torch_lvl1_M = config.getInt("Modes",TileName,3,1,Short.MAX_VALUE,TextM);
+            Torch_lvl1_R = config.getInt("WorkR",TileName,3,1, Short.MAX_VALUE,TextR);
             //Torch_lvl_2
-            TileNameTorch = "Torcherino_lvl_2";
-            Torch_lvl2_S = config.getInt("Speed",TileNameTorch,1,1,Short.MAX_VALUE,TextS);
-            Torch_lvl2_M = config.getInt("Modes",TileNameTorch,6,1,Short.MAX_VALUE,TextM);
-            Torch_lvl2_R = config.getInt("WorkR",TileNameTorch,6,1, Short.MAX_VALUE,TextR);
+            TileName = "Torcherino_lvl_2";
+            Torch_lvl2_S = config.getInt("Speed",TileName,1,1,Short.MAX_VALUE,TextS);
+            Torch_lvl2_M = config.getInt("Modes",TileName,6,1,Short.MAX_VALUE,TextM);
+            Torch_lvl2_R = config.getInt("WorkR",TileName,6,1, Short.MAX_VALUE,TextR);
             //Torch_lvl_3
-            TileNameTorch = "Torcherino_lvl_3";
-            Torch_lvl3_S = config.getInt("Speed",TileNameTorch,1,1,Short.MAX_VALUE,TextS);
-            Torch_lvl3_M = config.getInt("Modes",TileNameTorch,9,1,Short.MAX_VALUE,TextM);
-            Torch_lvl3_R = config.getInt("WorkR",TileNameTorch,9,1, Short.MAX_VALUE,TextR);
+            TileName = "Torcherino_lvl_3";
+            Torch_lvl3_S = config.getInt("Speed",TileName,1,1,Short.MAX_VALUE,TextS);
+            Torch_lvl3_M = config.getInt("Modes",TileName,9,1,Short.MAX_VALUE,TextM);
+            Torch_lvl3_R = config.getInt("WorkR",TileName,9,1, Short.MAX_VALUE,TextR);
             //Torch_lvl_4
-            TileNameTorch = "Torcherino_lvl_4";
-            Torch_lvl4_S = config.getInt("Speed",TileNameTorch,1,1,Short.MAX_VALUE,TextS);
-            Torch_lvl4_M = config.getInt("Modes",TileNameTorch,12,1,Short.MAX_VALUE,TextM);
-            Torch_lvl4_R = config.getInt("WorkR",TileNameTorch,12,1, Short.MAX_VALUE,TextR);
+            TileName = "Torcherino_lvl_4";
+            Torch_lvl4_S = config.getInt("Speed",TileName,1,1,Short.MAX_VALUE,TextS);
+            Torch_lvl4_M = config.getInt("Modes",TileName,12,1,Short.MAX_VALUE,TextM);
+            Torch_lvl4_R = config.getInt("WorkR",TileName,12,1, Short.MAX_VALUE,TextR);
             //Torch_lvl_5
-            TileNameTorch = "Torcherino_lvl_5";
-            Torch_lvl5_S = config.getInt("Speed",TileNameTorch,1,1,Short.MAX_VALUE,TextS);
-            Torch_lvl5_M = config.getInt("Modes",TileNameTorch,15,1,Short.MAX_VALUE,TextM);
-            Torch_lvl5_R = config.getInt("WorkR",TileNameTorch,15,1, Short.MAX_VALUE,TextR);
+            TileName = "Torcherino_lvl_5";
+            Torch_lvl5_S = config.getInt("Speed",TileName,1,1,Short.MAX_VALUE,TextS);
+            Torch_lvl5_M = config.getInt("Modes",TileName,15,1,Short.MAX_VALUE,TextM);
+            Torch_lvl5_R = config.getInt("WorkR",TileName,15,1, Short.MAX_VALUE,TextR);
             //Compressed_Torch_lvl_1
             TileNameCompressed = "Torcherino_lvl_1_Compressed";
             CTorch_lvl1_S = config.getInt("Speed",TileNameCompressed,9,1,Short.MAX_VALUE,TextS);

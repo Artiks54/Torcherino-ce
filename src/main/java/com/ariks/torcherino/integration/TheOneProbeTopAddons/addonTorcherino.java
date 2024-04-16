@@ -1,5 +1,6 @@
 package com.ariks.torcherino.integration.TheOneProbeTopAddons;
 
+import com.ariks.torcherino.Tiles.TileCollector;
 import com.ariks.torcherino.Tiles.TileCompresedTorch;
 import com.ariks.torcherino.Tiles.TileTorch;
 import com.ariks.torcherino.Tiles.TileTorcherinoBase;
@@ -22,6 +23,17 @@ public class addonTorcherino extends AddonBlank {
     @Override
     public void addProbeInfo(final ProbeMode probeMode, final IProbeInfo probeInfo, final EntityPlayer entityPlayer, final World world, final IBlockState iBlockState, final IProbeHitData data) {
         TileEntity tile = world.getTileEntity(data.getPos());
+        if(Config.BooleanTOP) {
+            if (tile instanceof TileCollector) {
+                TileCollector tileCollector = (TileCollector) tile;
+                if (tileCollector.BooleanWork) {
+                    probeInfo.text(TextFormatting.GREEN + "Work:" + "true");
+                } else {
+                    probeInfo.text(TextFormatting.RED + "Work:" + "false");
+                }
+                probeInfo.text(TextFormatting.YELLOW + "Time: "+tileCollector.TimeCollect);
+            }
+        }
         if (Config.BooleanTOP) {
             if (tile instanceof TileTorcherinoBase) {
                 TileTorcherinoBase torch = (TileTorcherinoBase) tile;

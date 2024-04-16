@@ -9,11 +9,16 @@ gui.info.modes=Number of speed modes:
 gui.info.area=Maximum radius:
 gui.info.pos=Position:
 gui.info.aceleration=Aceleration:
+gui.info.time.collector=Collected time in seconds
+gui.info.text.collector=Collects time when it is not active, When activated, it spends the accumulated time to speed up work in a certain radius at a certain speed, If the time runs out, automatic collection will begin
 
-item.timewand.name=§6The Staff of Time
+item.time_wand_lvl1.name=§9The Staff of Time lvl 1
+item.time_wand_lvl2.name=§aThe Staff of Time lvl 2
+item.time_wand_lvl3.name=§cThe Staff of Time lvl 3
+item.time_wand_lvl4.name=§6The Staff of Time lvl 4
+item.time_wand_lvl5.name=§bThe Staff of Time lvl 5
+item.wand.info=Durability:
 
-item.config.name=§eConfiguration item
-item.torchinfo.name=§eInformation item
 item.diamondclock.name=§bDiamond Clock
 item.emeraldclock.name=§aEmerald Clock
 item.goldclock.name=§6Gold clock
@@ -35,3 +40,6 @@ tile.compressed_torch_lvl2.name=§aCompressed torcherino lvl 2
 tile.compressed_torch_lvl3.name=§cCompressed torcherino lvl 3
 tile.compressed_torch_lvl4.name=§6Compressed torcherino lvl 4
 tile.compressed_torch_lvl5.name=§bCompressed torcherino lvl 5
+
+tile.time_collector.name=§6Time collector
+item.collector.info=Accumulates time and uses it to speed up

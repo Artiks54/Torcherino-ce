@@ -22,7 +22,6 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
-
 import java.util.Random;
 
 public class TileTorcherinoBase extends TileEntity implements ITickable {
@@ -45,7 +44,7 @@ public class TileTorcherinoBase extends TileEntity implements ITickable {
     public void update() {
         if (world.isRemote)return;
         updateGui();
-        if(booleanWork && Config.BooleanVisualWork) {
+        if(booleanWork && Config.BooleanVisualWork && radius != 0 && speed != 0) {
             WorkVisual();
         }
         if (booleanRender || booleanWork) {
@@ -56,18 +55,18 @@ public class TileTorcherinoBase extends TileEntity implements ITickable {
         }
     }
     public void WorkVisual(){
-        cooldown++;
-        if(cooldown == 20){
-            cooldown = 0;
-            double x = pos.getX();
-            double y = pos.getY();
-            double z = pos.getZ();
-            EnumParticleTypes parc = EnumParticleTypes.FLAME;
-            ((WorldServer)world).spawnParticle(parc,x+0.5,y+1.15,z+0.5,1,0,0,0,0,new int[0]);
-            ((WorldServer)world).spawnParticle(parc,x+0.5,y+0.85,z,1,0,0,0,0,new int[0]);
-            ((WorldServer)world).spawnParticle(parc,x+1,y+0.85,z+0.5,1,0,0,0,0,new int[0]);
-            ((WorldServer)world).spawnParticle(parc,x,y+0.85,z+0.5,1,0,0,0,0,new int[0]);
-            ((WorldServer)world).spawnParticle(parc,x+0.5,y+0.85,z+1,1,0,0,0,0,new int[0]);
+            cooldown++;
+            if (cooldown >= 19) {
+                cooldown = 0;
+                double x = pos.getX();
+                double y = pos.getY();
+                double z = pos.getZ();
+                EnumParticleTypes parc = EnumParticleTypes.FLAME;
+                ((WorldServer) world).spawnParticle(parc, x + 0.5, y + 1.15, z + 0.5, 1, 0, 0, 0, 0, new int[0]);
+                ((WorldServer) world).spawnParticle(parc, x + 0.5, y + 0.85, z, 1, 0, 0, 0, 0, new int[0]);
+                ((WorldServer) world).spawnParticle(parc, x + 1, y + 0.85, z + 0.5, 1, 0, 0, 0, 0, new int[0]);
+                ((WorldServer) world).spawnParticle(parc, x, y + 0.85, z + 0.5, 1, 0, 0, 0, 0, new int[0]);
+                ((WorldServer) world).spawnParticle(parc, x + 0.5, y + 0.85, z + 1, 1, 0, 0, 0, 0, new int[0]);
         }
     }
     public void updateGui() {

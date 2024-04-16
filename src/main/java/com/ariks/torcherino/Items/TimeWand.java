@@ -3,6 +3,7 @@ package com.ariks.torcherino.Items;
 import com.ariks.torcherino.Register.AccelerationRegistry;
 import com.ariks.torcherino.Tiles.TileTorcherinoBase;
 import com.ariks.torcherino.util.Config;
+import com.ariks.torcherino.util.LocalizedStringKey;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
@@ -20,9 +21,16 @@ import java.util.List;
 import java.util.Random;
 
 public class TimeWand extends itemBase {
+    LocalizedStringKey LS = new LocalizedStringKey();
+    protected int SpeedWand(){
+        return 0;
+    }
+    protected int DurabilityWand(){
+        return 0;
+    }
     public TimeWand(String name) {
         super(name);
-        this.setMaxDamage(500);
+        this.setMaxDamage(DurabilityWand());
         this.setMaxStackSize(1);
     }
     @Override
@@ -38,7 +46,7 @@ public class TimeWand extends itemBase {
                 if (!(block.getTickRandomly() || (tile instanceof ITickable && block.hasTileEntity(blockState)))) {
                     return EnumActionResult.FAIL;
                 }
-                for (int i = 0; i < Config.SpeedWand; i++) {
+                for (int i = 0; i < SpeedWand() * 100; i++) {
                     block.updateTick(worldIn, pos, blockState, new Random());
                     if (tile instanceof ITickable) {
                         ((ITickable) tile).update();
@@ -57,7 +65,7 @@ public class TimeWand extends itemBase {
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, @NotNull ITooltipFlag flagIn) {
         int durability = stack.getMaxDamage() - stack.getItemDamage();
-        tooltip.add(TextFormatting.GOLD + "Durability: "+" " + durability + "/" + stack.getMaxDamage());
+        tooltip.add(TextFormatting.GRAY + LS.StrWandInfoItem+" " + durability + "/" + stack.getMaxDamage());
         super.addInformation(stack, worldIn, tooltip, flagIn);
     }
     @Override

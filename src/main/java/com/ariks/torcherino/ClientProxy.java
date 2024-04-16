@@ -1,9 +1,10 @@
 package com.ariks.torcherino;
 
+import com.ariks.torcherino.GUI.GuiCollector;
 import com.ariks.torcherino.GUI.GuiTorcherino;
 import com.ariks.torcherino.Render.TileTorcherinoBaseRender;
+import com.ariks.torcherino.Tiles.TileCollector;
 import com.ariks.torcherino.Tiles.TileTorcherinoBase;
-import com.ariks.torcherino.util.Config;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
@@ -29,6 +30,11 @@ public class ClientProxy extends CommonProxy {
 		TileEntity tile = world.getTileEntity(pos);
 		if (tile instanceof TileTorcherinoBase) {
 			GuiTorcherino gui = new GuiTorcherino((TileTorcherinoBase) tile,player);
+			Minecraft.getMinecraft().displayGuiScreen(gui);
+			return true;
+		}
+		if (tile instanceof TileCollector) {
+			GuiCollector gui = new GuiCollector((TileCollector) tile,player);
 			Minecraft.getMinecraft().displayGuiScreen(gui);
 			return true;
 		}

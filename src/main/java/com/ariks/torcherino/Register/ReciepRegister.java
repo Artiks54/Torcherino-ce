@@ -18,7 +18,7 @@ public class ReciepRegister {
                 " A ",
                 "ABA",
                 " A ",
-                'A', new ItemStack(Blocks.GOLD_BLOCK),
+                'A', new ItemStack(Items.GOLD_INGOT),
                 'B', new ItemStack(Redstone_Clock));
         //EmeraldClock
         GameRegistry.addShapedRecipe(
@@ -28,7 +28,7 @@ public class ReciepRegister {
                 " A ",
                 "ABA",
                 " A ",
-                'A', new ItemStack(Blocks.EMERALD_BLOCK),
+                'A', new ItemStack(Items.EMERALD),
                 'B', new ItemStack(Lapis_Clock));
         //DiamondClock
         GameRegistry.addShapedRecipe(
@@ -38,7 +38,7 @@ public class ReciepRegister {
                 " A ",
                 "ABA",
                 " A ",
-                'A', new ItemStack(Blocks.DIAMOND_BLOCK),
+                'A', new ItemStack(Items.DIAMOND),
                 'B', new ItemStack(Gold_Clock));
         //LapisClock
         GameRegistry.addShapedRecipe(
@@ -84,10 +84,11 @@ public class ReciepRegister {
                 new ResourceLocation(Torcherino.MOD_ID + ":" + "bindingelement2"),
                 new ItemStack(Binding_Element2),
                 "ASA",
-                "SBS",
+                "CBC",
                 "ASA",
                 'S', new ItemStack(Blocks.DRAGON_EGG),
                 'A', new ItemStack(Items.NETHER_STAR),
+                'C', new ItemStack(Items.END_CRYSTAL),
                 'B', new ItemStack(Binding_Element));
         //compressedtorch
         GameRegistry.addShapedRecipe(
@@ -99,15 +100,55 @@ public class ReciepRegister {
                 "AAA",
                 'A', new ItemStack(Blocks.TORCH),
                 'B', new ItemStack(Binding_Element));
-        //TimeWand
+        //TimeWand_lvl_1
         GameRegistry.addShapedRecipe(
-                new ResourceLocation(Torcherino.MOD_ID + ":" + "timewand"),
-                new ResourceLocation(Torcherino.MOD_ID + ":" + "timewand"),
-                new ItemStack(Time_Wand),
+                new ResourceLocation(Torcherino.MOD_ID + ":" + "timewand_lvl1"),
+                new ResourceLocation(Torcherino.MOD_ID + ":" + "timewand_lvl1"),
+                new ItemStack(Time_Wand_lvl1),
+                "  A",
+                " B ",
+                "B  ",
+                'A', new ItemStack(Lapis_Clock),
+                'B', new ItemStack(Items.STICK));
+        //TimeWand_lvl_2
+        GameRegistry.addShapedRecipe(
+                new ResourceLocation(Torcherino.MOD_ID + ":" + "timewand_lvl2"),
+                new ResourceLocation(Torcherino.MOD_ID + ":" + "timewand_lvl2"),
+                new ItemStack(Time_Wand_lvl2),
+                "  A",
+                " B ",
+                "B  ",
+                'A', new ItemStack(Emerald_Clock),
+                'B', new ItemStack(Items.STICK));
+        //TimeWand_lvl_3
+        GameRegistry.addShapedRecipe(
+                new ResourceLocation(Torcherino.MOD_ID + ":" + "timewand_lvl3"),
+                new ResourceLocation(Torcherino.MOD_ID + ":" + "timewand_lvl3"),
+                new ItemStack(Time_Wand_lvl3),
+                "  A",
+                " B ",
+                "B  ",
+                'A', new ItemStack(Redstone_Clock),
+                'B', new ItemStack(Items.STICK));
+        //TimeWand_lvl_4
+        GameRegistry.addShapedRecipe(
+                new ResourceLocation(Torcherino.MOD_ID + ":" + "timewand_lvl4"),
+                new ResourceLocation(Torcherino.MOD_ID + ":" + "timewand_lvl4"),
+                new ItemStack(Time_Wand_lvl4),
                 "  A",
                 " B ",
                 "B  ",
                 'A', new ItemStack(Gold_Clock),
+                'B', new ItemStack(Items.STICK));
+        //TimeWand_lvl_5
+        GameRegistry.addShapedRecipe(
+                new ResourceLocation(Torcherino.MOD_ID + ":" + "timewand_lvl5"),
+                new ResourceLocation(Torcherino.MOD_ID + ":" + "timewand_lvl5"),
+                new ItemStack(Time_Wand_lvl5),
+                "  A",
+                " B ",
+                "B  ",
+                'A', new ItemStack(Diamond_Clock),
                 'B', new ItemStack(Items.STICK));
     }
 }
