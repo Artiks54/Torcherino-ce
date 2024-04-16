@@ -1,5 +1,5 @@
 ﻿# Torcherino-Community-Edition
-Global Update 7.7.2
+Global Update 7.7.3
 
 The rendering system has been optimized.
 
