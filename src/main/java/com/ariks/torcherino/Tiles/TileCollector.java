@@ -21,15 +21,16 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Random;
 
 public class TileCollector extends TileEntity implements ITickable {
-    private int CooldownIncr, CooldownDecr;
-    public int TimeCollect;
     protected NetworkRegistry.TargetPoint packetTargetPoint;
     public boolean BooleanWork;
     public boolean OpenGuiCollector;
     private boolean OldBooleanWork;
+    private int CooldownDecr;
     private int OldTimeCollect;
     public final int speed = Config.CollectorSpeed;
     public final int AreaModifier = Config.CollectorRadius;
+    private int CooldownIncr = Config.CollectorTimeCooldownConfig;
+    public int TimeCollect = Config.CollectorTimeCollectConfig;
     private final Random rand = new Random();
     protected int speedBase(int base) {
         return base;

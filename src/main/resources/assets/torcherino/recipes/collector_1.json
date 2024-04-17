@@ -12,6 +12,6 @@
 		"C": {"item": "torcherino:lapisclock"},
 		"T": {"item": "minecraft:hopper"},
 		"O": {"item": "minecraft:obsidian"},
-		"S": {"item": "minecraft:nether_star"}
+		"S": {"item": "torcherino:time_element"}
 	}
 }   

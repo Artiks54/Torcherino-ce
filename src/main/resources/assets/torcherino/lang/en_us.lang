@@ -17,7 +17,13 @@ item.time_wand_lvl3.name=§cThe Staff of Time lvl 3
 item.time_wand_lvl4.name=§6The Staff of Time lvl 4
 item.time_wand_lvl5.name=§bThe Staff of Time lvl 5
 item.wand.info=Durability:
-item.time_storage.name=§eTemporary storage
+
+item.time_storage_lvl1.name=§9Time storage lvl 1
+item.time_storage_lvl2.name=§aTime storage lvl 2
+item.time_storage_lvl3.name=§cTime storage lvl 3
+item.time_storage_lvl4.name=§6Time storage lvl 4
+item.time_storage_lvl5.name=§bTime storage lvl 5
+item.time_storage_infinite.name=§5Infinite time storage
 
 item.diamondclock.name=§bDiamond Clock
 item.emeraldclock.name=§aEmerald Clock
@@ -27,6 +33,9 @@ item.redstoneclock.name=§cRedstone clock
 item.compressedtorch.name=§eCompressed Torch
 item.bindingelement.name=§dBinding Element
 item.bindingelement2.name=§5Advanced Binding Element
+item.time_element.name=Time element
+item.time_nugget.name=Time nugget
+item.time_ingot.name=Time ingot
 itemGroup.torcherinoTab=Torcherino CE
 
 tile.torch_lvl1.name=§9Torcherino lvl 1

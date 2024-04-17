@@ -17,7 +17,13 @@ item.time_wand_lvl3.name=§cПосох времени уровень 3
 item.time_wand_lvl4.name=§6Посох времени уровень 4
 item.time_wand_lvl5.name=§bПосох времени уровень 5
 item.wand.info=Прочность:
-item.time_storage.name=§eВременное хранилище
+
+item.time_storage_lvl1.name=§9Временное хранилище уровень 1
+item.time_storage_lvl2.name=§aВременное хранилище уровень 2
+item.time_storage_lvl3.name=§cВременное хранилище уровень 3
+item.time_storage_lvl4.name=§6Временное хранилище уровень 4
+item.time_storage_lvl5.name=§bВременное хранилище уровень 5
+item.time_storage_infinite.name=§5Бесконечное временное хранилище
 
 item.diamondclock.name=§bАлмазные часы
 item.emeraldclock.name=§aИзумрудные часы
@@ -27,6 +33,9 @@ item.redstoneclock.name=§cРедстоун часы
 item.compressedtorch.name=§eСжатый факел
 item.bindingelement.name=§dСвязующий элемент
 item.bindingelement2.name=§5Улучшенный связующий элемент
+item.time_element.name=Временной элемент
+item.time_nugget.name=Временной кусочек
+item.time_ingot.name=Временной слиток
 itemGroup.torcherinoTab=Torcherino CE
 
 tile.torch_lvl1.name=§9Ускоряющий факел 1 уровня

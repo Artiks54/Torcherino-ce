@@ -41,7 +41,22 @@ public class BlockCollector extends Block implements IHasModel {
     }
     @Override
     public boolean onBlockActivated(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull EntityPlayer playerIn, @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (playerIn.getHeldItem(hand).getItem() == RegistryArray.Time_Storage) {
+        if (playerIn.getHeldItem(hand).getItem() == RegistryArray.time_storage_lvl1 ) {
+            return false;
+        }
+        if (playerIn.getHeldItem(hand).getItem() == RegistryArray.time_storage_lvl2 ) {
+            return false;
+        }
+        if (playerIn.getHeldItem(hand).getItem() == RegistryArray.time_storage_lvl3 ) {
+            return false;
+        }
+        if (playerIn.getHeldItem(hand).getItem() == RegistryArray.time_storage_lvl4 ) {
+            return false;
+        }
+        if (playerIn.getHeldItem(hand).getItem() == RegistryArray.time_storage_lvl5 ) {
+            return false;
+        }
+        if (playerIn.getHeldItem(hand).getItem() == RegistryArray.time_storage_infinite ) {
             return false;
         }
         return Torcherino.proxy.openGui(worldIn, pos, playerIn);

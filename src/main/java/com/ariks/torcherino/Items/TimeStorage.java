@@ -1,6 +1,7 @@
 package com.ariks.torcherino.Items;
 
 import com.ariks.torcherino.Tiles.TileCollector;
+import com.ariks.torcherino.util.Config;
 import com.ariks.torcherino.util.LocalizedStringKey;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -21,7 +22,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class TimeStorage extends itemBase {
-
+    protected int MaxStorageTime(){
+        return 0;
+    }
     public TimeStorage(String name) {
         super(name);
         this.setMaxStackSize(1);
@@ -42,7 +45,7 @@ public class TimeStorage extends itemBase {
             assert stack.getTagCompound() != null;
             int time = stack.getTagCompound().getInteger("Time");
             LocalizedStringKey LS = new LocalizedStringKey();
-            tooltip.add(TextFormatting.GRAY + LS.TimeCollector +": " +TextFormatting.GREEN+ time);
+            tooltip.add(TextFormatting.GRAY + LS.TimeCollector + ": " + time + "/"+ MaxStorageTime());
         }
         LocalizedStringKey LS = new LocalizedStringKey();
         tooltip.add(TextFormatting.GRAY + LS.Str_Time_Storage_Tooltip);
@@ -56,14 +59,22 @@ public class TimeStorage extends itemBase {
                 NBTTagCompound tagCompound = player.getHeldItem(hand).getTagCompound();
                 assert tagCompound != null;
                 int storedTime = tagCompound.getInteger("Time");
-                if (player.isSneaking()) {
-                    int collectedTime = tileCollector.TimeCollect;
-                    tagCompound.setInteger("Time", storedTime + collectedTime);
-                    tileCollector.TimeCollect = 0;
-                } else {
-                    int collectedTime = tileCollector.TimeCollect;
-                    tileCollector.TimeCollect = (storedTime + collectedTime);
-                    tagCompound.setInteger("Time", 0);
+                int freeSpace = MaxStorageTime() - storedTime;
+                int collectedTime = tileCollector.TimeCollect;
+                if(player.isSneaking()){
+                if (freeSpace > 0) {
+                    if (collectedTime > freeSpace) {
+                        tagCompound.setInteger("Time", storedTime + freeSpace);
+                        tileCollector.TimeCollect = collectedTime - freeSpace;
+                    } else {
+                        tagCompound.setInteger("Time", storedTime + collectedTime);
+                        tileCollector.TimeCollect = 0;
+                    }
+                }
+                }else {
+                    int x = tagCompound.getInteger("Time");
+                    tileCollector.TimeCollect += x;
+                    tagCompound.setInteger("Time",0);
                 }
             }
         }
