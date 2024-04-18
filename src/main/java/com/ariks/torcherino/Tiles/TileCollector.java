@@ -30,7 +30,7 @@ public class TileCollector extends TileEntity implements ITickable {
     public final int speed = Config.CollectorSpeed;
     public final int AreaModifier = Config.CollectorRadius;
     private int CooldownIncr = Config.CollectorTimeCooldownConfig;
-    public int TimeCollect = (Config.CollectorTimeCollectConfig + Integer.MAX_VALUE - 10);
+    public int TimeCollect = Config.CollectorTimeCollectConfig;
     private final Random rand = new Random();
     protected int speedBase(int base) {
         return base;
