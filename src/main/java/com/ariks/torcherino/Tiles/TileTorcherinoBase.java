@@ -24,7 +24,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import java.util.Random;
 
-public class TileTorcherinoBase extends TileEntity implements ITickable {
+public abstract class TileTorcherinoBase extends TileEntity implements ITickable {
     protected NetworkRegistry.TargetPoint packetTargetPoint;
     private final Random rand = new Random();
     public int radius, speed, xMin, yMin, zMin, xMax, yMax, zMax;

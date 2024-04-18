@@ -70,7 +70,7 @@ public class TileCollector extends TileEntity implements ITickable {
             updateOldValues();
             ModPacketHandler.network.sendToAllTracking(new UpdateGuiCollectorPacket(pos, BooleanWork, TimeCollect), packetTargetPoint);
             if (Config.DebugMod) {
-                Torcherino.logger.debug("Send Packet update GUI Tile Torcherino");
+                Torcherino.logger.debug("Send Packet update GUI Tile Collector");
             }
         }
     }
