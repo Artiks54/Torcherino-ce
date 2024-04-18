@@ -1,7 +1,7 @@
 package com.ariks.torcherino.Items;
 
+import com.ariks.torcherino.Register.RegistryArray;
 import com.ariks.torcherino.Tiles.TileCollector;
-import com.ariks.torcherino.util.Config;
 import com.ariks.torcherino.util.LocalizedStringKey;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -21,8 +21,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
-public class TimeStorage extends itemBase {
-    protected int MaxStorageTime(){
+public abstract class TimeStorage extends itemBase {
+    protected int MaxConfigStorageTime() {
         return 0;
     }
     public TimeStorage(String name) {
@@ -41,40 +41,42 @@ public class TimeStorage extends itemBase {
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, @NotNull List<String> tooltip, @NotNull ITooltipFlag flagIn) {
+        LocalizedStringKey LS = new LocalizedStringKey();
         if (stack.hasTagCompound()) {
             assert stack.getTagCompound() != null;
             int time = stack.getTagCompound().getInteger("Time");
-            LocalizedStringKey LS = new LocalizedStringKey();
-            tooltip.add(TextFormatting.GRAY + LS.TimeCollector + ": " + time + "/"+ MaxStorageTime());
+            tooltip.add(TextFormatting.GRAY + LS.Str_Time_Storage_Tooltip);
+            if (stack.getItem() == RegistryArray.time_storage_infinite) {
+                tooltip.add(TextFormatting.GRAY + LS.TimeCollector + ": " + time);
+            }
+            if (stack.getItem() != RegistryArray.time_storage_infinite) {
+                tooltip.add(TextFormatting.GRAY + LS.TimeCollector + ": " + time + "/" + MaxConfigStorageTime());
+            }
         }
-        LocalizedStringKey LS = new LocalizedStringKey();
-        tooltip.add(TextFormatting.GRAY + LS.Str_Time_Storage_Tooltip);
     }
     @Override
     public @NotNull EnumActionResult onItemUse(@NotNull EntityPlayer player, World worldIn, @NotNull BlockPos pos, @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
             TileEntity tileEntity = worldIn.getTileEntity(pos);
-            if (tileEntity instanceof TileCollector && player.getHeldItem(hand).hasTagCompound()) {
+            if (tileEntity instanceof TileCollector) {
                 TileCollector tileCollector = (TileCollector) tileEntity;
-                NBTTagCompound tagCompound = player.getHeldItem(hand).getTagCompound();
-                assert tagCompound != null;
-                int storedTime = tagCompound.getInteger("Time");
-                int freeSpace = MaxStorageTime() - storedTime;
-                int collectedTime = tileCollector.TimeCollect;
-                if(player.isSneaking()){
-                if (freeSpace > 0) {
-                    if (collectedTime > freeSpace) {
-                        tagCompound.setInteger("Time", storedTime + freeSpace);
-                        tileCollector.TimeCollect = collectedTime - freeSpace;
+                ItemStack heldItem = player.getHeldItem(hand);
+                if (heldItem.hasTagCompound()) {
+                    NBTTagCompound tagCompound = heldItem.getTagCompound();
+                    assert tagCompound != null;
+                    int storedTime = Math.min(tagCompound.getInteger("Time"), MaxConfigStorageTime());
+                    int freeSpace = Integer.MAX_VALUE - tileCollector.TimeCollect;
+                    if (!player.isSneaking()) {
+                        if (freeSpace > 0) {
+                            int transferTime = Math.min(storedTime, freeSpace);
+                            tagCompound.setInteger("Time", storedTime - transferTime);
+                            tileCollector.TimeCollect += (transferTime);
+                        }
                     } else {
-                        tagCompound.setInteger("Time", storedTime + collectedTime);
-                        tileCollector.TimeCollect = 0;
+                        int transferTime = Math.min(tileCollector.TimeCollect, MaxConfigStorageTime() - storedTime);
+                        tagCompound.setInteger("Time", storedTime + transferTime);
+                        tileCollector.TimeCollect -= (transferTime);
                     }
-                }
-                }else {
-                    int x = tagCompound.getInteger("Time");
-                    tileCollector.TimeCollect += x;
-                    tagCompound.setInteger("Time",0);
                 }
             }
         }

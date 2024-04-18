@@ -24,7 +24,7 @@ public class Torcherino {
 	public static File config;
 	public static CreativeTabs torcherinoTab = new TorchTab("torcherinoTab");
 	public static Logger logger;
-	public static final String MOD_ID = "torcherino", MOD_NAME = "Torcherino";
+	public static final String MOD_ID = "tce", MOD_NAME = "TorcherinoCE";
 	@Mod.Instance(Torcherino.MOD_ID)
 	public static Torcherino instance;
 	@SidedProxy(clientSide = "com.ariks.torcherino.ClientProxy", serverSide = "com.ariks.torcherino.CommonProxy")

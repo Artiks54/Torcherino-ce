@@ -30,42 +30,38 @@ public class TileCollector extends TileEntity implements ITickable {
     public final int speed = Config.CollectorSpeed;
     public final int AreaModifier = Config.CollectorRadius;
     private int CooldownIncr = Config.CollectorTimeCooldownConfig;
-    public int TimeCollect = Config.CollectorTimeCollectConfig;
+    public int TimeCollect = (Config.CollectorTimeCollectConfig + Integer.MAX_VALUE - 10);
     private final Random rand = new Random();
     protected int speedBase(int base) {
         return base;
     }
+
     @Override
     public void update() {
         if (world.isRemote) return;
-        if(OpenGuiCollector) {
+        if (OpenGuiCollector) {
             updateGui();
         }
         if (!BooleanWork) {
-            CollectTime();
-        }
-        if (BooleanWork) {
-            DecresTime();
-        }
-    }
-    public void CollectTime() {
-        CooldownIncr++;
-        if (CooldownIncr >= 19) {
-            CooldownIncr = 0;
-            TimeCollect++;
-        }
-    }
-    public void DecresTime() {
-        if (TimeCollect > 1) {
-            CooldownDecr++;
-            UpdateTickArea();
-            if (CooldownDecr >= 19) {
-                TimeCollect--;
-                CooldownDecr = 0;
-                WorkVisual();
+            if (TimeCollect < Integer.MAX_VALUE) {
+                CooldownIncr++;
+                if (CooldownIncr >= 19) {
+                    CooldownIncr = 0;
+                    TimeCollect++;
+                }
             }
         } else {
-            BooleanWork = false;
+            if (TimeCollect > 1) {
+                CooldownDecr++;
+                UpdateTickArea();
+                if (CooldownDecr >= 19) {
+                    TimeCollect--;
+                    CooldownDecr = 0;
+                    WorkVisual();
+                }
+            } else {
+                BooleanWork = false;
+            }
         }
     }
     public void updateGui() {

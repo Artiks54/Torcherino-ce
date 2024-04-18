@@ -1,0 +1,54 @@
+itemGroup.torcherinoTab=Torcherino CE
+
+tce_gui.button.StrWork=Работа:
+tce_gui.button.StrRender=Визуализация:
+tce_gui.button.StrOn=Вкл
+tce_gui.button.StrOff=Выкл
+tce_gui.info.text=Информация: Клик левой кнопки мыши увеличивает радиус или скорость, лкм + щифт уменьшает.
+tce_gui.info.modes=Количество режимов скорости:
+tce_gui.info.area=Максимальный радиус работы:
+tce_gui.info.aceleration=Ускорение:
+tce_gui.info.time.collector=Собранное время в секундах
+tce_gui.info.text.collector=Собирает время когда выключен, При включение тратит накопленное время для ускорение, Если время закончиться то начнется автоматический сбор
+
+tce_item.wand.info=Прочность:
+tce_item.collector.info=Накапливает время и использует его для ускорения
+tce_item.tooltip.time_storage=Shift + ПКМ извлекает время из сборщика, ПКМ вставляет время в сборщик
+tce_item.tooltip.time_wand=Shift + ПКМ для ускорения
+
+
+
+item.tce_time_wand_lvl1.name=§9Посох времени уровень 1
+item.tce_time_wand_lvl2.name=§aПосох времени уровень 2
+item.tce_time_wand_lvl3.name=§cПосох времени уровень 3
+item.tce_time_wand_lvl4.name=§6Посох времени уровень 4
+item.tce_time_wand_lvl5.name=§bПосох времени уровень 5
+item.tce_time_storage_lvl1.name=§9Временное хранилище уровень 1
+item.tce_time_storage_lvl2.name=§aВременное хранилище уровень 2
+item.tce_time_storage_lvl3.name=§cВременное хранилище уровень 3
+item.tce_time_storage_lvl4.name=§6Временное хранилище уровень 4
+item.tce_time_storage_lvl5.name=§bВременное хранилище уровень 5
+item.tce_time_storage_infinite.name=§5Бесконечное временное хранилище
+item.tce_diamondclock.name=§bАлмазные часы
+item.tce_emeraldclock.name=§aИзумрудные часы
+item.tce_goldclock.name=§6Золотые часы
+item.tce_lapisclock.name=§9Лазуритовые часы
+item.tce_redstoneclock.name=§cРедстоун часы
+item.tce_compressedtorch.name=§eСжатый факел
+item.tce_bindingelement.name=§dСвязующий элемент
+item.tce_bindingelement2.name=§5Улучшенный связующий элемент
+item.tce_time_element.name=Временной элемент
+item.tce_time_nugget.name=Временной кусочек
+item.tce_time_ingot.name=Временной слиток
+
+tile.tce_torch_lvl1.name=§9Ускоряющий факел 1 уровня
+tile.tce_torch_lvl2.name=§aУскоряющий факел 2 уровня
+tile.tce_torch_lvl3.name=§cУскоряющий факел 3 уровня
+tile.tce_torch_lvl4.name=§6Ускоряющий факел 4 уровня
+tile.tce_torch_lvl5.name=§bУскоряющий факел 5 уровня
+tile.tce_compressed_torch_lvl1.name=§9Сжатый ускоряющий факел 1 уровня
+tile.tce_compressed_torch_lvl2.name=§aСжатый ускоряющий факел 2 уровня
+tile.tce_compressed_torch_lvl3.name=§cСжатый ускоряющий факел 3 уровня
+tile.tce_compressed_torch_lvl4.name=§6Сжатый ускоряющий факел 4 уровня
+tile.tce_compressed_torch_lvl5.name=§bСжатый ускоряющий факел 5 уровня
+tile.tce_time_collector.name=§6Временной сборщик

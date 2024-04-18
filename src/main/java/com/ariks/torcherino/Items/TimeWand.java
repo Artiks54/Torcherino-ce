@@ -22,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Random;
 
-public class TimeWand extends itemBase {
+public abstract class TimeWand extends itemBase {
 
     protected int SpeedWand(){
         return 0;
@@ -70,7 +70,7 @@ public class TimeWand extends itemBase {
         int durability = stack.getMaxDamage() - stack.getItemDamage();
         LocalizedStringKey LS = new LocalizedStringKey();
         tooltip.add(TextFormatting.GRAY + LS.Str_Time_Wand_Tooltip);
-        tooltip.add(TextFormatting.GRAY + LS.StrWandInfoItem+" " + durability + "/" + stack.getMaxDamage());
+        tooltip.add(TextFormatting.GRAY + LS.StrWandInfoItem+" " + durability);
         super.addInformation(stack, worldIn, tooltip, flagIn);
     }
     @Override

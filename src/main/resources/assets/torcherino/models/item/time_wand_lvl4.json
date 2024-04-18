@@ -1,6 +1,0 @@
-{
-  "parent": "item/handheld",
-  "textures": {
-    "layer0": "torcherino:items/time_wand_lvl4"
-  }
-}

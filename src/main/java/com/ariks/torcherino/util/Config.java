@@ -15,7 +15,8 @@ public class Config {
     private final static String TextS = "Acceleration 1 = 100%";
     private final static String TextM = "Number of acceleration modes";
     private final static String TextR = "Working radius";
-    public static boolean logPlacement,BooleanParcWand,BooleanRenderFilledBox,BooleanRender,BooleanRenderLine,BooleanVisualWork;
+    public static boolean logPlacement,DebugMod;
+    public static boolean BooleanParcWand,BooleanRenderFilledBox,BooleanRender,BooleanRenderLine,BooleanVisualWork;
     public static boolean BooleanTOP;
     public static int SpeedWand_lvl1,SpeedWand_lvl2,SpeedWand_lvl3,SpeedWand_lvl4,SpeedWand_lvl5;
     public static int
@@ -39,12 +40,13 @@ public class Config {
         try {config.load();
             String General = "General";
             String Render = "Render";
-            String Item = "Item Wand";
+            String Item = "Item";
             String ColorRenderTile = "Color render line";
             //BlackList
             blacklistedBlocks = config.getStringList("blacklistedBlocks", "blacklist", new String[]{}, "modid:unlocalized");
             blacklistedTiles = config.getStringList("blacklistedTiles", "blacklist", new String[]{}, "Fully qualified class name");
             //General
+            DebugMod = config.getBoolean("Debug_Mode",General,false,"Debug modes");
             logPlacement = config.getBoolean("logPlacement", General, true, "(For Server Owners) Is it logged when someone places a Torcherino?");
             BooleanTOP = config.getBoolean("integration_top_addons",General,true,"True/false Integration TheOneProbe-TopAddons");
             //Storage_Time_In_Bottle
@@ -149,8 +151,8 @@ public class Config {
             CTorch_lvl5_R = config.getInt("Area",TileNameCompressed,15,1, Short.MAX_VALUE,TextR);
         } finally {if(config.hasChanged()) config.save();}}
     public static void registerConfig(@NotNull FMLPreInitializationEvent event){
-        Torcherino.config = new File(event.getModConfigurationDirectory()+"/"+Torcherino.MOD_ID);
+        Torcherino.config = new File(event.getModConfigurationDirectory()+"/"+Torcherino.MOD_NAME);
         Torcherino.config.mkdirs();
-        init(new File(Torcherino.config.getPath(),Torcherino.MOD_ID+".cfg"));
+        init(new File(Torcherino.config.getPath(),Torcherino.MOD_NAME+".cfg"));
     }
 }

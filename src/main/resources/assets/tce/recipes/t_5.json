@@ -1,0 +1,16 @@
+{
+	"result": {
+		"item": "tce:tce_torch_lvl5"
+	},
+	"pattern" : [
+		"SCS",
+		"CTC",
+		"SCS"
+	],
+	"type" : "minecraft:crafting_shaped",
+	"key" : {
+		"C": {"item": "tce:tce_diamondclock"},
+		"T": {"item": "tce:tce_torch_lvl4"},
+		"S": {"item": "minecraft:nether_star"}
+	}
+}   
