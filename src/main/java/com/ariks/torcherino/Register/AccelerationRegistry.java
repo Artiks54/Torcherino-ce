@@ -3,6 +3,7 @@ package com.ariks.torcherino.Register;
 import java.util.HashSet;
 import java.util.Set;
 import com.ariks.torcherino.Torcherino;
+import com.ariks.torcherino.util.Config;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
@@ -16,25 +17,35 @@ public class AccelerationRegistry {
 			try {
 				Class<?> clazz = Torcherino.instance.getClass().getClassLoader().loadClass(string);
 				if (clazz == null) {
-					Torcherino.logger.info("Class null: " + string);
+					if (Config.DebugMod) {
+						Torcherino.logger.info("Class null: " + string);
+					}
 					return;
 				} else if (!TileEntity.class.isAssignableFrom(clazz)) {
-					Torcherino.logger.info("Class not a TileEntity: " + string);
+					if (Config.DebugMod) {
+						Torcherino.logger.info("Class not a TileEntity: " + string);
+					}
 					return;
 				}
 				blacklistTile(clazz.asSubclass(TileEntity.class));
 			} catch (ClassNotFoundException e) {
-				Torcherino.logger.info("Class not found: " + string + ", ignoring");
+				if (Config.DebugMod) {
+					Torcherino.logger.info("Class not found: " + string + ", ignoring");
+				}
 			}
 		} else {
 			String[] parts = string.split(":");
 			if (parts.length != 2) {
-				Torcherino.logger.info("Received malformed message: " + string);
+				if (Config.DebugMod) {
+					Torcherino.logger.info("Received malformed message: " + string);
+				}
 				return;
 			}
 			ResourceLocation location = new ResourceLocation(parts[0], parts[1]);
 			Block block = Block.REGISTRY.getObject(location);
-			Torcherino.logger.info("Blacklisting block: " + block.getUnlocalizedName());
+			if (Config.DebugMod) {
+				Torcherino.logger.info("Blacklisting block: " + block.getUnlocalizedName());
+			}
 			blacklistBlock(block);
 		}
 	}

@@ -38,7 +38,7 @@ public class BlockTorcherino extends Block implements IHasModel {
     @Override
     public void onBlockAdded(@NotNull World world, @NotNull BlockPos pos, @NotNull IBlockState state) {
         super.onBlockAdded(world, pos, state);
-        if (Config.logPlacement) {
+        if (Config.DebugMod) {
             Torcherino.logger.info(this.getClass().getName().substring(30) + "Torcherino place: " + pos.getX() + "," + pos.getY() + "," + pos.getZ());
         }
     }

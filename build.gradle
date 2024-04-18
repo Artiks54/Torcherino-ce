@@ -81,6 +81,8 @@ repositories {
         compileOnly "curse.maven:top-addons-247111:2887479"
         runtimeOnly "curse.maven:jei-238222:5101347"
         compileOnly "curse.maven:jei-238222:5101347"
+        runtimeOnly "curse.maven:crafttweaker-239197:5013567"
+        compileOnly "curse.maven:crafttweaker-239197:5013567"
         compileOnly fileTree('lib')
         runtimeOnly fileTree('lib')
         compileOnly fileTree('libs')

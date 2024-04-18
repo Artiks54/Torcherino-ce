@@ -66,7 +66,9 @@ public class Torcherino {
 	public void imcMessage(FMLInterModComms.IMCEvent event) {
 		for (FMLInterModComms.IMCMessage message : event.getMessages()) {
 			if (!message.isStringMessage()) {
-				logger.info("Received non-string message! Ignoring");
+				if (Config.DebugMod) {
+					logger.info("Received non-string message! Ignoring");
+				}
 				continue;
 			}
 			String s = message.getStringValue();

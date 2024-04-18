@@ -1,6 +1,7 @@
 package com.ariks.torcherino.Tiles;
 
 import com.ariks.torcherino.Register.AccelerationRegistry;
+import com.ariks.torcherino.Torcherino;
 import com.ariks.torcherino.network.ModPacketHandler;
 import com.ariks.torcherino.network.UpdateGuiCollectorPacket;
 import com.ariks.torcherino.util.Config;
@@ -68,6 +69,9 @@ public class TileCollector extends TileEntity implements ITickable {
         if (shouldSendGuiUpdatePacket()) {
             updateOldValues();
             ModPacketHandler.network.sendToAllTracking(new UpdateGuiCollectorPacket(pos, BooleanWork, TimeCollect), packetTargetPoint);
+            if (Config.DebugMod) {
+                Torcherino.logger.debug("Send Packet update GUI Tile Torcherino");
+            }
         }
     }
     public void WorkVisual() {

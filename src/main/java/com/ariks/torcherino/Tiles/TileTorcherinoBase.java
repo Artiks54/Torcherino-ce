@@ -71,9 +71,11 @@ public class TileTorcherinoBase extends TileEntity implements ITickable {
     }
     public void updateGui() {
         if (shouldSendGuiUpdatePacket()) {
-            ModPacketHandler.network.sendToAllTracking(new UpdateGuiPacket(pos, booleanWork, booleanRender, radius, speed), packetTargetPoint);
             updateOldValues();
-            Torcherino.logger.debug("Send Packet update GUI");
+            ModPacketHandler.network.sendToAllTracking(new UpdateGuiPacket(pos, booleanWork, booleanRender, radius, speed), packetTargetPoint);
+            if (Config.DebugMod) {
+                Torcherino.logger.debug("Send Packet update GUI Tile Torcherino");
+            }
         }
     }
     private boolean shouldSendGuiUpdatePacket() {

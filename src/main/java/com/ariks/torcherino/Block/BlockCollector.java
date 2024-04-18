@@ -80,7 +80,7 @@ public class BlockCollector extends Block implements IHasModel {
     @Override
     public void onBlockAdded(@NotNull World world, @NotNull BlockPos pos, @NotNull IBlockState state) {
         super.onBlockAdded(world, pos, state);
-        if (Config.logPlacement) {
+        if (Config.DebugMod) {
             Torcherino.logger.info(this.getClass().getName().substring(30) + "Collector place: " + pos.getX() + "," + pos.getY() + "," + pos.getZ());
         }
     }

@@ -15,7 +15,7 @@ public class Config {
     private final static String TextS = "Acceleration 1 = 100%";
     private final static String TextM = "Number of acceleration modes";
     private final static String TextR = "Working radius";
-    public static boolean logPlacement,DebugMod;
+    public static boolean DebugMod;
     public static boolean BooleanParcWand,BooleanRenderFilledBox,BooleanRender,BooleanRenderLine,BooleanVisualWork;
     public static boolean BooleanTOP;
     public static int SpeedWand_lvl1,SpeedWand_lvl2,SpeedWand_lvl3,SpeedWand_lvl4,SpeedWand_lvl5;
@@ -46,8 +46,7 @@ public class Config {
             blacklistedBlocks = config.getStringList("blacklistedBlocks", "blacklist", new String[]{}, "modid:unlocalized");
             blacklistedTiles = config.getStringList("blacklistedTiles", "blacklist", new String[]{}, "Fully qualified class name");
             //General
-            DebugMod = config.getBoolean("Debug_Mode",General,false,"Debug modes");
-            logPlacement = config.getBoolean("logPlacement", General, true, "(For Server Owners) Is it logged when someone places a Torcherino?");
+            DebugMod = config.getBoolean("Debug_Mode",General,false,"(For Server Owners) Debug modes");
             BooleanTOP = config.getBoolean("integration_top_addons",General,true,"True/false Integration TheOneProbe-TopAddons");
             //Storage_Time_In_Bottle
             Stored_Time_Bottle_Lvl_1 = config.getInt("Time_Storage_lvl_1",Item,500,1,Integer.MAX_VALUE,"Storage time bottle lvl 1");
