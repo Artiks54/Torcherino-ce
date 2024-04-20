@@ -1,38 +1,29 @@
 package com.ariks.torcherino.GUI;
 
+import com.ariks.torcherino.Tiles.TileDCompresedTorch;
 import com.ariks.torcherino.util.Config;
 import com.ariks.torcherino.network.ModPacketHandler;
 import com.ariks.torcherino.Tiles.TileTorcherinoBase;
 import com.ariks.torcherino.network.UpdateTilePacket;
 import com.ariks.torcherino.Tiles.TileCompresedTorch;
 import com.ariks.torcherino.Tiles.TileTorch;
-import com.ariks.torcherino.Torcherino;
-import com.ariks.torcherino.util.LocalizedStringKey;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
-import org.lwjgl.input.Keyboard;
 import java.awt.*;
 
 @SideOnly(Side.CLIENT)
-public class GuiTorcherino extends GuiScreen {
-    LocalizedStringKey LS = new LocalizedStringKey();
-    final ResourceLocation texture = new ResourceLocation(Torcherino.MOD_ID, "textures/gui/gui_small.png");
-    private final TextFormatting green = TextFormatting.GREEN;
-    private final TileTorcherinoBase tile;
-    private final EntityPlayer player;
+public class GuiTorcherino extends ExampleGui {
     private String StrRadius,StrSpeed,StrRender,StrWork,StrStringConfigArea,StrStringConfigMode,StrStringConfigAceleration;
     private int SpeedModifers;
+    private final TileTorcherinoBase tile;
     public GuiTorcherino(TileTorcherinoBase tile, EntityPlayer player) {
+        super(player,tile);
         this.tile = tile;
-        this.player = player;
     }
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         int screenWidthPixels = width;
@@ -43,7 +34,6 @@ public class GuiTorcherino extends GuiScreen {
         int stringPositionY = textureY + 15;
         Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
         drawModalRectWithCustomSizedTexture(textureX, textureY, 0, 0, 256, 128, 256, 128);
-        FontRenderer fontRenderer = this.fontRenderer;
         fontRenderer.drawSplitString(LS.Info, stringPositionX, stringPositionY, 230, Color.WHITE.getRGB());
         fontRenderer.drawString(StrStringConfigMode, stringPositionX, stringPositionY + 27 , Color.WHITE.getRGB());
         fontRenderer.drawString(StrStringConfigArea, stringPositionX, stringPositionY + 37, Color.WHITE.getRGB());
@@ -80,23 +70,6 @@ public class GuiTorcherino extends GuiScreen {
         }
         ModPacketHandler.network.sendToServer(new UpdateTilePacket(this.tile.getPos(), updatePacketTile));
     }
-    public void updateScreen() {
-        super.updateScreen();
-        this.initGui();
-        if (tile.getPos().getDistance((int) player.posX, (int) player.posY, (int) player.posZ) > 8.0) {
-            player.closeScreen();
-        }
-    }
-    @Override
-    protected void keyTyped(char typedChar, int keyCode) {
-        if(Keyboard.isKeyDown(Keyboard.KEY_E) || Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)){
-            player.closeScreen();
-        }
-    }
-    @Override
-    public boolean doesGuiPauseGame()  {
-        return false;
-    }
     public void updateStringConfig() {
         if (tile instanceof TileTorch.TileBase1) {
             updateStringConfigForTile(Config.Torch_lvl1_M, Config.Torch_lvl1_R, Config.Torch_lvl1_S);
@@ -118,6 +91,16 @@ public class GuiTorcherino extends GuiScreen {
             updateStringConfigForTile(Config.CTorch_lvl4_M, Config.CTorch_lvl4_R, Config.CTorch_lvl4_S);
         } else if (tile instanceof TileCompresedTorch.CompressedTileBase5) {
             updateStringConfigForTile(Config.CTorch_lvl5_M, Config.CTorch_lvl5_R, Config.CTorch_lvl5_S);
+        } else if (tile instanceof TileDCompresedTorch.DCompressedTileBase1) {
+            updateStringConfigForTile(Config.DTorch_lvl1_M, Config.DTorch_lvl1_R, Config.DTorch_lvl1_S);
+        } else if (tile instanceof TileDCompresedTorch.DCompressedTileBase2) {
+            updateStringConfigForTile(Config.DTorch_lvl2_M, Config.DTorch_lvl2_R, Config.DTorch_lvl2_S);
+        } else if (tile instanceof TileDCompresedTorch.DCompressedTileBase3) {
+            updateStringConfigForTile(Config.DTorch_lvl3_M, Config.DTorch_lvl3_R, Config.DTorch_lvl3_S);
+        } else if (tile instanceof TileDCompresedTorch.DCompressedTileBase4) {
+            updateStringConfigForTile(Config.DTorch_lvl4_M, Config.DTorch_lvl4_R, Config.DTorch_lvl4_S);
+        } else if (tile instanceof TileDCompresedTorch.DCompressedTileBase5) {
+            updateStringConfigForTile(Config.DTorch_lvl5_M, Config.DTorch_lvl5_R, Config.DTorch_lvl5_S);
         }
     }
     private void updateStringConfigForTile(int mode, int area, int speedModifier) {

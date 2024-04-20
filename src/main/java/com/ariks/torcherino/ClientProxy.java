@@ -1,9 +1,13 @@
 package com.ariks.torcherino;
 
-import com.ariks.torcherino.GUI.GuiCollector;
+import com.ariks.torcherino.GUI.GuiAceleration;
+import com.ariks.torcherino.GUI.GuiCollectors;
+import com.ariks.torcherino.GUI.GuiTimeStorage;
 import com.ariks.torcherino.GUI.GuiTorcherino;
 import com.ariks.torcherino.Render.TileTorcherinoBaseRender;
-import com.ariks.torcherino.Tiles.TileCollector;
+import com.ariks.torcherino.Tiles.TileAcceleration;
+import com.ariks.torcherino.Tiles.TileCollectors;
+import com.ariks.torcherino.Tiles.TileTimeStorage;
 import com.ariks.torcherino.Tiles.TileTorcherinoBase;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -33,8 +37,18 @@ public class ClientProxy extends CommonProxy {
 			Minecraft.getMinecraft().displayGuiScreen(gui);
 			return true;
 		}
-		if (tile instanceof TileCollector) {
-			GuiCollector gui = new GuiCollector((TileCollector) tile,player);
+		if (tile instanceof TileAcceleration) {
+			GuiAceleration gui = new GuiAceleration((TileAcceleration) tile,player);
+			Minecraft.getMinecraft().displayGuiScreen(gui);
+			return true;
+		}
+		if (tile instanceof TileTimeStorage) {
+			GuiTimeStorage gui = new GuiTimeStorage((TileTimeStorage) tile,player);
+			Minecraft.getMinecraft().displayGuiScreen(gui);
+			return true;
+		}
+		if (tile instanceof TileCollectors) {
+			GuiCollectors gui = new GuiCollectors((TileCollectors) tile,player);
 			Minecraft.getMinecraft().displayGuiScreen(gui);
 			return true;
 		}

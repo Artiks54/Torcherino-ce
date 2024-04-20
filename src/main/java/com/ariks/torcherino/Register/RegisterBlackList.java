@@ -1,6 +1,5 @@
 package com.ariks.torcherino.Register;
-import com.ariks.torcherino.Tiles.TileCollector;
-import com.ariks.torcherino.Tiles.TileCompresedTorch;
+import com.ariks.torcherino.Tiles.*;
 import net.minecraft.init.Blocks;
 import static com.ariks.torcherino.Tiles.TileTorch.*;
 
@@ -46,6 +45,12 @@ public class RegisterBlackList {
         AccelerationRegistry.blacklistBlock(RegistryArray.Compressed_Torch_lvl3);
         AccelerationRegistry.blacklistBlock(RegistryArray.Compressed_Torch_lvl4);
         AccelerationRegistry.blacklistBlock(RegistryArray.Compressed_Torch_lvl5);
+        //D-Torch
+        AccelerationRegistry.blacklistBlock(RegistryArray.D_Compressed_Torch_lvl1);
+        AccelerationRegistry.blacklistBlock(RegistryArray.D_Compressed_Torch_lvl2);
+        AccelerationRegistry.blacklistBlock(RegistryArray.D_Compressed_Torch_lvl3);
+        AccelerationRegistry.blacklistBlock(RegistryArray.D_Compressed_Torch_lvl4);
+        AccelerationRegistry.blacklistBlock(RegistryArray.D_Compressed_Torch_lvl5);
         //Tile-Torch
         AccelerationRegistry.blacklistTile(TileBase1.class);
         AccelerationRegistry.blacklistTile(TileBase2.class);
@@ -58,8 +63,20 @@ public class RegisterBlackList {
         AccelerationRegistry.blacklistTile(TileCompresedTorch.CompressedTileBase3.class);
         AccelerationRegistry.blacklistTile(TileCompresedTorch.CompressedTileBase4.class);
         AccelerationRegistry.blacklistTile(TileCompresedTorch.CompressedTileBase5.class);
-        //Tile-Collector
-        AccelerationRegistry.blacklistTile(TileCollector.class);
-        AccelerationRegistry.blacklistBlock(RegistryArray.Time_Collector);
+        //Tile-D-Torch
+        AccelerationRegistry.blacklistTile(TileDCompresedTorch.DCompressedTileBase1.class);
+        AccelerationRegistry.blacklistTile(TileDCompresedTorch.DCompressedTileBase2.class);
+        AccelerationRegistry.blacklistTile(TileDCompresedTorch.DCompressedTileBase3.class);
+        AccelerationRegistry.blacklistTile(TileDCompresedTorch.DCompressedTileBase4.class);
+        AccelerationRegistry.blacklistTile(TileDCompresedTorch.DCompressedTileBase5.class);
+        //Tile-Acceleration
+        AccelerationRegistry.blacklistTile(TileAcceleration.class);
+        AccelerationRegistry.blacklistBlock(RegistryArray.Time_Acceleration);
+        //Tile-Collectors
+        AccelerationRegistry.blacklistTile(TileCollectors.class);
+        AccelerationRegistry.blacklistBlock(RegistryArray.Time_collectors);
+        //Tile-Storage
+        AccelerationRegistry.blacklistTile(TileTimeStorage.class);
+        AccelerationRegistry.blacklistBlock(RegistryArray.Time_Storage);
     }
 }

@@ -1,9 +1,6 @@
 package com.ariks.torcherino.integration.TheOneProbeTopAddons;
 
-import com.ariks.torcherino.Tiles.TileCollector;
-import com.ariks.torcherino.Tiles.TileCompresedTorch;
-import com.ariks.torcherino.Tiles.TileTorch;
-import com.ariks.torcherino.Tiles.TileTorcherinoBase;
+import com.ariks.torcherino.Tiles.*;
 import com.ariks.torcherino.Torcherino;
 import com.ariks.torcherino.util.Config;
 import io.github.drmanganese.topaddons.addons.AddonBlank;
@@ -24,38 +21,50 @@ public class addonTorcherino extends AddonBlank {
     public void addProbeInfo(final ProbeMode probeMode, final IProbeInfo probeInfo, final EntityPlayer entityPlayer, final World world, final IBlockState iBlockState, final IProbeHitData data) {
         TileEntity tile = world.getTileEntity(data.getPos());
         if(Config.BooleanTOP) {
-            if (tile instanceof TileCollector) {
-                TileCollector tileCollector = (TileCollector) tile;
-                if (tileCollector.BooleanWork) {
-                    probeInfo.text(TextFormatting.GREEN + "Work:" + "true");
-                } else {
-                    probeInfo.text(TextFormatting.RED + "Work:" + "false");
-                }
-                probeInfo.text(TextFormatting.YELLOW + "Time: "+tileCollector.TimeCollect);
-            }
-        }
-        if (Config.BooleanTOP) {
-            if (tile instanceof TileTorcherinoBase) {
-                TileTorcherinoBase torch = (TileTorcherinoBase) tile;
-                if (torch.booleanWork) {
+            if (tile instanceof TileAcceleration) {
+                TileAcceleration TileAcceleration = (TileAcceleration) tile;
+                if (TileAcceleration.BooleanWork) {
                     probeInfo.text(TextFormatting.GREEN + "Work: " + "true");
                 } else {
                     probeInfo.text(TextFormatting.RED + "Work: " + "false");
                 }
-                if (torch.radius >= 1) {
-                    probeInfo.text(TextFormatting.GREEN + "Radius: " + torch.radius + "x" + torch.radius + "x" + torch.radius);
+                probeInfo.text(TextFormatting.YELLOW + "Time: "+TileAcceleration.TimeCollect);
+            }
+        }
+        if(Config.BooleanTOP) {
+            if (tile instanceof TileTimeStorage) {
+                TileTimeStorage tileTimeStorage = (TileTimeStorage) tile;
+                probeInfo.text(TextFormatting.GREEN + "Time: " + tileTimeStorage.TimeStorage);
+            }
+        }
+        if(Config.BooleanTOP) {
+            if (tile instanceof TileCollectors) {
+                TileCollectors TileCollectors = (TileCollectors) tile;
+                probeInfo.text(TextFormatting.GREEN + "Time: " + TileCollectors.TimeCollect);
+            }
+        }
+        if (Config.BooleanTOP) {
+            if (tile instanceof TileTorcherinoBase) {
+                TileTorcherinoBase TileTorcherinoBase = (TileTorcherinoBase) tile;
+                if (TileTorcherinoBase.booleanWork) {
+                    probeInfo.text(TextFormatting.GREEN + "Work: " + "true");
                 } else {
-                    probeInfo.text(TextFormatting.RED + "Radius: " + torch.radius + "x" + torch.radius + "x" + torch.radius);
+                    probeInfo.text(TextFormatting.RED + "Work: " + "false");
                 }
-                if (torch.speed >= 1) {
-                    probeInfo.text(TextFormatting.GREEN + "Speed: " + torch.speed * SpeedModifers * 100 + "%");
+                if (TileTorcherinoBase.radius >= 1) {
+                    probeInfo.text(TextFormatting.GREEN + "Radius: " + TileTorcherinoBase.radius + "x" + TileTorcherinoBase.radius + "x" + TileTorcherinoBase.radius);
+                } else {
+                    probeInfo.text(TextFormatting.RED + "Radius: " + TileTorcherinoBase.radius + "x" + TileTorcherinoBase.radius + "x" + TileTorcherinoBase.radius);
+                }
+                if (TileTorcherinoBase.speed >= 1) {
+                    probeInfo.text(TextFormatting.GREEN + "Speed: " + TileTorcherinoBase.speed * SpeedModifers * 100 + "%");
                 } else {
                     probeInfo.text(TextFormatting.RED + "Speed: " + "0%");
                 }
-                if (torch.booleanRender && Config.BooleanRender) {
+                if (TileTorcherinoBase.booleanRender && Config.BooleanRender) {
                     probeInfo.text(TextFormatting.GREEN + "Visualization: " + "true");
                 }
-                if (!torch.booleanRender && Config.BooleanRender) {
+                if (!TileTorcherinoBase.booleanRender && Config.BooleanRender) {
                     probeInfo.text(TextFormatting.RED + "Visualization: " + "false");
                 }
                 }
@@ -79,6 +88,16 @@ public class addonTorcherino extends AddonBlank {
                     SpeedModifers = Config.CTorch_lvl4_S;
                 } else if (tile instanceof TileCompresedTorch.CompressedTileBase5) {
                     SpeedModifers = Config.CTorch_lvl5_S;
+                } else if (tile instanceof TileDCompresedTorch.DCompressedTileBase1) {
+                    SpeedModifers = Config.DTorch_lvl1_S;
+                } else if (tile instanceof TileDCompresedTorch.DCompressedTileBase2) {
+                    SpeedModifers = Config.DTorch_lvl2_S;
+                } else if (tile instanceof TileDCompresedTorch.DCompressedTileBase3) {
+                    SpeedModifers = Config.DTorch_lvl3_S;
+                } else if (tile instanceof TileDCompresedTorch.DCompressedTileBase4) {
+                    SpeedModifers = Config.DTorch_lvl4_S;
+                } else if (tile instanceof TileDCompresedTorch.DCompressedTileBase5) {
+                    SpeedModifers = Config.DTorch_lvl5_S;
                 }
             }
     }

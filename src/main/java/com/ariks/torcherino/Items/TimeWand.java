@@ -1,6 +1,7 @@
 package com.ariks.torcherino.Items;
 
 import com.ariks.torcherino.Register.AccelerationRegistry;
+import com.ariks.torcherino.Register.RegistryArray;
 import com.ariks.torcherino.Tiles.TileTorcherinoBase;
 import com.ariks.torcherino.util.Config;
 import com.ariks.torcherino.util.LocalizedStringKey;
@@ -57,24 +58,31 @@ public abstract class TimeWand extends itemBase {
                         break;
                     }
                 }
-                if(Config.BooleanParcWand){
+                if (Config.BooleanParcWand) {
                     ((WorldServer) worldIn).spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5, 1, 0.15, 0.15, 0.15, 0.02);
                 }
-                stack.damageItem(1,player);
+                if (stack.getItem() != RegistryArray.Time_Wand_lvl6) {
+                    stack.damageItem(1, player);
+                }
             }
         return EnumActionResult.SUCCESS;
     }
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, @NotNull ITooltipFlag flagIn) {
-        int durability = stack.getMaxDamage() - stack.getItemDamage();
-        LocalizedStringKey LS = new LocalizedStringKey();
-        tooltip.add(TextFormatting.GRAY + LS.Str_Time_Wand_Tooltip);
-        tooltip.add(TextFormatting.GRAY + LS.StrWandInfoItem+" " + durability);
-        super.addInformation(stack, worldIn, tooltip, flagIn);
+            int durability = stack.getMaxDamage() - stack.getItemDamage();
+            LocalizedStringKey LS = new LocalizedStringKey();
+            tooltip.add(TextFormatting.GRAY + LS.Str_Time_Wand_Tooltip);
+            if (stack.getItem() != RegistryArray.Time_Wand_lvl6) {
+            tooltip.add(TextFormatting.GRAY + LS.StrWandInfoItem + " " + durability);
+            super.addInformation(stack, worldIn, tooltip, flagIn);
+        }
     }
     @Override
     public boolean showDurabilityBar(@NotNull ItemStack stack) {
-        return stack.isItemDamaged();
+        if (stack.getItem() != RegistryArray.Time_Wand_lvl6) {
+            return stack.isItemDamaged();
+        }
+        return false;
     }
 }

@@ -1,0 +1,15 @@
+{
+	"result": {
+		"item": "tce:tce_d_compressed_torch_lvl5"
+	},
+	"pattern" : [
+		"TTT",
+		"TAT",
+		"TTT"
+	],
+	"type" : "minecraft:crafting_shaped",
+	"key" : {
+		"T": {"item": "tce:tce_compressed_torch_lvl5"},
+		"A": {"item": "tce:tce_bindingelement3"}
+	}
+}   

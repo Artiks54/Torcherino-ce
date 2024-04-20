@@ -3,7 +3,7 @@ package com.ariks.torcherino.Tiles;
 import com.ariks.torcherino.Register.AccelerationRegistry;
 import com.ariks.torcherino.Torcherino;
 import com.ariks.torcherino.network.ModPacketHandler;
-import com.ariks.torcherino.network.UpdateGuiCollectorPacket;
+import com.ariks.torcherino.network.UpdateGuiAcelerationPacket;
 import com.ariks.torcherino.util.Config;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -21,56 +21,44 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import org.jetbrains.annotations.NotNull;
 import java.util.Random;
 
-public class TileCollector extends TileEntity implements ITickable {
+public class TileAcceleration extends TileEntity implements ITickable {
     protected NetworkRegistry.TargetPoint packetTargetPoint;
     public boolean BooleanWork;
-    public boolean OpenGuiCollector;
+    public boolean OpenGuiAceleration;
     private boolean OldBooleanWork;
     private int CooldownDecr;
     private int OldTimeCollect;
-    public final int speed = Config.CollectorSpeed;
-    public final int AreaModifier = Config.CollectorRadius;
-    private int CooldownIncr = Config.CollectorTimeCooldownConfig;
-    public int TimeCollect = Config.CollectorTimeCollectConfig;
+    public final int speed = Config.AccelerationSpeed;
+    public final int AreaModifier = Config.AccelerationRadius;
+    public int TimeCollect = Config.AccelerationTimeCollectConfig;
     private final Random rand = new Random();
     protected int speedBase(int base) {
         return base;
     }
-
     @Override
     public void update() {
         if (world.isRemote) return;
-        if (OpenGuiCollector) {
+        if (OpenGuiAceleration) {
             updateGui();
         }
-        if (!BooleanWork) {
-            if (TimeCollect < Integer.MAX_VALUE) {
-                CooldownIncr++;
-                if (CooldownIncr >= 19) {
-                    CooldownIncr = 0;
-                    TimeCollect++;
-                }
+        if (BooleanWork && TimeCollect > 0) {
+            CooldownDecr++;
+            UpdateTickArea();
+            if (CooldownDecr >= 19) {
+                TimeCollect--;
+                CooldownDecr = 0;
+                WorkVisual();
             }
         } else {
-            if (TimeCollect > 1) {
-                CooldownDecr++;
-                UpdateTickArea();
-                if (CooldownDecr >= 19) {
-                    TimeCollect--;
-                    CooldownDecr = 0;
-                    WorkVisual();
-                }
-            } else {
-                BooleanWork = false;
-            }
+            BooleanWork = false;
         }
     }
     public void updateGui() {
         if (shouldSendGuiUpdatePacket()) {
             updateOldValues();
-            ModPacketHandler.network.sendToAllTracking(new UpdateGuiCollectorPacket(pos, BooleanWork, TimeCollect), packetTargetPoint);
+            ModPacketHandler.network.sendToAllTracking(new UpdateGuiAcelerationPacket(pos, BooleanWork, TimeCollect), packetTargetPoint);
             if (Config.DebugMod) {
-                Torcherino.logger.debug("Send Packet update GUI Tile Collector");
+                Torcherino.logger.debug("Send Packet update GUI Tile Acceleration");
             }
         }
     }
@@ -139,24 +127,20 @@ public class TileCollector extends TileEntity implements ITickable {
         BooleanWork = !BooleanWork;
     }
     @Override
-    public @NotNull NBTTagCompound writeToNBT(NBTTagCompound compound) {
-        compound.setInteger("TimeCollect", TimeCollect);
-        compound.setInteger("OldTimeCollect", OldTimeCollect);
-        compound.setInteger("CooldownIncr", CooldownIncr);
-        compound.setInteger("CooldownDecr", CooldownDecr);
-        compound.setBoolean("BooleanWork", BooleanWork);
-        compound.setBoolean("OldBooleanWork", OldBooleanWork);
-        return super.writeToNBT(compound);
+    public @NotNull NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+        nbt.setInteger("TimeCollect", TimeCollect);
+        nbt.setInteger("OldTimeCollect", OldTimeCollect);
+        nbt.setBoolean("BooleanWork", BooleanWork);
+        nbt.setBoolean("OldBooleanWork", OldBooleanWork);
+        return super.writeToNBT(nbt);
     }
     @Override
-    public void readFromNBT(NBTTagCompound compound) {
-        this.TimeCollect = compound.getInteger("TimeCollect");
-        this.OldTimeCollect = compound.getInteger("OldTimeCollect");
-        this.TimeCollect = compound.getInteger("CooldownIncr");
-        this.TimeCollect = compound.getInteger("CooldownDecr");
-        this.BooleanWork = compound.getBoolean("BooleanWork");
-        this.OldBooleanWork = compound.getBoolean("OldBooleanWork");
-        super.readFromNBT(compound);
+    public void readFromNBT(NBTTagCompound nbt) {
+        this.TimeCollect = nbt.getInteger("TimeCollect");
+        this.OldTimeCollect = nbt.getInteger("OldTimeCollect");
+        this.BooleanWork = nbt.getBoolean("BooleanWork");
+        this.OldBooleanWork = nbt.getBoolean("OldBooleanWork");
+        super.readFromNBT(nbt);
     }
     @Override
     public @NotNull SPacketUpdateTileEntity getUpdatePacket() {

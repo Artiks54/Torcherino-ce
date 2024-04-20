@@ -1,6 +1,7 @@
 package com.ariks.torcherino.Render;
 
 import com.ariks.torcherino.Tiles.TileCompresedTorch;
+import com.ariks.torcherino.Tiles.TileDCompresedTorch;
 import com.ariks.torcherino.Tiles.TileTorch;
 import com.ariks.torcherino.Tiles.TileTorcherinoBase;
 import com.ariks.torcherino.util.Config;
@@ -26,23 +27,23 @@ public class TileTorcherinoBaseRender extends TileEntitySpecialRenderer<TileTorc
                 GlStateManager.disableCull();
                 if (Config.BooleanRenderLine) {
                     int r, g, b;
-                    if (tile instanceof TileTorch.TileBase1 || tile instanceof TileCompresedTorch.CompressedTileBase1) {
+                    if (tile instanceof TileTorch.TileBase1 || tile instanceof TileCompresedTorch.CompressedTileBase1 || tile instanceof TileDCompresedTorch.DCompressedTileBase1) {
                         r = Config.Torch_Color_lvl1_R;
                         g = Config.Torch_Color_lvl1_G;
                         b = Config.Torch_Color_lvl1_B;
-                    } else if (tile instanceof TileTorch.TileBase2 || tile instanceof TileCompresedTorch.CompressedTileBase2) {
+                    } else if (tile instanceof TileTorch.TileBase2 || tile instanceof TileCompresedTorch.CompressedTileBase2 || tile instanceof TileDCompresedTorch.DCompressedTileBase2) {
                         r = Config.Torch_Color_lvl2_R;
                         g = Config.Torch_Color_lvl2_G;
                         b = Config.Torch_Color_lvl2_B;
-                    } else if (tile instanceof TileTorch.TileBase3 || tile instanceof TileCompresedTorch.CompressedTileBase3) {
+                    } else if (tile instanceof TileTorch.TileBase3 || tile instanceof TileCompresedTorch.CompressedTileBase3 || tile instanceof TileDCompresedTorch.DCompressedTileBase3) {
                         r = Config.Torch_Color_lvl3_R;
                         g = Config.Torch_Color_lvl3_G;
                         b = Config.Torch_Color_lvl3_B;
-                    } else if (tile instanceof TileTorch.TileBase4 || tile instanceof TileCompresedTorch.CompressedTileBase4) {
+                    } else if (tile instanceof TileTorch.TileBase4 || tile instanceof TileCompresedTorch.CompressedTileBase4 || tile instanceof TileDCompresedTorch.DCompressedTileBase4) {
                         r = Config.Torch_Color_lvl4_R;
                         g = Config.Torch_Color_lvl4_G;
                         b = Config.Torch_Color_lvl4_B;
-                    } else if (tile instanceof TileTorch.TileBase5 || tile instanceof TileCompresedTorch.CompressedTileBase5) {
+                    } else if (tile instanceof TileTorch.TileBase5 || tile instanceof TileCompresedTorch.CompressedTileBase5 || tile instanceof TileDCompresedTorch.DCompressedTileBase5) {
                         r = Config.Torch_Color_lvl5_R;
                         g = Config.Torch_Color_lvl5_G;
                         b = Config.Torch_Color_lvl5_B;

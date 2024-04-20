@@ -9,14 +9,23 @@ public class LocalizedStringKey {
      public String ButtonStrRender = I18n.format(modid+"gui.button.StrRender");
      public String StrOn = I18n.format(modid+"gui.button.StrOn");
      public String StrOff = I18n.format(modid+"gui.button.StrOff");
-     public String Info = I18n.format(modid+"gui.info.text");
-     public String InfoCollector = I18n.format(modid+"gui.info.text.collector");
-     public String TimeCollector = I18n.format(modid+"gui.info.time.collector");
      public String StrModes = I18n.format(modid+"gui.info.modes");
      public String StrArea = I18n.format(modid+"gui.info.area");
+     public String Info = I18n.format(modid+"gui.info.text");
+     //Time Storage Tile
+     public String TimeCollected = I18n.format(modid+"gui.info.time.collected");
+     public String InfoTimeStorage = I18n.format(modid+"gui.info.text.storage");
+     //Aceleration Tile
      public String StrAceleration = I18n.format(modid+"gui.info.aceleration");
-     public String StrCollectorInfoItem = I18n.format(modid+"item.collector.info");
-     public String StrWandInfoItem = I18n.format(modid+"item.wand.info");
+     public String StrAcelerationInfoItem = I18n.format(modid+"item.aceleration.info");
+     public String StrGuiAceleration = I18n.format(modid+"gui.info.text.aceleration");
+     //Collector Tile
+     public String StrCollectorsInfoItem = I18n.format(modid+"item.collectors.info");
+     public String StrCollectorsGuiInfo = I18n.format(modid+"gui.info.text.collectors");
+     //Item storage
      public String Str_Time_Storage_Tooltip = I18n.format(modid+"item.tooltip.time_storage");
+     public String StrStorageInfoItem = I18n.format(modid+"item.storage.info");
+     //Item Wand
+     public String StrWandInfoItem = I18n.format(modid+"item.wand.info");
      public String Str_Time_Wand_Tooltip = I18n.format(modid+"item.tooltip.time_wand");
 }

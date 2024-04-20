@@ -1,0 +1,20 @@
+{
+	"result": {
+		"item": "tce:tce_time_core"
+	},
+	"pattern" : [
+		"BSB",
+		"CEC",
+		"LDA"
+	],
+	"type" : "minecraft:crafting_shaped",
+	"key" : {
+		"B": {"item": "tce:tce_bindingelement"},
+		"S": {"item": "tce:tce_time_storage"},
+		"C": {"item": "tce:tce_time_casing"},
+		"E": {"item": "tce:tce_time_element"},
+		"L": {"item": "tce:tce_time_collectors"},
+		"D": {"item": "tce:tce_goldclock"},
+		"A": {"item": "tce:tce_time_acceleration"}
+	}
+}   

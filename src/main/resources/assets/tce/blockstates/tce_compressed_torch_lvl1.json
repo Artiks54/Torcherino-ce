@@ -1,9 +1,9 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "tce:torch",
+    "model": "tce:torch_imp",
 	    "textures": {
-        "base": "tce:blocks/baseimp",
+        "base": "tce:blocks/base",
 		"material": "tce:blocks/lapis",
         "particle":  "tce:blocks/lapis"
         },

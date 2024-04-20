@@ -1,0 +1,18 @@
+{
+  "result": {
+    "item": "tce:tce_time_acceleration"
+  },
+  "pattern" : [
+    "CFC",
+    "ITI",
+    "CEC"
+  ],
+  "type" : "minecraft:crafting_shaped",
+  "key" : {
+    "C": {"item": "tce:tce_time_casing"},
+    "F": {"item": "tce:tce_bindingelement"},
+    "T": {"item": "tce:tce_compressedtorch"},
+    "I": {"item": "tce:tce_emeraldclock"},
+    "E": {"item": "tce:tce_time_storage"}
+  }
+}

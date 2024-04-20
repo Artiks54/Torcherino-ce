@@ -54,19 +54,15 @@ public abstract class TileTorcherinoBase extends TileEntity implements ITickable
             UpdateTickArea();
         }
     }
-    public void WorkVisual(){
-            cooldown++;
-            if (cooldown >= 19) {
-                cooldown = 0;
-                double x = pos.getX();
-                double y = pos.getY();
-                double z = pos.getZ();
+    public void WorkVisual() {
+        cooldown++;
+        if (cooldown >= 15) {
+            cooldown = 0;
+            double x = pos.getX();
+            double y = pos.getY();
+            double z = pos.getZ();
                 EnumParticleTypes parc = EnumParticleTypes.FLAME;
-                ((WorldServer) world).spawnParticle(parc, x + 0.5, y + 1.15, z + 0.5, 1, 0, 0, 0, 0, new int[0]);
-                ((WorldServer) world).spawnParticle(parc, x + 0.5, y + 0.85, z, 1, 0, 0, 0, 0, new int[0]);
-                ((WorldServer) world).spawnParticle(parc, x + 1, y + 0.85, z + 0.5, 1, 0, 0, 0, 0, new int[0]);
-                ((WorldServer) world).spawnParticle(parc, x, y + 0.85, z + 0.5, 1, 0, 0, 0, 0, new int[0]);
-                ((WorldServer) world).spawnParticle(parc, x + 0.5, y + 0.85, z + 1, 1, 0, 0, 0, 0, new int[0]);
+                ((WorldServer) world).spawnParticle(parc, x + 0.5, y + 1.2, z + 0.5, 1, 0, 0, 0, 0, new int[0]);
         }
     }
     public void updateGui() {
@@ -144,30 +140,28 @@ public abstract class TileTorcherinoBase extends TileEntity implements ITickable
     public void toggleArea(boolean increase){radius = (byte) ((radius + (increase ? 1 : -1) + Radius()) % Radius());}
     public void toggleWork() {booleanWork = !booleanWork;}
     public void toggleRender() {booleanRender = !booleanRender;}
-    public @NotNull NBTTagCompound writeToNBT(NBTTagCompound tagCompound) {
-        tagCompound.setBoolean("work", this.booleanWork);
-        tagCompound.setBoolean("render", this.booleanRender);
-        tagCompound.setInteger("speed", this.speed);
-        tagCompound.setInteger("currentmode", this.radius);
-        tagCompound.setBoolean("oldWork", this.oldBooleanWork);
-        tagCompound.setBoolean("oldRender", this.oldBooleanRender);
-        tagCompound.setInteger("oldSpeed", this.oldSpeed);
-        tagCompound.setInteger("oldCurrentmode", this.oldRadius);
-        tagCompound.setInteger("cooldown",this.cooldown);
-        return super.writeToNBT(tagCompound);
+    public @NotNull NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+        nbt.setBoolean("work", this.booleanWork);
+        nbt.setBoolean("render", this.booleanRender);
+        nbt.setInteger("speed", this.speed);
+        nbt.setInteger("currentmode", this.radius);
+        nbt.setBoolean("oldWork", this.oldBooleanWork);
+        nbt.setBoolean("oldRender", this.oldBooleanRender);
+        nbt.setInteger("oldSpeed", this.oldSpeed);
+        nbt.setInteger("oldCurrentmode", this.oldRadius);
+        return super.writeToNBT(nbt);
     }
     @Override
-    public void readFromNBT(NBTTagCompound tagCompound) {
-        this.booleanWork = tagCompound.getBoolean("work");
-        this.booleanRender = tagCompound.getBoolean("render");
-        this.speed = tagCompound.getInteger("speed");
-        this.radius = tagCompound.getInteger("currentmode");
-        this.oldBooleanWork = tagCompound.getBoolean("oldWork");
-        this.oldBooleanRender = tagCompound.getBoolean("oldRender");
-        this.oldSpeed = tagCompound.getInteger("oldSpeed");
-        this.oldRadius = tagCompound.getInteger("oldCurrentmode");
-        this.cooldown = tagCompound.getInteger("cooldown");
-        super.readFromNBT(tagCompound);
+    public void readFromNBT(NBTTagCompound nbt) {
+        this.booleanWork = nbt.getBoolean("work");
+        this.booleanRender = nbt.getBoolean("render");
+        this.speed = nbt.getInteger("speed");
+        this.radius = nbt.getInteger("currentmode");
+        this.oldBooleanWork = nbt.getBoolean("oldWork");
+        this.oldBooleanRender = nbt.getBoolean("oldRender");
+        this.oldSpeed = nbt.getInteger("oldSpeed");
+        this.oldRadius = nbt.getInteger("oldCurrentmode");
+        super.readFromNBT(nbt);
     }
     @Override
     public SPacketUpdateTileEntity getUpdatePacket() {

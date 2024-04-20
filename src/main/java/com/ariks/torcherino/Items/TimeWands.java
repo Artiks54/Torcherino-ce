@@ -69,5 +69,17 @@ public abstract class TimeWands {
             return 4096;
         }
     }
-
+    public static final class TimeWand_lvl_6 extends TimeWand {
+        public TimeWand_lvl_6(String name) {
+            super(name);
+        }
+        @Override
+        protected int SpeedWand() {
+            return Config.SpeedWand_lvl6;
+        }
+        @Override
+        protected int DurabilityWand() {
+            return 1;
+        }
+    }
 }

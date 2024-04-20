@@ -11,9 +11,10 @@ public class ModPacketHandler {
         network = NetworkRegistry.INSTANCE.newSimpleChannel(Torcherino.MOD_ID);
         //Server
         network.registerMessage(UpdateTilePacket.Handler.class, UpdateTilePacket.class, 1, Side.SERVER);
-        network.registerMessage(UpdateTilePacketCollector.Handler.class, UpdateTilePacketCollector.class, 2, Side.SERVER);
         //Client
-        network.registerMessage(UpdateGuiPacket.Handler.class, UpdateGuiPacket.class, 3, Side.CLIENT);
-        network.registerMessage(UpdateGuiCollectorPacket.Handler.class, UpdateGuiCollectorPacket.class, 4, Side.CLIENT);
+        network.registerMessage(UpdateGuiPacket.Handler.class, UpdateGuiPacket.class, 2, Side.CLIENT);
+        network.registerMessage(UpdateGuiAcelerationPacket.Handler.class, UpdateGuiAcelerationPacket.class, 3, Side.CLIENT);
+        network.registerMessage(UpdateGuiStoragePacket.Handler.class, UpdateGuiStoragePacket.class, 4, Side.CLIENT);
+        network.registerMessage(UpdateGuiCollectorsPacket.Handler.class, UpdateGuiCollectorsPacket.class, 5, Side.CLIENT);
     }
 }

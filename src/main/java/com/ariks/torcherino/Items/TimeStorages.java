@@ -9,7 +9,7 @@ public abstract class TimeStorages {
             super(name);
         }
         @Override
-        protected int MaxConfigStorageTime() {
+        protected int MaxConfigStorageTimeItem() {
             return Config.Stored_Time_Bottle_Lvl_1;
         }
     }
@@ -18,7 +18,7 @@ public abstract class TimeStorages {
             super(name);
         }
         @Override
-        protected int MaxConfigStorageTime() {
+        protected int MaxConfigStorageTimeItem() {
             return Config.Stored_Time_Bottle_Lvl_2;
         }
     }
@@ -27,7 +27,7 @@ public abstract class TimeStorages {
             super(name);
         }
         @Override
-        protected int MaxConfigStorageTime() {
+        protected int MaxConfigStorageTimeItem() {
             return Config.Stored_Time_Bottle_Lvl_3;
         }
     }
@@ -36,7 +36,7 @@ public abstract class TimeStorages {
             super(name);
         }
         @Override
-        protected int MaxConfigStorageTime() {
+        protected int MaxConfigStorageTimeItem() {
             return Config.Stored_Time_Bottle_Lvl_4;
         }
     }
@@ -45,7 +45,7 @@ public abstract class TimeStorages {
             super(name);
         }
         @Override
-        protected int MaxConfigStorageTime() {
+        protected int MaxConfigStorageTimeItem() {
             return Config.Stored_Time_Bottle_Lvl_5;
         }
     }
@@ -54,7 +54,7 @@ public abstract class TimeStorages {
             super(name);
         }
         @Override
-        protected int MaxConfigStorageTime() {
+        protected int MaxConfigStorageTimeItem() {
             return Config.Stored_Time_Bottle_infinite;
         }
     }

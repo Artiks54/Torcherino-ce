@@ -1,5 +1,8 @@
 package com.ariks.torcherino.network;
 
+import com.ariks.torcherino.Tiles.TileAcceleration;
+import com.ariks.torcherino.Tiles.TileCollectors;
+import com.ariks.torcherino.Tiles.TileTimeStorage;
 import com.ariks.torcherino.Tiles.TileTorcherinoBase;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.tileentity.TileEntity;
@@ -46,6 +49,31 @@ public class UpdateTilePacket implements IMessage {
                             case 4: torcherinoTile.toggleArea(true);break;
                             case 5: torcherinoTile.toggleArea(false);break;
                             case 6: torcherinoTile.toggleRender();break;
+                        }
+                    }
+                    if (tile instanceof TileAcceleration) {
+                        int receivedValue = message.value;
+                        TileAcceleration TileAcceleration = (TileAcceleration) tile;
+                        switch (receivedValue) {
+                            case 1: TileAcceleration.toggleWork();break;
+                            case 2: TileAcceleration.OpenGuiAceleration = true;break;
+                            case 3: TileAcceleration.OpenGuiAceleration = false;break;
+                        }
+                    }
+                    if (tile instanceof TileTimeStorage) {
+                        int receivedValue = message.value;
+                        TileTimeStorage TileTimeStorage = (TileTimeStorage) tile;
+                        switch (receivedValue) {
+                            case 1: TileTimeStorage.OpenGuiStorage = true;break;
+                            case 2: TileTimeStorage.OpenGuiStorage = false;break;
+                        }
+                    }
+                    if (tile instanceof TileCollectors) {
+                        int receivedValue = message.value;
+                        TileCollectors TileCollectors = (TileCollectors) tile;
+                        switch (receivedValue) {
+                            case 1: TileCollectors.OpenGuiCollectors = true;break;
+                            case 2: TileCollectors.OpenGuiCollectors = false;break;
                         }
                     }
                 }
