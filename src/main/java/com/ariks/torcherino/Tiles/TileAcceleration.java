@@ -30,7 +30,7 @@ public class TileAcceleration extends TileEntity implements ITickable {
     private int OldTimeCollect;
     public final int speed = Config.AccelerationSpeed;
     public final int AreaModifier = Config.AccelerationRadius;
-    public int TimeCollect = Config.AccelerationTimeCollectConfig;
+    public int TimeCollect;
     private final Random rand = new Random();
     protected int speedBase(int base) {
         return base;

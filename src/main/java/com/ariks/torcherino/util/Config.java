@@ -38,7 +38,7 @@ public class Config {
             DTorch_lvl1_S, DTorch_lvl1_M, DTorch_lvl1_R, DTorch_lvl2_S, DTorch_lvl2_M, DTorch_lvl2_R,
             DTorch_lvl3_S, DTorch_lvl3_M, DTorch_lvl3_R, DTorch_lvl4_S, DTorch_lvl4_M, DTorch_lvl4_R,
             DTorch_lvl5_S, DTorch_lvl5_M, DTorch_lvl5_R;
-    public static int AccelerationSpeed,AccelerationRadius,AccelerationTimeCollectConfig;
+    public static int AccelerationSpeed,AccelerationRadius;
     public static int TimeStorageMaxTime;
     public static int MaxStorageTimeCollectors,RequiredTimeCollectors;
     public static int Stored_Time_Bottle_Lvl_1,Stored_Time_Bottle_Lvl_2,Stored_Time_Bottle_Lvl_3,Stored_Time_Bottle_Lvl_4,Stored_Time_Bottle_Lvl_5,Stored_Time_Bottle_infinite;
@@ -111,7 +111,6 @@ public class Config {
             TileName = "Tile_Time_Acceleration";
             AccelerationSpeed = config.getInt("Speed",TileName,3,1, Short.MAX_VALUE,TextS);
             AccelerationRadius = config.getInt("Area",TileName,3,1,Short.MAX_VALUE,TextR);
-            AccelerationTimeCollectConfig = config.getInt("Time",TileName,0,1,Integer.MAX_VALUE,"Initial accumulated time");
             //Torch_lvl_1
             TileName = "Torcherino_lvl_1";
             Torch_lvl1_S = config.getInt("Speed",TileName,1,1, Short.MAX_VALUE,TextS);
