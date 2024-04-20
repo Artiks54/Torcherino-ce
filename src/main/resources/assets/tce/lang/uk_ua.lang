@@ -1,0 +1,71 @@
+//Localized by artiks4471
+
+itemGroup.torcherinoTab=Torcherino CE
+
+tce_gui.button.StrWork=Працює:
+tce_gui.button.StrRender=Візуалізація:
+tce_gui.button.StrOn=ввімкнено
+tce_gui.button.StrOff=вимкнено
+tce_gui.info.text=Інформація: Клацніть лівою кнопкою миші для збільшення радіусу або швидкості, лівою кнопкою миші + Shift для зменшення.
+tce_gui.info.modes=Кількість режимів швидкості:
+tce_gui.info.area=Максимальний радіус:
+tce_gui.info.aceleration=Прискорення:
+tce_gui.info.time.collected=Час у секундах
+tce_gui.info.text.aceleration=Коли ввімкнено, витрачається накопичений час для прискорення, якщо час вичерпано, він автоматично вимикається
+tce_gui.info.text.storage=Зберігання часу
+tce_gui.info.text.collectors=Пасивно накопичує час
+
+tce_item.wand.info=Витривалість:
+tce_item.storage.info=Використовується для зберігання часу
+tce_item.aceleration.info=Використовує час для прискорення
+tce_item.tooltip.time_storage=Shift + Пріць правою кнопкою миші для витягування часу, правою кнопкою миші для вставки часу
+tce_item.tooltip.time_wand=Shift + Пріць правою кнопкою миші для прискорення
+tce_item.collectors.info=Накопичує час
+
+item.tce_time_wand_lvl1.name=§9Стів Часу рівень 1
+item.tce_time_wand_lvl2.name=§aСтів Часу рівень 2
+item.tce_time_wand_lvl3.name=§cСтів Часу рівень 3
+item.tce_time_wand_lvl4.name=§6Стів Часу рівень 4
+item.tce_time_wand_lvl5.name=§bСтів Часу рівень 5
+item.tce_time_wand_lvl6.name=§5Нескінченний стів часу
+item.tce_time_storage_lvl1.name=§9Зберігання часу рівень 1
+item.tce_time_storage_lvl2.name=§aЗберігання часу рівень 2
+item.tce_time_storage_lvl3.name=§cЗберігання часу рівень 3
+item.tce_time_storage_lvl4.name=§6Зберігання часу рівень 4
+item.tce_time_storage_lvl5.name=§bЗберігання часу рівень 5
+item.tce_time_storage_infinite.name=§5Нескінченне зберігання часу
+item.tce_diamondclock.name=§bДіамантовий годинник
+item.tce_emeraldclock.name=§aЗеленувато-зелений годинник
+item.tce_goldclock.name=§6Золотовий годинник
+item.tce_lapisclock.name=§9Лапис-лазурний годинник
+item.tce_redstoneclock.name=§cЧервоно-червоний годинник
+item.tce_dragonclock.name=§5Драконий годинник
+item.tce_compressedtorch.name=§eСтиснутий факел
+item.tce_bindingelement.name=§cЕлемент зв'язування
+item.tce_bindingelement2.name=§aПокращений елемент зв'язування
+item.tce_bindingelement3.name=§5Продвинутий елемент зв'язування
+item.tce_time_element.name=Час елемент
+item.tce_time_nugget.name=Час нігет
+item.tce_time_ingot.name=Час інгот
+item.tce_time_stick.name=Час паличка
+item.tce_time_casing.name=Час оболонка
+item.tce_time_core.name=Час ядро
+
+tile.tce_torch_lvl1.name=§9Torcherino рівень 1
+tile.tce_torch_lvl2.name=§aTorcherino рівень 2
+tile.tce_torch_lvl3.name=§cTorcherino рівень 3
+tile.tce_torch_lvl4.name=§6Torcherino рівень 4
+tile.tce_torch_lvl5.name=§bTorcherino рівень 5
+tile.tce_compressed_torch_lvl1.name=§9Покращений torcherino рівень 1
+tile.tce_compressed_torch_lvl2.name=§aПокращений torcherino рівень 2
+tile.tce_compressed_torch_lvl3.name=§cПокращений torcherino рівень 3
+tile.tce_compressed_torch_lvl4.name=§6Покращений torcherino рівень 4
+tile.tce_compressed_torch_lvl5.name=§bПокращений torcherino рівень 5
+tile.tce_d_compressed_torch_lvl1.name=§9Продвинутий torcherino рівень 1
+tile.tce_d_compressed_torch_lvl2.name=§aПродвинутий torcherino рівень 2
+tile.tce_d_compressed_torch_lvl3.name=§cПродвинутий torcherino рівень 3
+tile.tce_d_compressed_torch_lvl4.name=§6Продвинутий torcherino рівень 4
+tile.tce_d_compressed_torch_lvl5.name=§bПродвинутий torcherino рівень 5
+tile.tce_time_acceleration.name=§6Прискорення часу
+tile.tce_time_storage.name=§6Зберігання часу
+tile.tce_time_collectors.name=§6Тимчасовий збірник
