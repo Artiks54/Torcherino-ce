@@ -4,25 +4,40 @@ import com.ariks.torcherino.Register.RegistryArray;
 import com.ariks.torcherino.Tiles.TileCompresedTorch;
 import com.ariks.torcherino.Tiles.TileDCompresedTorch;
 import com.ariks.torcherino.Tiles.TileTorch;
+import com.ariks.torcherino.Tiles.TileTorcherinoBase;
 import com.ariks.torcherino.util.IHasModel;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class BlockTorcherino extends ExmapleBlock implements IHasModel {
     private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.312, 0, 0.312, 0.688, 0.812, 0.688);
+
     public BlockTorcherino(String name) {
         super(name);
         this.setLightLevel(1);
     }
     @Override
     public @NotNull AxisAlignedBB getBoundingBox(@NotNull IBlockState state, @NotNull IBlockAccess source, @NotNull BlockPos pos) {
-            return BOUNDING_BOX;
+        return BOUNDING_BOX;
+    }
+    @Override
+    public boolean canConnectRedstone(@NotNull IBlockState state, @NotNull IBlockAccess world, @NotNull BlockPos pos, @Nullable EnumFacing side) {
+        return true;
+    }
+    @Override
+    public void neighborChanged(@NotNull IBlockState state, World worldIn, @NotNull BlockPos pos, @NotNull Block blockIn, @NotNull BlockPos fromPos) {
+        if(!worldIn.isRemote){
+            TileEntity tile = worldIn.getTileEntity(pos);
+            if(tile instanceof TileTorcherinoBase) ((TileTorcherinoBase) tile).setRedstoneSignal(worldIn.isBlockIndirectlyGettingPowered(pos) > 0);
+        }
     }
     @Override
     public TileEntity createTileEntity(@NotNull World world, @NotNull IBlockState state) {

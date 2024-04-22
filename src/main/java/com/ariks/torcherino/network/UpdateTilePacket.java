@@ -43,12 +43,13 @@ public class UpdateTilePacket implements IMessage {
                         int receivedValue = message.value;
                         TileTorcherinoBase torcherinoTile = (TileTorcherinoBase) tile;
                         switch (receivedValue) {
-                            case 1: torcherinoTile.toggleWork();break;
-                            case 2: torcherinoTile.toggleSpeed(true);break;
+                            case 1: torcherinoTile.toggleWorking(false);break;
+                            case 2: torcherinoTile.toggleWorking(true);break;
                             case 3: torcherinoTile.toggleSpeed(false);break;
-                            case 4: torcherinoTile.toggleArea(true);break;
+                            case 4: torcherinoTile.toggleSpeed(true);break;
                             case 5: torcherinoTile.toggleArea(false);break;
-                            case 6: torcherinoTile.toggleRender();break;
+                            case 6: torcherinoTile.toggleArea(true);break;
+                            case 7: torcherinoTile.toggleRender();break;
                         }
                     }
                     if (tile instanceof TileAcceleration) {

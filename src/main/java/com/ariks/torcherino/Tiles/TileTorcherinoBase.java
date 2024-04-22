@@ -27,10 +27,12 @@ import java.util.Random;
 public abstract class TileTorcherinoBase extends TileEntity implements ITickable {
     protected NetworkRegistry.TargetPoint packetTargetPoint;
     private final Random rand = new Random();
-    public int radius, speed, xMin, yMin, zMin, xMax, yMax, zMax;
-    public boolean booleanWork, booleanRender;
-    private int oldRadius, oldSpeed,cooldown;
-    private boolean oldBooleanWork, oldBooleanRender;
+    public int radius, speed,booleanMode, xMin, yMin, zMin, xMax, yMax, zMax;
+    public boolean booleanRender;
+    public boolean redstoneSignal;
+    private boolean redstoneMode;
+    private int oldRadius, oldSpeed,cooldown,oldBooleanMode;
+    private boolean oldBooleanRender;
     protected int Radius() {
         return 1 ;
     }
@@ -40,19 +42,26 @@ public abstract class TileTorcherinoBase extends TileEntity implements ITickable
     protected int SpeedModes() {
         return 1;
     }
+    public void setRedstoneSignal(boolean redstoneSignal) {
+        this.redstoneSignal = redstoneSignal;
+    }
     @Override
     public void update() {
-        if (world.isRemote)return;
+        if (world.isRemote) return;
         updateGui();
-        if(booleanWork && Config.BooleanVisualWork && radius != 0 && speed != 0) {
+        CheckRedstoneSignal();
+        if (redstoneMode || (booleanMode == 1 && Config.BooleanVisualWork && radius != 0 && speed != 0)) {
             WorkVisual();
         }
-        if (booleanRender || booleanWork) {
+        if (booleanRender || booleanMode == 1 || redstoneMode) {
             UpdateChangeArea();
         }
-        if (radius != 0 && speed != 0 && booleanWork) {
+        if (radius != 0 && speed != 0 && (booleanMode == 1 || redstoneMode)) {
             UpdateTickArea();
         }
+    }
+    public void CheckRedstoneSignal() {
+        redstoneMode = redstoneSignal && booleanMode == 2;
     }
     public void WorkVisual() {
         cooldown++;
@@ -68,20 +77,20 @@ public abstract class TileTorcherinoBase extends TileEntity implements ITickable
     public void updateGui() {
         if (shouldSendGuiUpdatePacket()) {
             updateOldValues();
-            ModPacketHandler.network.sendToAllTracking(new UpdateGuiPacket(pos, booleanWork, booleanRender, radius, speed), packetTargetPoint);
+            ModPacketHandler.network.sendToAllTracking(new UpdateGuiPacket(pos, booleanRender, radius, speed, booleanMode), packetTargetPoint);
             if (Config.DebugMod) {
                 Torcherino.logger.debug("Send Packet update GUI Tile Torcherino");
             }
         }
     }
     private boolean shouldSendGuiUpdatePacket() {
-        return oldBooleanWork != booleanWork || oldBooleanRender != booleanRender || oldRadius != radius || oldSpeed != speed;
+        return oldBooleanRender != booleanRender || oldRadius != radius || oldSpeed != speed || oldBooleanMode != booleanMode;
     }
     private void updateOldValues() {
-        oldBooleanWork = booleanWork;
         oldBooleanRender = booleanRender;
         oldRadius = radius;
         oldSpeed = speed;
+        oldBooleanMode = booleanMode;
     }
     private void UpdateChangeArea() {
         BlockPos minPos = pos.add(-radius, -radius, -radius);
@@ -136,31 +145,31 @@ public abstract class TileTorcherinoBase extends TileEntity implements ITickable
     public AxisAlignedBB getAABBForRender() {
         return new AxisAlignedBB(-radius, -radius, -radius, radius+1, radius+1, radius+1);
     }
+    public void toggleWorking(boolean increase){booleanMode = (byte) ((booleanMode + (increase ? 1 : -1) + 3) % 3);}
     public void toggleSpeed(boolean increase){speed = (byte) ((speed + (increase ? 1 : -1) + SpeedModes()) % SpeedModes());}
     public void toggleArea(boolean increase){radius = (byte) ((radius + (increase ? 1 : -1) + Radius()) % Radius());}
-    public void toggleWork() {booleanWork = !booleanWork;}
     public void toggleRender() {booleanRender = !booleanRender;}
     public @NotNull NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-        nbt.setBoolean("work", this.booleanWork);
         nbt.setBoolean("render", this.booleanRender);
+        nbt.setBoolean("oldRender", this.oldBooleanRender);
         nbt.setInteger("speed", this.speed);
         nbt.setInteger("currentmode", this.radius);
-        nbt.setBoolean("oldWork", this.oldBooleanWork);
-        nbt.setBoolean("oldRender", this.oldBooleanRender);
+        nbt.setInteger("BooleanMode",this.booleanMode);
         nbt.setInteger("oldSpeed", this.oldSpeed);
         nbt.setInteger("oldCurrentmode", this.oldRadius);
+        nbt.setInteger("OldBooleanMode",this.oldBooleanMode);
         return super.writeToNBT(nbt);
     }
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
-        this.booleanWork = nbt.getBoolean("work");
         this.booleanRender = nbt.getBoolean("render");
+        this.oldBooleanRender = nbt.getBoolean("oldRender");
         this.speed = nbt.getInteger("speed");
         this.radius = nbt.getInteger("currentmode");
-        this.oldBooleanWork = nbt.getBoolean("oldWork");
-        this.oldBooleanRender = nbt.getBoolean("oldRender");
+        this.booleanMode = nbt.getInteger("BooleanMode");
         this.oldSpeed = nbt.getInteger("oldSpeed");
         this.oldRadius = nbt.getInteger("oldCurrentmode");
+        this.oldBooleanMode = nbt.getInteger("OldBooleanMode");
         super.readFromNBT(nbt);
     }
     @Override

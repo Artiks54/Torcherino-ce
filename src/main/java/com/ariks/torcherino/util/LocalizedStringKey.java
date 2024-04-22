@@ -9,6 +9,8 @@ public class LocalizedStringKey {
      public String ButtonStrRender = I18n.format(modid+"gui.button.StrRender");
      public String StrOn = I18n.format(modid+"gui.button.StrOn");
      public String StrOff = I18n.format(modid+"gui.button.StrOff");
+     public String StrNotSelected = I18n.format(modid+"gui.button.NotSelected");
+     public String StrRedstoneMode = I18n.format(modid+"gui.button.StrRedstone");
      public String StrModes = I18n.format(modid+"gui.info.modes");
      public String StrArea = I18n.format(modid+"gui.info.area");
      public String Info = I18n.format(modid+"gui.info.text");

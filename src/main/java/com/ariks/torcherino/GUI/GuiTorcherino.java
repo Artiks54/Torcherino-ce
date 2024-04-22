@@ -18,11 +18,11 @@ import java.awt.*;
 
 @SideOnly(Side.CLIENT)
 public class GuiTorcherino extends ExampleGui {
-    private String StrRadius,StrSpeed,StrRender,StrWork,StrStringConfigArea,StrStringConfigMode,StrStringConfigAceleration;
+    private String StrRadius, StrSpeed, StrRender,StrWork, StrStringConfigArea, StrStringConfigMode, StrStringConfigAceleration;
     private int SpeedModifers;
     private final TileTorcherinoBase tile;
     public GuiTorcherino(TileTorcherinoBase tile, EntityPlayer player) {
-        super(player,tile);
+        super(player, tile);
         this.tile = tile;
     }
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
@@ -35,7 +35,7 @@ public class GuiTorcherino extends ExampleGui {
         Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
         drawModalRectWithCustomSizedTexture(textureX, textureY, 0, 0, 256, 128, 256, 128);
         fontRenderer.drawSplitString(LS.Info, stringPositionX, stringPositionY, 230, Color.WHITE.getRGB());
-        fontRenderer.drawString(StrStringConfigMode, stringPositionX, stringPositionY + 27 , Color.WHITE.getRGB());
+        fontRenderer.drawString(StrStringConfigMode, stringPositionX, stringPositionY + 27, Color.WHITE.getRGB());
         fontRenderer.drawString(StrStringConfigArea, stringPositionX, stringPositionY + 37, Color.WHITE.getRGB());
         fontRenderer.drawString(StrStringConfigAceleration, stringPositionX, stringPositionY + 47, Color.WHITE.getRGB());
         super.drawScreen(mouseX, mouseY, partialTicks);
@@ -62,11 +62,20 @@ public class GuiTorcherino extends ExampleGui {
         int buttonId = button.id;
         int updatePacketTile;
         switch (buttonId) {
-            case 1: updatePacketTile = 1;break;
-            case 2: updatePacketTile = isShiftKeyDown() ? 3 : 2;break;
-            case 3: updatePacketTile = isShiftKeyDown() ? 5 : 4;break;
-            case 4: updatePacketTile = 6;break;
-            default: return;
+            case 1:
+                updatePacketTile = isShiftKeyDown() ? 1 : 2;
+                break;
+            case 2:
+                updatePacketTile = isShiftKeyDown() ? 3 : 4;
+                break;
+            case 3:
+                updatePacketTile = isShiftKeyDown() ? 5 : 6;
+                break;
+            case 4:
+                updatePacketTile = 7;
+                break;
+            default:
+                return;
         }
         ModPacketHandler.network.sendToServer(new UpdateTilePacket(this.tile.getPos(), updatePacketTile));
     }
@@ -104,16 +113,32 @@ public class GuiTorcherino extends ExampleGui {
         }
     }
     private void updateStringConfigForTile(int mode, int area, int speedModifier) {
-        StrStringConfigMode = LS.StrModes + " " + green+mode;
-        StrStringConfigArea = LS.StrArea + " " + green+(area+"x"+area+"x"+area);
-        StrStringConfigAceleration = LS.StrAceleration + " "+green+(speedModifier * 100 + "%");
+        StrStringConfigMode = LS.StrModes + " " + green + mode;
+        StrStringConfigArea = LS.StrArea + " " + green + (area + "x" + area + "x" + area);
+        StrStringConfigAceleration = LS.StrAceleration + " " + green + (speedModifier * 100 + "%");
         SpeedModifers = speedModifier;
     }
     public void updateButton() {
-        StrWork = tile.booleanWork ? LS.ButtonStrWork + " " + TextFormatting.GREEN + LS.StrOn : LS.ButtonStrWork + " " + TextFormatting.RED + LS.StrOff;
+        if(tile.booleanMode == 0) {
+            StrWork = LS.ButtonStrWork + TextFormatting.RED + LS.StrOff;
+        }
+        if(tile.booleanMode == 1) {
+            StrWork = LS.ButtonStrWork + TextFormatting.GREEN + LS.StrOn;
+        }
+        if(tile.booleanMode == 2) {
+            StrWork = TextFormatting.YELLOW + LS.StrRedstoneMode;
+        }
+        if(tile.speed < 1){
+            StrSpeed = TextFormatting.RED + LS.StrNotSelected;
+        }else{
+            StrSpeed = TextFormatting.GREEN + (tile.speed * SpeedModifers * 100 + "%");
+        }
+        if(tile.radius < 1){
+            StrRadius = TextFormatting.RED + LS.StrNotSelected;
+        }else{
+            StrRadius = TextFormatting.GREEN + (tile.radius + "x" + tile.radius + "x" + tile.radius);
+        }
         StrRender = tile.booleanRender ? LS.ButtonStrRender + " " + TextFormatting.GREEN + LS.StrOn : LS.ButtonStrRender + " " + TextFormatting.RED + LS.StrOff;
-        StrSpeed = (tile.speed < 1 ? TextFormatting.RED : TextFormatting.GREEN) + (tile.speed * SpeedModifers * 100 + "%");
-        StrRadius = (tile.radius < 1 ? TextFormatting.RED : TextFormatting.GREEN) + (tile.radius + "x" + tile.radius + "x" + tile.radius);
     }
 }
 

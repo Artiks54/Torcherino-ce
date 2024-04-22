@@ -24,9 +24,9 @@ public class addonTorcherino extends AddonBlank {
             if (tile instanceof TileAcceleration) {
                 TileAcceleration TileAcceleration = (TileAcceleration) tile;
                 if (TileAcceleration.BooleanWork) {
-                    probeInfo.text(TextFormatting.GREEN + "Work: " + "true");
+                    probeInfo.text(TextFormatting.GREEN + "Working: On");
                 } else {
-                    probeInfo.text(TextFormatting.RED + "Work: " + "false");
+                    probeInfo.text(TextFormatting.RED + "Working: Off");
                 }
                 probeInfo.text(TextFormatting.YELLOW + "Time: "+TileAcceleration.TimeCollect);
             }
@@ -46,26 +46,30 @@ public class addonTorcherino extends AddonBlank {
         if (Config.BooleanTOP) {
             if (tile instanceof TileTorcherinoBase) {
                 TileTorcherinoBase TileTorcherinoBase = (TileTorcherinoBase) tile;
-                if (TileTorcherinoBase.booleanWork) {
-                    probeInfo.text(TextFormatting.GREEN + "Work: " + "true");
-                } else {
-                    probeInfo.text(TextFormatting.RED + "Work: " + "false");
+                if(TileTorcherinoBase.booleanMode == 0){
+                    probeInfo.text(TextFormatting.RED + "Working: Off");
+                }
+                if(TileTorcherinoBase.booleanMode == 1){
+                    probeInfo.text(TextFormatting.GREEN + "Working: On");
+                }
+                if(TileTorcherinoBase.booleanMode == 2){
+                    probeInfo.text(TextFormatting.YELLOW + "Redstone mode");
                 }
                 if (TileTorcherinoBase.radius >= 1) {
                     probeInfo.text(TextFormatting.GREEN + "Radius: " + TileTorcherinoBase.radius + "x" + TileTorcherinoBase.radius + "x" + TileTorcherinoBase.radius);
                 } else {
-                    probeInfo.text(TextFormatting.RED + "Radius: " + TileTorcherinoBase.radius + "x" + TileTorcherinoBase.radius + "x" + TileTorcherinoBase.radius);
+                    probeInfo.text(TextFormatting.RED + "Not selected");
                 }
                 if (TileTorcherinoBase.speed >= 1) {
                     probeInfo.text(TextFormatting.GREEN + "Speed: " + TileTorcherinoBase.speed * SpeedModifers * 100 + "%");
                 } else {
-                    probeInfo.text(TextFormatting.RED + "Speed: " + "0%");
+                    probeInfo.text(TextFormatting.RED + "Not selected");
                 }
                 if (TileTorcherinoBase.booleanRender && Config.BooleanRender) {
-                    probeInfo.text(TextFormatting.GREEN + "Visualization: " + "true");
+                    probeInfo.text(TextFormatting.GREEN + "Visualization: On");
                 }
                 if (!TileTorcherinoBase.booleanRender && Config.BooleanRender) {
-                    probeInfo.text(TextFormatting.RED + "Visualization: " + "false");
+                    probeInfo.text(TextFormatting.RED + "Visualization: Off");
                 }
                 }
                 if (tile instanceof TileTorch.TileBase1) {
