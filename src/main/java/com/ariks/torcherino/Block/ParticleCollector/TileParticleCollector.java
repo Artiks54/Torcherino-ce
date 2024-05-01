@@ -2,6 +2,7 @@ package com.ariks.torcherino.Block.ParticleCollector;
 
 import com.ariks.torcherino.Register.GuiHandler;
 import com.ariks.torcherino.Register.RegistryArray;
+import com.ariks.torcherino.util.Config;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
@@ -19,7 +20,7 @@ public class TileParticleCollector extends TileEntityLockable implements ITickab
     private final ItemStackHandler inventory = new ItemStackHandler(1) {@Override protected void onContentsChanged(int slot) {markDirty();}};
     public int amount;
     private int progress;
-    private int MaxProgress = 20;
+    private int MaxProgress = Config.RequiredGeneratorParticle;
     public int percent;
 
     @Override
