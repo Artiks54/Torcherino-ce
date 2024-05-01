@@ -1,0 +1,20 @@
+{
+	"result": {
+		"item": "tce:tce_particle_collector_lvl1"
+	},
+	"pattern" : [
+		"DHE",
+		"GBG",
+		"RHL"
+	],
+	"type" : "minecraft:crafting_shaped",
+	"key" : {
+		"R": {"item": "minecraft:redstone_block"},
+		"H": {"item": "minecraft:hopper"},
+		"L": {"item": "minecraft:lapis_block"},
+		"G": {"item": "minecraft:clock"},
+		"D": {"item": "minecraft:diamond_block"},
+		"E": {"item": "minecraft:emerald_block"},
+		"B": {"item": "tce:tce_bindingelement"}
+	}
+}   

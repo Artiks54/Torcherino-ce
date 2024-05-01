@@ -7,5 +7,5 @@ import org.jetbrains.annotations.NotNull;
 public class TorchTab extends CreativeTabs {
     public TorchTab(String string) {super(string);}
     @Override
-    public @NotNull ItemStack getTabIconItem() {return new ItemStack(RegistryArray.Torch_lvl_4);}
+    public @NotNull ItemStack getTabIconItem() {return new ItemStack(RegistryArray.Compressed_Torch_lvl4);}
 }

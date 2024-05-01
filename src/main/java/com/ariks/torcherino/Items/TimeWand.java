@@ -2,7 +2,6 @@ package com.ariks.torcherino.Items;
 
 import com.ariks.torcherino.Register.AccelerationRegistry;
 import com.ariks.torcherino.Register.RegistryArray;
-import com.ariks.torcherino.Tiles.TileTorcherinoBase;
 import com.ariks.torcherino.util.Config;
 import com.ariks.torcherino.util.LocalizedStringKey;
 import net.minecraft.block.Block;
@@ -23,17 +22,15 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Random;
 
-public abstract class TimeWand extends itemBase {
-
+public class TimeWand extends itemBase {
+    public final EnumWands enumWands;
     protected int SpeedWand(){
-        return 0;
+        return enumWands.getSpeed();
     }
-    protected int DurabilityWand(){
-        return 0;
-    }
-    public TimeWand(String name) {
+    public TimeWand(String name,EnumWands enumWands,int durability) {
         super(name);
-        this.setMaxDamage(DurabilityWand());
+        this.enumWands = enumWands;
+        this.setMaxDamage(durability);
         this.setMaxStackSize(1);
     }
     @Override
@@ -43,7 +40,7 @@ public abstract class TimeWand extends itemBase {
                 IBlockState blockState = worldIn.getBlockState(pos);
                 Block block = blockState.getBlock();
                 TileEntity tile = worldIn.getTileEntity(pos);
-                if (tile instanceof TileTorcherinoBase || AccelerationRegistry.isBlockBlacklisted(block)) {
+                if (AccelerationRegistry.isBlockBlacklisted(block)) {
                     return EnumActionResult.FAIL;
                 }
                 if (!(block.getTickRandomly() || (tile instanceof ITickable && block.hasTileEntity(blockState)))) {
@@ -61,7 +58,7 @@ public abstract class TimeWand extends itemBase {
                 if (Config.BooleanParcWand) {
                     ((WorldServer) worldIn).spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5, 1, 0.15, 0.15, 0.15, 0.02);
                 }
-                if (stack.getItem() != RegistryArray.Time_Wand_lvl6) {
+                if (stack.getItem() != RegistryArray.Time_Wand_infinite) {
                     stack.damageItem(1, player);
                 }
             }
@@ -73,14 +70,14 @@ public abstract class TimeWand extends itemBase {
             int durability = stack.getMaxDamage() - stack.getItemDamage();
             LocalizedStringKey LS = new LocalizedStringKey();
             tooltip.add(TextFormatting.GRAY + LS.Str_Time_Wand_Tooltip);
-            if (stack.getItem() != RegistryArray.Time_Wand_lvl6) {
+            if (stack.getItem() != RegistryArray.Time_Wand_infinite) {
             tooltip.add(TextFormatting.GRAY + LS.StrWandInfoItem + " " + durability);
             super.addInformation(stack, worldIn, tooltip, flagIn);
         }
     }
     @Override
     public boolean showDurabilityBar(@NotNull ItemStack stack) {
-        if (stack.getItem() != RegistryArray.Time_Wand_lvl6) {
+        if (stack.getItem() != RegistryArray.Time_Wand_infinite) {
             return stack.isItemDamaged();
         }
         return false;

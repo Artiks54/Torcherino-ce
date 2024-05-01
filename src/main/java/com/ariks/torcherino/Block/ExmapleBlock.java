@@ -1,15 +1,20 @@
 package com.ariks.torcherino.Block;
 
+import com.ariks.torcherino.Items.TimeStorage;
 import com.ariks.torcherino.Register.RegistryArray;
 import com.ariks.torcherino.Torcherino;
 import com.ariks.torcherino.util.Config;
 import com.ariks.torcherino.util.IHasModel;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
@@ -24,61 +29,42 @@ public abstract class ExmapleBlock extends Block implements IHasModel {
         this.setRegistryName(name);
         this.setUnlocalizedName(name);
         this.setCreativeTab(Torcherino.torcherinoTab);
-        this.setHardness(1.2F);
+        this.setHardness(2.5F);
+        this.setResistance(4.5f);
+        this.setSoundType(SoundType.METAL);
+        this.setHarvestLevel("pickaxe", 2);
         RegistryArray.BLOCKS.add(this);
         RegistryArray.ITEMS.add(new ItemBlock(this).setRegistryName(Objects.requireNonNull(this.getRegistryName())));
     }
     @Override
-    public boolean onBlockActivated(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull EntityPlayer playerIn, @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (playerIn.getHeldItem(hand).getItem() == RegistryArray.time_storage_lvl1) {
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if(playerIn.getHeldItem(hand).getItem() instanceof TimeStorage){
             return false;
         }
-        if (playerIn.getHeldItem(hand).getItem() == RegistryArray.time_storage_lvl2) {
-            return false;
+        TileEntity tile = worldIn.getTileEntity(pos);
+        if(!worldIn.isRemote && tile instanceof TileExampleContainer){
+            int id = Integer.parseInt(((TileExampleContainer) tile).getGuiID());
+            playerIn.openGui(Torcherino.instance,id,worldIn,pos.getX(),pos.getY(),pos.getZ());
         }
-        if (playerIn.getHeldItem(hand).getItem() == RegistryArray.time_storage_lvl3) {
-            return false;
-        }
-        if (playerIn.getHeldItem(hand).getItem() == RegistryArray.time_storage_lvl4) {
-            return false;
-        }
-        if (playerIn.getHeldItem(hand).getItem() == RegistryArray.time_storage_lvl5) {
-            return false;
-        }
-        if (playerIn.getHeldItem(hand).getItem() == RegistryArray.time_storage_infinite) {
-            return false;
-        }
-        return Torcherino.proxy.openGui(worldIn, pos, playerIn);
-    }
-    @Override
-    public void onBlockAdded(@NotNull World world, @NotNull BlockPos pos, @NotNull IBlockState state) {
-        super.onBlockAdded(world, pos, state);
-        if (Config.DebugMod) {
-            Torcherino.logger.info(this.getClass().getName().substring(30) + "Block place: "+getLocalizedName()+" Cord: " + pos.getX() + "," + pos.getY() + "," + pos.getZ()+" Dism: "+world.provider.getDimension());
-        }
-    }
-    @Override
-    public boolean isFullCube(@NotNull IBlockState state) {
-        return false;
-    }
-    @Override
-    public boolean isOpaqueCube(@NotNull IBlockState state) {
-        return false;
-    }
-    @Override
-    public boolean isNormalCube(@NotNull IBlockState state, @NotNull IBlockAccess world, @NotNull BlockPos pos) {
-        return false;
-    }
-    @Override
-    public boolean hasTileEntity(@NotNull IBlockState state) {
         return true;
     }
     @Override
-    public boolean canHarvestBlock(@NotNull IBlockAccess world, @NotNull BlockPos pos, @NotNull EntityPlayer player) {
-        return true;
+    public void onBlockPlacedBy(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull EntityLivingBase placer, @NotNull ItemStack stack) {
+        super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
+        if (Config.DebugMod && !worldIn.isRemote) {
+            Torcherino.logger.info(
+                    " Block place: "+getUnlocalizedName()+" Cord: " + pos.getX() + "," + pos.getY() + "," + pos.getZ()+" DismID: "+worldIn.provider.getDimension()+" PlayerName: "+placer.getName());
+        }
     }
+    public boolean isOpaqueCube(@NotNull IBlockState state) {return false;}
     @Override
-    public void registerModels() {
-        Torcherino.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
-    }
+    public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos) {return false;}
+    @Override
+    public boolean isFullCube(IBlockState state) {return false;}
+    @Override
+    public boolean hasTileEntity(@NotNull IBlockState state) {return true;}
+    @Override
+    public boolean canHarvestBlock(@NotNull IBlockAccess world, @NotNull BlockPos pos, @NotNull EntityPlayer player) {return true;}
+    @Override
+    public void registerModels() {Torcherino.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");}
 }

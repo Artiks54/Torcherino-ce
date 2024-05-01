@@ -1,9 +1,7 @@
 package com.ariks.torcherino.network;
 
-import com.ariks.torcherino.Tiles.TileAcceleration;
-import com.ariks.torcherino.Tiles.TileCollectors;
-import com.ariks.torcherino.Tiles.TileTimeStorage;
-import com.ariks.torcherino.Tiles.TileTorcherinoBase;
+import com.ariks.torcherino.Block.TimeManipulator.TileTimeManipulator;
+import com.ariks.torcherino.Block.Torcherino.TileTorcherinoBase;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -16,21 +14,11 @@ public class UpdateTilePacket implements IMessage {
     private BlockPos pos;
     private int value;
     public UpdateTilePacket() {}
-    public UpdateTilePacket(BlockPos pos, int value) {
-        this.value = value;
-        this.pos = pos;
-    }
+    public UpdateTilePacket(BlockPos pos, int value) {this.value = value;this.pos = pos;}
     @Override
-    public void fromBytes(ByteBuf buf) {
-        this.pos = BlockPos.fromLong(buf.readLong());
-        this.value = buf.readInt();
-
-        }
+    public void fromBytes(ByteBuf buf) {this.pos = BlockPos.fromLong(buf.readLong());this.value = buf.readInt();}
     @Override
-    public void toBytes(ByteBuf buf) {
-        buf.writeLong(this.pos.toLong());
-        buf.writeInt(value);
-    }
+    public void toBytes(ByteBuf buf) {buf.writeLong(this.pos.toLong());buf.writeInt(value);}
     public static class Handler implements IMessageHandler<UpdateTilePacket, IMessage> {
         @Override
         public IMessage onMessage(UpdateTilePacket message, MessageContext ctx) {
@@ -39,42 +27,26 @@ public class UpdateTilePacket implements IMessage {
             world.addScheduledTask(() -> {
                 if (world.isBlockLoaded(pos)) {
                     TileEntity tile = world.getTileEntity(pos);
-                    if (tile instanceof TileTorcherinoBase) {
-                        int receivedValue = message.value;
-                        TileTorcherinoBase torcherinoTile = (TileTorcherinoBase) tile;
-                        switch (receivedValue) {
-                            case 1: torcherinoTile.toggleWorking(false);break;
-                            case 2: torcherinoTile.toggleWorking(true);break;
-                            case 3: torcherinoTile.toggleSpeed(false);break;
-                            case 4: torcherinoTile.toggleSpeed(true);break;
-                            case 5: torcherinoTile.toggleArea(false);break;
-                            case 6: torcherinoTile.toggleArea(true);break;
-                            case 7: torcherinoTile.toggleRender();break;
-                        }
+                    if(tile instanceof TileTorcherinoBase) {
+                        TileTorcherinoBase TileTorcherinoBase = (TileTorcherinoBase) tile;
+                            int receivedValue = message.value;
+                            switch (receivedValue) {
+                                case 3: TileTorcherinoBase.toggleWorking(false);break;
+                                case 4: TileTorcherinoBase.toggleWorking(true);break;
+                                case 5: TileTorcherinoBase.toggleSpeed(false);break;
+                                case 6: TileTorcherinoBase.toggleSpeed(true);break;
+                                case 7: TileTorcherinoBase.toggleArea(false);break;
+                                case 8: TileTorcherinoBase.toggleArea(true);break;
+                                case 9: TileTorcherinoBase.toggleRender(false);break;
+                                case 10: TileTorcherinoBase.toggleRender(true);break;
+                            }
                     }
-                    if (tile instanceof TileAcceleration) {
+                    if (tile instanceof TileTimeManipulator) {
                         int receivedValue = message.value;
-                        TileAcceleration TileAcceleration = (TileAcceleration) tile;
+                        TileTimeManipulator TileTimeManipulator = (TileTimeManipulator) tile;
                         switch (receivedValue) {
-                            case 1: TileAcceleration.toggleWork();break;
-                            case 2: TileAcceleration.OpenGuiAceleration = true;break;
-                            case 3: TileAcceleration.OpenGuiAceleration = false;break;
-                        }
-                    }
-                    if (tile instanceof TileTimeStorage) {
-                        int receivedValue = message.value;
-                        TileTimeStorage TileTimeStorage = (TileTimeStorage) tile;
-                        switch (receivedValue) {
-                            case 1: TileTimeStorage.OpenGuiStorage = true;break;
-                            case 2: TileTimeStorage.OpenGuiStorage = false;break;
-                        }
-                    }
-                    if (tile instanceof TileCollectors) {
-                        int receivedValue = message.value;
-                        TileCollectors TileCollectors = (TileCollectors) tile;
-                        switch (receivedValue) {
-                            case 1: TileCollectors.OpenGuiCollectors = true;break;
-                            case 2: TileCollectors.OpenGuiCollectors = false;break;
+                            case 1: TileTimeManipulator.SetDay();break;
+                            case 2: TileTimeManipulator.SetNight();break;
                         }
                     }
                 }

@@ -1,0 +1,15 @@
+{
+	"result": {
+		"item": "tce:tce_particle_collector_lvl2"
+	},
+	"pattern" : [
+		"PPP",
+		"PBP",
+		"PPP"
+	],
+	"type" : "minecraft:crafting_shaped",
+	"key" : {
+		"P": {"item": "tce:tce_particle_collector_lvl1"},
+		"B": {"item": "tce:tce_bindingelement"}
+	}
+}   

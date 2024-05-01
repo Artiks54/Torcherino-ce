@@ -11,21 +11,16 @@ public class Config {
     public static String[] blacklistedBlocks;
     public static String[] blacklistedTiles;
     public static String TileName;
-    public static String TileNameCompressed;
-    public static String TileNameDCompressed;
-    private final static String TextS = "Acceleration 1 = 100%";
-    private final static String TextM = "Number of acceleration modes";
-    private final static String TextR = "Working radius";
+    private final static String TextS = "Speed 1 = 100%";
+    private final static String TextM = "Number of speed modes";
+    private final static String TextR = "Maximum Radius";
+    private final static String radius = "_radius";
+    private final static String speed = "_speed";
+    private final static String modes = "_number_modes";
     public static boolean DebugMod;
-    public static boolean BooleanParcWand,BooleanRenderFilledBox,BooleanRender,BooleanRenderLine,BooleanVisualWork;
-    public static boolean BooleanTOP;
-    public static int SpeedWand_lvl1,SpeedWand_lvl2,SpeedWand_lvl3,SpeedWand_lvl4,SpeedWand_lvl5,SpeedWand_lvl6;
-    public static int
-            Torch_Color_lvl1_R,Torch_Color_lvl1_G,Torch_Color_lvl1_B,
-            Torch_Color_lvl2_R,Torch_Color_lvl2_G,Torch_Color_lvl2_B,
-            Torch_Color_lvl3_R,Torch_Color_lvl3_G,Torch_Color_lvl3_B,
-            Torch_Color_lvl4_R,Torch_Color_lvl4_G,Torch_Color_lvl4_B,
-            Torch_Color_lvl5_R,Torch_Color_lvl5_G,Torch_Color_lvl5_B;
+    public static boolean BooleanParcWand,BooleanRender,BooleanVisualWork;
+    public static boolean IntegrationProjectE,IntegrationTheOneProbeTA;
+    public static int Render_Color_R,Render_Color_G,Render_Color_B;
     public static int
             Torch_lvl1_S,Torch_lvl1_M,Torch_lvl1_R, Torch_lvl2_S,Torch_lvl2_M,Torch_lvl2_R,
             Torch_lvl3_S,Torch_lvl3_M,Torch_lvl3_R, Torch_lvl4_S, Torch_lvl4_M,Torch_lvl4_R,
@@ -40,153 +35,150 @@ public class Config {
             DTorch_lvl5_S, DTorch_lvl5_M, DTorch_lvl5_R;
     public static int AccelerationSpeed,AccelerationRadius;
     public static int TimeStorageMaxTime;
-    public static int MaxStorageTimeCollectors,RequiredTimeCollectors;
+    public static int RequiredGeneratorParticle;
+    public static int RequiredTimeManipulator;
+    public static int MaxStorageTimeCollectors;
     public static int Stored_Time_Bottle_Lvl_1,Stored_Time_Bottle_Lvl_2,Stored_Time_Bottle_Lvl_3,Stored_Time_Bottle_Lvl_4,Stored_Time_Bottle_Lvl_5,Stored_Time_Bottle_infinite;
+    public static int SpeedWand_lvl1,SpeedWand_lvl2,SpeedWand_lvl3,SpeedWand_lvl4,SpeedWand_lvl5,SpeedWand_infinite;
     public static void init(File file) {
         config = new Configuration(file);
         try {config.load();
             String General = "General";
             String Render = "Render";
             String Item = "Item";
-            String ColorRenderTile = "Color render line";
-            //BlackList
+            String Tile = "Tile";
+            String TileTorcherino = "Tile_Torcherino_lvl1";
+            String TileTorcherino2 = "Tile_Torcherino_lvl2";
+            String TileTorcherino3 = "Tile_Torcherino_lvl3";
+            String TileTorcherino4 = "Tile_Torcherino_lvl4";
+            String TileTorcherino5 = "Tile_Torcherino_lvl5";
+            config.setCategoryComment(General,"General settings");
+            config.setCategoryComment(Item,"Item settings");
+            config.setCategoryComment(Render,"Render settings");
+            config.setCategoryComment(Tile,"TileEntity settings .Before changing these values, it is best to destroy the already installed TileEntity \n" +
+                    "If this is not possible, then in order for the value in TileEntity to change, it will need to be set again.");
+            config.setCategoryComment(TileTorcherino,"TileEntity settings .Before changing these values, it is best to destroy the already installed TileEntity \n" +
+                    "If this is not possible, then in order for the value in TileEntity to change, it will need to be set again.");
+//BlackList
             blacklistedBlocks = config.getStringList("blacklistedBlocks", "blacklist", new String[]{}, "modid:unlocalized");
             blacklistedTiles = config.getStringList("blacklistedTiles", "blacklist", new String[]{}, "Fully qualified class name");
-            //General
-            DebugMod = config.getBoolean("Debug_Mode",General,false,"(For Server Owners) Debug modes");
-            BooleanTOP = config.getBoolean("integration_top_addons",General,true,"True/false Integration TheOneProbe-TopAddons");
-            //Storage_Time_In_Bottle
+//General
+            DebugMod = config.getBoolean("Debug_Mode",General,false,"Debug modes");
+            IntegrationProjectE = config.getBoolean("integration_top_addons",General,true,"Integration TheOneProbe-TopAddons");
+            IntegrationTheOneProbeTA = config.getBoolean("integration_ProjectE",General,true,"Integration ProjectE");
+//Storage_Time_In_Bottle
             Stored_Time_Bottle_Lvl_1 = config.getInt("Time_Storage_lvl_1",Item,500,1,Integer.MAX_VALUE,"Storage time bottle lvl 1");
             Stored_Time_Bottle_Lvl_2 = config.getInt("Time_Storage_lvl_2",Item,1500,1,Integer.MAX_VALUE,"Storage time bottle lvl 2");
             Stored_Time_Bottle_Lvl_3 = config.getInt("Time_Storage_lvl_3",Item,4500,1,Integer.MAX_VALUE,"Storage time bottle lvl 3");
             Stored_Time_Bottle_Lvl_4 = config.getInt("Time_Storage_lvl_4",Item,13500,1,Integer.MAX_VALUE,"Storage time bottle lvl 4");
             Stored_Time_Bottle_Lvl_5 = config.getInt("Time_Storage_lvl_5",Item,45000,1,Integer.MAX_VALUE,"Storage time bottle lvl 5");
             Stored_Time_Bottle_infinite = config.getInt("Time_Storage_infinite",Item,Integer.MAX_VALUE,1,Integer.MAX_VALUE,"Storage time infinite");
-            //wand
+//wand
             SpeedWand_lvl1 = config.getInt("Time_Wand_Speed_lvl1",Item,3,1,Short.MAX_VALUE,"Speed Time Wand lvl 1. 1 = 100%.....");
             SpeedWand_lvl2 = config.getInt("Time_Wand_Speed_lvl2",Item,6,1,Short.MAX_VALUE,"Speed Time Wand lvl 2. 1 = 100%.....");
             SpeedWand_lvl3 = config.getInt("Time_Wand_Speed_lvl3",Item,9,1,Short.MAX_VALUE,"Speed Time Wand lvl 3. 1 = 100%.....");
             SpeedWand_lvl4 = config.getInt("Time_Wand_Speed_lvl4",Item,12,1,Short.MAX_VALUE,"Speed Time Wand lvl 4. 1 = 100%.....");
             SpeedWand_lvl5 = config.getInt("Time_Wand_Speed_lvl5",Item,15,1,Short.MAX_VALUE,"Speed Time Wand lvl 5. 1 = 100%.....");
-            SpeedWand_lvl6 = config.getInt("Time_Wand_Speed_lvl6",Item,20,1,Short.MAX_VALUE,"Speed Time Wand lvl 6. 1 = 100%.....");
-            //Render
+            SpeedWand_infinite = config.getInt("Time_Wand_Speed_lvl6",Item,20,1,Short.MAX_VALUE,"Speed Time Wand infinite. 1 = 100%.....");
+//Render
             BooleanParcWand = config.getBoolean("Time_Wand_Parc",Render,true,"Spawn Particle Wand");
             BooleanVisualWork = config.getBoolean("Tile_Visual_Work",Render,true,"Tile spawn Particle flame");
             BooleanRender = config.getBoolean("Tile_Render",Render,true,"Tile render true/false");
-            BooleanRenderFilledBox = config.getBoolean("Tile_Render_Box",Render,false,"Tile filling the box render");
-            BooleanRenderLine = config.getBoolean("Tile_Render_Line",Render,true,"Tile render line");
-            //Render color line lvl1
-            String[] rgbComponents1 = config.getString("Color_lvl1_RGB", ColorRenderTile, "0,0,255", "Render color line lvl-1 RGB max value 255").split(",");
-            Torch_Color_lvl1_R = Integer.parseInt(rgbComponents1[0]);
-            Torch_Color_lvl1_G = Integer.parseInt(rgbComponents1[1]);
-            Torch_Color_lvl1_B = Integer.parseInt(rgbComponents1[2]);
-            //Render color line lvl2
-            String[] rgbComponents2 = config.getString("Color_lvl2_RGB", ColorRenderTile, "0,255,0", "Render color line lvl-2 RGB max value 255").split(",");
-            Torch_Color_lvl2_R = Integer.parseInt(rgbComponents2[0]);
-            Torch_Color_lvl2_G = Integer.parseInt(rgbComponents2[1]);
-            Torch_Color_lvl2_B = Integer.parseInt(rgbComponents2[2]);
-            //Render color line lvl3
-            String[] rgbComponents3 = config.getString("Color_lvl3_RGB", ColorRenderTile, "255,0,0", "Render color line lvl-3 RGB max value 255").split(",");
-            Torch_Color_lvl3_R = Integer.parseInt(rgbComponents3[0]);
-            Torch_Color_lvl3_G = Integer.parseInt(rgbComponents3[1]);
-            Torch_Color_lvl3_B = Integer.parseInt(rgbComponents3[2]);
-            //Render color line lvl4
-            String[] rgbComponents4 = config.getString("Color_lvl4_RGB", ColorRenderTile, "255,255,0", "Render color line lvl-4 RGB max value 255").split(",");
-            Torch_Color_lvl4_R = Integer.parseInt(rgbComponents4[0]);
-            Torch_Color_lvl4_G = Integer.parseInt(rgbComponents4[1]);
-            Torch_Color_lvl4_B = Integer.parseInt(rgbComponents4[2]);
-            //Render color line lvl5
-            String[] rgbComponents5 = config.getString("Color_lvl5_RGB", ColorRenderTile, "0,255,255", "Render color line lvl-5 RGB max value 255").split(",");
-            Torch_Color_lvl5_R = Integer.parseInt(rgbComponents5[0]);
-            Torch_Color_lvl5_G = Integer.parseInt(rgbComponents5[1]);
-            Torch_Color_lvl5_B = Integer.parseInt(rgbComponents5[2]);
-            //Storage
-            TileName = "Tile_Time_Storage";
-            TimeStorageMaxTime = config.getInt("MaxStoredTime",TileName,1000000,1,Integer.MAX_VALUE,"Time Storage");
-            //Collectors
-            TileName = "Tile_Time_Collectors";
-            MaxStorageTimeCollectors = config.getInt("MaxStoredTime",TileName,1500,1,Integer.MAX_VALUE,"Maximum storage size");
-            RequiredTimeCollectors = config.getInt("Cooldown",TileName,10,1,Short.MAX_VALUE,"The required number of ticks to generate 1 second");
-            //Acceleration
-            TileName = "Tile_Time_Acceleration";
-            AccelerationSpeed = config.getInt("Speed",TileName,3,1, Short.MAX_VALUE,TextS);
-            AccelerationRadius = config.getInt("Area",TileName,3,1,Short.MAX_VALUE,TextR);
-            //Torch_lvl_1
+//Render color line
+            String[] rgbComponents1 = config.getString("Color_lvl1_RGB", Render, "255,0,0", "Render color line RGB max value 255").split(",");
+            Render_Color_R = Integer.parseInt(rgbComponents1[0]);
+            Render_Color_G = Integer.parseInt(rgbComponents1[1]);
+            Render_Color_B = Integer.parseInt(rgbComponents1[2]);
+//Time manipulator tile
+            RequiredTimeManipulator = config.getInt("Tile_Time_Manipulator",Tile,54110,1,Short.MAX_VALUE,"Need ticks to generate 100%");
+//Generator particle tile
+            RequiredGeneratorParticle = config.getInt("Tile_Generator_Particle",Tile,1154,1,Short.MAX_VALUE,"Need ticks to generate 100%");
+//Storage tile
+            TimeStorageMaxTime = config.getInt("Tile_Time_Storage",Tile,1000000,1,Integer.MAX_VALUE,"Time max time Storage");
+//Collectors tile
+            MaxStorageTimeCollectors = config.getInt("Tile_Time_Collectors_MaxStorage",Tile,1500,1,Integer.MAX_VALUE,"Maximum storage size");
+//Acceleration tile
+            AccelerationSpeed = config.getInt("Tile_Time_Acceleration_Speed",Tile,3,1, Short.MAX_VALUE,TextS);
+            AccelerationRadius = config.getInt("Tile_Time_Acceleration_Radius",Tile,3,1,Short.MAX_VALUE,TextR);
+//Torch_lvl_1
             TileName = "Torcherino_lvl_1";
-            Torch_lvl1_S = config.getInt("Speed",TileName,1,1, Short.MAX_VALUE,TextS);
-            Torch_lvl1_M = config.getInt("Mode",TileName,3,1,Short.MAX_VALUE,TextM);
-            Torch_lvl1_R = config.getInt("Area",TileName,3,1, Short.MAX_VALUE,TextR);
-            //Torch_lvl_2
+            Torch_lvl1_S = config.getInt(TileName+speed,TileTorcherino,1,1, Short.MAX_VALUE,TextS);
+            Torch_lvl1_M = config.getInt(TileName+modes,TileTorcherino,3,1,Short.MAX_VALUE,TextM);
+            Torch_lvl1_R = config.getInt(TileName+radius,TileTorcherino,3,1, Short.MAX_VALUE,TextR);
+//Torch_lvl_2
             TileName = "Torcherino_lvl_2";
-            Torch_lvl2_S = config.getInt("Speed",TileName,1,1,Short.MAX_VALUE,TextS);
-            Torch_lvl2_M = config.getInt("Mode",TileName,6,1,Short.MAX_VALUE,TextM);
-            Torch_lvl2_R = config.getInt("Area",TileName,6,1, Short.MAX_VALUE,TextR);
-            //Torch_lvl_3
+            Torch_lvl2_S = config.getInt(TileName+speed,TileTorcherino2,1,1,Short.MAX_VALUE,TextS);
+            Torch_lvl2_M = config.getInt(TileName+modes,TileTorcherino2,6,1,Short.MAX_VALUE,TextM);
+            Torch_lvl2_R = config.getInt(TileName+radius,TileTorcherino2,6,1, Short.MAX_VALUE,TextR);
+//Torch_lvl_3
             TileName = "Torcherino_lvl_3";
-            Torch_lvl3_S = config.getInt("Speed",TileName,1,1,Short.MAX_VALUE,TextS);
-            Torch_lvl3_M = config.getInt("Mode",TileName,9,1,Short.MAX_VALUE,TextM);
-            Torch_lvl3_R = config.getInt("Area",TileName,9,1, Short.MAX_VALUE,TextR);
-            //Torch_lvl_4
+            Torch_lvl3_S = config.getInt(TileName+speed,TileTorcherino3,1,1,Short.MAX_VALUE,TextS);
+            Torch_lvl3_M = config.getInt(TileName+modes,TileTorcherino3,9,1,Short.MAX_VALUE,TextM);
+            Torch_lvl3_R = config.getInt(TileName+radius,TileTorcherino3,9,1, Short.MAX_VALUE,TextR);
+//Torch_lvl_4
             TileName = "Torcherino_lvl_4";
-            Torch_lvl4_S = config.getInt("Speed",TileName,1,1,Short.MAX_VALUE,TextS);
-            Torch_lvl4_M = config.getInt("Mode",TileName,12,1,Short.MAX_VALUE,TextM);
-            Torch_lvl4_R = config.getInt("Area",TileName,12,1, Short.MAX_VALUE,TextR);
-            //Torch_lvl_5
+            Torch_lvl4_S = config.getInt(TileName+speed,TileTorcherino4,1,1,Short.MAX_VALUE,TextS);
+            Torch_lvl4_M = config.getInt(TileName+modes,TileTorcherino4,12,1,Short.MAX_VALUE,TextM);
+            Torch_lvl4_R = config.getInt(TileName+radius,TileTorcherino4,12,1, Short.MAX_VALUE,TextR);
+//Torch_lvl_5
             TileName = "Torcherino_lvl_5";
-            Torch_lvl5_S = config.getInt("Speed",TileName,1,1,Short.MAX_VALUE,TextS);
-            Torch_lvl5_M = config.getInt("Mode",TileName,15,1,Short.MAX_VALUE,TextM);
-            Torch_lvl5_R = config.getInt("Area",TileName,15,1, Short.MAX_VALUE,TextR);
-            //Compressed_Torch_lvl_1
-            TileNameCompressed = "Torcherino_lvl_1_Compressed";
-            CTorch_lvl1_S = config.getInt("Speed",TileNameCompressed,9,1,Short.MAX_VALUE,TextS);
-            CTorch_lvl1_M = config.getInt("Mode",TileNameCompressed,3,1,Short.MAX_VALUE,TextM);
-            CTorch_lvl1_R = config.getInt("Area",TileNameCompressed,3,1, Short.MAX_VALUE,TextR);
-            //Compressed_Torch_lvl_2
-            TileNameCompressed = "Torcherino_lvl_2_Compressed";
-            CTorch_lvl2_S = config.getInt("Speed",TileNameCompressed,9,1,Short.MAX_VALUE,TextS);
-            CTorch_lvl2_M = config.getInt("Mode",TileNameCompressed,6,1,Short.MAX_VALUE,TextM);
-            CTorch_lvl2_R = config.getInt("Area",TileNameCompressed,6,1, Short.MAX_VALUE,TextR);
-            //Compressed_Torch_lvl_3
-            TileNameCompressed = "Torcherino_lvl_3_Compressed";
-            CTorch_lvl3_S = config.getInt("Speed",TileNameCompressed,9,1,Short.MAX_VALUE,TextS);
-            CTorch_lvl3_M = config.getInt("Mode",TileNameCompressed,9,1,Short.MAX_VALUE,TextM);
-            CTorch_lvl3_R = config.getInt("Area",TileNameCompressed,9,1, Short.MAX_VALUE,TextR);
-            //Compressed_Torch_lvl_4
-            TileNameCompressed = "Torcherino_lvl_4_Compressed";
-            CTorch_lvl4_S = config.getInt("Speed",TileNameCompressed,9,1,Short.MAX_VALUE,TextS);
-            CTorch_lvl4_M = config.getInt("Mode",TileNameCompressed,12,1,Short.MAX_VALUE,TextM);
-            CTorch_lvl4_R = config.getInt("Area",TileNameCompressed,12,1, Short.MAX_VALUE,TextR);
-            //Compressed_Torch_lvl_5
-            TileNameCompressed = "Torcherino_lvl_5_Compressed";
-            CTorch_lvl5_S = config.getInt("Speed",TileNameCompressed,9,1,Short.MAX_VALUE,TextS);
-            CTorch_lvl5_M = config.getInt("Mode",TileNameCompressed,15,1,Short.MAX_VALUE,TextM);
-            CTorch_lvl5_R = config.getInt("Area",TileNameCompressed,15,1, Short.MAX_VALUE,TextR);
-            //DCompressed_Torch_lvl_1
-            TileNameDCompressed = "Torcherino_lvl_1_Double_Compressed";
-            DTorch_lvl1_S = config.getInt("Speed",TileNameDCompressed,81,1,Short.MAX_VALUE,TextS);
-            DTorch_lvl1_M = config.getInt("Mode",TileNameDCompressed,3,1,Short.MAX_VALUE,TextM);
-            DTorch_lvl1_R = config.getInt("Area",TileNameDCompressed,3,1, Short.MAX_VALUE,TextR);
-            //DCompressed_Torch_lvl_2
-            TileNameDCompressed = "Torcherino_lvl_2_Double_Compressed";
-            DTorch_lvl2_S = config.getInt("Speed",TileNameDCompressed,81,1,Short.MAX_VALUE,TextS);
-            DTorch_lvl2_M = config.getInt("Mode",TileNameDCompressed,6,1,Short.MAX_VALUE,TextM);
-            DTorch_lvl2_R = config.getInt("Area",TileNameDCompressed,6,1, Short.MAX_VALUE,TextR);
-            //DCompressed_Torch_lvl_3
-            TileNameDCompressed = "Torcherino_lvl_3_Double_Compressed";
-            DTorch_lvl3_S = config.getInt("Speed",TileNameDCompressed,81,1,Short.MAX_VALUE,TextS);
-            DTorch_lvl3_M = config.getInt("Mode",TileNameDCompressed,9,1,Short.MAX_VALUE,TextM);
-            DTorch_lvl3_R = config.getInt("Area",TileNameDCompressed,9,1, Short.MAX_VALUE,TextR);
-            //DCompressed_Torch_lvl_4
-            TileNameDCompressed = "Torcherino_lvl_4_Double_Compressed";
-            DTorch_lvl4_S = config.getInt("Speed",TileNameDCompressed,81,1,Short.MAX_VALUE,TextS);
-            DTorch_lvl4_M = config.getInt("Mode",TileNameDCompressed,12,1,Short.MAX_VALUE,TextM);
-            DTorch_lvl4_R = config.getInt("Area",TileNameDCompressed,12,1, Short.MAX_VALUE,TextR);
-            //DCompressed_Torch_lvl_5
-            TileNameDCompressed = "Torcherino_lvl_5_Double_Compressed";
-            DTorch_lvl5_S = config.getInt("Speed",TileNameDCompressed,81,1,Short.MAX_VALUE,TextS);
-            DTorch_lvl5_M = config.getInt("Mode",TileNameDCompressed,15,1,Short.MAX_VALUE,TextM);
-            DTorch_lvl5_R = config.getInt("Area",TileNameDCompressed,15,1, Short.MAX_VALUE,TextR);
-        } finally {if(config.hasChanged()) config.save();}}
+            Torch_lvl5_S = config.getInt(TileName+speed,TileTorcherino5,1,1,Short.MAX_VALUE,TextS);
+            Torch_lvl5_M = config.getInt(TileName+modes,TileTorcherino5,15,1,Short.MAX_VALUE,TextM);
+            Torch_lvl5_R = config.getInt(TileName+radius,TileTorcherino5,15,1, Short.MAX_VALUE,TextR);
+//Compressed_Torch_lvl_1
+            TileName = "Torcherino_lvl_1_Compressed";
+            CTorch_lvl1_S = config.getInt(TileName+speed,TileTorcherino,9,1,Short.MAX_VALUE,TextS);
+            CTorch_lvl1_M = config.getInt(TileName+modes,TileTorcherino,3,1,Short.MAX_VALUE,TextM);
+            CTorch_lvl1_R = config.getInt(TileName+radius,TileTorcherino,3,1, Short.MAX_VALUE,TextR);
+//Compressed_Torch_lvl_2
+            TileName = "Torcherino_lvl_2_Compressed";
+            CTorch_lvl2_S = config.getInt(TileName+speed,TileTorcherino2,9,1,Short.MAX_VALUE,TextS);
+            CTorch_lvl2_M = config.getInt(TileName+modes,TileTorcherino2,6,1,Short.MAX_VALUE,TextM);
+            CTorch_lvl2_R = config.getInt(TileName+radius,TileTorcherino2,6,1, Short.MAX_VALUE,TextR);
+//Compressed_Torch_lvl_3
+            TileName = "Torcherino_lvl_3_Compressed";
+            CTorch_lvl3_S = config.getInt(TileName+speed,TileTorcherino3,9,1,Short.MAX_VALUE,TextS);
+            CTorch_lvl3_M = config.getInt(TileName+modes,TileTorcherino3,9,1,Short.MAX_VALUE,TextM);
+            CTorch_lvl3_R = config.getInt(TileName+radius,TileTorcherino3,9,1, Short.MAX_VALUE,TextR);
+//Compressed_Torch_lvl_4
+            TileName = "Torcherino_lvl_4_Compressed";
+            CTorch_lvl4_S = config.getInt(TileName+speed,TileTorcherino4,9,1,Short.MAX_VALUE,TextS);
+            CTorch_lvl4_M = config.getInt(TileName+modes,TileTorcherino4,12,1,Short.MAX_VALUE,TextM);
+            CTorch_lvl4_R = config.getInt(TileName+radius,TileTorcherino4,12,1, Short.MAX_VALUE,TextR);
+//Compressed_Torch_lvl_5
+            TileName = "Torcherino_lvl_5_Compressed";
+            CTorch_lvl5_S = config.getInt(TileName+speed,TileTorcherino5,9,1,Short.MAX_VALUE,TextS);
+            CTorch_lvl5_M = config.getInt(TileName+modes,TileTorcherino5,15,1,Short.MAX_VALUE,TextM);
+            CTorch_lvl5_R = config.getInt(TileName+radius,TileTorcherino5,15,1, Short.MAX_VALUE,TextR);
+//DCompressed_Torch_lvl_1
+            TileName = "Torcherino_lvl_1_Double_Compressed";
+            DTorch_lvl1_S = config.getInt(TileName+speed,TileTorcherino,81,1,Short.MAX_VALUE,TextS);
+            DTorch_lvl1_M = config.getInt(TileName+modes,TileTorcherino,3,1,Short.MAX_VALUE,TextM);
+            DTorch_lvl1_R = config.getInt(TileName+radius,TileTorcherino,3,1, Short.MAX_VALUE,TextR);
+//DCompressed_Torch_lvl_2
+            TileName = "Torcherino_lvl_2_Double_Compressed";
+            DTorch_lvl2_S = config.getInt(TileName+speed,TileTorcherino2,81,1,Short.MAX_VALUE,TextS);
+            DTorch_lvl2_M = config.getInt(TileName+modes,TileTorcherino2,6,1,Short.MAX_VALUE,TextM);
+            DTorch_lvl2_R = config.getInt(TileName+radius,TileTorcherino2,6,1, Short.MAX_VALUE,TextR);
+//DCompressed_Torch_lvl_3
+            TileName = "Torcherino_lvl_3_Double_Compressed";
+            DTorch_lvl3_S = config.getInt(TileName+speed,TileTorcherino3,81,1,Short.MAX_VALUE,TextS);
+            DTorch_lvl3_M = config.getInt(TileName+modes,TileTorcherino3,9,1,Short.MAX_VALUE,TextM);
+            DTorch_lvl3_R = config.getInt(TileName+radius,TileTorcherino3,9,1, Short.MAX_VALUE,TextR);
+//DCompressed_Torch_lvl_4
+            TileName = "Torcherino_lvl_4_Double_Compressed";
+            DTorch_lvl4_S = config.getInt(TileName+speed,TileTorcherino4,81,1,Short.MAX_VALUE,TextS);
+            DTorch_lvl4_M = config.getInt(TileName+modes,TileTorcherino4,12,1,Short.MAX_VALUE,TextM);
+            DTorch_lvl4_R = config.getInt(TileName+radius,TileTorcherino4,12,1, Short.MAX_VALUE,TextR);
+//DCompressed_Torch_lvl_5
+            TileName = "Torcherino_lvl_5_Double_Compressed";
+            DTorch_lvl5_S = config.getInt(TileName+speed,TileTorcherino5,81,1,Short.MAX_VALUE,TextS);
+            DTorch_lvl5_M = config.getInt(TileName+modes,TileTorcherino5,15,1,Short.MAX_VALUE,TextM);
+            DTorch_lvl5_R = config.getInt(TileName+radius,TileTorcherino5,15,1, Short.MAX_VALUE,TextR);
+        } finally {
+            if(config.hasChanged()) config.save();
+        }
+    }
     public static void registerConfig(@NotNull FMLPreInitializationEvent event){
         Torcherino.config = new File(event.getModConfigurationDirectory()+"/"+Torcherino.MOD_NAME);
         Torcherino.config.mkdirs();

@@ -3,7 +3,6 @@ package com.ariks.torcherino.Register;
 import com.ariks.torcherino.Torcherino;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
@@ -187,7 +186,7 @@ public class ReciepRegister {
         GameRegistry.addShapedRecipe(
                 new ResourceLocation(Torcherino.MOD_ID + ":" + "timewand_lvl6"),
                 new ResourceLocation(Torcherino.MOD_ID + ":" + "timewand_lvl6"),
-                new ItemStack(Time_Wand_lvl6),
+                new ItemStack(Time_Wand_infinite),
                 " AT",
                 " BA",
                 "B  ",
@@ -282,7 +281,7 @@ public class ReciepRegister {
                 'R', new ItemStack(Items.REDSTONE),
                 'X', new ItemStack(Items.END_CRYSTAL),
                 'G', new ItemStack(Items.GOLD_INGOT),
-                'Z', new ItemStack(Items.DRAGON_BREATH),
+                'Z', new ItemStack(time_particle),
                 'C', new ItemStack(Items.CLOCK),
                 'E', new ItemStack(Items.EMERALD),
                 'N', new ItemStack(Items.NETHER_STAR),
@@ -292,13 +291,13 @@ public class ReciepRegister {
                 new ResourceLocation(Torcherino.MOD_ID + ":" + "time_nugget"),
                 new ResourceLocation(Torcherino.MOD_ID + ":" + "time_nugget"),
                 new ItemStack(time_nugget),
-                " IB",
-                "IGI",
-                "PI ",
+                "TIT",
+                "GBG",
+                "TIT",
                 'I', new ItemStack(Items.IRON_NUGGET),
-                'B', new ItemStack(Items.BLAZE_POWDER),
+                'T', new ItemStack(time_particle),
                 'G', new ItemStack(Items.GOLD_NUGGET),
-                'P', new ItemStack(Items.GUNPOWDER));
+                'B', new ItemStack(Items.BLAZE_POWDER));
         //time_ingot
         GameRegistry.addShapedRecipe(
                 new ResourceLocation(Torcherino.MOD_ID + ":" + "time_ingot"),

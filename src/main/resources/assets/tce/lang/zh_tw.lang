@@ -2,12 +2,20 @@
 
 itemGroup.torcherinoTab=加速火把社区版
 
+tce_gui.text.speed=速度
+tce_gui.text.radius=半徑
+tce_gui.text.working=工作
+tce_gui.text.always=總是開啟
+tce_gui.text.render.line=線條渲染
+tce_gui.text.render.box=盒子渲染
+tce_gui.text.render.comb=組合渲染
+tce_gui.text.render.off=渲染關閉
+
 tce_gui.button.StrWork=工作状态：
-tce_gui.button.StrRender=范围可视化：
 tce_gui.button.StrOn=开启
 tce_gui.button.StrOff=关闭
 tce_gui.button.StrRedstone=红石模式
-tce_gui.button.NotSelected=未选择
+tce_gui.button.StrRedstoneRevers=红石反向模式
 tce_gui.info.text=信息：左键点击以增加作用半径或加速倍率，Shift+左键点击则用于减少。
 tce_gui.info.modes=加速模式数：
 tce_gui.info.area=最大半径：
@@ -17,6 +25,14 @@ tce_gui.info.text.aceleration=开启时使用时间进行加速。若时间耗�
 tce_gui.info.text.storage=时间存储器
 tce_gui.info.text.collectors=被动积累时间
 
+tce_item.tooltip.tile_time_manipulator=控制世界的时间。
+tce_gui.text.tile_time_manipulator.day=白天
+tce_gui.text.tile_time_manipulator.night=夜晚
+tce_gui.text.tile_time_manipulator=时间操纵器
+tce_gui.text.tile_time_manipulator.progress=进度:
+
+tce_item.tooltip.tile_particle_collector=生成临时粒子
+
 tce_item.wand.info=耐久度：
 tce_item.storage.info=用于存储时间
 tce_item.aceleration.info=使用时间进行加速
@@ -24,13 +40,12 @@ tce_item.tooltip.time_storage=Shift+右键点击以提取时间，右键点击�
 tce_item.tooltip.time_wand=Shift+右键点击以进行加速
 tce_item.collectors.info=收集时间
 
-
 item.tce_time_wand_lvl1.name=§9时之杖 Lv 1
 item.tce_time_wand_lvl2.name=§a时之杖 Lv 2
 item.tce_time_wand_lvl3.name=§c时之杖 Lv 3
 item.tce_time_wand_lvl4.name=§6时之杖 Lv 4
 item.tce_time_wand_lvl5.name=§b时之杖 Lv 5
-item.tce_time_wand_lvl6.name=§5无尽时之杖
+item.tce_time_wand_infinite.name=§5无尽时之杖
 item.tce_time_storage_lvl1.name=§9时间存储瓶 Lv 1
 item.tce_time_storage_lvl2.name=§a时间存储瓶 Lv 2
 item.tce_time_storage_lvl3.name=§c时间存储瓶 Lv 3
@@ -53,6 +68,7 @@ item.tce_time_ingot.name=时间锭
 item.tce_time_stick.name=时间棒
 item.tce_time_casing.name=时间外壳
 item.tce_time_core.name=时间核心
+item.tce_time_particle.name=時間粒子
 
 tile.tce_torch_lvl1.name=§9加速火把 Lv 1
 tile.tce_torch_lvl2.name=§a加速火把 Lv 2
@@ -72,3 +88,5 @@ tile.tce_d_compressed_torch_lvl5.name=§b高级加速火把 Lv 5
 tile.tce_time_acceleration.name=§6时间加速器
 tile.tce_time_storage.name=§6时间存储器
 tile.tce_time_collectors.name=§6时间收集器
+tile.tce_time_manipulator.name=§5时间操纵器
+tile.tce_particle_collector.name=§6粒子收集器

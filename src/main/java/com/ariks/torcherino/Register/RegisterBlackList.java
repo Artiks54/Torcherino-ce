@@ -1,7 +1,15 @@
 package com.ariks.torcherino.Register;
-import com.ariks.torcherino.Tiles.*;
+
+import com.ariks.torcherino.Block.Aceleration.TileAcceleration;
+import com.ariks.torcherino.Block.TimeCollector.TileCollectors;
+import com.ariks.torcherino.Block.ParticleCollector.TileParticleCollector;
+import com.ariks.torcherino.Block.TimeManipulator.TileTimeManipulator;
+import com.ariks.torcherino.Block.TimeStorage.TileTimeStorage;
+import com.ariks.torcherino.Block.Torcherino.TileTorcherinoBase;
+import com.ariks.torcherino.Torcherino;
+import com.ariks.torcherino.util.Config;
+import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
-import static com.ariks.torcherino.Tiles.TileTorch.*;
 
 public class RegisterBlackList {
     public static void preInit() {
@@ -12,15 +20,8 @@ public class RegisterBlackList {
         AccelerationRegistry.blacklistBlock(Blocks.LAVA);
         AccelerationRegistry.blacklistBlock(Blocks.FLOWING_LAVA);
         AccelerationRegistry.blacklistBlock(Blocks.REDSTONE_ORE);
-        AccelerationRegistry.blacklistBlock(Blocks.GRASS);
-        AccelerationRegistry.blacklistBlock(Blocks.GRASS_PATH);
-        AccelerationRegistry.blacklistBlock(Blocks.DIRT);
-        AccelerationRegistry.blacklistBlock(Blocks.DROPPER);
-        AccelerationRegistry.blacklistBlock(Blocks.DISPENSER);
-        AccelerationRegistry.blacklistBlock(Blocks.OBSERVER);
         AccelerationRegistry.blacklistBlock(Blocks.DAYLIGHT_DETECTOR);
         AccelerationRegistry.blacklistBlock(Blocks.DAYLIGHT_DETECTOR_INVERTED);
-        AccelerationRegistry.blacklistBlock(Blocks.HOPPER);
         AccelerationRegistry.blacklistBlock(Blocks.PISTON);
         AccelerationRegistry.blacklistBlock(Blocks.PISTON_EXTENSION);
         AccelerationRegistry.blacklistBlock(Blocks.PISTON_HEAD);
@@ -31,52 +32,24 @@ public class RegisterBlackList {
         AccelerationRegistry.blacklistBlock(Blocks.UNPOWERED_REPEATER);
         AccelerationRegistry.blacklistBlock(Blocks.POWERED_COMPARATOR);
         AccelerationRegistry.blacklistBlock(Blocks.UNPOWERED_COMPARATOR);
-        AccelerationRegistry.blacklistBlock(Blocks.JUKEBOX);
-        AccelerationRegistry.blacklistBlock(Blocks.ENCHANTING_TABLE);
-        //Torch
-        AccelerationRegistry.blacklistBlock(RegistryArray.Torch_lvl_1);
-        AccelerationRegistry.blacklistBlock(RegistryArray.Torch_lvl_2);
-        AccelerationRegistry.blacklistBlock(RegistryArray.Torch_lvl_3);
-        AccelerationRegistry.blacklistBlock(RegistryArray.Torch_lvl_4);
-        AccelerationRegistry.blacklistBlock(RegistryArray.Torch_lvl_5);
-        //C-Torch
-        AccelerationRegistry.blacklistBlock(RegistryArray.Compressed_Torch_lvl1);
-        AccelerationRegistry.blacklistBlock(RegistryArray.Compressed_Torch_lvl2);
-        AccelerationRegistry.blacklistBlock(RegistryArray.Compressed_Torch_lvl3);
-        AccelerationRegistry.blacklistBlock(RegistryArray.Compressed_Torch_lvl4);
-        AccelerationRegistry.blacklistBlock(RegistryArray.Compressed_Torch_lvl5);
-        //D-Torch
-        AccelerationRegistry.blacklistBlock(RegistryArray.D_Compressed_Torch_lvl1);
-        AccelerationRegistry.blacklistBlock(RegistryArray.D_Compressed_Torch_lvl2);
-        AccelerationRegistry.blacklistBlock(RegistryArray.D_Compressed_Torch_lvl3);
-        AccelerationRegistry.blacklistBlock(RegistryArray.D_Compressed_Torch_lvl4);
-        AccelerationRegistry.blacklistBlock(RegistryArray.D_Compressed_Torch_lvl5);
-        //Tile-Torch
-        AccelerationRegistry.blacklistTile(TileBase1.class);
-        AccelerationRegistry.blacklistTile(TileBase2.class);
-        AccelerationRegistry.blacklistTile(TileBase3.class);
-        AccelerationRegistry.blacklistTile(TileBase4.class);
-        AccelerationRegistry.blacklistTile(TileBase5.class);
-        //Tile-C-Torch
-        AccelerationRegistry.blacklistTile(TileCompresedTorch.CompressedTileBase1.class);
-        AccelerationRegistry.blacklistTile(TileCompresedTorch.CompressedTileBase2.class);
-        AccelerationRegistry.blacklistTile(TileCompresedTorch.CompressedTileBase3.class);
-        AccelerationRegistry.blacklistTile(TileCompresedTorch.CompressedTileBase4.class);
-        AccelerationRegistry.blacklistTile(TileCompresedTorch.CompressedTileBase5.class);
-        //Tile-D-Torch
-        AccelerationRegistry.blacklistTile(TileDCompresedTorch.DCompressedTileBase1.class);
-        AccelerationRegistry.blacklistTile(TileDCompresedTorch.DCompressedTileBase2.class);
-        AccelerationRegistry.blacklistTile(TileDCompresedTorch.DCompressedTileBase3.class);
-        AccelerationRegistry.blacklistTile(TileDCompresedTorch.DCompressedTileBase4.class);
-        AccelerationRegistry.blacklistTile(TileDCompresedTorch.DCompressedTileBase5.class);
+        //All block
+        for (Block block : RegistryArray.BLOCKS) {
+            AccelerationRegistry.blacklistBlock(block);
+            if (Config.DebugMod) {
+                Torcherino.logger.info(Torcherino.MOD_NAME + ": " + "Block add black list to aceleration: " + block);
+            }
+        }
+        //Tile-Torcherino
+        AccelerationRegistry.blacklistTile(TileTorcherinoBase.class);
         //Tile-Acceleration
         AccelerationRegistry.blacklistTile(TileAcceleration.class);
-        AccelerationRegistry.blacklistBlock(RegistryArray.Time_Acceleration);
         //Tile-Collectors
         AccelerationRegistry.blacklistTile(TileCollectors.class);
-        AccelerationRegistry.blacklistBlock(RegistryArray.Time_collectors);
         //Tile-Storage
         AccelerationRegistry.blacklistTile(TileTimeStorage.class);
-        AccelerationRegistry.blacklistBlock(RegistryArray.Time_Storage);
+        //Tile-Particle-Collector
+        AccelerationRegistry.blacklistTile(TileParticleCollector.class);
+        //Tile-Time-Manipulator
+        AccelerationRegistry.blacklistTile(TileTimeManipulator.class);
     }
 }
