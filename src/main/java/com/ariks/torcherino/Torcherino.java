@@ -1,11 +1,8 @@
 package com.ariks.torcherino;
 
 import java.io.File;
-import com.ariks.torcherino.Register.RegistryIntegration;
+import com.ariks.torcherino.Register.*;
 import com.ariks.torcherino.network.CommonProxy;
-import com.ariks.torcherino.Register.RegisterBlackList;
-import com.ariks.torcherino.network.ModPacketHandler;
-import com.ariks.torcherino.Register.AccelerationRegistry;
 import com.ariks.torcherino.util.TorchTab;
 import com.ariks.torcherino.util.Config;
 import net.minecraft.creativetab.CreativeTabs;
@@ -16,9 +13,8 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import static com.ariks.torcherino.util.Config.*;
 
-@Mod(modid = Torcherino.MOD_ID, name = Torcherino.MOD_NAME, useMetadata = true, acceptedMinecraftVersions = "[1.12]", version = "7.7.6")
+@Mod(modid = Torcherino.MOD_ID, name = Torcherino.MOD_NAME, useMetadata = true, acceptedMinecraftVersions = "[1.12]", version = "7.7.7")
 public class Torcherino {
 	public static File config;
 	public static CreativeTabs torcherinoTab = new TorchTab("torcherinoTab");
@@ -36,18 +32,11 @@ public class Torcherino {
 	}
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
-			ModPacketHandler.init();
-			RegisterBlackList.preInit();
+		proxy.Init();
 	}
 	@Mod.EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-		RegistryIntegration.Registry();
-		for (String block : blacklistedBlocks) {
-			AccelerationRegistry.blacklistString(block);
-		}
-		for (String tile : blacklistedTiles) {
-			AccelerationRegistry.blacklistString(tile);
-		}
+		proxy.postInit();
 	}
 	@Mod.EventHandler
 	public void imcMessage(FMLInterModComms.IMCEvent event) {
@@ -59,7 +48,7 @@ public class Torcherino {
 				continue;
 			}
 			String s = message.getStringValue();
-			AccelerationRegistry.blacklistString(s);
+			RegistryAcceleration.blacklistString(s);
 		}
 	}
 }

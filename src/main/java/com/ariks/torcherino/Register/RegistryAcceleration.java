@@ -8,7 +8,7 @@ import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 
-public class AccelerationRegistry {
+public class RegistryAcceleration {
 	private static final Set<Block> blacklistedBlocks = new HashSet<>();
 	private static final Set<Class<? extends TileEntity>> blacklistedTiles = new HashSet<>();
 

@@ -2,7 +2,7 @@ package com.ariks.torcherino.Block.TimeCollector;
 
 import com.ariks.torcherino.Block.TileExampleContainer;
 import com.ariks.torcherino.Items.ITileTimeStorage;
-import com.ariks.torcherino.Register.GuiHandler;
+import com.ariks.torcherino.Register.RegistryGui;
 import com.ariks.torcherino.util.Config;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -52,7 +52,7 @@ public class TileCollectors extends TileExampleContainer implements ITickable, I
         return new ContainerTimeCollectors(inventoryPlayer,this,entityPlayer);
     }
     @Override
-    public String getGuiID() {return String.valueOf(GuiHandler.GUI_COLLECTORS_TIME);}
+    public String getGuiID() {return String.valueOf(RegistryGui.GUI_COLLECTORS_TIME);}
     @Override
     public String getName() {return "TileCollectors";}
     @Override

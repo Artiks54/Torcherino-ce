@@ -1,7 +1,7 @@
 package com.ariks.torcherino.Block.ParticleCollector;
 
 import com.ariks.torcherino.Block.ExmapleBlock;
-import com.ariks.torcherino.Register.GuiHandler;
+import com.ariks.torcherino.Register.RegistryGui;
 import com.ariks.torcherino.Torcherino;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -37,7 +37,7 @@ public class BlockParticleCollector extends ExmapleBlock {
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         TileEntity tile = worldIn.getTileEntity(pos);
         if (!worldIn.isRemote && tile instanceof TileParticleCollector) {
-            playerIn.openGui(Torcherino.instance, GuiHandler.GUI_PARTICLE_COLLECTOR, worldIn, pos.getX(), pos.getY(), pos.getZ());
+            playerIn.openGui(Torcherino.instance, RegistryGui.GUI_PARTICLE_COLLECTOR, worldIn, pos.getX(), pos.getY(), pos.getZ());
         }
         return true;
     }

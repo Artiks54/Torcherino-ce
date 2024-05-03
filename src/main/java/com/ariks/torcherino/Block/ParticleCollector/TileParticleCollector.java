@@ -1,7 +1,7 @@
 package com.ariks.torcherino.Block.ParticleCollector;
 
-import com.ariks.torcherino.Register.GuiHandler;
-import com.ariks.torcherino.Register.RegistryArray;
+import com.ariks.torcherino.Register.RegistryGui;
+import com.ariks.torcherino.Register.RegistryItems;
 import com.ariks.torcherino.util.Config;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -34,8 +34,8 @@ public class TileParticleCollector extends TileEntityLockable implements ITickab
             }
             if (progress >= MaxProgress) {
                 if (inventory.getStackInSlot(0).isEmpty()) {
-                    inventory.insertItem(0, new ItemStack(RegistryArray.time_particle, amount), false);
-                } else if (inventory.getStackInSlot(0).getItem() == RegistryArray.time_particle && inventory.getStackInSlot(0).getCount() < 64) {
+                    inventory.insertItem(0, new ItemStack(RegistryItems.time_particle, amount), false);
+                } else if (inventory.getStackInSlot(0).getItem() == RegistryItems.time_particle && inventory.getStackInSlot(0).getCount() < 64) {
                     int availableSpace = 64 - inventory.getStackInSlot(0).getCount();
                     int toAdd = Math.min(amount, availableSpace);
                     inventory.getStackInSlot(0).grow(toAdd);
@@ -152,6 +152,6 @@ public class TileParticleCollector extends TileEntityLockable implements ITickab
     }
     @Override
     public @NotNull String getGuiID() {
-        return String.valueOf(GuiHandler.GUI_PARTICLE_COLLECTOR);
+        return String.valueOf(RegistryGui.GUI_PARTICLE_COLLECTOR);
     }
 }

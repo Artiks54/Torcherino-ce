@@ -1,8 +1,8 @@
 package com.ariks.torcherino.Block.Torcherino;
 
 import com.ariks.torcherino.Block.TileExampleContainer;
-import com.ariks.torcherino.Register.AccelerationRegistry;
-import com.ariks.torcherino.Register.GuiHandler;
+import com.ariks.torcherino.Register.RegistryAcceleration;
+import com.ariks.torcherino.Register.RegistryGui;
 import com.ariks.torcherino.util.Config;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -81,7 +81,7 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
     private void AcelerationTick(BlockPos pos) {
         IBlockState blockState = world.getBlockState(pos);
         Block block = blockState.getBlock();
-        if (block instanceof BlockFluidBase || AccelerationRegistry.isBlockBlacklisted(block)) {
+        if (block instanceof BlockFluidBase || RegistryAcceleration.isBlockBlacklisted(block)) {
             return;
         }
         if (block.getTickRandomly()) {
@@ -98,7 +98,7 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
             if (tile == null || tile.isInvalid()) {
                 return;
             }
-            if (AccelerationRegistry.isTileBlacklisted(tile.getClass())) {
+            if (RegistryAcceleration.isTileBlacklisted(tile.getClass())) {
                 return;
             }
             int speedBase = speedBase(CurrentSpeed);
@@ -177,7 +177,7 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
     @Override
     public Container createContainer(InventoryPlayer inventoryPlayer, EntityPlayer entityPlayer) {return new ContainerTorcherino(inventoryPlayer,this,entityPlayer);}
     @Override
-    public String getGuiID() {return String.valueOf(GuiHandler.GUI_TORCHERINO);}
+    public String getGuiID() {return String.valueOf(RegistryGui.GUI_TORCHERINO);}
     @Override
     public String getName() {return "TileTorcherinoBase";}
     @Override

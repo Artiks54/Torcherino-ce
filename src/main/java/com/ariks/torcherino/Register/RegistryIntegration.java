@@ -9,7 +9,7 @@ public class RegistryIntegration {
     public static void Registry(){
         if (Loader.isModLoaded("projecte") && Config.IntegrationProjectE) {
                 AddonProjectE.registerEMC();
-                AccelerationRegistry.blacklistString("projecte:dm_pedestal");
+                RegistryAcceleration.blacklistString("projecte:dm_pedestal");
                 Torcherino.logger.info(Torcherino.MOD_NAME + " Integration projectE : Enabled");
             } else {
                 Torcherino.logger.info(Torcherino.MOD_NAME + " Integration projectE : Disabled");

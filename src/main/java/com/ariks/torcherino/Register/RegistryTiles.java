@@ -10,7 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import static com.ariks.torcherino.Torcherino.MOD_ID;
 
-public final class RegistrationTiles{
+public final class RegistryTiles {
     public static void preInit()
     {
         GameRegistry.registerTileEntity(TileTorcherinoBase.class,new ResourceLocation(MOD_ID,"Tile_Torcherino"));
@@ -18,6 +18,6 @@ public final class RegistrationTiles{
         GameRegistry.registerTileEntity(TileTimeStorage.class,new ResourceLocation(MOD_ID,"Tile_Time_Storage"));
         GameRegistry.registerTileEntity(TileCollectors.class,new ResourceLocation(MOD_ID,"Tile_Collectors"));
         GameRegistry.registerTileEntity(TileParticleCollector.class,new ResourceLocation(MOD_ID,"Tile_Particle_Collector"));
-        GameRegistry.registerTileEntity(TileTimeManipulator.class,new ResourceLocation(MOD_ID,"Tile_Time_Manipulator>"));
+        GameRegistry.registerTileEntity(TileTimeManipulator.class,new ResourceLocation(MOD_ID,"Tile_Time_Manipulator"));
     }
 }

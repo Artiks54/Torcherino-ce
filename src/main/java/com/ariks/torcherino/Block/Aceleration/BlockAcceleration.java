@@ -1,7 +1,6 @@
 package com.ariks.torcherino.Block.Aceleration;
 
 import com.ariks.torcherino.Block.ExmapleBlock;
-import com.ariks.torcherino.util.IHasModel;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -11,7 +10,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class BlockAcceleration extends ExmapleBlock implements IHasModel {
+public class BlockAcceleration extends ExmapleBlock {
     private static final AxisAlignedBB CUBE = new AxisAlignedBB(0.062, 0, 0.062, 0.938, 0.875, 0.938);
     public BlockAcceleration(String name) {
         super(name);

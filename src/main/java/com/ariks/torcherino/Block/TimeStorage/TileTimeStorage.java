@@ -1,7 +1,7 @@
 package com.ariks.torcherino.Block.TimeStorage;
 
 import com.ariks.torcherino.Items.ITileTimeStorage;
-import com.ariks.torcherino.Register.GuiHandler;
+import com.ariks.torcherino.Register.RegistryGui;
 import com.ariks.torcherino.Block.TileExampleContainer;
 import com.ariks.torcherino.util.Config;
 import net.minecraft.entity.player.EntityPlayer;
@@ -64,7 +64,7 @@ public class TileTimeStorage extends TileExampleContainer implements ITileTimeSt
         super.readFromNBT(nbt);
     }
     @Override
-    public String getGuiID() {return String.valueOf(GuiHandler.GUI_TIME_STORAGE);}
+    public String getGuiID() {return String.valueOf(RegistryGui.GUI_TIME_STORAGE);}
     @Override
     public String getName() {return "TileTimeStorage";}
     @Override

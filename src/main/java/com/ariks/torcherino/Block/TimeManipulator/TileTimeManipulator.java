@@ -1,7 +1,7 @@
 package com.ariks.torcherino.Block.TimeManipulator;
 
 import com.ariks.torcherino.Block.TileExampleContainer;
-import com.ariks.torcherino.Register.GuiHandler;
+import com.ariks.torcherino.Register.RegistryGui;
 import com.ariks.torcherino.util.Config;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -70,7 +70,7 @@ public class TileTimeManipulator extends TileExampleContainer implements ITickab
         return null;
     }
     @Override
-    public String getGuiID() {return String.valueOf(GuiHandler.GUI_TIME_MANIPULATOR);}
+    public String getGuiID() {return String.valueOf(RegistryGui.GUI_TIME_MANIPULATOR);}
     @Override
     public String getName() {return "TileTimeManipulator";}
     @Override

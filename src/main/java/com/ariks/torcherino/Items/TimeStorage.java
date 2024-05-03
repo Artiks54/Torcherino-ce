@@ -1,6 +1,6 @@
 package com.ariks.torcherino.Items;
 
-import com.ariks.torcherino.Register.RegistryArray;
+import com.ariks.torcherino.Register.RegistryItems;
 import com.ariks.torcherino.util.LocalizedStringKey;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -51,10 +51,10 @@ public class TimeStorage extends itemBase {
         if (stack.hasTagCompound()) {
             assert stack.getTagCompound() != null;
             int time = stack.getTagCompound().getInteger("Time");
-            if (stack.getItem() == RegistryArray.time_storage_infinite) {
+            if (stack.getItem() == RegistryItems.time_storage_infinite) {
                 tooltip.add(TextFormatting.GRAY + LS.TimeCollected + " " + time);
             }
-            if (stack.getItem() != RegistryArray.time_storage_infinite) {
+            if (stack.getItem() != RegistryItems.time_storage_infinite) {
                 tooltip.add(TextFormatting.GRAY + LS.TimeCollected + " " + time + "/" + MaxConfigStorageTimeItem());
             }
         }

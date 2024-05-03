@@ -1,7 +1,7 @@
 package com.ariks.torcherino.Block.TimeManipulator;
 
 import com.ariks.torcherino.Block.ExampleGuiContainer;
-import com.ariks.torcherino.network.ModPacketHandler;
+import com.ariks.torcherino.Register.RegistryNetwork;
 import com.ariks.torcherino.network.UpdateTilePacket;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.EntityPlayer;
@@ -49,10 +49,10 @@ public class GuiTimeManipulator extends ExampleGuiContainer {
     protected void actionPerformed(GuiButton button){
         int buttonId = button.id;
         if (buttonId == 1) {
-            ModPacketHandler.network.sendToServer(new UpdateTilePacket(this.tile.getPos(), 1));
+            RegistryNetwork.network.sendToServer(new UpdateTilePacket(this.tile.getPos(), 1));
         }
         if (buttonId == 2) {
-            ModPacketHandler.network.sendToServer(new UpdateTilePacket(this.tile.getPos(), 2));
+            RegistryNetwork.network.sendToServer(new UpdateTilePacket(this.tile.getPos(), 2));
         }
     }
 }

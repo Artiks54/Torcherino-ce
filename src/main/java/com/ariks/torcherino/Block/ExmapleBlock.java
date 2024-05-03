@@ -1,18 +1,14 @@
 package com.ariks.torcherino.Block;
 
 import com.ariks.torcherino.Items.TimeStorage;
-import com.ariks.torcherino.Register.RegistryArray;
 import com.ariks.torcherino.Torcherino;
 import com.ariks.torcherino.util.Config;
-import com.ariks.torcherino.util.IHasModel;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -21,9 +17,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
-import java.util.Objects;
 
-public abstract class ExmapleBlock extends Block implements IHasModel {
+public abstract class ExmapleBlock extends Block {
     public ExmapleBlock(String name) {
         super(Material.IRON);
         this.setRegistryName(name);
@@ -33,8 +28,6 @@ public abstract class ExmapleBlock extends Block implements IHasModel {
         this.setResistance(4.5f);
         this.setSoundType(SoundType.METAL);
         this.setHarvestLevel("pickaxe", 2);
-        RegistryArray.BLOCKS.add(this);
-        RegistryArray.ITEMS.add(new ItemBlock(this).setRegistryName(Objects.requireNonNull(this.getRegistryName())));
     }
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
@@ -65,6 +58,4 @@ public abstract class ExmapleBlock extends Block implements IHasModel {
     public boolean hasTileEntity(@NotNull IBlockState state) {return true;}
     @Override
     public boolean canHarvestBlock(@NotNull IBlockAccess world, @NotNull BlockPos pos, @NotNull EntityPlayer player) {return true;}
-    @Override
-    public void registerModels() {Torcherino.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");}
 }

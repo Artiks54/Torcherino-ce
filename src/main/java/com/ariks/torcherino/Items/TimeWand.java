@@ -1,7 +1,7 @@
 package com.ariks.torcherino.Items;
 
-import com.ariks.torcherino.Register.AccelerationRegistry;
-import com.ariks.torcherino.Register.RegistryArray;
+import com.ariks.torcherino.Register.RegistryAcceleration;
+import com.ariks.torcherino.Register.RegistryItems;
 import com.ariks.torcherino.util.Config;
 import com.ariks.torcherino.util.LocalizedStringKey;
 import net.minecraft.block.Block;
@@ -40,7 +40,7 @@ public class TimeWand extends itemBase {
                 IBlockState blockState = worldIn.getBlockState(pos);
                 Block block = blockState.getBlock();
                 TileEntity tile = worldIn.getTileEntity(pos);
-                if (AccelerationRegistry.isBlockBlacklisted(block)) {
+                if (RegistryAcceleration.isBlockBlacklisted(block)) {
                     return EnumActionResult.FAIL;
                 }
                 if (!(block.getTickRandomly() || (tile instanceof ITickable && block.hasTileEntity(blockState)))) {
@@ -58,7 +58,7 @@ public class TimeWand extends itemBase {
                 if (Config.BooleanParcWand) {
                     ((WorldServer) worldIn).spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5, 1, 0.15, 0.15, 0.15, 0.02);
                 }
-                if (stack.getItem() != RegistryArray.Time_Wand_infinite) {
+                if (stack.getItem() != RegistryItems.time_Wand_infinite) {
                     stack.damageItem(1, player);
                 }
             }
@@ -70,14 +70,14 @@ public class TimeWand extends itemBase {
             int durability = stack.getMaxDamage() - stack.getItemDamage();
             LocalizedStringKey LS = new LocalizedStringKey();
             tooltip.add(TextFormatting.GRAY + LS.Str_Time_Wand_Tooltip);
-            if (stack.getItem() != RegistryArray.Time_Wand_infinite) {
+            if (stack.getItem() != RegistryItems.time_Wand_infinite) {
             tooltip.add(TextFormatting.GRAY + LS.StrWandInfoItem + " " + durability);
             super.addInformation(stack, worldIn, tooltip, flagIn);
         }
     }
     @Override
     public boolean showDurabilityBar(@NotNull ItemStack stack) {
-        if (stack.getItem() != RegistryArray.Time_Wand_infinite) {
+        if (stack.getItem() != RegistryItems.time_Wand_infinite) {
             return stack.isItemDamaged();
         }
         return false;

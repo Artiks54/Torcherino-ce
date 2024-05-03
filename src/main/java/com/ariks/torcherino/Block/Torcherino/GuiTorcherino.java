@@ -1,7 +1,7 @@
 package com.ariks.torcherino.Block.Torcherino;
 
 import com.ariks.torcherino.Block.ExampleGuiContainer;
-import com.ariks.torcherino.network.ModPacketHandler;
+import com.ariks.torcherino.Register.RegistryNetwork;
 import com.ariks.torcherino.network.UpdateTilePacket;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.EntityPlayer;
@@ -43,7 +43,7 @@ public class GuiTorcherino extends ExampleGuiContainer {
             case 4: updatePacketTile = isShiftKeyDown() ? 9 : 10;break;
             default: return;
         }
-        ModPacketHandler.network.sendToServer(new UpdateTilePacket(this.tile.getPos(), updatePacketTile));
+        RegistryNetwork.network.sendToServer(new UpdateTilePacket(this.tile.getPos(), updatePacketTile));
     }
     public void updateButton() {
         if(tile.getValue(1) == 0) {StrWork = LS.StrTextWorking;}

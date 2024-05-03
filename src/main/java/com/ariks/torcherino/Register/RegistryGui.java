@@ -15,7 +15,7 @@ import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class GuiHandler implements IGuiHandler {
+public class RegistryGui implements IGuiHandler {
     public static final int GUI_PARTICLE_COLLECTOR = 0;
     public static final int GUI_TIME_STORAGE = 1;
     public static final int GUI_TORCHERINO = 2;
