@@ -4,8 +4,8 @@
     "model": "tce:particle_collector",
 	    "textures": {
         "base": "tce:blocks/base",
-		"material": "tce:blocks/part_collector",
-        "particle":  "tce:blocks/part_collector"
+		"material": "tce:blocks/part_collector_lvl3",
+        "particle":  "tce:blocks/part_collector_lvl3"
         },
     "transform": "forge:default-block"
   },
