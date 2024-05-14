@@ -20,7 +20,6 @@ public class Config {
     public static boolean DebugMod;
     public static boolean BooleanParcWand,BooleanRender,BooleanVisualWork;
     public static boolean IntegrationProjectE,IntegrationTheOneProbeTA;
-    public static int Render_Color_R,Render_Color_G,Render_Color_B;
     public static int
             Torch_lvl1_S,Torch_lvl1_M,Torch_lvl1_R, Torch_lvl2_S,Torch_lvl2_M,Torch_lvl2_R,
             Torch_lvl3_S,Torch_lvl3_M,Torch_lvl3_R, Torch_lvl4_S, Torch_lvl4_M,Torch_lvl4_R,
@@ -84,11 +83,6 @@ public class Config {
             BooleanParcWand = config.getBoolean("Time_Wand_Parc",Render,true,"Spawn Particle Wand");
             BooleanVisualWork = config.getBoolean("Tile_Visual_Work",Render,true,"Tile spawn Particle flame");
             BooleanRender = config.getBoolean("Tile_Render",Render,true,"Tile render true/false");
-//Render color line
-            String[] rgbComponents1 = config.getString("Color_lvl1_RGB", Render, "255,0,0", "Render color line RGB max value 255").split(",");
-            Render_Color_R = Integer.parseInt(rgbComponents1[0]);
-            Render_Color_G = Integer.parseInt(rgbComponents1[1]);
-            Render_Color_B = Integer.parseInt(rgbComponents1[2]);
 //Time manipulator tile
             RequiredTimeManipulator = config.getInt("Tile_Time_Manipulator",Tile,54110,1,Short.MAX_VALUE,"Need ticks to generate 100%");
 //Generator particle tile
