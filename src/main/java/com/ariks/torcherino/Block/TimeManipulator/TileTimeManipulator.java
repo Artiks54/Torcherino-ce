@@ -53,6 +53,10 @@ public class TileTimeManipulator extends TileExampleContainer implements ITickab
             this.percent = value;
         }
     }
+    public void UpdateTile(){
+        this.markDirty();
+        world.notifyBlockUpdate(pos,world.getBlockState(pos),world.getBlockState(pos),3);
+    }
     @Override
     public @NotNull NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         nbt.setInteger("Cooldown", Cooldown);

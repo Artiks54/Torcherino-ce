@@ -182,13 +182,14 @@ public class RegistryReciep {
         GameRegistry.addShapedRecipe(
                 new ResourceLocation(Torcherino.MOD_ID + ":" + "ParticleCollector_lvl_1"), null,
                 new ItemStack(Particle_collectors_lvl1),
-                "DHE",
+                "DME",
                 "GBG",
                 "RHL",
                 'R', new ItemStack(Blocks.REDSTONE_BLOCK),
                 'H', new ItemStack(Blocks.HOPPER),
                 'L', new ItemStack(Blocks.LAPIS_BLOCK),
                 'G', new ItemStack(Items.CLOCK),
+                'M', new ItemStack(Blocks.BEACON),
                 'D', new ItemStack(Blocks.DIAMOND_BLOCK),
                 'E', new ItemStack(Blocks.EMERALD_BLOCK),
                 'B', new ItemStack(binding_Element));

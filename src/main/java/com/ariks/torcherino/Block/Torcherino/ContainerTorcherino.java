@@ -9,30 +9,42 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ContainerTorcherino extends Container {
     private final TileTorcherinoBase tileEntity;
-    private int Working,CurrentRadius,CurrentSpeed,Render,MaxAcceleration;
+    private int Radius,Speed,work,render,R,G,B;
     public ContainerTorcherino(InventoryPlayer inventoryPlayer, TileTorcherinoBase tileEntity, EntityPlayer entityPlayer) {
         this.tileEntity = tileEntity;
     }
     @Override
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
-        int newWorking = this.tileEntity.getValue(1);
-        int newCurrentRadius = this.tileEntity.getValue(2);
-        int newCurrentSpeed = this.tileEntity.getValue(3);
+        int newRadius = this.tileEntity.getValue(1);
+        int newSpeed = this.tileEntity.getValue(2);
+        int newWork = this.tileEntity.getValue(3);
         int newRender = this.tileEntity.getValue(4);
-        int newMaxAcceleration = this.tileEntity.getValue(5);
-        if (this.Working != newWorking || this.CurrentRadius != newCurrentRadius || this.CurrentSpeed != newCurrentSpeed || this.Render != newRender || this.MaxAcceleration != newMaxAcceleration) {
-            this.Working = newWorking;
-            this.CurrentRadius = newCurrentRadius;
-            this.CurrentSpeed = newCurrentSpeed;
-            this.Render = newRender;
-            this.MaxAcceleration = newMaxAcceleration;
+        int newR = this.tileEntity.getValue(8);
+        int newG = this.tileEntity.getValue(9);
+        int newB = this.tileEntity.getValue(10);
+        if (this.Radius != newRadius
+                || this.Speed != newSpeed
+                || this.work != newWork
+                || this.render != newRender
+                || this.R != newR
+                || this.G != newG
+                || this.B != newB) {
+            this.Radius = newRadius;
+            this.Speed = newSpeed;
+            this.work = newWork;
+            this.render = newRender;
+            this.R = newR;
+            this.G = newG;
+            this.B = newB;
             for (IContainerListener listener : this.listeners) {
-                listener.sendWindowProperty(this, 1, newWorking);
-                listener.sendWindowProperty(this, 2, newCurrentRadius);
-                listener.sendWindowProperty(this, 3, newCurrentSpeed);
+                listener.sendWindowProperty(this, 1, newRadius);
+                listener.sendWindowProperty(this, 2, newSpeed);
+                listener.sendWindowProperty(this, 3, newWork);
                 listener.sendWindowProperty(this, 4, newRender);
-                listener.sendWindowProperty(this, 5, newMaxAcceleration);
+                listener.sendWindowProperty(this, 8, newR);
+                listener.sendWindowProperty(this, 9, newG);
+                listener.sendWindowProperty(this, 10, newB);
             }
         }
     }

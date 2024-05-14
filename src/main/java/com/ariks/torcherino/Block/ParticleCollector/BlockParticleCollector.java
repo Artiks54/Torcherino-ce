@@ -1,10 +1,15 @@
 package com.ariks.torcherino.Block.ParticleCollector;
 
 import com.ariks.torcherino.Block.ExmapleBlock;
+import com.ariks.torcherino.Items.TimeStorage;
+import com.ariks.torcherino.Torcherino;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -20,6 +25,18 @@ public class BlockParticleCollector extends ExmapleBlock {
     @Override
     public @NotNull AxisAlignedBB getBoundingBox(@NotNull IBlockState state, @NotNull IBlockAccess source, @NotNull BlockPos pos) {
         return new AxisAlignedBB(0.062, 0, 0.062, 0.938, 0.875, 0.938);
+    }
+    @Override
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if(playerIn.getHeldItem(hand).getItem() instanceof TimeStorage){
+            return false;
+        }
+        TileEntity tile = worldIn.getTileEntity(pos);
+        if(!worldIn.isRemote && tile instanceof TileParticleCollector){
+            int id = Integer.parseInt(((TileParticleCollector) tile).getGuiID());
+            playerIn.openGui(Torcherino.instance,id,worldIn,pos.getX(),pos.getY(),pos.getZ());
+        }
+        return true;
     }
     @Override
     public void breakBlock(World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state) {

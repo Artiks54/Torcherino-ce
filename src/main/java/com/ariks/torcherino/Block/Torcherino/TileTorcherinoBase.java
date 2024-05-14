@@ -3,7 +3,6 @@ package com.ariks.torcherino.Block.Torcherino;
 import com.ariks.torcherino.Block.TileExampleContainer;
 import com.ariks.torcherino.Register.RegistryAcceleration;
 import com.ariks.torcherino.Register.RegistryGui;
-import com.ariks.torcherino.util.Config;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,17 +23,15 @@ import java.util.Random;
 
 public class TileTorcherinoBase extends TileExampleContainer implements ITickable {
     private final Random rand = new Random();
-    public int CurrentRadius,CurrentSpeed,booleanMode,booleanRender,cooldown;
+    private int Radius,Speed,booleanMode,booleanRender,xMin,xMax,yMin,yMax,zMin,zMax,cooldown;
+    private int R = 255;
+    private int G = 0;
+    private int B = 0;
     public int MaxRadius,MaxModes,MaxAcceleration;
-    private int xMin,xMax,yMin,yMax,zMin,zMax;
     private boolean redstoneSignal,redstoneMode;
-    protected int Radius() {
-        return 1+MaxRadius;
-    }
     protected int speedBase(int base) {
         return base * MaxAcceleration;
     }
-    protected int SpeedModes() {return 1+MaxModes;}
     public void setRedstoneSignal(boolean redstoneSignal) {
         this.redstoneSignal = redstoneSignal;
     }
@@ -42,17 +39,17 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
     public void update() {
         if (world.isRemote) return;
         CheckRedstoneSignal();
-        if (redstoneMode || (booleanMode == 1 && Config.BooleanVisualWork && CurrentRadius != 0 && CurrentSpeed != 0)) {
-            WorkVisual();
-        }
-        if (booleanRender == 1 || booleanMode == 1 || redstoneMode) {
+        if (booleanRender != 0 || booleanMode != 0) {
             UpdateChangeArea();
         }
-        if (CurrentRadius != 0 && CurrentSpeed != 0 && (booleanMode == 1 || redstoneMode)) {
+        if (Radius != 0 && Speed != 0 && (booleanMode == 1 || redstoneMode)) {
             UpdateTickArea();
+            WorkVisual();
         }
     }
-    public void CheckRedstoneSignal() {redstoneMode = (booleanMode == 2 && redstoneSignal) || (booleanMode == 3 && !redstoneSignal);}
+    public void CheckRedstoneSignal() {
+        redstoneMode = (booleanMode == 2 && redstoneSignal) || (booleanMode == 3 && !redstoneSignal);
+    }
     public void WorkVisual() {
         if (++cooldown >= 20) {
             cooldown = 0;
@@ -64,8 +61,8 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
         }
     }
     private void UpdateChangeArea() {
-        BlockPos minPos = pos.add(-CurrentRadius, -CurrentRadius, -CurrentRadius);
-        BlockPos maxPos = pos.add(CurrentRadius, CurrentRadius, CurrentRadius);
+        BlockPos minPos = pos.add(-Radius, -Radius, -Radius);
+        BlockPos maxPos = pos.add(Radius, Radius, Radius);
         xMin = minPos.getX();
         yMin = minPos.getY();
         zMin = minPos.getZ();
@@ -85,7 +82,7 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
             return;
         }
         if (block.getTickRandomly()) {
-            int speedBase = speedBase(CurrentSpeed);
+            int speedBase = speedBase(Speed);
             for (int i = 0; i < speedBase; i++) {
                 if (world.getBlockState(pos) != blockState) {
                     break;
@@ -101,7 +98,7 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
             if (RegistryAcceleration.isTileBlacklisted(tile.getClass())) {
                 return;
             }
-            int speedBase = speedBase(CurrentSpeed);
+            int speedBase = speedBase(Speed);
             for (int i = 0; i < speedBase; i++) {
                 if (tile.isInvalid()) {
                     break;
@@ -112,32 +109,42 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
             }
         }
     }
+    public void UpdateTile(){
+        this.markDirty();
+        world.notifyBlockUpdate(pos,world.getBlockState(pos),world.getBlockState(pos),3);
+    }
     @SideOnly(Side.CLIENT)
-    public AxisAlignedBB getAABBForRender() {return new AxisAlignedBB(-CurrentRadius, -CurrentRadius, -CurrentRadius, CurrentRadius+1, CurrentRadius+1, CurrentRadius+1);}
-    public void toggleWorking(boolean increase){
-        booleanMode = (byte) ((booleanMode + (increase ? 1 : -1) + 4) % 4);
-        markDirty();
+    public AxisAlignedBB getAABBForRender() {
+        return new AxisAlignedBB(- Radius, - Radius, - Radius, 1D + Radius, 1D + Radius, 1D + Radius);
     }
-    public void toggleSpeed(boolean increase){
-        CurrentSpeed = (byte) ((CurrentSpeed + (increase ? 1 : -1) + SpeedModes()) % SpeedModes());
-        markDirty();
+    @Override
+    @SideOnly(Side.CLIENT)
+    public AxisAlignedBB getRenderBoundingBox() {
+        return new AxisAlignedBB(getPos().getX() - Radius, getPos().getY() - Radius, getPos().getZ() - Radius, getPos().getX() + 1D + Radius, getPos().getY() + 1D + Radius, getPos().getZ() + 1D + Radius);
     }
-    public void toggleArea(boolean increase){
-        CurrentRadius = (byte) ((CurrentRadius + (increase ? 1 : -1) + Radius()) % Radius());
-        markDirty();
+    public void ToogleWork(){
+        booleanMode++;
+        if(booleanMode > 3){
+            booleanMode = 0;
+        }
     }
-    public void toggleRender(boolean increase){
-        booleanRender = (byte) ((booleanRender + (increase ? 1 : -1) + 4) % 4);
-        markDirty();
+    public void ToogleRender(){
+        booleanRender++;
+        if(booleanRender > 3){
+            booleanRender = 0;
+        }
     }
     public @NotNull NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         nbt.setInteger("MaxAcceleration",this.MaxAcceleration);
         nbt.setInteger("MaxModes",this.MaxModes);
         nbt.setInteger("MaxRadius",this.MaxRadius);
-        nbt.setInteger("CurrentSpeed", this.CurrentSpeed);
-        nbt.setInteger("CurrentRadius", this.CurrentRadius);
+        nbt.setInteger("Speed", this.Speed);
+        nbt.setInteger("Radius", this.Radius);
         nbt.setInteger("mode",this.booleanMode);
         nbt.setInteger("render", this.booleanRender);
+        nbt.setInteger("R", this.R);
+        nbt.setInteger("G", this.G);
+        nbt.setInteger("B", this.B);
         nbt.setBoolean("Red",this.redstoneSignal);
         return super.writeToNBT(nbt);
     }
@@ -146,32 +153,73 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
         this.MaxAcceleration = nbt.getInteger("MaxAcceleration");
         this.MaxModes = nbt.getInteger("MaxModes");
         this.MaxRadius = nbt.getInteger("MaxRadius");
-        this.CurrentSpeed = nbt.getInteger("CurrentSpeed");
-        this.CurrentRadius = nbt.getInteger("CurrentRadius");
+        this.Speed = nbt.getInteger("Speed");
+        this.Radius = nbt.getInteger("Radius");
         this.booleanMode = nbt.getInteger("mode");
         this.booleanRender = nbt.getInteger("render");
+        this.R = nbt.getInteger("R");
+        this.G = nbt.getInteger("G");
+        this.B = nbt.getInteger("B");
         this.redstoneSignal = nbt.getBoolean("Red");
         super.readFromNBT(nbt);
     }
     @Override
     public int getValue(int id) {
-        switch (id){
-            case 1:return this.booleanMode;
-            case 2:return this.CurrentRadius;
-            case 3:return this.CurrentSpeed;
-            case 4:return this.booleanRender;
-            case 5:return this.MaxAcceleration;
+        if (id == 1) {
+            return this.Radius;
+        }
+        if (id == 2) {
+            return this.Speed;
+        }
+        if (id == 3) {
+            return this.booleanMode;
+        }
+        if (id == 4) {
+            return this.booleanRender;
+        }
+        if (id == 5) {
+            return this.MaxRadius;
+        }
+        if (id == 6) {
+            return this.MaxModes;
+        }
+        if (id == 7) {
+            return this.MaxAcceleration;
+        }
+        if (id == 8) {
+            return this.R;
+        }
+        if (id == 9) {
+            return this.G;
+        }
+        if (id == 10) {
+            return this.B;
         }
         return id;
     }
     @Override
-    public void setValue(int id, int value) {
-        switch (id) {
-            case 1: this.booleanMode = value;
-            case 2: this.CurrentRadius = value;
-            case 3: this.CurrentSpeed = value;
-            case 4: this.booleanRender = value;
-            case 5: this.MaxAcceleration = value;
+    public void setValue(int id, int value)
+    {
+        if (id == 1) {
+            this.Radius = value;
+        }
+        if (id == 2) {
+            this.Speed = value;
+        }
+        if(id == 3){
+            this.booleanMode = value;
+        }
+        if(id == 4){
+            this.booleanRender = value;
+        }
+        if(id == 8){
+            this.R = value;
+        }
+        if(id == 9){
+            this.G = value;
+        }
+        if(id == 10){
+            this.B = value;
         }
     }
     @Override

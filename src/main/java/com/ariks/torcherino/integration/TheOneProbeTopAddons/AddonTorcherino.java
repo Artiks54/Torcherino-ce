@@ -48,38 +48,38 @@ public class AddonTorcherino extends AddonBlank {
             }
             if (tile instanceof TileTorcherinoBase) {
                 TileTorcherinoBase TileTorcherinoBase = (TileTorcherinoBase) tile;
-                if(TileTorcherinoBase.booleanMode == 0){
+                if(TileTorcherinoBase.getValue(3) == 0){
                     probeInfo.text("Working off");
                 }
-                else if(TileTorcherinoBase.booleanMode == 1){
+                else if(TileTorcherinoBase.getValue(3) == 1){
                     probeInfo.text( "Always on");
                 }
-                else if(TileTorcherinoBase.booleanMode == 2){
+                else if(TileTorcherinoBase.getValue(3) == 2){
                     probeInfo.text("Redstone mode");
                 }
-                else if(TileTorcherinoBase.booleanMode == 3){
+                else if(TileTorcherinoBase.getValue(3) == 3){
                     probeInfo.text("Redstone reverse mode");
                 }
-                if (TileTorcherinoBase.CurrentRadius >= 1) {
-                    probeInfo.text("Radius: " + TileTorcherinoBase.CurrentRadius + "x" + TileTorcherinoBase.CurrentRadius + "x" + TileTorcherinoBase.CurrentRadius);
+                if (TileTorcherinoBase.getValue(1) >= 1) {
+                    probeInfo.text("Radius: " + TileTorcherinoBase.getValue(1) + "x" + TileTorcherinoBase.getValue(1) + "x" + TileTorcherinoBase.getValue(1));
                 } else {
                     probeInfo.text("Radius");
                 }
-                if (TileTorcherinoBase.CurrentSpeed >= 1) {
-                    probeInfo.text("Speed: " + TileTorcherinoBase.CurrentSpeed * TileTorcherinoBase.MaxAcceleration * 100 + "%");
+                if (TileTorcherinoBase.getValue(2) >= 1) {
+                    probeInfo.text("Speed: " + TileTorcherinoBase.getValue(2) * TileTorcherinoBase.MaxAcceleration * 100 + "%");
                 } else {
                     probeInfo.text("Speed");
                 }
-                if (TileTorcherinoBase.booleanRender == 0 && Config.BooleanRender) {
+                if (TileTorcherinoBase.getValue(4) == 0 && Config.BooleanRender) {
                     probeInfo.text("Render off");
                 }
-                if (TileTorcherinoBase.booleanRender == 1 && Config.BooleanRender) {
+                if (TileTorcherinoBase.getValue(4) == 1 && Config.BooleanRender) {
                     probeInfo.text("Render line");
                 }
-                if (TileTorcherinoBase.booleanRender == 2 && Config.BooleanRender) {
+                if (TileTorcherinoBase.getValue(4) == 2 && Config.BooleanRender) {
                     probeInfo.text("Render box");
                 }
-                if (TileTorcherinoBase.booleanRender == 3 && Config.BooleanRender) {
+                if (TileTorcherinoBase.getValue(4) == 3 && Config.BooleanRender) {
                     probeInfo.text("Rend combined");
                 }
             }

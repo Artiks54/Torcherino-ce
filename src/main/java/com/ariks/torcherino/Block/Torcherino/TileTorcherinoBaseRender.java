@@ -3,12 +3,14 @@ package com.ariks.torcherino.Block.Torcherino;
 import com.ariks.torcherino.util.Config;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import org.jetbrains.annotations.NotNull;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
+@SideOnly(Side.CLIENT)
 public class TileTorcherinoBaseRender extends TileEntitySpecialRenderer<TileTorcherinoBase> {
     @Override
-    public void render(@NotNull TileTorcherinoBase tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-        if (tile.hasWorld() && tile.booleanRender > 0 && Config.BooleanRender) {
+    public void render( TileTorcherinoBase tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+        if (tile.hasWorld() && tile.getValue(4) > 0 && Config.BooleanRender) {
             GlStateManager.pushMatrix();
             GlStateManager.translate(x - 0.0005D, y - 0.0005D, z - 0.0005D);
             GlStateManager.scale(0.999D, 0.999D, 0.999D);
@@ -18,13 +20,13 @@ public class TileTorcherinoBaseRender extends TileEntitySpecialRenderer<TileTorc
             GlStateManager.disableLighting();
             GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
             GlStateManager.disableCull();
-            if (tile.booleanRender == 1 || tile.booleanRender == 3) {
-                float red = Config.Render_Color_R / 255f;
-                float green = Config.Render_Color_G / 255f;
-                float blue = Config.Render_Color_B / 255f;
+            if (tile.getValue(4) == 1 || tile.getValue(4) == 3) {
+                float red = tile.getValue(8)/ 255f;
+                float green = tile.getValue(9)/ 255f;
+                float blue = tile.getValue(10) / 255f;
                 RenderGlobal.drawSelectionBoundingBox(tile.getAABBForRender(), red, green, blue, 1F);
             }
-            if (tile.booleanRender == 2 || tile.booleanRender == 3) {
+            if (tile.getValue(4) == 2 || tile.getValue(4) == 3) {
                 int i = 61680;
                 int j = i % 65536;
                 int k = 0;

@@ -28,7 +28,6 @@ public abstract class TileExampleContainer extends TileEntity implements ITileHa
     @Override
     public void onDataPacket(@NotNull NetworkManager net, SPacketUpdateTileEntity packet) {
         this.readFromNBT(packet.getNbtCompound());
-        this.getWorld().markBlockRangeForRenderUpdate(this.pos, this.pos);
     }
     @Override
     public boolean shouldRefresh(@NotNull World world, @NotNull BlockPos pos, @NotNull IBlockState oldState, @NotNull IBlockState newSate) {
