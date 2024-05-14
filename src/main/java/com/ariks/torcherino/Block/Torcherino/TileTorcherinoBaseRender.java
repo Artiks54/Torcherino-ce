@@ -5,6 +5,7 @@ import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class TileTorcherinoBaseRender extends TileEntitySpecialRenderer<TileTorcherinoBase> {
@@ -18,18 +19,22 @@ public class TileTorcherinoBaseRender extends TileEntitySpecialRenderer<TileTorc
             GlStateManager.enableBlend();
             GlStateManager.disableTexture2D();
             GlStateManager.disableLighting();
-            GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
             GlStateManager.disableCull();
             if (tile.getValue(4) == 1 || tile.getValue(4) == 3) {
+                GL11.glLineWidth(3.0f);
+                GL11.glEnable(GL11.GL_LINE_SMOOTH);
                 float red = tile.getValue(8)/ 255f;
                 float green = tile.getValue(9)/ 255f;
                 float blue = tile.getValue(10) / 255f;
+                GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
                 RenderGlobal.drawSelectionBoundingBox(tile.getAABBForRender(), red, green, blue, 1F);
+                GL11.glDisable(GL11.GL_LINE_SMOOTH);
             }
             if (tile.getValue(4) == 2 || tile.getValue(4) == 3) {
                 int i = 61680;
                 int j = i % 65536;
                 int k = 0;
+                GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
                 OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) j, (float) k);
                 RenderGlobal.renderFilledBox(tile.getAABBForRender(), 1F, 1F, 1F, 0.50F);
             }
