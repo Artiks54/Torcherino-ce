@@ -61,8 +61,8 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
         }
     }
     private void UpdateChangeArea() {
-        BlockPos minPos = pos.add(-Radius, -Radius, -Radius);
-        BlockPos maxPos = pos.add(Radius, Radius, Radius);
+        BlockPos minPos = pos.add(-Radius,-Radius,-Radius);
+        BlockPos maxPos = pos.add(+Radius,+Radius,+Radius);
         xMin = minPos.getX();
         yMin = minPos.getY();
         zMin = minPos.getZ();
@@ -115,12 +115,15 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
     }
     @SideOnly(Side.CLIENT)
     public AxisAlignedBB getAABBForRender() {
-        return new AxisAlignedBB(- Radius, - Radius, - Radius, 1D + Radius, 1D + Radius, 1D + Radius);
+        return new AxisAlignedBB(-Radius,-Radius,-Radius,Radius+1,Radius+1,Radius+1);
     }
     @Override
     @SideOnly(Side.CLIENT)
     public AxisAlignedBB getRenderBoundingBox() {
-        return new AxisAlignedBB(getPos().getX() - Radius, getPos().getY() - Radius, getPos().getZ() - Radius, getPos().getX() + 1D + Radius, getPos().getY() + 1D + Radius, getPos().getZ() + 1D + Radius);
+        final int X = getPos().getX();
+        final int Y = getPos().getY();
+        final int Z = getPos().getZ();
+        return new AxisAlignedBB(X-Radius,Y-Radius,Z-Radius,X+Radius+1,Y+Radius+1,Z+Radius+1);
     }
     public void ToogleWork(){
         booleanMode++;

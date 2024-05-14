@@ -14,7 +14,7 @@ public class RegistryIntegration {
             } else {
                 Torcherino.logger.info(Torcherino.MOD_NAME + " Integration projectE : Disabled");
         }
-        if(Loader.isModLoaded("topaddons") && Config.IntegrationTheOneProbeTA){
+        if(Loader.isModLoaded("topaddons") && Loader.isModLoaded("theoneprobe") && Config.IntegrationTheOneProbeTA){
             Torcherino.logger.info(Torcherino.MOD_NAME + " Integration topAddons : Enabled");
         }else {
             Torcherino.logger.info(Torcherino.MOD_NAME + " Integration topAddons : Disabled");
