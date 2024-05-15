@@ -49,7 +49,11 @@ item.tce_time_ingot.name=Тимчасовий зливок
 item.tce_time_stick.name=Тимчасова палиця
 item.tce_time_casing.name=Тимчасова оболонка
 item.tce_time_core.name=Тимчасове ядро
-item.tce_time_particle.name=Чарівниця, що використовується.
+item.tce_time_particle.name=Час частинка
+item.tce_time_particle_redstone.name=Час частинка redstone
+item.tce_time_particle_emerald.name=Час частинка смарагд
+item.tce_time_particle_gold.name=Час частинка золото
+item.tce_time_particle_diamond.name=Час частинка діамант
 
 tile.tce_torch_lvl1.name=§9Смолоскип 1 рівня
 tile.tce_torch_lvl2.name=§aФакел 2 рівня

@@ -50,6 +50,10 @@ item.tce_time_stick.name=Временная палка
 item.tce_time_casing.name=Временная оболочка
 item.tce_time_core.name=Временное ядро
 item.tce_time_particle.name=Врмееная частица
+item.tce_time_particle_redstone.name=Врмееная частица редстоуна
+item.tce_time_particle_emerald.name=Врмееная частица изумруда
+item.tce_time_particle_gold.name=Врмееная частица золота
+item.tce_time_particle_diamond.name=Врмееная частица алмаза
 
 tile.tce_torch_lvl1.name=§9Факел 1 уровня
 tile.tce_torch_lvl2.name=§aФакел 2 уровня

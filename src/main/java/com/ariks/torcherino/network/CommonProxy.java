@@ -5,6 +5,7 @@ import com.ariks.torcherino.Register.RegistryBlock;
 import com.ariks.torcherino.Torcherino;
 import com.ariks.torcherino.util.JoinDiscord;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import static com.ariks.torcherino.util.Config.*;
@@ -32,4 +33,5 @@ public class CommonProxy {
 	}
 	public void registerItemRenderer(Item item, int meta, String id) {
 	}
+	public void renderItemOnScreen(ItemStack current, int x, int y) {}
 }

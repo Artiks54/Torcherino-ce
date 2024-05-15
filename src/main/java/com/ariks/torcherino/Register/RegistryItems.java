@@ -38,4 +38,8 @@ public final class RegistryItems {
     public static final Item time_casing = new itemBase(modid+"time_casing");
     public static final Item time_core = new itemBase(modid+"time_core");
     public static final Item time_particle = new itemBase(modid+"time_particle");
+    public static final Item time_particle_gold = new itemBase(modid+"time_particle_gold");
+    public static final Item time_particle_redstone = new itemBase(modid+"time_particle_redstone");
+    public static final Item time_particle_diamond = new itemBase(modid+"time_particle_diamond");
+    public static final Item time_particle_emerald = new itemBase(modid+"time_particle_emerald");
 }

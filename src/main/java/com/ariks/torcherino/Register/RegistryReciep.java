@@ -452,28 +452,71 @@ public class RegistryReciep {
         GameRegistry.addShapedRecipe(
                 new ResourceLocation(Torcherino.MOD_ID + ":" + "time_element"), null,
                 new ItemStack(time_element),
-                "DXG",
-                "ZCZ",
-                "RNE",
-                'R', new ItemStack(Items.REDSTONE),
-                'X', new ItemStack(Items.END_CRYSTAL),
-                'G', new ItemStack(Items.GOLD_INGOT),
-                'Z', new ItemStack(time_particle),
+                "DNG",
+                "CBC",
+                "RIE",
+                'R', new ItemStack(time_particle_redstone),
+                'G', new ItemStack(time_particle_gold),
+                'B', new ItemStack(binding_Element),
                 'C', new ItemStack(Items.CLOCK),
-                'E', new ItemStack(Items.EMERALD),
+                'E', new ItemStack(time_particle_emerald),
                 'N', new ItemStack(Items.NETHER_STAR),
-                'D', new ItemStack(Items.DIAMOND));
+                'I', new ItemStack(time_ingot),
+                'D', new ItemStack(time_particle_diamond));
+        //time_particle_redstone
+        GameRegistry.addShapedRecipe(
+                new ResourceLocation(Torcherino.MOD_ID + ":" + "time_particle_redstone"), null,
+                new ItemStack(time_particle_redstone),
+                "PIP",
+                "PBP",
+                "PIP",
+                'I', new ItemStack(Items.REDSTONE),
+                'B', new ItemStack(binding_Element),
+                'P', new ItemStack(time_particle));
+        //time_particle_gold
+        GameRegistry.addShapedRecipe(
+                new ResourceLocation(Torcherino.MOD_ID + ":" + "time_particle_gold"), null,
+                new ItemStack(time_particle_gold),
+                "PIP",
+                "PBP",
+                "PIP",
+                'I', new ItemStack(Items.GOLD_INGOT),
+                'B', new ItemStack(binding_Element),
+                'P', new ItemStack(time_particle));
+        //time_particle_diamond
+        GameRegistry.addShapedRecipe(
+                new ResourceLocation(Torcherino.MOD_ID + ":" + "time_particle_diamond"), null,
+                new ItemStack(time_particle_diamond),
+                "PIP",
+                "PBP",
+                "PIP",
+                'I', new ItemStack(Items.DIAMOND),
+                'B', new ItemStack(binding_Element),
+                'P', new ItemStack(time_particle));
+        //time_particle_emerald
+        GameRegistry.addShapedRecipe(
+                new ResourceLocation(Torcherino.MOD_ID + ":" + "time_particle_emerald"), null,
+                new ItemStack(time_particle_emerald),
+                "PIP",
+                "PBP",
+                "PIP",
+                'I', new ItemStack(Items.EMERALD),
+                'B', new ItemStack(binding_Element),
+                'P', new ItemStack(time_particle));
         //time_nugget
         GameRegistry.addShapedRecipe(
                 new ResourceLocation(Torcherino.MOD_ID + ":" + "time_nugget"), null,
                 new ItemStack(time_nugget),
-                "TIT",
-                "GBG",
-                "TIT",
-                'I', new ItemStack(Items.IRON_NUGGET),
-                'T', new ItemStack(time_particle),
-                'G', new ItemStack(Items.GOLD_NUGGET),
-                'B', new ItemStack(Items.BLAZE_POWDER));
+                "BDB",
+                "GPR",
+                "IEI",
+                'B', new ItemStack(Items.BLAZE_POWDER),
+                'D', new ItemStack(time_particle_diamond),
+                'G', new ItemStack(time_particle_gold),
+                'P', new ItemStack(time_particle),
+                'R', new ItemStack(time_particle_redstone),
+                'I', new ItemStack(Items.IRON_INGOT),
+                'E', new ItemStack(time_particle_emerald));
         //time_ingot
         GameRegistry.addShapedRecipe(
                 new ResourceLocation(Torcherino.MOD_ID + ":" + "time_ingot"), null,

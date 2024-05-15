@@ -50,6 +50,10 @@ item.tce_time_stick.name=时间棒
 item.tce_time_casing.name=时间壳
 item.tce_time_core.name=时间核心
 item.tce_time_particle.name=时间粒子
+item.tce_time_particle_redstone.name=时间粒子红石
+item.tce_time_particle_emerald.name=时间粒子绿宝石
+item.tce_time_particle_gold.name=时间粒子金
+item.tce_time_particle_diamond.name=时间粒子钻石
 
 tile.tce_torch_lvl1.name=§9加速火把 等级1
 tile.tce_torch_lvl2.name=§a加速火把 等级2

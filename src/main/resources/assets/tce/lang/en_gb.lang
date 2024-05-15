@@ -50,6 +50,10 @@ item.tce_time_stick.name=Time stick
 item.tce_time_casing.name=Time casing
 item.tce_time_core.name=Time core
 item.tce_time_particle.name=Time particle
+item.tce_time_particle_redstone.name=Time particle redstone
+item.tce_time_particle_emerald.name=Time particle emerald
+item.tce_time_particle_gold.name=Time particle gold
+item.tce_time_particle_diamond.name=Time particle diamond
 
 tile.tce_torch_lvl1.name=§9Torcherino lvl 1
 tile.tce_torch_lvl2.name=§aTorcherino lvl 2
