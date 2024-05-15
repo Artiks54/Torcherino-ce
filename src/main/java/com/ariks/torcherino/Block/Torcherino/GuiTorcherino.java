@@ -1,7 +1,8 @@
 package com.ariks.torcherino.Block.Torcherino;
 
 import com.ariks.torcherino.Block.ExampleGuiContainer;
-import com.ariks.torcherino.util.CuboidGui;
+import com.ariks.torcherino.util.Config;
+import com.ariks.torcherino.util.GuiColorCube;
 import com.ariks.torcherino.util.GuiSliderInt;
 import com.ariks.torcherino.Register.RegistryNetwork;
 import com.ariks.torcherino.network.UpdateTilePacket;
@@ -16,8 +17,8 @@ import java.awt.*;
 public class GuiTorcherino extends ExampleGuiContainer {
     private final TileTorcherinoBase tile;
     private GuiSliderInt sliderRadius,sliderSpeed,sliderR,sliderG,sliderB;
-    private GuiButton buttonWork,buttonRender,SettingsOpen;
-    CuboidGui cuboidGui = new CuboidGui();
+    private GuiButton buttonWork,buttonRender,SettingsOpen,SettingsClosed;
+    GuiColorCube colorCube = new GuiColorCube();
     private boolean drawCube;
 
     public GuiTorcherino(InventoryPlayer inventory, TileTorcherinoBase tileEntity, EntityPlayer player) {
@@ -27,40 +28,45 @@ public class GuiTorcherino extends ExampleGuiContainer {
     @Override
     public void initGui() {
         super.initGui();
-        DelCube();
+        this.DelCube();
+        final int maxColor = 255;
+        final int min = 0;
         int x = (this.width - xSize) / 2;
         int y = (this.height - ySize) / 2;
         buttonList.clear();
-        sliderRadius = new GuiSliderInt(tile, 0, x + 10, y + 70, 115, 20, 0, tile.getValue(5), 1);
-        sliderSpeed = new GuiSliderInt(tile, 0, x + 10, y + 95, 115, 20, 0, tile.getValue(6), 2);
-        sliderR = new GuiSliderInt(tile, 0, x + 10, y + 45, 115, 20, 0, 255, 8);
-        sliderG = new GuiSliderInt(tile, 0, x + 10, y + 70, 115, 20, 0, 255, 9);
-        sliderB = new GuiSliderInt(tile, 0, x + 10, y + 95, 115, 20, 0, 255, 10);
-        buttonWork = new GuiButton(1, x + 130, y + 70, 115, 20, "");
-        buttonRender = new GuiButton(2, x + 130, y + 95, 115, 20, "");
-        SettingsOpen = new GuiButton(3, x + 130, y + 95, 115, 20, "[ " + LS.StrTextRenderOff + " ]");
+        sliderRadius = new GuiSliderInt(tile, 11, x+10, y+20, 235, 20, min, tile.getValue(5), 1);
+        sliderSpeed = new GuiSliderInt(tile, 12, x+10, y+45, 235, 20, min, tile.getValue(6), 2);
+        sliderR = new GuiSliderInt(tile, 13, x+10, y+20, 160, 20, min, maxColor, 8);
+        sliderG = new GuiSliderInt(tile, 14, x+10, y+45, 160, 20, min, maxColor, 9);
+        sliderB = new GuiSliderInt(tile, 15, x+10, y+70, 160, 20, min, maxColor, 10);
+        buttonWork = new GuiButton(1, x+10, y+70, 235, 20, "");
+        buttonRender = new GuiButton(2, x+45, y+95, 200, 20, "");
+        SettingsOpen = new GuiButton(3, x+10, y+95, 235, 20, "[ "+LS.StrTextRenderOff+" ]");
+        SettingsClosed = new GuiButton(4,x+10,y+95,30,20,"<-");
+        this.ConfigRenderUpdate();
         buttonList.add(buttonWork);
-        buttonList.add(buttonRender);
-        buttonList.add(SettingsOpen);
         buttonList.add(sliderRadius);
         buttonList.add(sliderSpeed);
-        buttonList.add(sliderR);
-        buttonList.add(sliderG);
-        buttonList.add(sliderB);
-        offStings();
-        hideStings();
+        this.offStings();
     }
-    public void hideMain() {
-        buttonWork.visible = false;
-        sliderRadius.visible = false;
-        sliderSpeed.visible = false;
-        SettingsOpen.visible = false;
-        buttonRender.visible = true;
-        sliderR.visible = true;
-        sliderG.visible = true;
-        sliderB.visible = true;
+    private void ConfigRenderUpdate(){
+        if(Config.BooleanRender){
+            buttonList.add(buttonRender);
+            buttonList.add(SettingsOpen);
+            buttonList.add(SettingsClosed);
+            buttonList.add(sliderR);
+            buttonList.add(sliderG);
+            buttonList.add(sliderB);
+        }else{
+            buttonList.remove(buttonRender);
+            buttonList.remove(SettingsOpen);
+            buttonList.remove(SettingsClosed);
+            buttonList.remove(sliderR);
+            buttonList.remove(sliderG);
+            buttonList.remove(sliderB);
+        }
     }
-    public void offMain() {
+    private void offMain() {
         buttonWork.enabled = false;
         sliderRadius.enabled = false;
         sliderSpeed.enabled = false;
@@ -69,41 +75,51 @@ public class GuiTorcherino extends ExampleGuiContainer {
         sliderR.enabled = true;
         sliderG.enabled = true;
         sliderB.enabled = true;
+        SettingsClosed.enabled = true;
+        buttonWork.visible = false;
+        sliderRadius.visible = false;
+        sliderSpeed.visible = false;
+        SettingsOpen.visible = false;
+        buttonRender.visible = true;
+        sliderR.visible = true;
+        sliderG.visible = true;
+        sliderB.visible = true;
+        SettingsClosed.visible = true;
     }
-    public void hideStings() {
+    private void offStings() {
+        sliderR.enabled = false;
+        sliderG.enabled = false;
+        sliderB.enabled = false;
+        buttonRender.enabled = false;
+        SettingsClosed.enabled = false;
+        buttonWork.enabled = true;
+        sliderRadius.enabled = true;
+        sliderSpeed.enabled = true;
+        SettingsOpen.enabled = true;
         sliderR.visible = false;
         sliderG.visible = false;
         sliderB.visible = false;
         buttonRender.visible = false;
+        SettingsClosed.visible = false;
         buttonWork.visible = true;
         sliderRadius.visible = true;
         sliderSpeed.visible = true;
         SettingsOpen.visible = true;
     }
-    public void offStings() {
-        sliderR.enabled = false;
-        sliderG.enabled = false;
-        sliderB.enabled = false;
-        buttonRender.enabled = false;
-        buttonWork.enabled = true;
-        sliderRadius.enabled = true;
-        sliderSpeed.enabled = true;
-        SettingsOpen.enabled = true;
-    }
-    public void DrawCube(){
+    private void DrawCube(){
         if(drawCube) {
             int x = (this.width - xSize) / 2;
             int y = (this.height - ySize) / 2;
             float red = sliderR.getSliderValue() / 255f;
             float green = sliderG.getSliderValue() / 255f;
             float blue = sliderB.getSliderValue() / 255f;
-            cuboidGui.setCube(60, x + 185, y+55, red, green, blue);
-            cuboidGui.drawCube();
+            colorCube.setCube(70, x+210, y+55, red, green, blue);
+            colorCube.drawCube();
         }
     }
-    public void DelCube(){
+    private void DelCube(){
         drawCube = false;
-        cuboidGui.clearCube();
+        colorCube.clearCube();
     }
     @Override
     protected void actionPerformed(GuiButton button) {
@@ -114,15 +130,20 @@ public class GuiTorcherino extends ExampleGuiContainer {
             RegistryNetwork.network.sendToServer(new UpdateTilePacket(this.tile.getPos(), 4));
         }
         if (button.id == 3) {
-            hideMain();
-            offMain();
+            this.offMain();
             drawCube = true;
+        }
+        if (button.id == 4) {
+            this.offStings();
+            this.DelCube();
         }
     }
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         super.drawScreen(mouseX, mouseY, partialTicks);
-        DrawCube();
+        if(Config.BooleanRender) {
+            this.DrawCube();
+        }
         for (GuiButton button : buttonList) {
             if (button == sliderRadius && button.isMouseOver()) {
                 drawHoveringText(LS.StrTextRadius, mouseX, mouseY);

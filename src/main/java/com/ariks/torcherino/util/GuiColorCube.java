@@ -6,7 +6,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import org.lwjgl.opengl.GL11;
 
-public class CuboidGui {
+public class GuiColorCube {
     private float size;
     private float x, y;
     private float red, green, blue;

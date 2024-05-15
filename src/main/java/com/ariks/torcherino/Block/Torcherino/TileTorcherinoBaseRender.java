@@ -21,7 +21,7 @@ public class TileTorcherinoBaseRender extends TileEntitySpecialRenderer<TileTorc
             GlStateManager.disableLighting();
             GlStateManager.disableCull();
             if (tile.getValue(4) == 1 || tile.getValue(4) == 3) {
-                GL11.glLineWidth(3.0f);
+                GL11.glLineWidth(3.5f);
                 GL11.glEnable(GL11.GL_LINE_SMOOTH);
                 float red = tile.getValue(8)/ 255f;
                 float green = tile.getValue(9)/ 255f;
