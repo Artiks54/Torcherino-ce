@@ -6,11 +6,11 @@ import com.ariks.torcherino.network.UpdateTilePacket;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.client.config.GuiButtonExt;
 
-public class GuiButton extends GuiButtonExt {
+public class GuiButtonNetwork extends GuiButtonExt {
     private final int valueChange;
     private final TileExampleContainer tile;
 
-    public GuiButton(TileExampleContainer tile, int id, int xPos, int yPos, int width, int height, String displayString, int value) {
+    public GuiButtonNetwork(TileExampleContainer tile, int id, int xPos, int yPos, int width, int height, String displayString, int value) {
         super(id, xPos, yPos, width, height, displayString);
         this.valueChange = value;
         this.tile = tile;

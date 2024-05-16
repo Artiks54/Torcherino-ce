@@ -16,7 +16,7 @@ public class GuiTorcherino extends ExampleGuiContainer {
     private final TileTorcherinoBase tile;
     private GuiSliderInt sliderRadius,sliderSpeed,sliderR,sliderG,sliderB;
     private net.minecraft.client.gui.GuiButton SettingsOpen,SettingsClosed;
-    private GuiButton buttonWork,buttonRender;
+    private GuiButtonNetwork buttonWork,buttonRender;
     private GuiItemButton buttonInfo;
     GuiColorCube colorCube = new GuiColorCube();
     private boolean drawCube;
@@ -39,8 +39,8 @@ public class GuiTorcherino extends ExampleGuiContainer {
         sliderR = new GuiSliderInt(tile, 13, x+10, y+20, 160, 20, min, maxColor, 8);
         sliderG = new GuiSliderInt(tile, 14, x+10, y+45, 160, 20, min, maxColor, 9);
         sliderB = new GuiSliderInt(tile, 15, x+10, y+70, 160, 20, min, maxColor, 10);
-        buttonWork = new GuiButton(tile,1, x+10, y+70, 235, 20, "",1);
-        buttonRender = new GuiButton(tile,2, x+45, y+95, 200, 20, "",2);
+        buttonWork = new GuiButtonNetwork(tile,1, x+10, y+70, 235, 20, "",1);
+        buttonRender = new GuiButtonNetwork(tile,2, x+45, y+95, 200, 20, "",2);
         SettingsOpen = new net.minecraft.client.gui.GuiButton(3, x+35, y+95, 210, 20, "");
         buttonInfo = new GuiItemButton(5, x+10, y+95);
         buttonInfo.setStackRender(new ItemStack(Items.PAPER));
