@@ -13,19 +13,21 @@ public class GuiSliderInt extends GuiButtonExt {
     public boolean isMouseDown;
     private final int min;
     private final int max;
+    private final String str;
     private final TileExampleContainer responder;
     private final int responderField;
-    private boolean appendPlusSignLabel = true;
+    private boolean SetString = false;
     public GuiSliderInt(TileExampleContainer guiResponder, int idIn, int x, int y,
                             int widthIn, int heightIn,
-                            final int minIn, final int maxIn, int fieldId) {
-        super(idIn, x, y, widthIn, heightIn, "");
+                            final int minIn, final int maxIn, int fieldId,String string,boolean booleanString) {
+        super(idIn, x, y, widthIn, heightIn, string);
         this.updateDisplay();
         responder = guiResponder;
         this.min = minIn;
         this.max = maxIn;
+        this.str = string;
+        this.SetString = booleanString;
         this.responderField = fieldId;
-        appendPlusSignLabel = (getMin() < 0);
         this.setSliderValue(responder.getValue(responderField), false);
     }
     public void setSliderValue(float value, boolean notifyResponder) {
@@ -50,12 +52,11 @@ public class GuiSliderInt extends GuiButtonExt {
         return MathHelper.floor(val);
     }
     private void updateDisplay() {
-        int val = (int) this.getSliderValue();
-        if (val > 0 && appendPlusSignLabel) {
-            this.displayString = "+" + val;
-        }
-        else {
-            this.displayString = "" + val;
+        if(SetString){
+            this.displayString = str;
+        } else {
+            int val = (int) this.getSliderValue();
+            this.displayString = String.valueOf(val);
         }
     }
     @Override

@@ -34,11 +34,11 @@ public class GuiTorcherino extends ExampleGuiContainer {
         int x = (this.width - xSize) / 2;
         int y = (this.height - ySize) / 2;
         buttonList.clear();
-        sliderRadius = new GuiSliderInt(tile, 11, x+10, y+20, 235, 20, min, tile.getValue(5), 1);
-        sliderSpeed = new GuiSliderInt(tile, 12, x+10, y+45, 235, 20, min, tile.getValue(6), 2);
-        sliderR = new GuiSliderInt(tile, 13, x+10, y+20, 160, 20, min, maxColor, 8);
-        sliderG = new GuiSliderInt(tile, 14, x+10, y+45, 160, 20, min, maxColor, 9);
-        sliderB = new GuiSliderInt(tile, 15, x+10, y+70, 160, 20, min, maxColor, 10);
+        sliderRadius = new GuiSliderInt(tile, 11, x+10, y+20, 235, 20, min, tile.getValue(5), 1,LS.StrTextRadius,true);
+        sliderSpeed = new GuiSliderInt(tile, 12, x+10, y+45, 235, 20, min, tile.getValue(6), 2,LS.StrTextSpeed,true);
+        sliderR = new GuiSliderInt(tile, 13, x+10, y+20, 160, 20, min, maxColor, 8,"Red",true);
+        sliderG = new GuiSliderInt(tile, 14, x+10, y+45, 160, 20, min, maxColor, 9,"Green",true);
+        sliderB = new GuiSliderInt(tile, 15, x+10, y+70, 160, 20, min, maxColor, 10,"Blued",true);
         buttonWork = new GuiButtonNetwork(tile,1, x+10, y+70, 235, 20, "",1);
         buttonRender = new GuiButtonNetwork(tile,2, x+45, y+95, 200, 20, "",2);
         SettingsOpen = new net.minecraft.client.gui.GuiButton(3, x+35, y+95, 210, 20, "");
@@ -119,20 +119,21 @@ public class GuiTorcherino extends ExampleGuiContainer {
         for (net.minecraft.client.gui.GuiButton button : buttonList) {
             if (button.isMouseOver()) {
                 if (button == sliderRadius) {
-                    drawHoveringText(LS.StrTextRadius, mouseX, mouseY);
+                    int radius = (int) sliderRadius.getSliderValue();
+                    drawHoveringText(radius+"x"+radius+"x"+radius, mouseX, mouseY);
                 } else if (button == sliderSpeed) {
-                    drawHoveringText(LS.StrTextSpeed + " " + tile.getValue(7) * 100 * sliderSpeed.getSliderValue() + "%", mouseX, mouseY);
+                    drawHoveringText(tile.getValue(7) * 100 * sliderSpeed.getSliderValue() + "%", mouseX, mouseY);
                 } else if (button == sliderR) {
-                    drawHoveringText("R", mouseX, mouseY);
+                    drawHoveringText(String.valueOf(sliderR.getSliderValue()), mouseX, mouseY);
                 } else if (button == sliderG) {
-                    drawHoveringText("G", mouseX, mouseY);
+                    drawHoveringText(String.valueOf(sliderG.getSliderValue()), mouseX, mouseY);
                 } else if (button == sliderB) {
-                    drawHoveringText("B", mouseX, mouseY);
+                    drawHoveringText(String.valueOf(sliderB.getSliderValue()), mouseX, mouseY);
                 } else if (button == buttonInfo) {
                     drawHoveringText(TextFormatting.GREEN+"Info",mouseX,mouseY-16);
                     drawHoveringText("Pos: " + "X: " + tile.getPos().getX() + " Y: " + tile.getPos().getY() + " Z: " + tile.getPos().getZ(), mouseX,mouseY);
                     drawHoveringText("Max " + LS.StrTextRadius + ": " + tile.getValue(5), mouseX, mouseY+16);
-                    drawHoveringText("Max " + LS.StrTextSpeed + ": " + tile.getValue(7) * 100 + "%", mouseX, mouseY + 32);
+                    drawHoveringText(LS.StrTextSpeed + ": " + tile.getValue(7) * 100 + "%", mouseX, mouseY + 32);
                 }
             }
         }
