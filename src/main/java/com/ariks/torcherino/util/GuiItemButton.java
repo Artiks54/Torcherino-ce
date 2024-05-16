@@ -5,9 +5,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.client.config.GuiButtonExt;
 
-public class GuiTextureButton extends GuiButtonExt {
+public class GuiItemButton extends GuiButtonExt {
     private ItemStack stack = ItemStack.EMPTY;
-    public GuiTextureButton(int buttonId, int x, int y) {
+    public GuiItemButton(int buttonId, int x, int y) {
         super(buttonId, x, y, 20, 20, "");
     }
     @Override
