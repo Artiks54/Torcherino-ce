@@ -2,6 +2,7 @@ package com.ariks.torcherino.Block.Torcherino;
 
 import com.ariks.torcherino.Block.ExampleGuiContainer;
 import com.ariks.torcherino.util.*;
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
@@ -15,7 +16,7 @@ import java.awt.*;
 public class GuiTorcherino extends ExampleGuiContainer {
     private final TileTorcherinoBase tile;
     private GuiSliderInt sliderRadius,sliderSpeed,sliderR,sliderG,sliderB;
-    private net.minecraft.client.gui.GuiButton SettingsOpen,SettingsClosed;
+    private GuiButton SettingsOpen,SettingsClosed;
     private GuiButtonNetwork buttonWork,buttonRender;
     private GuiItemButton buttonInfo;
     GuiColorCube colorCube = new GuiColorCube();
