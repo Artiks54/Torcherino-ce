@@ -14,11 +14,9 @@ public class JoinDiscord {
         TextComponentString hello = new TextComponentString("Hello "+event.player.getName());
         hello.getStyle().setColor(TextFormatting.GREEN);
         event.player.sendMessage(hello);
-
         TextComponentString mainMessage = new TextComponentString("Torcherino-ce version. "+TextFormatting.DARK_PURPLE+Torcherino.VERSION);
         mainMessage.getStyle().setColor(TextFormatting.GREEN);
         event.player.sendMessage(mainMessage);
-
         TextComponentString linkMessage = new TextComponentString(TextFormatting.GREEN+"->"+TextFormatting.DARK_PURPLE+" https://discord.gg/Mp5sEpE3B3 "+TextFormatting.GREEN+"<-");
         linkMessage.getStyle()
                 .setUnderlined(true)

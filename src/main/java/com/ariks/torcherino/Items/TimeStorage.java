@@ -1,6 +1,7 @@
 package com.ariks.torcherino.Items;
 
 import com.ariks.torcherino.Register.RegistryItems;
+import com.ariks.torcherino.util.ITileTimeStorage;
 import com.ariks.torcherino.util.LocalizedStringKey;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;

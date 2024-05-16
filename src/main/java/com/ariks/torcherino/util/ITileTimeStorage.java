@@ -1,4 +1,4 @@
-package com.ariks.torcherino.Items;
+package com.ariks.torcherino.util;
 
 public interface ITileTimeStorage {
     void addTimeStorage(int time);

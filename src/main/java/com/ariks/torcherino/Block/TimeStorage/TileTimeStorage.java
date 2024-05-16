@@ -1,6 +1,6 @@
 package com.ariks.torcherino.Block.TimeStorage;
 
-import com.ariks.torcherino.Items.ITileTimeStorage;
+import com.ariks.torcherino.util.ITileTimeStorage;
 import com.ariks.torcherino.Register.RegistryGui;
 import com.ariks.torcherino.Block.TileExampleContainer;
 import com.ariks.torcherino.util.Config;

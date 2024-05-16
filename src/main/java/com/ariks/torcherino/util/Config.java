@@ -18,6 +18,7 @@ public class Config {
     private final static String speed = "_speed";
     private final static String modes = "_number_modes";
     public static boolean DebugMod;
+    public static boolean BooleanHelloMsg;
     public static boolean BooleanParcWand,BooleanRender,BooleanVisualWork;
     public static boolean IntegrationProjectE,IntegrationTheOneProbeTA;
     public static int
@@ -46,7 +47,7 @@ public class Config {
             String Render = "Render";
             String Item = "Item";
             String Tile = "Tile";
-            String TileTorcherino = "Tile_Torcherino_lvl1";
+            String TileTorcherino = "Tile_Torcherino";
             String TileTorcherino2 = "Tile_Torcherino_lvl2";
             String TileTorcherino3 = "Tile_Torcherino_lvl3";
             String TileTorcherino4 = "Tile_Torcherino_lvl4";
@@ -62,6 +63,7 @@ public class Config {
             blacklistedBlocks = config.getStringList("blacklistedBlocks", "blacklist", new String[]{}, "modid:unlocalized");
             blacklistedTiles = config.getStringList("blacklistedTiles", "blacklist", new String[]{}, "Fully qualified class name");
 //General
+            BooleanHelloMsg = config.getBoolean("Hello_Message",General,true,"Send chat hello message");
             DebugMod = config.getBoolean("Debug_Mode",General,false,"Debug modes");
             IntegrationProjectE = config.getBoolean("integration_top_addons",General,true,"Integration TheOneProbe-TopAddons");
             IntegrationTheOneProbeTA = config.getBoolean("integration_ProjectE",General,true,"Integration ProjectE");
