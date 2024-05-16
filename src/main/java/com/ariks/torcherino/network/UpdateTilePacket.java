@@ -38,18 +38,16 @@ public class UpdateTilePacket implements IMessage {
                     TileEntity tile = world.getTileEntity(pos);
                     if(tile instanceof TileTorcherinoBase) {
                         TileTorcherinoBase TileTorcherinoBase = (TileTorcherinoBase) tile;
-                            int receivedValue = message.value;
                             TileTorcherinoBase.UpdateTile();
-                            switch (receivedValue) {
-                                case 3: TileTorcherinoBase.ToogleWork();break;
-                                case 4: TileTorcherinoBase.ToogleRender();break;
+                            switch (message.value) {
+                                case 1: TileTorcherinoBase.ToogleWork();break;
+                                case 2: TileTorcherinoBase.ToogleRender();break;
                             }
                     }
                     if (tile instanceof TileTimeManipulator) {
                         TileTimeManipulator TileTimeManipulator = (TileTimeManipulator) tile;
-                        int receivedValue = message.value;
                         TileTimeManipulator.UpdateTile();
-                        switch (receivedValue) {
+                        switch (message.value) {
                             case 1: TileTimeManipulator.SetDay();break;
                             case 2: TileTimeManipulator.SetNight();break;
                         }

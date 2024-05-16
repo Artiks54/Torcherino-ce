@@ -12,8 +12,7 @@ import net.minecraft.util.ITickable;
 import org.jetbrains.annotations.NotNull;
 
 public class TileCollectors extends TileExampleContainer implements ITickable, ITileTimeStorage {
-    private int Cooldown;
-    private int TimeStorage;
+    private int Cooldown,TimeStorage;
     private int ConfigCollectorsMaxStorage = Config.MaxStorageTimeCollectors;
     @Override
     public void update() {
@@ -53,10 +52,6 @@ public class TileCollectors extends TileExampleContainer implements ITickable, I
     }
     @Override
     public String getGuiID() {return String.valueOf(RegistryGui.GUI_COLLECTORS_TIME);}
-    @Override
-    public String getName() {return "TileCollectors";}
-    @Override
-    public boolean hasCustomName() {return false;}
     @Override
     public @NotNull NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         nbt.setInteger("TimeStorage", TimeStorage);

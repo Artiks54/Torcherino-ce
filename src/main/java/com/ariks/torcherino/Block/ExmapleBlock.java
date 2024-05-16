@@ -29,7 +29,6 @@ public abstract class ExmapleBlock extends Block {
         this.setSoundType(SoundType.METAL);
         this.setHarvestLevel("pickaxe", 2);
     }
-
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if(playerIn.getHeldItem(hand).getItem() instanceof TimeStorage){
@@ -47,7 +46,7 @@ public abstract class ExmapleBlock extends Block {
         super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
         if (Config.DebugMod && !worldIn.isRemote) {
             Torcherino.logger.info(
-                    " Block place: "+getUnlocalizedName()+" Cord: " + pos.getX() + "," + pos.getY() + "," + pos.getZ()+" DismID: "+worldIn.provider.getDimension()+" PlayerName: "+placer.getName());
+                    "TorcherinoCE-log: Block place: "+getUnlocalizedName()+" Cord: " + pos.getX() + "," + pos.getY() + "," + pos.getZ()+" DismID: "+worldIn.provider.getDimension()+" PlayerName: "+placer.getName());
         }
     }
     public boolean isOpaqueCube(@NotNull IBlockState state) {return false;}

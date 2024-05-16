@@ -22,6 +22,14 @@ public abstract class TileExampleContainer extends TileEntity implements ITileHa
         return new SPacketUpdateTileEntity(this.pos, 3, this.getUpdateTag());
     }
     @Override
+    public String getName() {
+        return this.world.getBlockState(pos).getBlock().getUnlocalizedName();
+    }
+    @Override
+    public boolean hasCustomName() {
+        return false;
+    }
+    @Override
     public @NotNull NBTTagCompound getUpdateTag() {
         return this.writeToNBT(new NBTTagCompound());
     }

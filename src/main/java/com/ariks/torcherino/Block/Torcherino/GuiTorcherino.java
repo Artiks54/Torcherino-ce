@@ -2,9 +2,6 @@ package com.ariks.torcherino.Block.Torcherino;
 
 import com.ariks.torcherino.Block.ExampleGuiContainer;
 import com.ariks.torcherino.util.*;
-import com.ariks.torcherino.Register.RegistryNetwork;
-import com.ariks.torcherino.network.UpdateTilePacket;
-import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
@@ -18,7 +15,8 @@ import java.awt.*;
 public class GuiTorcherino extends ExampleGuiContainer {
     private final TileTorcherinoBase tile;
     private GuiSliderInt sliderRadius,sliderSpeed,sliderR,sliderG,sliderB;
-    private GuiButton buttonWork,buttonRender,SettingsOpen,SettingsClosed;
+    private net.minecraft.client.gui.GuiButton SettingsOpen,SettingsClosed;
+    private GuiButton buttonWork,buttonRender;
     private GuiTextureButton buttonInfo;
     GuiColorCube colorCube = new GuiColorCube();
     private boolean drawCube;
@@ -41,12 +39,12 @@ public class GuiTorcherino extends ExampleGuiContainer {
         sliderR = new GuiSliderInt(tile, 13, x+10, y+20, 160, 20, min, maxColor, 8);
         sliderG = new GuiSliderInt(tile, 14, x+10, y+45, 160, 20, min, maxColor, 9);
         sliderB = new GuiSliderInt(tile, 15, x+10, y+70, 160, 20, min, maxColor, 10);
-        buttonWork = new GuiButton(1, x+10, y+70, 235, 20, "");
-        buttonRender = new GuiButton(2, x+45, y+95, 200, 20, "");
-        SettingsOpen = new GuiButton(3, x+35, y+95, 210, 20, "");
+        buttonWork = new GuiButton(tile,1, x+10, y+70, 235, 20, "",1);
+        buttonRender = new GuiButton(tile,2, x+45, y+95, 200, 20, "",2);
+        SettingsOpen = new net.minecraft.client.gui.GuiButton(3, x+35, y+95, 210, 20, "");
         buttonInfo = new GuiTextureButton(5, x+10, y+95);
         buttonInfo.setStackRender(new ItemStack(Items.PAPER));
-        SettingsClosed = new GuiButton(4,x+10,y+95,30,20,"<-");
+        SettingsClosed = new net.minecraft.client.gui.GuiButton(4,x+10,y+95,30,20,"<-");
         this.ConfigRenderUpdate();
         buttonList.add(buttonInfo);
         buttonList.add(buttonWork);
@@ -71,19 +69,19 @@ public class GuiTorcherino extends ExampleGuiContainer {
             buttonList.remove(sliderB);
         }
     }
-    private void setButtonStatus(GuiButton[] buttons, boolean enabled, boolean visible) {
-        for (GuiButton button : buttons) {
+    private void setButtonStatus(net.minecraft.client.gui.GuiButton[] buttons, boolean enabled, boolean visible) {
+        for (net.minecraft.client.gui.GuiButton button : buttons) {
             button.enabled = enabled;
             button.visible = visible;
         }
     }
     private void offMain() {
-        setButtonStatus(new GuiButton[] {buttonWork, sliderRadius, sliderSpeed, SettingsOpen,buttonInfo}, false, false);
-        setButtonStatus(new GuiButton[] {buttonRender, sliderR, sliderG, sliderB, SettingsClosed}, true, true);
+        setButtonStatus(new net.minecraft.client.gui.GuiButton[] {buttonWork, sliderRadius, sliderSpeed, SettingsOpen,buttonInfo}, false, false);
+        setButtonStatus(new net.minecraft.client.gui.GuiButton[] {buttonRender, sliderR, sliderG, sliderB, SettingsClosed}, true, true);
     }
     private void offStrings() {
-        setButtonStatus(new GuiButton[] {sliderR, sliderG, sliderB, buttonRender, SettingsClosed}, false, false);
-        setButtonStatus(new GuiButton[] {buttonWork, sliderRadius, sliderSpeed, SettingsOpen,buttonInfo}, true, true);
+        setButtonStatus(new net.minecraft.client.gui.GuiButton[] {sliderR, sliderG, sliderB, buttonRender, SettingsClosed}, false, false);
+        setButtonStatus(new net.minecraft.client.gui.GuiButton[] {buttonWork, sliderRadius, sliderSpeed, SettingsOpen,buttonInfo}, true, true);
     }
     private void AddCube(){
         if(drawCube) {
@@ -101,13 +99,14 @@ public class GuiTorcherino extends ExampleGuiContainer {
         colorCube.clearCube();
     }
     @Override
-    protected void actionPerformed(GuiButton button) {
-        int id = button.id;
-        switch (id) {
-            case 1: RegistryNetwork.network.sendToServer(new UpdateTilePacket(this.tile.getPos(), 3));break;
-            case 2: RegistryNetwork.network.sendToServer(new UpdateTilePacket(this.tile.getPos(), 4));break;
-            case 3: this.offMain();drawCube = true;break;
-            case 4:this.offStrings();this.DelCube();break;
+    protected void actionPerformed(net.minecraft.client.gui.GuiButton button) {
+        if(button.id == 3){
+            this.offMain();
+            drawCube = true;
+        }
+        if(button.id == 4){
+            this.offStrings();
+            this.DelCube();
         }
     }
     @Override
@@ -117,7 +116,7 @@ public class GuiTorcherino extends ExampleGuiContainer {
         if(Config.BooleanRender) {
             this.AddCube();
         }
-        for (GuiButton button : buttonList) {
+        for (net.minecraft.client.gui.GuiButton button : buttonList) {
             if (button.isMouseOver()) {
                 if (button == sliderRadius) {
                     drawHoveringText(LS.StrTextRadius, mouseX, mouseY);

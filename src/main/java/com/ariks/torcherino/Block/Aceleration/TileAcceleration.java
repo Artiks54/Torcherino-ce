@@ -23,8 +23,7 @@ import java.util.Random;
 public class TileAcceleration extends TileExampleContainer implements ITickable, ITileTimeStorage {
     private final int speed = Config.AccelerationSpeed;
     private final int AreaModifier = Config.AccelerationRadius;
-    private int TimeStorage;
-    private int Cooldown;
+    private int TimeStorage,Cooldown;
     private final Random rand = new Random();
     protected int speedBase(int base) {
         return base;
@@ -45,7 +44,7 @@ public class TileAcceleration extends TileExampleContainer implements ITickable,
             }
         }
     }
-    public void WorkVisual() {
+    private void WorkVisual() {
         if (Config.BooleanVisualWork) {
             double x = pos.getX();
             double y = pos.getY();
@@ -131,14 +130,6 @@ public class TileAcceleration extends TileExampleContainer implements ITickable,
     @Override
     public String getGuiID() {
         return String.valueOf(RegistryGui.GUI_ACELERATION);
-    }
-    @Override
-    public String getName() {
-        return "TileAcceleration";
-    }
-    @Override
-    public boolean hasCustomName() {
-        return false;
     }
     @Override
     public void addTimeStorage(int time) {

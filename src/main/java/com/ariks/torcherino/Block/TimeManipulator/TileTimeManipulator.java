@@ -11,9 +11,7 @@ import net.minecraft.util.ITickable;
 import org.jetbrains.annotations.NotNull;
 
 public class TileTimeManipulator extends TileExampleContainer implements ITickable {
-    public int percent;
-    private int Charged;
-    private int Cooldown;
+    private int Charged,Cooldown,percent;
     private final int MaxCooldown = Config.RequiredTimeManipulator;
     @Override
     public void update() {
@@ -75,8 +73,4 @@ public class TileTimeManipulator extends TileExampleContainer implements ITickab
     }
     @Override
     public String getGuiID() {return String.valueOf(RegistryGui.GUI_TIME_MANIPULATOR);}
-    @Override
-    public String getName() {return "TileTimeManipulator";}
-    @Override
-    public boolean hasCustomName() {return false;}
 }

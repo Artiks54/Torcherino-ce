@@ -65,8 +65,4 @@ public class TileTimeStorage extends TileExampleContainer implements ITileTimeSt
     }
     @Override
     public String getGuiID() {return String.valueOf(RegistryGui.GUI_TIME_STORAGE);}
-    @Override
-    public String getName() {return "TileTimeStorage";}
-    @Override
-    public boolean hasCustomName() {return false;}
 }

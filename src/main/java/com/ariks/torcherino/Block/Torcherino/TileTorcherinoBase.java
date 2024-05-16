@@ -47,10 +47,10 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
             WorkVisual();
         }
     }
-    public void CheckRedstoneSignal() {
+    private void CheckRedstoneSignal() {
         redstoneMode = (booleanMode == 2 && redstoneSignal) || (booleanMode == 3 && !redstoneSignal);
     }
-    public void WorkVisual() {
+    private void WorkVisual() {
         if (++cooldown >= 20) {
             cooldown = 0;
             double x = pos.getX();
@@ -226,11 +226,11 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
         }
     }
     @Override
-    public Container createContainer(InventoryPlayer inventoryPlayer, EntityPlayer entityPlayer) {return new ContainerTorcherino(inventoryPlayer,this,entityPlayer);}
+    public Container createContainer(InventoryPlayer inventoryPlayer, EntityPlayer entityPlayer) {
+        return new ContainerTorcherino(inventoryPlayer,this,entityPlayer);
+    }
     @Override
-    public String getGuiID() {return String.valueOf(RegistryGui.GUI_TORCHERINO);}
-    @Override
-    public String getName() {return "TileTorcherinoBase";}
-    @Override
-    public boolean hasCustomName() {return false;}
+    public String getGuiID() {
+        return String.valueOf(RegistryGui.GUI_TORCHERINO);
+    }
 }
