@@ -16,10 +16,12 @@ public class TileTimeStorage extends TileExampleContainer implements ITileTimeSt
     @Override
     public void addTimeStorage(int time) {
         this.TimeStorage += time;
+        this.UpdateTile();
     }
     @Override
     public void removeTimeStorage(int time) {
         this.TimeStorage -= time;
+        this.UpdateTile();
     }
     @Override
     public int getTimeStorage() {

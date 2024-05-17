@@ -24,6 +24,7 @@ public class TileCollectors extends TileExampleContainer implements ITickable, I
             Cooldown = 0;
             if(TimeStorage < ConfigCollectorsMaxStorage){
                 TimeStorage++;
+                UpdateTile();
             }
         }
     }
@@ -67,10 +68,12 @@ public class TileCollectors extends TileExampleContainer implements ITickable, I
     @Override
     public void addTimeStorage(int time) {
         this.TimeStorage += time;
+        this.UpdateTile();
     }
     @Override
     public void removeTimeStorage(int time) {
         this.TimeStorage -= time;
+        this.UpdateTile();
     }
     @Override
     public int getTimeStorage() {

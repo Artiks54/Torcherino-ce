@@ -21,7 +21,8 @@ public class GuiTimeManipulator extends ExampleGuiContainer {
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         super.drawScreen(mouseX, mouseY, partialTicks);
-        percent = tile.getValue(1);
+        this.UpdateButtonEnabled();
+        this.percent = tile.getValue(1);
         int x = (this.width - xSize) / 2;
         int y = (this.height - ySize) / 2;
         this.fontRenderer.drawString(tile.getBlockType().getLocalizedName(), x+10,y+10, Color.ORANGE.getRGB());

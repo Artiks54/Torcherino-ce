@@ -18,8 +18,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class ExmapleBlock extends Block {
-    public ExmapleBlock(String name) {
+public abstract class ExampleBlock extends Block {
+    public ExampleBlock(String name) {
         super(Material.IRON);
         this.setRegistryName(name);
         this.setUnlocalizedName(name);

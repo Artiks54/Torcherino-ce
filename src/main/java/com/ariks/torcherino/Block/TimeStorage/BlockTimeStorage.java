@@ -1,6 +1,6 @@
 package com.ariks.torcherino.Block.TimeStorage;
 
-import com.ariks.torcherino.Block.ExmapleBlock;
+import com.ariks.torcherino.Block.ExampleBlock;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class BlockTimeStorage extends ExmapleBlock {
+public class BlockTimeStorage extends ExampleBlock {
     public BlockTimeStorage(String name) {
         super(name);
     }

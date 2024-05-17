@@ -109,10 +109,6 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
             }
         }
     }
-    public void UpdateTile(){
-        this.markDirty();
-        world.notifyBlockUpdate(pos,world.getBlockState(pos),world.getBlockState(pos),3);
-    }
     @SideOnly(Side.CLIENT)
     public AxisAlignedBB getAABBForRender() {
         return new AxisAlignedBB(-Radius,-Radius,-Radius,Radius+1,Radius+1,Radius+1);
@@ -126,12 +122,14 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
         return new AxisAlignedBB(X-Radius,Y-Radius,Z-Radius,X+Radius+1,Y+Radius+1,Z+Radius+1);
     }
     public void ToogleWork(){
+        UpdateTile();
         booleanMode++;
         if(booleanMode > 3){
             booleanMode = 0;
         }
     }
     public void ToogleRender(){
+        UpdateTile();
         booleanRender++;
         if(booleanRender > 3){
             booleanRender = 0;

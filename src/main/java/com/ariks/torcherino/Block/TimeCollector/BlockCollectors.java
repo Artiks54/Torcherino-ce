@@ -1,6 +1,6 @@
 package com.ariks.torcherino.Block.TimeCollector;
 
-import com.ariks.torcherino.Block.ExmapleBlock;
+import com.ariks.torcherino.Block.ExampleBlock;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class BlockCollectors extends ExmapleBlock {
+public class BlockCollectors extends ExampleBlock {
     public BlockCollectors(String name) {
         super(name);
     }

@@ -25,17 +25,22 @@ public class TileTimeManipulator extends TileExampleContainer implements ITickab
             if(Cooldown >= MaxCooldown){
                 Charged = 1;
             }
+            UpdateTile();
         }
     }
     public void SetDay(){
-            world.setWorldTime(1000);
-            Charged = 0;
-            Cooldown = 0;
+        world.setWorldTime(1000);
+        this.reset();
     }
     public void SetNight() {
-            world.setWorldTime(13000);
-            Charged = 0;
-            Cooldown = 0;
+        world.setWorldTime(13000);
+        this.reset();
+    }
+    protected void reset(){
+        Charged = 0;
+        Cooldown = 0;
+        percent = 0;
+        UpdateTile();
     }
     @Override
     public int getValue(int id) {
@@ -51,20 +56,18 @@ public class TileTimeManipulator extends TileExampleContainer implements ITickab
             this.percent = value;
         }
     }
-    public void UpdateTile(){
-        this.markDirty();
-        world.notifyBlockUpdate(pos,world.getBlockState(pos),world.getBlockState(pos),3);
-    }
     @Override
     public @NotNull NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         nbt.setInteger("Cooldown", Cooldown);
         nbt.setInteger("Charged",Charged);
+        nbt.setInteger("Percent",percent);
         return super.writeToNBT(nbt);
     }
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
         this.Cooldown = nbt.getInteger("Cooldown");
         this.Charged = nbt.getInteger("Charged");
+        this.percent = nbt.getInteger("Percent");
         super.readFromNBT(nbt);
     }
     @Override

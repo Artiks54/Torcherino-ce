@@ -1,6 +1,6 @@
 package com.ariks.torcherino.Block.ParticleCollector;
 
-import com.ariks.torcherino.Block.ExmapleBlock;
+import com.ariks.torcherino.Block.ExampleBlock;
 import com.ariks.torcherino.Items.TimeStorage;
 import com.ariks.torcherino.Torcherino;
 import net.minecraft.block.state.IBlockState;
@@ -16,7 +16,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
-public class BlockParticleCollector extends ExmapleBlock {
+public class BlockParticleCollector extends ExampleBlock {
     private final ParticleCollectorEnumLevel tileType;
     public BlockParticleCollector(String name, ParticleCollectorEnumLevel tileType) {
         super(name);

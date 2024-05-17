@@ -35,6 +35,7 @@ public class TileAcceleration extends TileExampleContainer implements ITickable,
     }
     private void timeDecrees(){
         if(TimeStorage > 0){
+            UpdateTile();
             UpdateTickArea();
             Cooldown++;
             if(Cooldown >= 19){
@@ -134,10 +135,12 @@ public class TileAcceleration extends TileExampleContainer implements ITickable,
     @Override
     public void addTimeStorage(int time) {
         this.TimeStorage += time;
+        this.UpdateTile();
     }
     @Override
     public void removeTimeStorage(int time) {
         this.TimeStorage -= time;
+        this.UpdateTile();
     }
     @Override
     public int getTimeStorage() {

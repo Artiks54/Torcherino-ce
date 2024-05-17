@@ -1,6 +1,6 @@
 package com.ariks.torcherino.Block.Torcherino;
 
-import com.ariks.torcherino.Block.ExmapleBlock;
+import com.ariks.torcherino.Block.ExampleBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class BlockTorcherino extends ExmapleBlock {
+public class BlockTorcherino extends ExampleBlock {
     private final TorcherinoEnumLevel tileType;
     public BlockTorcherino(String name,TorcherinoEnumLevel tileType) {
         super(name);

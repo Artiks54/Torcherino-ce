@@ -25,6 +25,9 @@ public abstract class TileExampleContainer extends TileEntity implements ITileHa
     public String getName() {
         return this.world.getBlockState(pos).getBlock().getUnlocalizedName();
     }
+    public int[] getFieldOrdinals() {
+        return new int[0];
+    }
     @Override
     public boolean hasCustomName() {
         return false;
@@ -36,6 +39,10 @@ public abstract class TileExampleContainer extends TileEntity implements ITileHa
     @Override
     public void onDataPacket(@NotNull NetworkManager net, SPacketUpdateTileEntity packet) {
         this.readFromNBT(packet.getNbtCompound());
+    }
+    public void UpdateTile(){
+        this.markDirty();
+        world.notifyBlockUpdate(pos,world.getBlockState(pos),world.getBlockState(pos),3);
     }
     @Override
     public boolean shouldRefresh(@NotNull World world, @NotNull BlockPos pos, @NotNull IBlockState oldState, @NotNull IBlockState newSate) {
