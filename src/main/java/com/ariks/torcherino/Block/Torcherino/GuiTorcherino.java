@@ -10,7 +10,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import java.awt.*;
 
 @SideOnly(Side.CLIENT)
 public class GuiTorcherino extends ExampleGuiContainer {
@@ -23,7 +22,7 @@ public class GuiTorcherino extends ExampleGuiContainer {
     private boolean drawCube;
 
     public GuiTorcherino(InventoryPlayer inventory, TileTorcherinoBase tileEntity, EntityPlayer player) {
-        super(new ContainerTorcherino(inventory, tileEntity, player));
+        super(new ContainerTorcherino(inventory, tileEntity, player),tileEntity);
         this.tile = tileEntity;
     }
     @Override
@@ -35,17 +34,17 @@ public class GuiTorcherino extends ExampleGuiContainer {
         int x = (this.width - xSize) / 2;
         int y = (this.height - ySize) / 2;
         buttonList.clear();
-        sliderRadius = new GuiSliderInt(tile, 11, x+10, y+20, 235, 20, min, tile.getValue(5), 1,LS.StrTextRadius,true);
-        sliderSpeed = new GuiSliderInt(tile, 12, x+10, y+45, 235, 20, min, tile.getValue(6), 2,LS.StrTextSpeed,true);
-        sliderR = new GuiSliderInt(tile, 13, x+10, y+20, 160, 20, min, maxColor, 8,"Red",true);
-        sliderG = new GuiSliderInt(tile, 14, x+10, y+45, 160, 20, min, maxColor, 9,"Green",true);
-        sliderB = new GuiSliderInt(tile, 15, x+10, y+70, 160, 20, min, maxColor, 10,"Blued",true);
+        sliderRadius = new GuiSliderInt(tile, 11, x+10, y+20, 235, 20, min, tile.getValue(5), 1,LS.StrTextRadius);
+        sliderSpeed = new GuiSliderInt(tile, 12, x+10, y+45, 235, 20, min, tile.getValue(6), 2,LS.StrTextSpeed);
+        sliderR = new GuiSliderInt(tile, 13, x+10, y+20, 160, 20, min, maxColor, 8,"Red");
+        sliderG = new GuiSliderInt(tile, 14, x+10, y+45, 160, 20, min, maxColor, 9,"Green");
+        sliderB = new GuiSliderInt(tile, 15, x+10, y+70, 160, 20, min, maxColor, 10,"Blued");
         buttonWork = new GuiButtonNetwork(tile,1, x+10, y+70, 235, 20, "",1);
         buttonRender = new GuiButtonNetwork(tile,2, x+45, y+95, 200, 20, "",2);
-        SettingsOpen = new net.minecraft.client.gui.GuiButton(3, x+35, y+95, 210, 20, "");
+        SettingsOpen = new GuiButton(3, x+35, y+95, 210, 20, "[ "+LS.StrTextRenderOff+" ]");
         buttonInfo = new GuiItemButton(5, x+10, y+95);
         buttonInfo.setStackRender(new ItemStack(Items.PAPER));
-        SettingsClosed = new net.minecraft.client.gui.GuiButton(4,x+10,y+95,30,20,"<-");
+        SettingsClosed = new GuiButton(4,x+10,y+95,30,20,"<-");
         this.ConfigRenderUpdate();
         buttonList.add(buttonInfo);
         buttonList.add(buttonWork);
@@ -139,15 +138,9 @@ public class GuiTorcherino extends ExampleGuiContainer {
             }
         }
     }
-    @Override
-    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-        int posX = (this.xSize / 2) -121;
-        this.fontRenderer.drawString(tile.getBlockType().getLocalizedName(), posX+5,10, Color.WHITE.getRGB());
-    }
     public void updateButton() {
         int renderGet = tile.getValue(4);
         int workGet = tile.getValue(3);
-        SettingsOpen.displayString = "[ "+LS.StrTextRenderOff+" ]";
         switch (workGet) {
             case 0: buttonWork.displayString = LS.StrTextWorking;break;
             case 1: buttonWork.displayString = LS.StrTextAlways;break;

@@ -7,36 +7,34 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.client.config.GuiButtonExt;
+import java.util.Objects;
 
 public class GuiSliderInt extends GuiButtonExt {
     private float sliderPosition = 1.0F;
     public boolean isMouseDown;
-    private final int min;
-    private final int max;
+    private final int min,max;
     private final String str;
-    private final TileExampleContainer responder;
-    private final int responderField;
-    private boolean SetString = false;
-    public GuiSliderInt(TileExampleContainer guiResponder, int idIn, int x, int y,
+    private final TileExampleContainer tile;
+    private final int valueId;
+    public GuiSliderInt(TileExampleContainer tile, int idIn, int x, int y,
                             int widthIn, int heightIn,
-                            final int minIn, final int maxIn, int fieldId,String string,boolean booleanString) {
+                            final int minIn, final int maxIn, int valueId,String string) {
         super(idIn, x, y, widthIn, heightIn, string);
         this.updateDisplay();
-        responder = guiResponder;
+        this.tile = tile;
         this.min = minIn;
         this.max = maxIn;
         this.str = string;
-        this.SetString = booleanString;
-        this.responderField = fieldId;
-        this.setSliderValue(responder.getValue(responderField), false);
+        this.valueId = valueId;
+        this.setSliderValue(tile.getValue(valueId), false);
     }
     public void setSliderValue(float value, boolean notifyResponder) {
-        this.sliderPosition = (value - this.getMin()) / (this.getMax() - this.getMin());
+        this.sliderPosition = (value - min) / (max - min);
         if (sliderPosition < 0) {
             sliderPosition = 0;
         }
-        if (sliderPosition > this.getMax()) {
-            sliderPosition = this.getMax();
+        if (sliderPosition > max) {
+            sliderPosition = max;
         }
         this.updateDisplay();
         if (notifyResponder) {
@@ -45,14 +43,14 @@ public class GuiSliderInt extends GuiButtonExt {
     }
     private void notifyResponder() {
         int val = (int) this.getSliderValue();
-        RegistryNetwork.network.sendToServer(new UpdateSlider(this.responder.getPos(), this.responderField, val));
+        RegistryNetwork.network.sendToServer(new UpdateSlider(this.tile.getPos(), this.valueId, val));
     }
     public float getSliderValue() {
-        float val = this.getMin() + (this.getMax() - this.getMin()) * this.sliderPosition;
+        float val = min + (max - min) * this.sliderPosition;
         return MathHelper.floor(val);
     }
     private void updateDisplay() {
-        if(SetString){
+        if(!Objects.equals(str, "")){
             this.displayString = str;
         } else {
             int val = (int) this.getSliderValue();
@@ -106,11 +104,5 @@ public class GuiSliderInt extends GuiButtonExt {
     @Override
     protected int getHoverState(boolean mouseOver) {
         return 0;
-    }
-    public int getMax() {
-        return max;
-    }
-    public int getMin() {
-        return min;
     }
 }

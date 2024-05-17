@@ -15,8 +15,29 @@ public class GuiTimeManipulator extends ExampleGuiContainer {
     private GuiButtonNetwork buttonSetDay,buttonSetNight;
     private int percent;
     public GuiTimeManipulator(InventoryPlayer inventory, TileTimeManipulator tileEntity, EntityPlayer player) {
-        super(new ContainerTimeManipulator(inventory, tileEntity,player));
+        super(new ContainerTimeManipulator(inventory, tileEntity,player),tileEntity);
         this.tile = tileEntity;
+    }
+    @Override
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+        super.drawScreen(mouseX, mouseY, partialTicks);
+        percent = tile.getValue(1);
+        int x = (this.width - xSize) / 2;
+        int y = (this.height - ySize) / 2;
+        this.fontRenderer.drawString(tile.getBlockType().getLocalizedName(), x+10,y+10, Color.ORANGE.getRGB());
+        this.fontRenderer.drawString(LS.StrTextProgress+" "+percent+"%",x+10,y+25, Color.WHITE.getRGB());
+    }
+    @Override
+    public void initGui() {
+        super.initGui();
+        int x = (this.width - xSize) / 2;
+        int y = (this.height - ySize) / 2;
+        buttonList.clear();
+        buttonSetDay = new GuiButtonNetwork(tile,1, x+10, y+95, 110, 20, TextFormatting.YELLOW+ LS.StrTextDay,1);
+        buttonSetNight = new GuiButtonNetwork(tile,2, x+135, y+95, 110, 20, TextFormatting.DARK_PURPLE+ LS.StrTextNight,2);
+        this.UpdateButtonEnabled();
+        buttonList.add(buttonSetDay);
+        buttonList.add(buttonSetNight);
     }
     private void UpdateButtonEnabled(){
         if(percent < 100) {
@@ -26,20 +47,5 @@ public class GuiTimeManipulator extends ExampleGuiContainer {
             buttonSetDay.enabled = true;
             buttonSetNight.enabled = true;
         }
-    }
-    @Override
-    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-        int posX = (this.xSize / 2) -121;
-        percent = tile.getValue(1);
-        this.fontRenderer.drawString(tile.getBlockType().getLocalizedName(), posX+4,10, Color.ORANGE.getRGB());
-        this.fontRenderer.drawString(LS.StrTextProgress+" "+percent+"%",posX+4,25, Color.WHITE.getRGB());
-        int x = (this.width - xSize) / 2;
-        int y = (this.height - ySize) / 2;
-        buttonList.clear();
-        buttonSetDay = new GuiButtonNetwork(tile,1, x+10, y+95, 110, 20, TextFormatting.YELLOW+ LS.StrTextDay,1);
-        buttonSetNight = new GuiButtonNetwork(tile,2, x+135, y+95, 110, 20, TextFormatting.DARK_PURPLE+ LS.StrTextNight,2);
-        this.UpdateButtonEnabled();
-        buttonList.add(buttonSetDay);
-        buttonList.add(buttonSetNight);
     }
 }
