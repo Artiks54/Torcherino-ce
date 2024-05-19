@@ -25,7 +25,7 @@ public abstract class TileExampleContainer extends TileEntity implements ITileHa
     public String getName() {
         return this.world.getBlockState(pos).getBlock().getUnlocalizedName();
     }
-    public int[] getFieldOrdinals() {
+    public int[] getValueList() {
         return new int[0];
     }
     @Override

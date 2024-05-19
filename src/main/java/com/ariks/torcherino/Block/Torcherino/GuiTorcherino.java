@@ -50,7 +50,7 @@ public class GuiTorcherino extends ExampleGuiContainer {
         buttonList.add(buttonWork);
         buttonList.add(sliderRadius);
         buttonList.add(sliderSpeed);
-        this.offStrings();
+        this.OffStrings();
     }
     private void ConfigRenderUpdate(){
         if(Config.BooleanRender){
@@ -75,11 +75,11 @@ public class GuiTorcherino extends ExampleGuiContainer {
             button.visible = visible;
         }
     }
-    private void offMain() {
+    private void OffMain() {
         setButtonStatus(new net.minecraft.client.gui.GuiButton[] {buttonWork, sliderRadius, sliderSpeed, SettingsOpen,buttonInfo}, false, false);
         setButtonStatus(new net.minecraft.client.gui.GuiButton[] {buttonRender, sliderR, sliderG, sliderB, SettingsClosed}, true, true);
     }
-    private void offStrings() {
+    private void OffStrings() {
         setButtonStatus(new net.minecraft.client.gui.GuiButton[] {sliderR, sliderG, sliderB, buttonRender, SettingsClosed}, false, false);
         setButtonStatus(new net.minecraft.client.gui.GuiButton[] {buttonWork, sliderRadius, sliderSpeed, SettingsOpen,buttonInfo}, true, true);
     }
@@ -101,18 +101,18 @@ public class GuiTorcherino extends ExampleGuiContainer {
     @Override
     protected void actionPerformed(net.minecraft.client.gui.GuiButton button) {
         if(button.id == 3){
-            this.offMain();
+            this.OffMain();
             drawCube = true;
         }
         if(button.id == 4){
-            this.offStrings();
+            this.OffStrings();
             this.DelCube();
         }
     }
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         super.drawScreen(mouseX, mouseY, partialTicks);
-        this.updateButton();
+        this.UpdateButton();
         if(Config.BooleanRender) {
             this.AddCube();
         }
@@ -132,13 +132,13 @@ public class GuiTorcherino extends ExampleGuiContainer {
                 } else if (button == buttonInfo) {
                     drawHoveringText(TextFormatting.GREEN+"Info",mouseX,mouseY-16);
                     drawHoveringText("Pos: " + "X: " + tile.getPos().getX() + " Y: " + tile.getPos().getY() + " Z: " + tile.getPos().getZ(), mouseX,mouseY);
-                    drawHoveringText("Max " + LS.StrTextRadius + ": " + tile.getValue(5), mouseX, mouseY+16);
-                    drawHoveringText(LS.StrTextSpeed + ": " + tile.getValue(7) * 100 + "%", mouseX, mouseY + 32);
+                    drawHoveringText("Max " + LS.StrTextRadius +": " + tile.getValue(5), mouseX, mouseY+16);
+                    drawHoveringText("Max " + LS.StrTextSpeed + ": " + tile.getValue(7) * 100 *tile.getValue(6) + "%", mouseX, mouseY + 32);
                 }
             }
         }
     }
-    public void updateButton() {
+    private void UpdateButton() {
         int renderGet = tile.getValue(4);
         int workGet = tile.getValue(3);
         switch (workGet) {

@@ -66,21 +66,21 @@ public class TileCollectors extends TileExampleContainer implements ITickable, I
         super.readFromNBT(nbt);
     }
     @Override
-    public void addTimeStorage(int time) {
+    public void AddTimeStorage(int time) {
         this.TimeStorage += time;
         this.UpdateTile();
     }
     @Override
-    public void removeTimeStorage(int time) {
+    public void RemoveTimeStorage(int time) {
         this.TimeStorage -= time;
         this.UpdateTile();
     }
     @Override
-    public int getTimeStorage() {
+    public int GetTimeStorage() {
         return this.TimeStorage;
     }
     @Override
-    public int getMaxStorage() {
+    public int GetMaxStorage() {
         return this.ConfigCollectorsMaxStorage;
     }
 }

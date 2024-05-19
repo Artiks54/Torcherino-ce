@@ -26,9 +26,9 @@ public abstract class ExampleGuiContainer extends GuiContainer {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         super.drawScreen(mouseX, mouseY, partialTicks);
         this.renderHoveredToolTip(mouseX,mouseY);
-        this.drawName();
+        this.DrawName();
     }
-    private void drawName(){
+    private void DrawName(){
         int x = (this.width - xSize) / 2;
         int y = (this.height - ySize) / 2;
         this.fontRenderer.drawString(tile.getBlockType().getLocalizedName(), x+10,y+10, Color.WHITE.getRGB());

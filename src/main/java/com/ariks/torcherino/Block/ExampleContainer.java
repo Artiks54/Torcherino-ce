@@ -10,21 +10,21 @@ public class ExampleContainer extends Container {
 
     protected TileExampleContainer tile;
     private int[] tileMap;
-    private void setTile(TileExampleContainer tile) {
+    private void SetTile(TileExampleContainer tile) {
         this.tile = tile;
-        this.tileMap = new int[tile.getFieldOrdinals().length];
+        this.tileMap = new int[tile.getValueList().length];
     }
     public ExampleContainer(TileExampleContainer tile) {
-        this.setTile(tile);
+        this.SetTile(tile);
     }
-    protected void syncFields() {
-        int fieldId;
+    protected void SyncValue() {
+        int ValueId;
         for (IContainerListener listener : this.listeners) {
-            for (int j = 0; j < tile.getFieldOrdinals().length; j++) {
-                fieldId = tile.getFieldOrdinals()[j];
-                int value = this.tile.getValue(fieldId);
+            for (int j = 0; j < tile.getValueList().length; j++) {
+                ValueId = tile.getValueList()[j];
+                int value = this.tile.getValue(ValueId);
                 if (this.tileMap[j] != value) {
-                    listener.sendWindowProperty(this, fieldId, value);
+                    listener.sendWindowProperty(this, ValueId, value);
                     this.tileMap[j] = value;
                 }
             }
@@ -33,10 +33,11 @@ public class ExampleContainer extends Container {
     @Override
     public void detectAndSendChanges() {
         if (tile != null) {
-            this.syncFields();
+            this.SyncValue();
         }
         super.detectAndSendChanges();
     }
+
     @Override
     @SideOnly(Side.CLIENT)
     public void updateProgressBar(int id, int data) {

@@ -31,9 +31,9 @@ public class TileAcceleration extends TileExampleContainer implements ITickable,
     @Override
     public void update() {
         if (world.isRemote) return;
-        this.timeDecrees();
+        this.TimeDecrees();
     }
-    private void timeDecrees(){
+    private void TimeDecrees(){
         if(TimeStorage > 0){
             UpdateTile();
             UpdateTickArea();
@@ -133,21 +133,21 @@ public class TileAcceleration extends TileExampleContainer implements ITickable,
         return String.valueOf(RegistryGui.GUI_ACELERATION);
     }
     @Override
-    public void addTimeStorage(int time) {
+    public void AddTimeStorage(int time) {
         this.TimeStorage += time;
         this.UpdateTile();
     }
     @Override
-    public void removeTimeStorage(int time) {
+    public void RemoveTimeStorage(int time) {
         this.TimeStorage -= time;
         this.UpdateTile();
     }
     @Override
-    public int getTimeStorage() {
+    public int GetTimeStorage() {
         return this.TimeStorage;
     }
     @Override
-    public int getMaxStorage() {
+    public int GetMaxStorage() {
         return Integer.MAX_VALUE;
     }
 }

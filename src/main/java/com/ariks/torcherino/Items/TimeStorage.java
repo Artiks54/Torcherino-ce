@@ -71,18 +71,18 @@ public class TimeStorage extends itemBase {
                     NBTTagCompound tagCompound = heldItem.getTagCompound();
                     assert tagCompound != null;
                     int storedTime = tagCompound.getInteger("Time");
-                    int freeSpace = tile.getMaxStorage() - tile.getTimeStorage();
+                    int freeSpace = tile.GetMaxStorage() - tile.GetTimeStorage();
                     if (!player.isSneaking()) {
                         if (freeSpace > 0) {
                             int transferTime = Math.min(storedTime, freeSpace);
                             tagCompound.setInteger("Time", storedTime - transferTime);
-                            tile.addTimeStorage(transferTime);
+                            tile.AddTimeStorage(transferTime);
                             worldIn.notifyBlockUpdate(pos, worldIn.getBlockState(pos), worldIn.getBlockState(pos), 3); // Обновляем состояние тайла при добавлении времени
                         }
                     } else {
-                        int transferTime = Math.min(tile.getTimeStorage(), MaxConfigStorageTimeItem() - storedTime);
+                        int transferTime = Math.min(tile.GetTimeStorage(), MaxConfigStorageTimeItem() - storedTime);
                         tagCompound.setInteger("Time", storedTime + transferTime);
-                        tile.removeTimeStorage(transferTime);
+                        tile.RemoveTimeStorage(transferTime);
                         worldIn.notifyBlockUpdate(pos, worldIn.getBlockState(pos), worldIn.getBlockState(pos), 3); // Обновляем состояние тайла при уменьшении времени
                     }
                 }

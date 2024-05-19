@@ -30,13 +30,13 @@ public class TileTimeManipulator extends TileExampleContainer implements ITickab
     }
     public void SetDay(){
         world.setWorldTime(1000);
-        this.reset();
+        this.Reset();
     }
     public void SetNight() {
         world.setWorldTime(13000);
-        this.reset();
+        this.Reset();
     }
-    protected void reset(){
+    private void Reset(){
         Charged = 0;
         Cooldown = 0;
         percent = 0;

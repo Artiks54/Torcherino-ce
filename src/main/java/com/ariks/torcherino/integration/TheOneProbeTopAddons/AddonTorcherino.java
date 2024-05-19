@@ -26,15 +26,15 @@ public class AddonTorcherino extends AddonBlank {
         if(Config.IntegrationTheOneProbeTA){
             if (tile instanceof TileAcceleration) {
                 TileAcceleration TileAcceleration = (TileAcceleration) tile;
-                probeInfo.text("Time: "+TileAcceleration.getTimeStorage());
+                probeInfo.text("Time: "+TileAcceleration.GetTimeStorage());
             }
             if (tile instanceof TileTimeStorage) {
                 TileTimeStorage tileTimeStorage = (TileTimeStorage) tile;
-                probeInfo.text("Time: " + tileTimeStorage.getTimeStorage());
+                probeInfo.text("Time: " + tileTimeStorage.GetTimeStorage());
             }
             if (tile instanceof TileCollectors) {
                 TileCollectors TileCollectors = (TileCollectors) tile;
-                probeInfo.text("Time: " + TileCollectors.getTimeStorage());
+                probeInfo.text("Time: " + TileCollectors.GetTimeStorage());
             }
             if (tile instanceof TileTimeManipulator) {
                 TileTimeManipulator TileTimeManipulator = (TileTimeManipulator) tile;

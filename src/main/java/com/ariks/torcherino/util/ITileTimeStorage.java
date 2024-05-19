@@ -1,8 +1,8 @@
 package com.ariks.torcherino.util;
 
 public interface ITileTimeStorage {
-    void addTimeStorage(int time);
-    void removeTimeStorage(int time);
-    int getTimeStorage();
-    int getMaxStorage();
+    void AddTimeStorage(int time);
+    void RemoveTimeStorage(int time);
+    int GetTimeStorage();
+    int GetMaxStorage();
 }
