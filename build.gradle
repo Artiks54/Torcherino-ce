@@ -68,6 +68,7 @@ dependencies {
             version: "${minecraft_version}-${forge_version}"
     ])
     compileOnly "curse.maven:projecte-226410:2702991"
+    runtimeOnly "curse.maven:projecte-226410:2702991"
     runtimeOnly "curse.maven:the-one-probe-245211:2667280"
     compileOnly "curse.maven:the-one-probe-245211:2667280"
     runtimeOnly "curse.maven:top-addons-247111:2887479"
