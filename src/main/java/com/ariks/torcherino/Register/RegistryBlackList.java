@@ -35,7 +35,7 @@ public class RegistryBlackList {
         for (Block block : RegistryBlock.BLOCKS) {
             RegistryAcceleration.blacklistBlock(block);
             if (Config.DebugMod) {
-                Torcherino.logger.info(Torcherino.MOD_NAME + ": " + "Block add black list to aceleration: " + block);
+                Torcherino.logger.info(Torcherino.MOD_NAME + ": " + "Block add black list to aceleration: " + block.getUnlocalizedName());
             }
         }
         //Tile-Torcherino

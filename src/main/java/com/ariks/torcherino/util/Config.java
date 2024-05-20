@@ -60,7 +60,7 @@ public class Config {
             config.setCategoryComment(TileTorcherino,"TileEntity settings .Before changing these values, it is best to destroy the already installed TileEntity \n" +
                     "If this is not possible, then in order for the value in TileEntity to change, it will need to be set again.");
 //BlackList
-            blacklistedBlocks = config.getStringList("blacklistedBlocks", "blacklist", new String[]{}, "modid:unlocalized");
+            blacklistedBlocks = config.getStringList("blacklistedBlocks", "blacklist", new String[]{}, "modid:unlocalized,  Example: projecte:collector_mk1");
             blacklistedTiles = config.getStringList("blacklistedTiles", "blacklist", new String[]{}, "Fully qualified class name");
 //General
             BooleanHelloMsg = config.getBoolean("Hello_Message",General,true,"Send chat hello message");
