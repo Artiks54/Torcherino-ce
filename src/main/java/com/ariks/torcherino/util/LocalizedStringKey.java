@@ -15,7 +15,6 @@ public class LocalizedStringKey {
      public String StrTextRenderLine = I18n.format(modid+"gui.text.render.line");
      public String StrTextRenderBox = I18n.format(modid+"gui.text.render.box");
      public String StrTextRenderComb = I18n.format(modid+"gui.text.render.comb");
-     public String StrTextRenderOff = I18n.format(modid+"gui.text.render.off");
      public String StrTextRenderNull = I18n.format(modid+"gui.text.render.null");
      //Time Manipulator tile
      public String StrTextDay = I18n.format(modid+"gui.text.tile_time_manipulator.day");

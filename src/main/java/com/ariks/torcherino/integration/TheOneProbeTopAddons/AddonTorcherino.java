@@ -60,10 +60,14 @@ public class AddonTorcherino extends AddonBlank {
                 else if(TileTorcherinoBase.getValue(3) == 3){
                     probeInfo.text("Redstone reverse mode");
                 }
-                if (TileTorcherinoBase.getValue(1) >= 1) {
-                    probeInfo.text("Radius: " + TileTorcherinoBase.getValue(1) + "x" + TileTorcherinoBase.getValue(1) + "x" + TileTorcherinoBase.getValue(1));
-                } else {
-                    probeInfo.text("Radius");
+                if (TileTorcherinoBase.getValue(15) >= 1) {
+                    probeInfo.text("X: " + TileTorcherinoBase.getValue(15));
+                }
+                if (TileTorcherinoBase.getValue(16) >= 1) {
+                    probeInfo.text("Y: " + TileTorcherinoBase.getValue(16));
+                }
+                if (TileTorcherinoBase.getValue(17) >= 1) {
+                    probeInfo.text("Z: " + TileTorcherinoBase.getValue(17));
                 }
                 if (TileTorcherinoBase.getValue(2) >= 1) {
                     probeInfo.text("Speed: " + TileTorcherinoBase.getValue(2) * TileTorcherinoBase.MaxAcceleration * 100 + "%");

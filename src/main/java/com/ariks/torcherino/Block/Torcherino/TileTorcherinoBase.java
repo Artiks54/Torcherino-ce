@@ -23,7 +23,8 @@ import java.util.Random;
 
 public class TileTorcherinoBase extends TileExampleContainer implements ITickable {
     private final Random rand = new Random();
-    private int Radius,Speed,booleanMode,booleanRender,xMin,xMax,yMin,yMax,zMin,zMax,cooldown;
+    private int RadiusX,RadiusY,RadiusZ;
+    private int Speed,booleanMode,booleanRender,xMin,xMax,yMin,yMax,zMin,zMax,cooldown;
     private int R = 255;
     private int G = 0;
     private int B = 0;
@@ -42,7 +43,7 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
         if (booleanRender != 0 || booleanMode != 0) {
             UpdateChangeArea();
         }
-        if (Radius != 0 && Speed != 0 && (booleanMode == 1 || redstoneMode)) {
+        if ((RadiusX != 0 || RadiusY !=0 || RadiusZ !=0) && Speed != 0 && (booleanMode == 1 || redstoneMode)) {
             UpdateTickArea();
             WorkVisual();
         }
@@ -61,8 +62,8 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
         }
     }
     private void UpdateChangeArea() {
-        BlockPos minPos = pos.add(-Radius,-Radius,-Radius);
-        BlockPos maxPos = pos.add(+Radius,+Radius,+Radius);
+        BlockPos minPos = pos.add(-RadiusX,-RadiusY,-RadiusZ);
+        BlockPos maxPos = pos.add(+RadiusX,+RadiusY,+RadiusZ);
         xMin = minPos.getX();
         yMin = minPos.getY();
         zMin = minPos.getZ();
@@ -111,7 +112,7 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
     }
     @SideOnly(Side.CLIENT)
     public AxisAlignedBB getAABBForRender() {
-        return new AxisAlignedBB(-Radius,-Radius,-Radius,Radius+1,Radius+1,Radius+1);
+        return new AxisAlignedBB(-RadiusX,-RadiusY,-RadiusZ,RadiusX+1,RadiusY+1,RadiusZ+1);
     }
     @Override
     @SideOnly(Side.CLIENT)
@@ -119,7 +120,7 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
         final int X = getPos().getX();
         final int Y = getPos().getY();
         final int Z = getPos().getZ();
-        return new AxisAlignedBB(X-Radius,Y-Radius,Z-Radius,X+Radius+1,Y+Radius+1,Z+Radius+1);
+        return new AxisAlignedBB(X-RadiusX,Y-RadiusY,Z-RadiusZ,X+RadiusX+1,Y+RadiusY+1,Z+RadiusZ+1);
     }
     public void ToogleWork(){
         UpdateTile();
@@ -140,12 +141,14 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
         nbt.setInteger("MaxModes",this.MaxModes);
         nbt.setInteger("MaxRadius",this.MaxRadius);
         nbt.setInteger("Speed", this.Speed);
-        nbt.setInteger("Radius", this.Radius);
         nbt.setInteger("mode",this.booleanMode);
         nbt.setInteger("render", this.booleanRender);
         nbt.setInteger("R", this.R);
         nbt.setInteger("G", this.G);
         nbt.setInteger("B", this.B);
+        nbt.setInteger("RadiusX", this.RadiusX);
+        nbt.setInteger("RadiusY", this.RadiusY);
+        nbt.setInteger("RadiusZ", this.RadiusZ);
         nbt.setBoolean("Red",this.redstoneSignal);
         return super.writeToNBT(nbt);
     }
@@ -155,20 +158,19 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
         this.MaxModes = nbt.getInteger("MaxModes");
         this.MaxRadius = nbt.getInteger("MaxRadius");
         this.Speed = nbt.getInteger("Speed");
-        this.Radius = nbt.getInteger("Radius");
         this.booleanMode = nbt.getInteger("mode");
         this.booleanRender = nbt.getInteger("render");
         this.R = nbt.getInteger("R");
         this.G = nbt.getInteger("G");
         this.B = nbt.getInteger("B");
+        this.RadiusX = nbt.getInteger("RadiusX");
+        this.RadiusY = nbt.getInteger("RadiusY");
+        this.RadiusZ = nbt.getInteger("RadiusZ");
         this.redstoneSignal = nbt.getBoolean("Red");
         super.readFromNBT(nbt);
     }
     @Override
     public int getValue(int id) {
-        if (id == 1) {
-            return this.Radius;
-        }
         if (id == 2) {
             return this.Speed;
         }
@@ -196,14 +198,20 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
         if (id == 10) {
             return this.B;
         }
+        if (id == 15) {
+            return this.RadiusX;
+        }
+        if (id == 16) {
+            return this.RadiusY;
+        }
+        if (id == 17) {
+            return this.RadiusZ;
+        }
         return id;
     }
     @Override
     public void setValue(int id, int value)
     {
-        if (id == 1) {
-            this.Radius = value;
-        }
         if (id == 2) {
             this.Speed = value;
         }
@@ -221,6 +229,15 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
         }
         if(id == 10){
             this.B = value;
+        }
+        if(id == 15){
+            this.RadiusX = value;
+        }
+        if(id == 16){
+            this.RadiusY = value;
+        }
+        if(id == 17){
+            this.RadiusZ = value;
         }
     }
     @Override

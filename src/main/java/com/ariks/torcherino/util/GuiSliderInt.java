@@ -7,24 +7,25 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.client.config.GuiButtonExt;
-import java.util.Objects;
 
 public class GuiSliderInt extends GuiButtonExt {
     private float sliderPosition = 1.0F;
     public boolean isMouseDown;
     private final int min,max;
     private final String str;
+    private final int mode;
     private final TileExampleContainer tile;
     private final int valueId;
     public GuiSliderInt(TileExampleContainer tile, int idIn, int x, int y,
                             int widthIn, int heightIn,
-                            final int minIn, final int maxIn, int valueId,String string) {
+                            final int minIn, final int maxIn, int valueId,String string,int mode) {
         super(idIn, x, y, widthIn, heightIn, string);
         this.updateDisplay();
         this.tile = tile;
         this.min = minIn;
         this.max = maxIn;
         this.str = string;
+        this.mode = mode;
         this.valueId = valueId;
         this.setSliderValue(tile.getValue(valueId), false);
     }
@@ -50,9 +51,13 @@ public class GuiSliderInt extends GuiButtonExt {
         return MathHelper.floor(val);
     }
     private void updateDisplay() {
-        if(!Objects.equals(str, "")){
+        if(mode == 1) {
+            this.displayString = (str + " " + this.getSliderValue());
+        }
+        if(mode == 2) {
             this.displayString = str;
-        } else {
+        }
+        if(mode == 3) {
             int val = (int) this.getSliderValue();
             this.displayString = String.valueOf(val);
         }
