@@ -1,4 +1,6 @@
 ﻿# Torcherino-Community-Edition
+
+
 ![Version](https://img.shields.io/badge/VERSION-red.svg?style=for-the-badge)
 ![ver](https://img.shields.io/badge/7.7.9-red.svg?style=for-the-badge)
 
@@ -9,6 +11,13 @@
 ![Gradle](https://img.shields.io/badge/Gradle-02303A.svg?style=for-the-badge&logo=Gradle&logoColor=white)
 [![GitHub license](https://img.shields.io/badge/License-GPLv3-blue.svg?style=for-the-badge)](https://www.gnu.org/licenses/gpl-3.0)
 [![Discord](https://img.shields.io/badge/Discord-Join-1.svg?style=for-the-badge)](https://discord.gg/Mp5sEpE3B3)
+
+<p align="center">
+    <a href="https://discord.gg/Mp5sEpE3B3">
+        <img src="https://img.shields.io/discord/308323056592486420?logo=discord"
+            alt="chat on Discord"></a>
+</p>
+
 ## Websites Download mod.
 ## 1)https://modrinth.com/mod/torcherino-ce
 ## 2)https://www.curseforge.com/minecraft/mc-mods/torcherino-community-edition
