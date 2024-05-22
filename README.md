@@ -5,7 +5,7 @@
 ![ver](https://img.shields.io/badge/7.7.9-red.svg?style=for-the-badge)
 
 [![CurseForge name](https://cf.way2muchnoise.eu/title/919322.svg?badge_style=for_the_badge)](https://www.curseforge.com/minecraft/mc-mods/torcherino-community-edition)
-![CurseForge name](https://cf.way2muchnoise.eu/torcherino-community-edition.svg?badge_style=for_the_badge)
+[![CurseForge name](https://cf.way2muchnoise.eu/torcherino-community-edition.svg?badge_style=for_the_badge)](https://www.curseforge.com/minecraft/mc-mods/torcherino-community-edition)
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white)
 ![IntelliJ IDEA](https://img.shields.io/badge/IntelliJIDEA-000000.svg?style=for-the-badge&logo=intellij-idea&logoColor=white)
 ![Gradle](https://img.shields.io/badge/Gradle-02303A.svg?style=for-the-badge&logo=Gradle&logoColor=white)
