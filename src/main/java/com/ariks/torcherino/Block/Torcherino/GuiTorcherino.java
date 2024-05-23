@@ -147,9 +147,9 @@ public class GuiTorcherino extends GuiContainer {
         String stringR = ("Red: " + tile.getValue(8));
         String stringG = ("Green: " + tile.getValue(9));
         String stringB = ("Blue: " + tile.getValue(10));
-        String radiusX = ("X: "+tile.getValue(15));
-        String radiusY = ("Y: "+tile.getValue(16));
-        String radiusZ = ("Z: "+tile.getValue(17));
+        String radiusX = ("X Range: "+tile.getValue(15));
+        String radiusY = ("Y Range: "+tile.getValue(16));
+        String radiusZ = ("Z Range: "+tile.getValue(17));
         sliderX.displayString = radiusX;
         sliderY.displayString = radiusY;
         sliderZ.displayString = radiusZ;
