@@ -30,7 +30,7 @@ public abstract class ExampleBlock extends Block {
         this.setHarvestLevel("pickaxe", 2);
     }
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, EntityPlayer playerIn, @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
         if(playerIn.getHeldItem(hand).getItem() instanceof TimeStorage){
             return false;
         }
@@ -51,9 +51,9 @@ public abstract class ExampleBlock extends Block {
     }
     public boolean isOpaqueCube(@NotNull IBlockState state) {return false;}
     @Override
-    public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos) {return false;}
+    public boolean isNormalCube(@NotNull IBlockState state, @NotNull IBlockAccess world, @NotNull BlockPos pos) {return false;}
     @Override
-    public boolean isFullCube(IBlockState state) {return false;}
+    public boolean isFullCube(@NotNull IBlockState state) {return false;}
     @Override
     public boolean hasTileEntity(@NotNull IBlockState state) {return true;}
     @Override

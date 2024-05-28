@@ -5,6 +5,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 
 public class ExampleContainer extends Container {
 
@@ -37,14 +38,13 @@ public class ExampleContainer extends Container {
         }
         super.detectAndSendChanges();
     }
-
     @Override
     @SideOnly(Side.CLIENT)
     public void updateProgressBar(int id, int data) {
         tile.setValue(id, data);
     }
     @Override
-    public boolean canInteractWith(EntityPlayer entityPlayer) {
+    public boolean canInteractWith(@NotNull EntityPlayer entityPlayer) {
         return this.tile.isUsableByPlayer(entityPlayer);
     }
 }

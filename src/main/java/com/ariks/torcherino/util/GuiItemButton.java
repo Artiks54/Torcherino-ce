@@ -7,6 +7,7 @@ import com.ariks.torcherino.network.UpdateTilePacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.client.config.GuiButtonExt;
+import org.jetbrains.annotations.NotNull;
 
 public class GuiItemButton extends GuiButtonExt {
     private ItemStack stack = ItemStack.EMPTY;
@@ -25,7 +26,7 @@ public class GuiItemButton extends GuiButtonExt {
             }
         }
     @Override
-    public boolean mousePressed(Minecraft mc, int mouseX, int mouseY) {
+    public boolean mousePressed(@NotNull Minecraft mc, int mouseX, int mouseY) {
         if (super.mousePressed(mc, mouseX, mouseY)) {
             if (valueChange != 0) {
                 RegistryNetwork.network.sendToServer(new UpdateTilePacket(tile.getPos(), valueChange));
@@ -33,9 +34,6 @@ public class GuiItemButton extends GuiButtonExt {
             }
         }
         return false;
-    }
-    public ItemStack getStackRender() {
-        return stack;
     }
     public void setStackRender(ItemStack stackRender) {
         this.stack = stackRender;

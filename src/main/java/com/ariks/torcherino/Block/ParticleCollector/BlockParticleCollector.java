@@ -27,7 +27,7 @@ public class BlockParticleCollector extends ExampleBlock {
         return new AxisAlignedBB(0.062, 0, 0.062, 0.938, 0.875, 0.938);
     }
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state, EntityPlayer playerIn, @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
         if(playerIn.getHeldItem(hand).getItem() instanceof TimeStorage){
             return false;
         }

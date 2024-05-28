@@ -7,6 +7,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.client.config.GuiButtonExt;
+import org.jetbrains.annotations.NotNull;
 
 public class GuiSliderInt extends GuiButtonExt {
     private float sliderPosition = 1.0F;
@@ -63,7 +64,7 @@ public class GuiSliderInt extends GuiButtonExt {
         }
     }
     @Override
-    public boolean mousePressed(Minecraft mc, int mouseX, int mouseY) {
+    public boolean mousePressed(@NotNull Minecraft mc, int mouseX, int mouseY) {
         if (super.mousePressed(mc, mouseX, mouseY)) {
             this.sliderPosition = (float) (mouseX - (this.x + 4)) / (float) (this.width - 8);
             if (this.sliderPosition < 0.0F) {
@@ -82,7 +83,7 @@ public class GuiSliderInt extends GuiButtonExt {
         }
     }
     @Override
-    protected void mouseDragged(Minecraft mc, int mouseX, int mouseY) {
+    protected void mouseDragged(@NotNull Minecraft mc, int mouseX, int mouseY) {
         super.mouseDragged(mc, mouseX, mouseY);
         if (this.visible) {
             if (this.isMouseDown) {

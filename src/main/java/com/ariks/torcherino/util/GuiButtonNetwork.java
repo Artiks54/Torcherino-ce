@@ -5,6 +5,7 @@ import com.ariks.torcherino.Register.RegistryNetwork;
 import com.ariks.torcherino.network.UpdateTilePacket;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.client.config.GuiButtonExt;
+import org.jetbrains.annotations.NotNull;
 
 public class GuiButtonNetwork extends GuiButtonExt {
     private final int valueChange;
@@ -16,7 +17,7 @@ public class GuiButtonNetwork extends GuiButtonExt {
         this.tile = tile;
     }
     @Override
-    public boolean mousePressed(Minecraft mc, int mouseX, int mouseY) {
+    public boolean mousePressed(@NotNull Minecraft mc, int mouseX, int mouseY) {
         if (super.mousePressed(mc, mouseX, mouseY)) {
             RegistryNetwork.network.sendToServer(new UpdateTilePacket(tile.getPos(),valueChange));
             return true;
