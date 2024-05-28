@@ -22,7 +22,7 @@ public abstract class TileExampleContainer extends TileEntity implements ITileHa
         return new SPacketUpdateTileEntity(this.pos, 3, this.getUpdateTag());
     }
     @Override
-    public String getName() {
+    public @NotNull String getName() {
         return this.world.getBlockState(pos).getBlock().getUnlocalizedName();
     }
     public int[] getValueList() {
