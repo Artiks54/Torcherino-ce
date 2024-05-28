@@ -24,6 +24,7 @@ public abstract class ExampleGuiContainer extends GuiContainer {
     }
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+        this.drawDefaultBackground();
         super.drawScreen(mouseX, mouseY, partialTicks);
         this.renderHoveredToolTip(mouseX,mouseY);
         this.DrawName();
@@ -35,7 +36,6 @@ public abstract class ExampleGuiContainer extends GuiContainer {
     }
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-        this.drawDefaultBackground();
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(texture);
         int x = (this.width - xSize) / 2;

@@ -22,7 +22,6 @@ public class TileParticleCollector extends TileEntityLockable implements ITickab
     private int progress;
     private int MaxProgress = Config.RequiredGeneratorParticle;
     public int percent;
-
     @Override
     public void update() {
         if (!world.isRemote) {
@@ -46,7 +45,7 @@ public class TileParticleCollector extends TileEntityLockable implements ITickab
         }
     }
     @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+    public @NotNull NBTTagCompound writeToNBT(@NotNull NBTTagCompound nbt) {
         super.writeToNBT(nbt);
         nbt.setTag("inventory", inventory.serializeNBT());
         nbt.setInteger("progress", progress);
@@ -54,7 +53,7 @@ public class TileParticleCollector extends TileEntityLockable implements ITickab
         return nbt;
     }
     @Override
-    public void readFromNBT(NBTTagCompound nbt) {
+    public void readFromNBT(@NotNull NBTTagCompound nbt) {
         super.readFromNBT(nbt);
         inventory.deserializeNBT(nbt.getCompoundTag("inventory"));
         progress = nbt.getInteger("progress");

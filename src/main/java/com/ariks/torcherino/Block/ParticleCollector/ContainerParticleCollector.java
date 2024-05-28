@@ -17,7 +17,7 @@ public class ContainerParticleCollector extends Container {
 
     public ContainerParticleCollector(InventoryPlayer playerInventory, TileParticleCollector tileEntity, EntityPlayer player) {
         this.tileEntity = tileEntity;
-        this.addSlotToContainer(new Slot(tileEntity, 0, 141, 36) {
+        this.addSlotToContainer(new Slot(tileEntity, 0, 80, 31) {
             @Override
             public boolean isItemValid(@NotNull ItemStack stack) {
                 return false;
@@ -25,11 +25,11 @@ public class ContainerParticleCollector extends Container {
         });
         for (int i = 0; i < 3; ++i) {
             for (int j = 0; j < 9; ++j) {
-                this.addSlotToContainer(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+                this.addSlotToContainer(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 86 + i * 18));
             }
         }
         for (int k = 0; k < 9; ++k) {
-            this.addSlotToContainer(new Slot(playerInventory, k, 8 + k * 18, 142));
+            this.addSlotToContainer(new Slot(playerInventory, k, 8 + k * 18, 144));
         }
     }
     @Override
@@ -100,7 +100,7 @@ public class ContainerParticleCollector extends Container {
         return this.tileEntity.isUsableByPlayer(entityPlayer);
     }
     @Override
-    public void onContainerClosed(EntityPlayer playerIn) {
+    public void onContainerClosed(@NotNull EntityPlayer playerIn) {
         super.onContainerClosed(playerIn);
         this.tileEntity.closeInventory(playerIn);
     }

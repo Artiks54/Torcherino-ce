@@ -23,18 +23,15 @@ import java.util.List;
 
 public class TimeStorage extends itemBase {
     private final EnumStorage enumStorage;
-
     protected int MaxConfigStorageTimeItem() {
         return enumStorage.getStorage();
     }
-
     public TimeStorage(String name, EnumStorage enumStorage) {
         super(name);
         this.enumStorage = enumStorage;
         this.setMaxStackSize(1);
         this.setNoRepair();
     }
-
     @Override
     public void onUpdate(@NotNull ItemStack stack, @NotNull World worldIn, @NotNull Entity entityIn, int itemSlot, boolean isSelected) {
         if (!stack.hasTagCompound()) {
@@ -43,7 +40,6 @@ public class TimeStorage extends itemBase {
             stack.getTagCompound().setInteger("Time", 0);
         }
     }
-
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, @NotNull List<String> tooltip, @NotNull ITooltipFlag flagIn) {
