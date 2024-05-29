@@ -20,8 +20,7 @@ public class GuiParticleCollector extends GuiContainer {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         this.drawDefaultBackground();
         super.drawScreen(mouseX, mouseY, partialTicks);
-        this.renderHoveredToolTip(mouseX,mouseY);
-    }
+        this.renderHoveredToolTip(mouseX,mouseY);}
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -29,8 +28,8 @@ public class GuiParticleCollector extends GuiContainer {
         int x = (this.width - xSize) / 2;
         int y = (this.height - ySize) / 2;
         drawTexturedModalRect(x, y, 0, 0, xSize,ySize);
-        int progress = tile.getField(1);
-        int maxProgress = tile.getField(2);
+        int progress = tile.getValue(1);
+        int maxProgress = tile.getValue(2);
         int fix = 1;
         int wightTexture = 34;
         int heightTexture = 34;
