@@ -128,7 +128,7 @@ public class RegistryReciep {
                 'C', new ItemStack(time_casing),
                 'E', new ItemStack(time_element),
                 'L', new ItemStack(Time_collectors),
-                'D', new ItemStack(gold_Clock),
+                'D', new ItemStack(lapis_Clock),
                 'A', new ItemStack(Time_Acceleration));
         //TimeStorage
         GameRegistry.addShapedRecipe(
@@ -312,7 +312,7 @@ public class RegistryReciep {
                 new ResourceLocation(Torcherino.MOD_ID + ":" + "compressedtorch"), null,
                 new ItemStack(comp_Torch),
                 "AXA",
-                "XCX",
+                "ACA",
                 "AXA",
                 'A', new ItemStack(Blocks.TORCH),
                 'X', new ItemStack(time_ingot),
