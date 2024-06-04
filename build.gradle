@@ -77,11 +77,11 @@ repositories {
             includeGroup "curse.maven"
         }
     }
-    maven { // Мавен, который поддерживает JEI.
+    maven {
         name = "Progwml6 maven"
         url = "http://dvs1.progwml6.com/files/maven"
     }
-    maven { // Мавен, который поддерживает JEI, для резерва.
+    maven {
         name = "ModMaven"
         url = "modmaven.k-4u.nl"
     }
@@ -95,11 +95,13 @@ dependencies {
     ])
     implementation 'org.jetbrains:annotations:23.0.0'
     compileOnly "curse.maven:projecte-226410:2702991"
+    runtimeOnly "curse.maven:projecte-226410:2702991"
     compileOnly "curse.maven:the-one-probe-245211:2667280"
     runtimeOnly "curse.maven:the-one-probe-245211:2667280"
     compileOnly "curse.maven:top-addons-247111:2887479"
     runtimeOnly "curse.maven:top-addons-247111:2887479"
     compileOnly "curse.maven:jei-238222:5101347"
+    runtimeOnly "curse.maven:jei-238222:5101347"
     runtimeOnly fileTree('lib')
     compileOnly fileTree('lib')
     compileOnly fileTree('libs')
