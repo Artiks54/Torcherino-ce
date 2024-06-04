@@ -47,4 +47,8 @@ public class ExampleContainer extends Container {
     public boolean canInteractWith(@NotNull EntityPlayer entityPlayer) {
         return this.tile.isUsableByPlayer(entityPlayer);
     }
+    @Override
+    public void onContainerClosed(@NotNull EntityPlayer playerIn) {
+        super.onContainerClosed(playerIn);
+    }
 }

@@ -65,8 +65,8 @@ public class Config {
 //General
             BooleanHelloMsg = config.getBoolean("Hello_Message",General,true,"Send chat hello message");
             DebugMod = config.getBoolean("Debug_Mode",General,false,"Debug modes");
-            IntegrationProjectE = config.getBoolean("integration_top_addons",General,true,"Integration TheOneProbe-TopAddons");
-            IntegrationTheOneProbeTA = config.getBoolean("integration_ProjectE",General,true,"Integration ProjectE");
+            IntegrationTheOneProbeTA = config.getBoolean("integration_top_addons",General,true,"Integration TheOneProbe-TopAddons");
+            IntegrationProjectE = config.getBoolean("integration_ProjectE",General,true,"Integration ProjectE");
 //Storage_Time_In_Bottle
             Stored_Time_Bottle_Lvl_1 = config.getInt("Time_Storage_lvl_1",Item,500,1,Integer.MAX_VALUE,"Storage time bottle lvl 1");
             Stored_Time_Bottle_Lvl_2 = config.getInt("Time_Storage_lvl_2",Item,1500,1,Integer.MAX_VALUE,"Storage time bottle lvl 2");

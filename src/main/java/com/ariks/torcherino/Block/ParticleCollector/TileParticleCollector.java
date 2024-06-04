@@ -7,10 +7,11 @@ import com.ariks.torcherino.util.Config;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ITickable;
-import net.minecraftforge.items.ItemStackHandler;
+import net.minecraft.util.NonNullList;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
@@ -18,45 +19,50 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nonnull;
 
 public class TileParticleCollector extends TileExampleContainer implements ITickable, IInventory {
-    private final ItemStackHandler inventory = new ItemStackHandler(1) {@Override protected void onContentsChanged(int slot) {markDirty();}};
+    private final NonNullList<ItemStack> inventory = NonNullList.withSize(1, ItemStack.EMPTY);
     public int amount,percent;
     private int progress;
     private int MaxProgress = Config.RequiredGeneratorParticle;
     @Override
     public void update() {
         if (!world.isRemote) {
-            if (inventory.getStackInSlot(0).isEmpty() || inventory.getStackInSlot(0).getCount() < 64) {
-                progress++;
-                UpdateTile();
-            }
-            if (progress >= MaxProgress ) {
-                if (inventory.getStackInSlot(0).isEmpty()) {
-                    inventory.insertItem(0, new ItemStack(RegistryItems.time_particle, amount), false);
-                } else if (inventory.getStackInSlot(0).getItem() == RegistryItems.time_particle && inventory.getStackInSlot(0).getCount() < 64) {
-                    int availableSpace = 64 - inventory.getStackInSlot(0).getCount();
-                    int toAdd = Math.min(amount, availableSpace);
-                    inventory.getStackInSlot(0).grow(toAdd);
-                }
-                progress = 0;
-                UpdateTile();
-            }
-            percent = (progress * 100) / MaxProgress;
+            this.GenerateMyInventory();
         }
     }
+    private void GenerateMyInventory(){
+        int slotGenerated = 0;
+        if (inventory.get(slotGenerated).isEmpty() || inventory.get(slotGenerated).getCount() < 64) {
+            progress ++;
+            percent = (progress * 100) / MaxProgress;
+            this.UpdateTile();
+        }
+        if (progress >= MaxProgress) {
+            if (inventory.get(slotGenerated).isEmpty()) {
+                inventory.set(slotGenerated, new ItemStack(RegistryItems.time_particle, amount));
+            } else if (inventory.get(slotGenerated).getCount() < 64) {
+                int availableSpace = 64 - inventory.get(slotGenerated).getCount();
+                int toAdd = Math.min(amount, availableSpace);
+                inventory.get(slotGenerated).grow(toAdd);
+            }
+            progress = 0;
+        }
+    }
+
     @Override
     public @NotNull NBTTagCompound writeToNBT(@NotNull NBTTagCompound nbt) {
         super.writeToNBT(nbt);
-        nbt.setTag("inventory", inventory.serializeNBT());
         nbt.setInteger("progress", progress);
         nbt.setInteger("amount",amount);
+        nbt.setTag("inventory", ItemStackHelper.saveAllItems(new NBTTagCompound(), inventory));
         return nbt;
     }
     @Override
     public void readFromNBT(@NotNull NBTTagCompound nbt) {
         super.readFromNBT(nbt);
-        inventory.deserializeNBT(nbt.getCompoundTag("inventory"));
         progress = nbt.getInteger("progress");
         amount = nbt.getInteger("amount");
+        NBTTagCompound inventoryTag = nbt.getCompoundTag("inventory");
+        ItemStackHelper.loadAllItems(inventoryTag, inventory);
     }
     @Override
     public int getValue(int id) {
@@ -78,45 +84,76 @@ public class TileParticleCollector extends TileExampleContainer implements ITick
         }
     }
     @Override
+    public int getSizeInventory() {
+        return inventory.size();
+    }
+    @Override
+    public boolean isEmpty() {
+        for (ItemStack stack : this.inventory) {
+            if (!stack.isEmpty()) return false;
+        }
+        return true;
+    }
+    @Override
+    public @NotNull ItemStack getStackInSlot(int index) {
+        return this.inventory.get(index);
+    }
+    @Override
+    public @NotNull ItemStack decrStackSize(int index, int count) {
+        return ItemStackHelper.getAndSplit(this.inventory, index, count);
+    }
+    @Override
+    public @NotNull ItemStack removeStackFromSlot(int index) {
+        return ItemStackHelper.getAndRemove(this.inventory, index);
+    }
+    @Override
+    public void setInventorySlotContents(int index, @NotNull ItemStack stack) {
+        inventory.set(index, stack);
+        if (stack.getCount() > getInventoryStackLimit()) {
+            stack.setCount(getInventoryStackLimit());
+        }
+        markDirty();
+    }
+    @Override
+    public int getInventoryStackLimit() {
+        return 64;
+    }
+    @Override
     public boolean isUsableByPlayer(@Nonnull EntityPlayer player) {
         return !isInvalid() && player.getDistanceSq(pos.add(0.5, 0.5, 0.5)) <= 64;
     }
-    @Nonnull
     @Override
-    public ItemStack getStackInSlot(int index) {return inventory.getStackInSlot(index);}
-    @Nonnull
+    public void openInventory(@Nonnull EntityPlayer player) {}
     @Override
-    public ItemStack decrStackSize(int index, int count) {
-        return inventory.extractItem(index, count, false);
+    public void closeInventory(@Nonnull EntityPlayer player) {}
+    @Override
+    public boolean isItemValidForSlot(int index, @Nonnull ItemStack stack) {
+        return false;
+    }
+    @Override
+    public int getField(int i) {return 0;}
+    @Override public void setField(int i, int i1) {}
+    @Override
+    public int getFieldCount() {return 0;}
+    @Override
+    public void clear() {
+        this.inventory.clear();
+    }
+    @Override
+    public @NotNull String getName() {
+        return "TileParticle";
     }
     @Nonnull
     @Override
-    public ItemStack removeStackFromSlot(int index) {
-        return inventory.extractItem(index, inventory.getSlotLimit(index), false);
+    public ITextComponent getDisplayName() {
+        return new TextComponentString(getName());
     }
     @Override
-    public void setInventorySlotContents(int index, @Nonnull ItemStack stack) {
-        inventory.setStackInSlot(index, stack);
-    }
-    @Override
-    public @NotNull Container createContainer(@NotNull InventoryPlayer inventoryPlayer, @NotNull EntityPlayer entityPlayer) {
-        return new ContainerParticleCollector(inventoryPlayer,this,entityPlayer);
+    public @NotNull Container createContainer(@NotNull InventoryPlayer playerInventory, @NotNull EntityPlayer playerIn) {
+        return new ContainerParticleCollector(playerInventory,this, playerIn);
     }
     @Override
     public @NotNull String getGuiID() {
         return String.valueOf(RegistryGui.GUI_PARTICLE_COLLECTOR);
     }
-    @Override public int getSizeInventory() {return 1;}
-    @Override public boolean isEmpty() {return false;}
-    @Override public int getInventoryStackLimit() {return 64;}
-    @Override public void openInventory(@Nonnull EntityPlayer player) {}
-    @Override public void closeInventory(@Nonnull EntityPlayer player) {}
-    @Override public boolean isItemValidForSlot(int index, @Nonnull ItemStack stack) {
-        return false;
-    }
-    @Override public int getField(int id) {return 0;}
-    @Override public void setField(int id, int value) {}
-    @Override public int getFieldCount() {return 0;}
-    @Override public void clear() {this.inventory.setSize(0);}
-    @Nonnull @Override public ITextComponent getDisplayName() {return new TextComponentString(getName());}
 }

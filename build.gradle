@@ -4,21 +4,46 @@ buildscript {
             name = ":forge"
             url = 'https://files.minecraftforge.net/maven'
         }
+        maven {
+            url 'https://plugins.gradle.org/m2/'
+        }
         jcenter()
         mavenCentral()
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:3.+'
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '4.+', changing: true
+        classpath "gradle.plugin.net.kyori:blossom:1.1.0"
     }
 }
+
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'net.minecraftforge.gradle'
+apply plugin: "net.kyori.blossom"
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
-group = 'com.ariks.torcherino'
-archivesBaseName = 'torcherino'
-sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
+
+version = modVersion
+group = modGroup
+archivesBaseName = modBaseName
+
+compileJava {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+}
+blossom {
+    replaceToken '%VERSION%', modVersion
+}
+sourceSets {
+    main {
+        java {
+            srcDirs = ["src/main/java"]
+        }
+        resources {
+            srcDirs = ["src/main/resources"]
+        }
+    }
+}
 minecraft {
     mappings channel: "snapshot", version: mcp_version
     runs {
@@ -44,68 +69,111 @@ minecraft {
 }
 repositories {
     maven {
+        url "http://maven.cil.li"
+    }
+    maven {
+        url "https://www.cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
+    maven { // Мавен, который поддерживает JEI.
         name = "Progwml6 maven"
         url = "http://dvs1.progwml6.com/files/maven"
     }
-    maven {
+    maven { // Мавен, который поддерживает JEI, для резерва.
         name = "ModMaven"
         url = "modmaven.k-4u.nl"
     }
-    maven {
-        name = "tterrag maven"
-        url = "https://maven.tterrag.com/"
-    }
-    maven {
-        name = "curse.maven"
-        url = "https://www.cursemaven.com"
-    }
 }
+
 dependencies {
-    implementation 'org.jetbrains:annotations:23.0.0'
     minecraft([
             group  : "net.minecraftforge",
             name   : "forge",
             version: "${minecraft_version}-${forge_version}"
     ])
+    implementation 'org.jetbrains:annotations:23.0.0'
     compileOnly "curse.maven:projecte-226410:2702991"
-    runtimeOnly "curse.maven:projecte-226410:2702991"
-    runtimeOnly "curse.maven:the-one-probe-245211:2667280"
     compileOnly "curse.maven:the-one-probe-245211:2667280"
-    runtimeOnly "curse.maven:top-addons-247111:2887479"
+    runtimeOnly "curse.maven:the-one-probe-245211:2667280"
     compileOnly "curse.maven:top-addons-247111:2887479"
-    runtimeOnly "curse.maven:jei-238222:5101347"
+    runtimeOnly "curse.maven:top-addons-247111:2887479"
     compileOnly "curse.maven:jei-238222:5101347"
-    runtimeOnly "curse.maven:crafttweaker-239197:5013567"
-    compileOnly "curse.maven:crafttweaker-239197:5013567"
-    compileOnly fileTree('lib')
     runtimeOnly fileTree('lib')
+    compileOnly fileTree('lib')
     compileOnly fileTree('libs')
 }
+
+processResources {
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft_version
+
+    from(sourceSets.main.resources.srcDirs) {
+        include "mcmod.info"
+    }
+    from(sourceSets.main.resources.srcDirs) {
+        exclude "mcmod.info"
+    }
+    rename '(.+_at.cfg)', 'META-INF/$1'
+}
+def commonManifest = {
+    attributes 'FMLAT': 'tc_at.cfg'
+}
+
+jar {
+    manifest {
+        attributes([
+                "Specification-Title": project.name,
+                "Specification-Vendor": "ijo42",
+                "Specification-Version": "1",
+                "Implementation-Title": project.name,
+                "Implementation-Version": project.version,
+                "Implementation-Vendor" :"Ariks54",
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+                "Git-Commit-Hash": getGitHash()
+        ])
+    }
+    from 'LICENSE'
+    manifest commonManifest
+    from sourceSets.main.output.classesDirs
+    from sourceSets.main.output.resourcesDir
+}
+
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+    options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+    options.incremental = true
+    sourceCompatibility = targetCompatibility = '1.8'
+}
+jar.archiveFileName = "${project.archivesBaseName}-${project.minecraft_version}-${project.version}.jar"
+
 jar.finalizedBy('reobfJar')
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifact jar
-        }
-    }
-    repositories {
-        maven {
-            url "file:///${project.projectDir}/mcmodsrepo"
-        }
-    }
-}
-apply plugin: 'idea'
-idea {
-    module {
-        inheritOutputDirs = true
+defaultTasks 'build'
+
+static def getGitHash() {
+    try {
+        def process = 'git rev-parse --short HEAD'.execute()
+        process.waitFor()
+        return (process.exitValue() ? 'unknown' : process.text.trim())
+    }catch(IOException ignored){
+        return 'unknown'
     }
 }
-subprojects {
-    apply plugin: 'idea'
+
+sourceSets { main { output.resourcesDir = output.classesDirs[0] } }
+task devJar(type: Jar) {
+    classifier = 'dev'
+    from sourceSets.main.output
 }
-task prepareAssets(type: Copy) {
-    group = 'build'
-    from project.file('src/main/resources')
-    into project.file('build/classes/java/main')
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
 }
-sourceSets { main { output.resourcesDir = output.classesDir } }
+
+artifacts {
+    archives devJar
+    archives sourcesJar
+}

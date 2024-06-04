@@ -8,8 +8,10 @@ import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 public class ContainerParticleCollector extends ExampleContainer  {
+    private final TileParticleCollector tileParticleCollector;
     public ContainerParticleCollector(InventoryPlayer inventoryPlayer, TileParticleCollector tileEntity, EntityPlayer entityPlayer) {
         super(tileEntity);
+        this.tileParticleCollector = tileEntity;
 
         this.addSlotToContainer(new Slot(tileEntity, 0, 80, 31) {
             @Override
@@ -26,38 +28,25 @@ public class ContainerParticleCollector extends ExampleContainer  {
             this.addSlotToContainer(new Slot(inventoryPlayer, k, 8 + k * 18, 144));
         }
     }
-    @Override
-    public @NotNull ItemStack transferStackInSlot(@NotNull EntityPlayer player, int slotIndex) {
+    public @NotNull ItemStack transferStackInSlot(@NotNull EntityPlayer playerIn, int index)
+    {
         ItemStack itemstack = ItemStack.EMPTY;
-        Slot slot = this.inventorySlots.get(slotIndex);
+        Slot slot = this.inventorySlots.get(index);
         if (slot != null && slot.getHasStack()) {
-            ItemStack slotStack = slot.getStack();
-            itemstack = slotStack.copy();
-            if (slotIndex == 0) {
-                if (!this.mergeItemStack(slotStack, 1, 37, false)) {
+            ItemStack itemstack1 = slot.getStack();
+            itemstack = itemstack1.copy();
+            if (index < this.tileParticleCollector.getSizeInventory()) {
+                if (!this.mergeItemStack(itemstack1, this.tileParticleCollector.getSizeInventory(), this.inventorySlots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
-                slot.onSlotChange(slotStack, itemstack);
-            } else {
-                if (slotIndex < 28) {
-                    if (!this.mergeItemStack(slotStack, 28, 37, false)) {
-                        return ItemStack.EMPTY;
-                    }
-                } else if (slotIndex < 37) {
-                    if (!this.mergeItemStack(slotStack, 1, 28, false)) {
-                        return ItemStack.EMPTY;
-                    }
-                }
+            } else if (!this.mergeItemStack(itemstack1, 0, this.tileParticleCollector.getSizeInventory(), false)) {
+                return ItemStack.EMPTY;
             }
-            if (slotStack.isEmpty()) {
+            if (itemstack1.isEmpty()) {
                 slot.putStack(ItemStack.EMPTY);
             } else {
                 slot.onSlotChanged();
             }
-            if (slotStack.getCount() == itemstack.getCount()) {
-                return ItemStack.EMPTY;
-            }
-            slot.onTake(player, slotStack);
         }
         return itemstack;
     }

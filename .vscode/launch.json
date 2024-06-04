@@ -6,12 +6,12 @@
       "name": "runClient",
       "request": "launch",
       "mainClass": "net.minecraftforge.legacydev.MainClient",
-      "projectName": "Torcherino-ce2",
+      "projectName": "Torcherino-ce",
       "cwd": "${workspaceFolder}\\run",
       "vmArgs": "-Dforge.logging.console.level\u003ddebug -Dforge.logging.markers\u003dSCAN,REGISTRIES,REGISTRYDUMP",
       "args": "",
       "env": {
-        "MCP_TO_SRG": "C:\\Users\\deflaut\\Desktop\\Torcherino-ce2\\build\\createSrgToMcp\\output.srg",
+        "MCP_TO_SRG": "C:\\Users\\deflaut\\Desktop\\Torcherino-ce\\build\\createSrgToMcp\\output.srg",
         "MOD_CLASSES": "${workspaceFolder}\\bin\\main;${workspaceFolder}\\bin\\main",
         "mainClass": "net.minecraft.launchwrapper.Launch",
         "MCP_MAPPINGS": "snapshot_20171003-1.12",
@@ -28,10 +28,10 @@
       "type": "java",
       "name": "runData",
       "request": "launch",
-      "projectName": "Torcherino-ce2",
+      "projectName": "Torcherino-ce",
       "cwd": "${workspaceFolder}\\run",
       "vmArgs": "-Dforge.logging.console.level\u003ddebug",
-      "args": "--mod ssp --all --existing \"C:\\Users\\deflaut\\Desktop\\Torcherino-ce2\\src\\main\\resources\" --existing \"C:\\Users\\deflaut\\Desktop\\Torcherino-ce2\\src\\generated\\resources\" --output \"C:\\Users\\deflaut\\Desktop\\Torcherino-ce2\\src\\generated\\resources\"",
+      "args": "--mod ssp --all --existing \"C:\\Users\\deflaut\\Desktop\\Torcherino-ce\\src\\main\\resources\" --existing \"C:\\Users\\deflaut\\Desktop\\Torcherino-ce\\src\\generated\\resources\" --output \"C:\\Users\\deflaut\\Desktop\\Torcherino-ce\\src\\generated\\resources\"",
       "env": {
         "MOD_CLASSES": "${workspaceFolder}\\bin\\main;${workspaceFolder}\\bin\\main"
       }
@@ -41,12 +41,12 @@
       "name": "runServer",
       "request": "launch",
       "mainClass": "net.minecraftforge.legacydev.MainServer",
-      "projectName": "Torcherino-ce2",
+      "projectName": "Torcherino-ce",
       "cwd": "${workspaceFolder}\\run",
       "vmArgs": "-Dforge.logging.console.level\u003ddebug -Dforge.logging.markers\u003dSCAN,REGISTRIES,REGISTRYDUMP",
       "args": "",
       "env": {
-        "MCP_TO_SRG": "C:\\Users\\deflaut\\Desktop\\Torcherino-ce2\\build\\createSrgToMcp\\output.srg",
+        "MCP_TO_SRG": "C:\\Users\\deflaut\\Desktop\\Torcherino-ce\\build\\createSrgToMcp\\output.srg",
         "MOD_CLASSES": "${workspaceFolder}\\bin\\main;${workspaceFolder}\\bin\\main",
         "mainClass": "net.minecraft.launchwrapper.Launch",
         "MCP_MAPPINGS": "snapshot_20171003-1.12",

@@ -49,6 +49,7 @@ public abstract class ExampleBlock extends Block {
                     "TorcherinoCE-log: Block place: "+getUnlocalizedName()+" Cord: " + pos.getX() + "," + pos.getY() + "," + pos.getZ()+" DismID: "+worldIn.provider.getDimension()+" PlayerName: "+placer.getName());
         }
     }
+    @Override
     public boolean isOpaqueCube(@NotNull IBlockState state) {return false;}
     @Override
     public boolean isNormalCube(@NotNull IBlockState state, @NotNull IBlockAccess world, @NotNull BlockPos pos) {return false;}

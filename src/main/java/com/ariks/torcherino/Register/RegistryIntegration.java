@@ -6,11 +6,11 @@ import com.ariks.torcherino.util.Config;
 import net.minecraftforge.fml.common.Loader;
 
 public class RegistryIntegration {
-    public static void Registry(){
+    public static void Registry() {
         if (Loader.isModLoaded("projecte") && Config.IntegrationProjectE) {
-                AddonProjectE.registerEMC();
-                RegistryAcceleration.blacklistString("projecte:dm_pedestal");
-                Torcherino.logger.info(Torcherino.MOD_NAME + " Integration projectE : Enabled");
+            AddonProjectE.registerEMC();
+            RegistryAcceleration.blacklistString("projecte:dm_pedestal");
+            Torcherino.logger.info(Torcherino.MOD_NAME + " Integration projectE : Enabled");
             } else {
                 Torcherino.logger.info(Torcherino.MOD_NAME + " Integration projectE : Disabled");
         }
@@ -18,6 +18,6 @@ public class RegistryIntegration {
             Torcherino.logger.info(Torcherino.MOD_NAME + " Integration topAddons : Enabled");
         }else {
             Torcherino.logger.info(Torcherino.MOD_NAME + " Integration topAddons : Disabled");
+       }
         }
-    }
 }
