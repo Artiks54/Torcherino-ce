@@ -6,6 +6,6 @@ import net.minecraft.entity.player.InventoryPlayer;
 
 public class ContainerTimeStorage extends ExampleContainer {
     public ContainerTimeStorage(InventoryPlayer inventoryPlayer, TileTimeStorage tileEntity,EntityPlayer entityPlayer) {
-        super(tileEntity);
+        super(tileEntity,inventoryPlayer,true);
     }
 }

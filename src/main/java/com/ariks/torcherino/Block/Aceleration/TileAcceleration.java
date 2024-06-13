@@ -24,6 +24,7 @@ public class TileAcceleration extends TileExampleContainer implements ITickable,
     private final int speed = Config.AccelerationSpeed;
     private final int AreaModifier = Config.AccelerationRadius;
     private int TimeStorage,Cooldown;
+    private final int MaxTimeStorage = 3600;
     private final Random rand = new Random();
     protected int speedBase(int base) {
         return base;
@@ -116,6 +117,9 @@ public class TileAcceleration extends TileExampleContainer implements ITickable,
         if (id == 1) {
             return this.TimeStorage;
         }
+        if (id == 2) {
+            return this.MaxTimeStorage;
+        }
         return id;
     }
     @Override
@@ -148,6 +152,6 @@ public class TileAcceleration extends TileExampleContainer implements ITickable,
     }
     @Override
     public int GetMaxStorage() {
-        return Integer.MAX_VALUE;
+        return this.MaxTimeStorage;
     }
 }

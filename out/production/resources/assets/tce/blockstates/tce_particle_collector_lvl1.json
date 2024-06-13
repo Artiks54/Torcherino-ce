@@ -1,0 +1,17 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tce:particle_collector",
+	    "textures": {
+        "base": "tce:blocks/base",
+		"material": "tce:blocks/part_collector_lvl1",
+        "particle":  "tce:blocks/part_collector_lvl1"
+        },
+    "transform": "forge:default-block"
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{}],
+    "destroyed": [{}]
+  }
+}

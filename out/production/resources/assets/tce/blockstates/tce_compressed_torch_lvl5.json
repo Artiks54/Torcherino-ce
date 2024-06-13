@@ -1,0 +1,17 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tce:torch_imp",
+	    "textures": {
+        "base": "tce:blocks/base",
+		"material": "tce:blocks/diamond",
+        "particle":  "tce:blocks/diamond"
+        },
+    "transform": "forge:default-block"
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{}],
+    "destroyed": [{}]
+  }
+}

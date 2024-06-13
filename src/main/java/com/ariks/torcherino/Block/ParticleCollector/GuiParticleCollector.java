@@ -11,7 +11,7 @@ import org.lwjgl.opengl.GL11;
 public class GuiParticleCollector extends GuiContainer {
     private final TileParticleCollector tile;
     public final LocalizedStringKey LS = new LocalizedStringKey();
-    private final ResourceLocation texture = new ResourceLocation(Torcherino.MOD_ID, "textures/gui/gui1.png");
+    private final ResourceLocation texture = new ResourceLocation(Torcherino.MOD_ID, "textures/gui/gui.png");
     public GuiParticleCollector(InventoryPlayer inventory, TileParticleCollector tileEntity, EntityPlayer player) {
         super(new ContainerParticleCollector(inventory,tileEntity,player));
         this.tile = tileEntity;
@@ -20,14 +20,15 @@ public class GuiParticleCollector extends GuiContainer {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         this.drawDefaultBackground();
         super.drawScreen(mouseX, mouseY, partialTicks);
-        this.renderHoveredToolTip(mouseX,mouseY);}
+        this.renderHoveredToolTip(mouseX,mouseY);
+    }
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(texture);
         int x = (this.width - xSize) / 2;
         int y = (this.height - ySize) / 2;
-        drawTexturedModalRect(x, y, 0, 0, xSize,ySize);
+        drawTexturedModalRect(x, y, 0, 0, 175,167);
         int progress = tile.getValue(1);
         int maxProgress = tile.getValue(2);
         int fix = 1;

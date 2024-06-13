@@ -38,8 +38,7 @@ public class AddonTorcherino extends AddonBlank {
             }
             if (tile instanceof TileTimeManipulator) {
                 TileTimeManipulator TileTimeManipulator = (TileTimeManipulator) tile;
-                probeInfo.text("Progress");
-                probeInfo.progress(TileTimeManipulator.getValue(1),100);
+                probeInfo.text("Time: " + TileTimeManipulator.GetTimeStorage());
             }
             if (tile instanceof TileParticleCollector) {
                 TileParticleCollector TileParticleCollector = (TileParticleCollector) tile;

@@ -68,11 +68,11 @@ public class Config {
             IntegrationTheOneProbeTA = config.getBoolean("integration_top_addons",General,true,"Integration TheOneProbe-TopAddons");
             IntegrationProjectE = config.getBoolean("integration_ProjectE",General,true,"Integration ProjectE");
 //Storage_Time_In_Bottle
-            Stored_Time_Bottle_Lvl_1 = config.getInt("Time_Storage_lvl_1",Item,500,1,Integer.MAX_VALUE,"Storage time bottle lvl 1");
-            Stored_Time_Bottle_Lvl_2 = config.getInt("Time_Storage_lvl_2",Item,1500,1,Integer.MAX_VALUE,"Storage time bottle lvl 2");
-            Stored_Time_Bottle_Lvl_3 = config.getInt("Time_Storage_lvl_3",Item,4500,1,Integer.MAX_VALUE,"Storage time bottle lvl 3");
-            Stored_Time_Bottle_Lvl_4 = config.getInt("Time_Storage_lvl_4",Item,13500,1,Integer.MAX_VALUE,"Storage time bottle lvl 4");
-            Stored_Time_Bottle_Lvl_5 = config.getInt("Time_Storage_lvl_5",Item,45000,1,Integer.MAX_VALUE,"Storage time bottle lvl 5");
+            Stored_Time_Bottle_Lvl_1 = config.getInt("Time_Storage_lvl_1",Item,120,1,Integer.MAX_VALUE,"Storage time bottle lvl 1");
+            Stored_Time_Bottle_Lvl_2 = config.getInt("Time_Storage_lvl_2",Item,360,1,Integer.MAX_VALUE,"Storage time bottle lvl 2");
+            Stored_Time_Bottle_Lvl_3 = config.getInt("Time_Storage_lvl_3",Item,1080,1,Integer.MAX_VALUE,"Storage time bottle lvl 3");
+            Stored_Time_Bottle_Lvl_4 = config.getInt("Time_Storage_lvl_4",Item,2400,1,Integer.MAX_VALUE,"Storage time bottle lvl 4");
+            Stored_Time_Bottle_Lvl_5 = config.getInt("Time_Storage_lvl_5",Item,7200,1,Integer.MAX_VALUE,"Storage time bottle lvl 5");
             Stored_Time_Bottle_infinite = config.getInt("Time_Storage_infinite",Item,Integer.MAX_VALUE,1,Integer.MAX_VALUE,"Storage time infinite");
 //wand
             SpeedWand_lvl1 = config.getInt("Time_Wand_Speed_lvl1",Item,3,1,Byte.MAX_VALUE,"Speed Time Wand lvl 1. 1 = 100%.....");
@@ -86,13 +86,13 @@ public class Config {
             BooleanVisualWork = config.getBoolean("Tile_Visual_Work",Render,true,"Tile spawn Particle flame");
             BooleanRender = config.getBoolean("Tile_Render",Render,true,"Tile render true/false");
 //Time manipulator tile
-            RequiredTimeManipulator = config.getInt("Tile_Time_Manipulator",Tile,54110,1,Short.MAX_VALUE,"Need ticks to generate 100%");
+            RequiredTimeManipulator = config.getInt("Tile_Time_Manipulator",Tile,24000,1,Short.MAX_VALUE,"Need time");
 //Generator particle tile
             RequiredGeneratorParticle = config.getInt("Tile_Generator_Particle",Tile,1154,1,Short.MAX_VALUE,"Need ticks to generate 100%");
 //Storage tile
-            TimeStorageMaxTime = config.getInt("Tile_Time_Storage",Tile,1000000,1,Integer.MAX_VALUE,"Time max time Storage");
+            TimeStorageMaxTime = config.getInt("Tile_Time_Storage",Tile,15000,1,Integer.MAX_VALUE,"Time max time Storage");
 //Collectors tile
-            MaxStorageTimeCollectors = config.getInt("Tile_Time_Collectors_MaxStorage",Tile,1500,1,Integer.MAX_VALUE,"Maximum storage size");
+            MaxStorageTimeCollectors = config.getInt("Tile_Time_Collectors_MaxStorage",Tile,1000,1,Integer.MAX_VALUE,"Maximum storage size");
 //Acceleration tile
             AccelerationSpeed = config.getInt("Tile_Time_Acceleration_Speed",Tile,3,1, Byte.MAX_VALUE,TextS);
             AccelerationRadius = config.getInt("Tile_Time_Acceleration_Radius",Tile,3,1,Byte.MAX_VALUE,TextR);
