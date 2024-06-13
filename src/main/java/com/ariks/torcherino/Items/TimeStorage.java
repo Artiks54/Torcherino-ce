@@ -40,6 +40,22 @@ public class TimeStorage extends itemBase {
             stack.getTagCompound().setInteger("Time", 0);
         }
     }
+    @Override
+    public boolean showDurabilityBar(ItemStack stack) {
+        return true;
+    }
+    @Override
+    public double getDurabilityForDisplay(ItemStack stack) {
+        if (stack.hasTagCompound()) {
+            assert stack.getTagCompound() != null;
+            if (stack.getTagCompound().hasKey("Time")) {
+                int currentTime = stack.getTagCompound().getInteger("Time");
+                int maxStorageTime = MaxConfigStorageTimeItem();
+                return 1.0 - ((double) currentTime / (double) maxStorageTime);
+            }
+        }
+        return 0;
+    }
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, @NotNull List<String> tooltip, @NotNull ITooltipFlag flagIn) {
