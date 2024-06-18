@@ -19,7 +19,8 @@ public class GuiTimeManipulator extends ExampleGuiContainer {
         SetWidth(175);
         SetHeight(167);
         setBooleanBar(true);
-        SetBarSettings(165,25,5,13,1,170,"Time:");
+        setBooleanTooltip(true);
+        SetBarSettings(165,25,5,13,1,170);
     }
     @Override
     public void UpdateBar() {

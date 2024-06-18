@@ -1,5 +1,6 @@
 package com.ariks.torcherino.Block;
 
+import com.ariks.torcherino.Block.ParticleCollector.TileParticleCollector;
 import com.ariks.torcherino.Items.TimeStorage;
 import com.ariks.torcherino.Torcherino;
 import com.ariks.torcherino.util.Config;
@@ -110,6 +111,6 @@ public abstract class ExampleBlock extends Block {
     @Override
     public boolean canHarvestBlock(@NotNull IBlockAccess world, @NotNull BlockPos pos, @NotNull EntityPlayer player) {
         TileEntity TileEntity =  world.getTileEntity(pos);
-        return !(TileEntity instanceof ITileTimeStorage);
+        return !(TileEntity instanceof TileParticleCollector || TileEntity instanceof ITileTimeStorage);
     }
 }

@@ -6,6 +6,6 @@ import net.minecraft.entity.player.InventoryPlayer;
 
 public class ContainerTorcherino extends ExampleContainer {
     public ContainerTorcherino(InventoryPlayer inventoryPlayer, TileTorcherinoBase tileEntity, EntityPlayer entityPlayer) {
-        super(tileEntity,inventoryPlayer,false);
+        super(tileEntity);
     }
 }

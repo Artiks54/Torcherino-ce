@@ -86,11 +86,11 @@ public class Config {
             BooleanVisualWork = config.getBoolean("Tile_Visual_Work",Render,true,"Tile spawn Particle flame");
             BooleanRender = config.getBoolean("Tile_Render",Render,true,"Tile render true/false");
 //Time manipulator tile
-            RequiredTimeManipulator = config.getInt("Tile_Time_Manipulator",Tile,24000,1,Short.MAX_VALUE,"Need time");
+            RequiredTimeManipulator = config.getInt("Tile_Time_Manipulator",Tile,1200,1,Short.MAX_VALUE,"Need time");
 //Generator particle tile
             RequiredGeneratorParticle = config.getInt("Tile_Generator_Particle",Tile,1154,1,Short.MAX_VALUE,"Need ticks to generate 100%");
 //Storage tile
-            TimeStorageMaxTime = config.getInt("Tile_Time_Storage",Tile,15000,1,Integer.MAX_VALUE,"Time max time Storage");
+            TimeStorageMaxTime = config.getInt("Tile_Time_Storage",Tile,10000,1,Integer.MAX_VALUE,"Time max time Storage");
 //Collectors tile
             MaxStorageTimeCollectors = config.getInt("Tile_Time_Collectors_MaxStorage",Tile,1000,1,Integer.MAX_VALUE,"Maximum storage size");
 //Acceleration tile

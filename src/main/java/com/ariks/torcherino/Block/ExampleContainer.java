@@ -13,22 +13,30 @@ import org.jetbrains.annotations.NotNull;
 public class ExampleContainer extends Container {
 
     protected TileExampleContainer tile;
+    private boolean hasTile;
     private int[] tileMap;
     private void SetTile(TileExampleContainer tile) {
+        this.hasTile = true;
         this.tile = tile;
         this.tileMap = new int[tile.getValueList().length];
     }
-    public ExampleContainer(TileExampleContainer tile, InventoryPlayer inventoryPlayer,boolean EnableInventory) {
+    public ExampleContainer() {
+        this.hasTile = false;
+    }
+    public ExampleContainer(TileExampleContainer tile) {
         this.SetTile(tile);
-        if(EnableInventory) {
-            for (int i = 0; i < 3; ++i) {
-                for (int j = 0; j < 9; ++j) {
-                    this.addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 8 + j * 18, 86 + i * 18));
-                }
+    }
+    protected void PlayerInventory(InventoryPlayer inventoryPlayer) {
+        for (int i = 0; i < 3; ++i) {
+            for (int j = 0; j < 9; ++j) {
+                this.addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 8 + j * 18, 86 + i * 18));
             }
-            for (int k = 0; k < 9; ++k) {
-                this.addSlotToContainer(new Slot(inventoryPlayer, k, 8 + k * 18, 144));
-            }
+        }
+        PlayerHotbar(inventoryPlayer);
+    }
+    private void PlayerHotbar(InventoryPlayer inventoryPlayer) {
+        for (int k = 0; k < 9; ++k) {
+            this.addSlotToContainer(new Slot(inventoryPlayer, k, 8 + k * 18, 144));
         }
     }
     protected void SyncValue() {
@@ -61,28 +69,7 @@ public class ExampleContainer extends Container {
         return this.tile.isUsableByPlayer(entityPlayer);
     }
     @Override
-    public void onContainerClosed(@NotNull EntityPlayer playerIn) {
-        super.onContainerClosed(playerIn);
-    }
-    public @NotNull ItemStack transferStackInSlot(@NotNull EntityPlayer playerIn, int index) {
-        ItemStack itemstack = ItemStack.EMPTY;
-        Slot slot = this.inventorySlots.get(index);
-        if (slot != null && slot.getHasStack()) {
-            ItemStack itemstack1 = slot.getStack();
-            itemstack = itemstack1.copy();
-            if (index < this.inventorySlots.size() / 2) {
-                if (!this.mergeItemStack(itemstack1, this.inventorySlots.size() / 2, this.inventorySlots.size(), true)) {
-                    return ItemStack.EMPTY;
-                }
-            } else if (!this.mergeItemStack(itemstack1, 0, this.inventorySlots.size() / 2, false)) {
-                return ItemStack.EMPTY;
-            }
-            if (itemstack1.isEmpty()) {
-                slot.putStack(ItemStack.EMPTY);
-            } else {
-                slot.onSlotChanged();
-            }
-        }
-        return itemstack;
+    public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
+        return ItemStack.EMPTY;
     }
 }

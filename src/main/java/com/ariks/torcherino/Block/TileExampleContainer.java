@@ -42,7 +42,7 @@ public abstract class TileExampleContainer extends TileEntity implements ITileHa
     }
     public void UpdateTile(){
         this.markDirty();
-        world.notifyBlockUpdate(pos,world.getBlockState(pos),world.getBlockState(pos),3);
+        this.world.notifyBlockUpdate(pos,world.getBlockState(pos),world.getBlockState(pos),3);
     }
     @Override
     public boolean shouldRefresh(@NotNull World world, @NotNull BlockPos pos, @NotNull IBlockState oldState, @NotNull IBlockState newSate) {

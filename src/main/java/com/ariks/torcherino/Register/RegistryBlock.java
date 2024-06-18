@@ -2,7 +2,6 @@ package com.ariks.torcherino.Register;
 
 import com.ariks.torcherino.Block.Aceleration.BlockAcceleration;
 import com.ariks.torcherino.Block.ParticleCollector.BlockParticleCollector;
-import com.ariks.torcherino.Block.ParticleCollector.ParticleCollectorEnumLevel;
 import com.ariks.torcherino.Block.TimeCollector.BlockCollectors;
 import com.ariks.torcherino.Block.TimeManipulator.BlockTimeManipulator;
 import com.ariks.torcherino.Block.TimeStorage.BlockTimeStorage;
@@ -43,9 +42,7 @@ public class RegistryBlock {
     public static Block Time_collectors = new BlockCollectors(modid+"time_collectors");
     public static Block Time_Manipulator = new BlockTimeManipulator(modid+"time_manipulator");
     public static Block Time_Storage = new BlockTimeStorage(modid+"time_storage");
-    public static Block Particle_collectors_lvl1 = new BlockParticleCollector(modid+"particle_collector_lvl1", ParticleCollectorEnumLevel.lvl_1);
-    public static Block Particle_collectors_lvl2 = new BlockParticleCollector(modid+"particle_collector_lvl2",ParticleCollectorEnumLevel.lvl_2);
-    public static Block Particle_collectors_lvl3 = new BlockParticleCollector(modid+"particle_collector_lvl3",ParticleCollectorEnumLevel.lvl_3);
+    public static Block Particle_collectors = new BlockParticleCollector(modid+"particle_collector");
     public static final List<Block> BLOCKS = new ArrayList<>();
     static {
         Field[] fields = RegistryBlock.class.getDeclaredFields();

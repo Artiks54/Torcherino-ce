@@ -42,4 +42,10 @@ public final class RegistryItems {
     public static final Item time_particle_redstone = new itemBase(modid+"time_particle_redstone");
     public static final Item time_particle_diamond = new itemBase(modid+"time_particle_diamond");
     public static final Item time_particle_emerald = new itemBase(modid+"time_particle_emerald");
+    public static final Item upgrade_kit1 = new itemBase(modid+"uk1");
+    public static final Item upgrade_kit2 = new itemBase(modid+"uk2");
+    public static final Item upgrade_kit3 = new itemBase(modid+"uk3");
+    public static final Item upgrade_kit4 = new itemBase(modid+"uk4");
+    public static final Item upgrade_kit5 = new itemBase(modid+"uk5");
+    public static final Item upgrade_kit6 = new itemBase(modid+"uk6");
 }

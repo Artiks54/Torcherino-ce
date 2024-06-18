@@ -6,6 +6,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 
 public class ContainerTimeManipulator extends ExampleContainer {
     public ContainerTimeManipulator(InventoryPlayer inventoryPlayer, TileTimeManipulator tileEntity, EntityPlayer entityPlayer) {
-        super(tileEntity,inventoryPlayer,true);
+        super(tileEntity);
+        PlayerInventory(inventoryPlayer);
     }
 }

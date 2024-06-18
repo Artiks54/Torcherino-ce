@@ -127,7 +127,7 @@ jar {
     manifest {
         attributes([
                 "Specification-Title": project.name,
-                "Specification-Vendor": "ijo42",
+                "Specification-Vendor": "Ariks54",
                 "Specification-Version": "1",
                 "Implementation-Title": project.name,
                 "Implementation-Version": project.version,
@@ -149,7 +149,7 @@ tasks.withType(JavaCompile) {
     options.incremental = true
     sourceCompatibility = targetCompatibility = '1.8'
 }
-jar.archiveFileName = "${project.archivesBaseName}-${project.minecraft_version}-${project.version}.jar"
+jar.archiveFileName = "${project.archivesBaseName}-${project.version}.jar"
 
 jar.finalizedBy('reobfJar')
 defaultTasks 'build'
