@@ -102,6 +102,8 @@ dependencies {
     runtimeOnly "curse.maven:top-addons-247111:2887479"
     compileOnly "curse.maven:jei-238222:5101347"
     runtimeOnly "curse.maven:jei-238222:5101347"
+    compileOnly "curse.maven:ae2-extended-life-570458:5411078"
+    runtimeOnly "curse.maven:ae2-extended-life-570458:5411078"
     runtimeOnly fileTree('lib')
     compileOnly fileTree('lib')
     compileOnly fileTree('libs')

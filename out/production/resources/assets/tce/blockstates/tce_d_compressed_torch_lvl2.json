@@ -1,0 +1,17 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tce:torch_adv",
+	    "textures": {
+        "base": "tce:blocks/base",
+		"material": "tce:blocks/emerald",
+        "particle":  "tce:blocks/emerald"
+        },
+    "transform": "forge:default-block"
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{}],
+    "destroyed": [{}]
+  }
+}

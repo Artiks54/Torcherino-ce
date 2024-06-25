@@ -4,6 +4,7 @@ import com.ariks.torcherino.Block.TileExampleContainer;
 import com.ariks.torcherino.Register.RegistryGui;
 import com.ariks.torcherino.Register.RegistryItems;
 import com.ariks.torcherino.util.Config;
+import com.ariks.torcherino.util.InvWrapperRestricted;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
@@ -17,17 +18,26 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraftforge.items.CapabilityItemHandler;
 import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nonnull;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class TileParticleCollector extends TileExampleContainer implements ITickable, IInventory, ISidedInventory {
-    private final NonNullList<ItemStack> inventory = NonNullList.withSize(2, ItemStack.EMPTY);
+    protected NonNullList<ItemStack> inventory;
     private int amount = 1;
     public int percent;
     private int MaxProgress = Config.RequiredGeneratorParticle;
     private int addProgress,NeedNext,progress;
+    private final InvWrapperRestricted invHandler;
     public int level = 1;
     public int TotalGeneratedUp;
+    public TileParticleCollector(){
+        invHandler = new InvWrapperRestricted(this);
+        inventory = NonNullList.withSize(2,ItemStack.EMPTY);
+        invHandler.setSlotsExtract(Collections.singletonList(0));
+    }
     @Override
     public void update() {
         if (!world.isRemote) {
@@ -244,11 +254,28 @@ public class TileParticleCollector extends TileExampleContainer implements ITick
         return new int[2];
     }
     @Override
-    public boolean canInsertItem(int index, ItemStack itemStack, EnumFacing enumFacing) {
-        return index != 1;
+    public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction) {
+        return invHandler.canInsert(index);
     }
     @Override
-    public boolean canExtractItem(int index, ItemStack itemStack, EnumFacing enumFacing) {
-        return index != 1;
+    public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
+        return invHandler.canExtract(index);
+    }
+    @Override
+    public boolean hasCapability(net.minecraftforge.common.capabilities.Capability<?> capability, EnumFacing facing) {
+        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && this.getSizeInventory() > 0)
+        {
+            return true;
+        }
+        return super.hasCapability(capability, facing);
+    }
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> T getCapability(net.minecraftforge.common.capabilities.Capability<T> capability, EnumFacing facing) {
+        if (capability == net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+        {
+            return (T) invHandler;
+        }
+        return super.getCapability(capability, facing);
     }
 }
