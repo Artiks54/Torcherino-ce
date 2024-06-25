@@ -21,7 +21,6 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.items.CapabilityItemHandler;
 import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nonnull;
-import java.util.Arrays;
 import java.util.Collections;
 
 public class TileParticleCollector extends TileExampleContainer implements ITickable, IInventory, ISidedInventory {
