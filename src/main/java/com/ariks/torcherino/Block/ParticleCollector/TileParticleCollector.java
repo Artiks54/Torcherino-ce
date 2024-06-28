@@ -1,41 +1,30 @@
 package com.ariks.torcherino.Block.ParticleCollector;
 
-import com.ariks.torcherino.Block.TileExampleContainer;
+import com.ariks.torcherino.Block.TileExampleInventory;
+import com.ariks.torcherino.Items.ItemUpgrade;
 import com.ariks.torcherino.Register.RegistryGui;
 import com.ariks.torcherino.Register.RegistryItems;
 import com.ariks.torcherino.util.Config;
-import com.ariks.torcherino.util.InvWrapperRestricted;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.NonNullList;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraftforge.items.CapabilityItemHandler;
 import org.jetbrains.annotations.NotNull;
-import javax.annotation.Nonnull;
-import java.util.Collections;
 
-public class TileParticleCollector extends TileExampleContainer implements ITickable, IInventory, ISidedInventory {
-    protected NonNullList<ItemStack> inventory;
+public class TileParticleCollector extends TileExampleInventory implements ITickable {
     private int amount = 1;
     public int percent;
     private int MaxProgress = Config.RequiredGeneratorParticle;
     private int addProgress,NeedNext,progress;
-    private final InvWrapperRestricted invHandler;
     public int level = 1;
     public int TotalGeneratedUp;
     public TileParticleCollector(){
-        invHandler = new InvWrapperRestricted(this);
-        inventory = NonNullList.withSize(2,ItemStack.EMPTY);
-        invHandler.setSlotsExtract(Collections.singletonList(0));
+        super(2);
+        this.setSlotsForInsert(1);
+        this.setSlotsForExtract(0);
     }
     @Override
     public void update() {
@@ -176,69 +165,11 @@ public class TileParticleCollector extends TileExampleContainer implements ITick
         }
     }
     @Override
-    public int getSizeInventory() {
-        return inventory.size();
-    }
-    @Override
-    public boolean isEmpty() {
-        for (ItemStack stack : this.inventory) {
-            if (!stack.isEmpty()) return false;
+    public boolean isItemValidForSlot(int index, ItemStack itemStack) {
+        if(index == 1 && inventory.get(1).isEmpty() && itemStack.getItem() instanceof ItemUpgrade){
+            return true;
         }
-        return true;
-    }
-    @Override
-    public @NotNull ItemStack getStackInSlot(int index) {
-        return this.inventory.get(index);
-    }
-    @Override
-    public @NotNull ItemStack decrStackSize(int index, int count) {
-        return ItemStackHelper.getAndSplit(this.inventory, index, count);
-    }
-    @Override
-    public @NotNull ItemStack removeStackFromSlot(int index) {
-        return ItemStackHelper.getAndRemove(this.inventory, index);
-    }
-    @Override
-    public void setInventorySlotContents(int index, @NotNull ItemStack stack) {
-        inventory.set(index, stack);
-        if (stack.getCount() > getInventoryStackLimit()) {
-            stack.setCount(getInventoryStackLimit());
-        }
-        markDirty();
-    }
-    @Override
-    public int getInventoryStackLimit() {
-        return 64;
-    }
-    @Override
-    public boolean isUsableByPlayer(@Nonnull EntityPlayer player) {
-        return !isInvalid() && player.getDistanceSq(pos.add(0.5, 0.5, 0.5)) <= 64;
-    }
-    @Override
-    public void openInventory(@Nonnull EntityPlayer player) {}
-    @Override
-    public void closeInventory(@Nonnull EntityPlayer player) {}
-    @Override
-    public boolean isItemValidForSlot(int i, ItemStack itemStack) {
         return false;
-    }
-    @Override
-    public int getField(int i) {return 0;}
-    @Override public void setField(int i, int i1) {}
-    @Override
-    public int getFieldCount() {return 0;}
-    @Override
-    public void clear() {
-        this.inventory.clear();
-    }
-    @Override
-    public @NotNull String getName() {
-        return "TileParticle";
-    }
-    @Nonnull
-    @Override
-    public ITextComponent getDisplayName() {
-        return new TextComponentString(getName());
     }
     @Override
     public @NotNull Container createContainer(@NotNull InventoryPlayer playerInventory, @NotNull EntityPlayer playerIn) {
@@ -247,34 +178,5 @@ public class TileParticleCollector extends TileExampleContainer implements ITick
     @Override
     public String getGuiID() {
         return String.valueOf(RegistryGui.GUI_PARTICLE_COLLECTOR);
-    }
-    @Override
-    public int[] getSlotsForFace(EnumFacing enumFacing) {
-        return new int[2];
-    }
-    @Override
-    public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction) {
-        return invHandler.canInsert(index);
-    }
-    @Override
-    public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
-        return invHandler.canExtract(index);
-    }
-    @Override
-    public boolean hasCapability(net.minecraftforge.common.capabilities.Capability<?> capability, EnumFacing facing) {
-        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && this.getSizeInventory() > 0)
-        {
-            return true;
-        }
-        return super.hasCapability(capability, facing);
-    }
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> T getCapability(net.minecraftforge.common.capabilities.Capability<T> capability, EnumFacing facing) {
-        if (capability == net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
-        {
-            return (T) invHandler;
-        }
-        return super.getCapability(capability, facing);
     }
 }

@@ -7,12 +7,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-public class itemBase extends Item implements IHasModel {
-    public itemBase(String name) {
+public class ItemBase extends Item implements IHasModel {
+    public ItemBase(String name) {
         this.setRegistryName(name);
         this.setUnlocalizedName(name);
         this.setMaxStackSize(64);
         this.setCreativeTab(Torcherino.torcherinoTab);
+        this.setNoRepair();
         RegistryItems.ITEMS.add(this);
     }
     @Override

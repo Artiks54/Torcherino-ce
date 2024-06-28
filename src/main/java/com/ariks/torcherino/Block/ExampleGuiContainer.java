@@ -19,8 +19,8 @@ public abstract class ExampleGuiContainer extends GuiContainer {
     public ExampleGuiContainer(Container container) {
         super(container);
     }
-    public void SetTexture(String texturePath) {
-        this.textures = new ResourceLocation(Torcherino.MOD_ID, texturePath);
+    public void SetTexture(String texture) {
+        this.textures = new ResourceLocation(Torcherino.MOD_ID, texture);
     }
     public void setBooleanBar(Boolean booleanBar) {
         this.booleanBar = booleanBar;

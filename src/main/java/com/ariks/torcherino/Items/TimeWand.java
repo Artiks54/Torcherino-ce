@@ -22,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Random;
 
-public class TimeWand extends itemBase {
+public class TimeWand extends ItemBase {
     public final EnumWands enumWands;
     protected int SpeedWand(){
         return enumWands.getSpeed();

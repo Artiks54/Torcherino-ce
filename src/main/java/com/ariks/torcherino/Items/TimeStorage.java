@@ -21,7 +21,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
-public class TimeStorage extends itemBase {
+public class TimeStorage extends ItemBase {
     private final EnumStorage enumStorage;
     protected int MaxConfigStorageTimeItem() {
         return enumStorage.getStorage();
@@ -30,7 +30,6 @@ public class TimeStorage extends itemBase {
         super(name);
         this.enumStorage = enumStorage;
         this.setMaxStackSize(1);
-        this.setNoRepair();
     }
     @Override
     public void onUpdate(@NotNull ItemStack stack, @NotNull World worldIn, @NotNull Entity entityIn, int itemSlot, boolean isSelected) {

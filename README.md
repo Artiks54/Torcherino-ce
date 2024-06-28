@@ -2,7 +2,7 @@
 
 
 ![Version](https://img.shields.io/badge/VERSION-red.svg?style=for-the-badge)
-![ver](https://img.shields.io/badge/7.8.4-red.svg?style=for-the-badge)
+![ver](https://img.shields.io/badge/7.8.5-red.svg?style=for-the-badge)
 
 [![CurseForge name](https://cf.way2muchnoise.eu/title/919322.svg?badge_style=for_the_badge)](https://www.curseforge.com/minecraft/mc-mods/torcherino-community-edition)
 [![CurseForge name](https://cf.way2muchnoise.eu/torcherino-community-edition.svg?badge_style=for_the_badge)](https://www.curseforge.com/minecraft/mc-mods/torcherino-community-edition)
