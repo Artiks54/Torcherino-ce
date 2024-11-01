@@ -2,19 +2,66 @@ package com.ariks.torcherino.integration.Jei;
 
 import com.ariks.torcherino.Register.RegistryBlock;
 import com.ariks.torcherino.Register.RegistryItems;
+import com.ariks.torcherino.Torcherino;
+import com.ariks.torcherino.util.Config;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;
+import mezz.jei.api.ingredients.VanillaTypes;
+import mezz.jei.api.recipe.IRecipeCategoryRegistration;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import java.text.NumberFormat;
+import java.util.Collections;
 
 @JEIPlugin
 public class AddonJei implements IModPlugin {
+    private final String idEnergy = Torcherino.MOD_ID + "_energy";
+    private final String idParticle = Torcherino.MOD_ID + "_particle";
+    private final String idGrow = Torcherino.MOD_ID + "_grow";
+    private final String formattedValue = NumberFormat.getNumberInstance().format(Config.RFPerTickEnergyParticle);
+
     public void register(IModRegistry registry) {
-        registry.addIngredientInfo(new ItemStack(RegistryItems.time_particle), ItemStack.class, "Generated in a particle collector.");
-        registry.addIngredientInfo(new ItemStack(RegistryBlock.Particle_collectors), ItemStack.class, "Generates time particles");
-        registry.addIngredientInfo(new ItemStack(RegistryBlock.Time_Manipulator), ItemStack.class, "Allows you to change the time in the world.");
-        registry.addIngredientInfo(new ItemStack(RegistryBlock.Time_Acceleration), ItemStack.class, "Uses time to accelerate by 500% within a 3x3x3 radius");
-        registry.addIngredientInfo(new ItemStack(RegistryBlock.Time_collectors), ItemStack.class, "Passively accumulates time");
-        registry.addIngredientInfo(new ItemStack(RegistryBlock.Time_Storage), ItemStack.class, "It is used to store time");
+
+
+        registry.addIngredientInfo(new ItemStack(RegistryBlock.Time_Manipulator), VanillaTypes.ITEM, "Allows you to change the time in the world.");
+        registry.addIngredientInfo(new ItemStack(RegistryBlock.Time_Acceleration), VanillaTypes.ITEM, "Uses time to accelerate by 500% within a 3x3x3 radius");
+        registry.addIngredientInfo(new ItemStack(RegistryBlock.Time_collectors), VanillaTypes.ITEM, "Passively accumulates time");
+        registry.addIngredientInfo(new ItemStack(RegistryBlock.Time_Storage), VanillaTypes.ITEM, "It is used to store time");
+
+        registry.addIngredientInfo(new ItemStack(RegistryBlock.Grow_lvl1),VanillaTypes.ITEM,"Placed a block under the block on which something is growing and this will accelerate growth.");
+        registry.addIngredientInfo(new ItemStack(RegistryBlock.Grow_lvl2),VanillaTypes.ITEM,"Placed a block under the block on which something is growing and this will accelerate growth.");
+        registry.addIngredientInfo(new ItemStack(RegistryBlock.Grow_lvl3),VanillaTypes.ITEM,"Placed a block under the block on which something is growing and this will accelerate growth.");
+        registry.addIngredientInfo(new ItemStack(RegistryBlock.Grow_lvl4),VanillaTypes.ITEM,"Placed a block under the block on which something is growing and this will accelerate growth.");
+        registry.addIngredientInfo(new ItemStack(RegistryBlock.Grow_lvl5),VanillaTypes.ITEM,"Placed a block under the block on which something is growing and this will accelerate growth.");
+
+        registry.handleRecipes(ParticleRecipe.class, recipe -> recipe, idEnergy);
+        registry.addRecipes(Collections.singletonList(new ParticleRecipe(null, new ItemStack(RegistryItems.time_particle))),idEnergy);
+        registry.addRecipeCatalyst(new ItemStack(RegistryBlock.EnergyParticle),idEnergy);
+
+        registry.handleRecipes(ParticleRecipe.class, recipe -> recipe, idParticle);
+        registry.addRecipes(Collections.singletonList(new ParticleRecipe(null, new ItemStack(RegistryItems.time_particle))),idParticle);
+        registry.addRecipes(Collections.singletonList(new ParticleRecipe(new ItemStack(RegistryItems.upgrade_count_1), new ItemStack(RegistryItems.time_particle,2))),idParticle);
+        registry.addRecipes(Collections.singletonList(new ParticleRecipe(new ItemStack(RegistryItems.upgrade_count_2), new ItemStack(RegistryItems.time_particle,4))),idParticle);
+        registry.addRecipes(Collections.singletonList(new ParticleRecipe(new ItemStack(RegistryItems.upgrade_count_3), new ItemStack(RegistryItems.time_particle,8))),idParticle);
+        registry.addRecipes(Collections.singletonList(new ParticleRecipe(new ItemStack(RegistryItems.upgrade_count_4), new ItemStack(RegistryItems.time_particle,16))),idParticle);
+        registry.addRecipes(Collections.singletonList(new ParticleRecipe(new ItemStack(RegistryItems.upgrade_count_5), new ItemStack(RegistryItems.time_particle,32))),idParticle);
+        registry.addRecipes(Collections.singletonList(new ParticleRecipe(new ItemStack(RegistryItems.upgrade_count_6), new ItemStack(RegistryItems.time_particle,64))),idParticle);
+        registry.addRecipeCatalyst(new ItemStack(RegistryBlock.Particle_collectors),idParticle);
+
+        registry.handleRecipes(ImageRecipe.class, recipe -> recipe, idGrow);
+        registry.addRecipes(Collections.singletonList(new ImageRecipe()),idGrow);
+        registry.addRecipeCatalyst(new ItemStack(RegistryBlock.Grow_lvl1),idGrow);
+        registry.addRecipeCatalyst(new ItemStack(RegistryBlock.Grow_lvl2),idGrow);
+        registry.addRecipeCatalyst(new ItemStack(RegistryBlock.Grow_lvl3),idGrow);
+        registry.addRecipeCatalyst(new ItemStack(RegistryBlock.Grow_lvl4),idGrow);
+        registry.addRecipeCatalyst(new ItemStack(RegistryBlock.Grow_lvl5),idGrow);
+
+    }
+    @Override
+    public void registerCategories(IRecipeCategoryRegistration registry) {
+        registry.addRecipeCategories(new EnergyParticleRecipeCategory(registry.getJeiHelpers().getGuiHelper()));
+        registry.addRecipeCategories(new ParticleRecipeCategory(registry.getJeiHelpers().getGuiHelper()));
+        registry.addRecipeCategories(new ImageRecipeCategory(registry.getJeiHelpers().getGuiHelper()));
     }
 }
