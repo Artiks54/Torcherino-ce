@@ -6,7 +6,6 @@ import com.ariks.torcherino.Block.TimeCollector.TileCollectors;
 import com.ariks.torcherino.Block.TimeManipulator.TileTimeManipulator;
 import com.ariks.torcherino.Block.TimeStorage.TileTimeStorage;
 import com.ariks.torcherino.Block.Torcherino.TileTorcherinoBase;
-import com.ariks.torcherino.Register.RegistryItems;
 import com.ariks.torcherino.Torcherino;
 import com.ariks.torcherino.util.Config;
 import io.github.drmanganese.topaddons.addons.AddonBlank;
@@ -16,7 +15,6 @@ import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.ProbeMode;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -46,10 +44,6 @@ public class AddonTorcherino extends AddonBlank {
                 TileParticleCollector TileParticleCollector = (TileParticleCollector) tile;
                 probeInfo.text("Progress:");
                 probeInfo.progress(TileParticleCollector.percent, 100);
-                probeInfo.text("Level: " + ((TileParticleCollector) tile).level);
-                if (!((TileParticleCollector) tile).getStackInSlot(0).isEmpty()) {
-                    probeInfo.item(new ItemStack(RegistryItems.time_particle, ((TileParticleCollector) tile).getStackInSlot(0).getCount()));
-                }
             }
             if (tile instanceof TileTorcherinoBase) {
                 TileTorcherinoBase TileTorcherinoBase = (TileTorcherinoBase) tile;
