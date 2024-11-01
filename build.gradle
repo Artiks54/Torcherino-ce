@@ -104,6 +104,10 @@ dependencies {
     runtimeOnly "curse.maven:jei-238222:5101347"
     compileOnly "curse.maven:ae2-extended-life-570458:5411078"
     runtimeOnly "curse.maven:ae2-extended-life-570458:5411078"
+    compileOnly "curse.maven:cyclic-239286:4075832"
+    runtimeOnly "curse.maven:cyclic-239286:4075832"
+    compileOnly "curse.maven:crafttweaker-239197:5486112"
+    runtimeOnly "curse.maven:crafttweaker-239197:5486112"
     runtimeOnly fileTree('lib')
     compileOnly fileTree('lib')
     compileOnly fileTree('libs')
