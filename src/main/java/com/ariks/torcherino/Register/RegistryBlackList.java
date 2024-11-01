@@ -1,6 +1,7 @@
 package com.ariks.torcherino.Register;
 
 import com.ariks.torcherino.Block.Aceleration.TileAcceleration;
+import com.ariks.torcherino.Block.EnergyGeneration.TileEnergyParticle;
 import com.ariks.torcherino.Block.TimeCollector.TileCollectors;
 import com.ariks.torcherino.Block.ParticleCollector.TileParticleCollector;
 import com.ariks.torcherino.Block.TimeManipulator.TileTimeManipulator;
@@ -27,6 +28,11 @@ public class RegistryBlackList {
         RegistryAcceleration.blacklistBlock(Blocks.STICKY_PISTON);
         RegistryAcceleration.blacklistBlock(Blocks.REDSTONE_LAMP);
         RegistryAcceleration.blacklistBlock(Blocks.REPEATING_COMMAND_BLOCK);
+        RegistryAcceleration.blacklistBlock(RegistryBlock.Grow_lvl1);
+        RegistryAcceleration.blacklistBlock(RegistryBlock.Grow_lvl2);
+        RegistryAcceleration.blacklistBlock(RegistryBlock.Grow_lvl3);
+        RegistryAcceleration.blacklistBlock(RegistryBlock.Grow_lvl4);
+        RegistryAcceleration.blacklistBlock(RegistryBlock.Grow_lvl5);
         RegistryAcceleration.blacklistBlock(Blocks.POWERED_REPEATER);
         RegistryAcceleration.blacklistBlock(Blocks.UNPOWERED_REPEATER);
         RegistryAcceleration.blacklistBlock(Blocks.POWERED_COMPARATOR);
@@ -50,5 +56,7 @@ public class RegistryBlackList {
         RegistryAcceleration.blacklistTile(TileParticleCollector.class);
         //Tile-Time-Manipulator
         RegistryAcceleration.blacklistTile(TileTimeManipulator.class);
+        //Tile-Energy-Particle
+        RegistryAcceleration.blacklistTile(TileEnergyParticle.class);
     }
 }

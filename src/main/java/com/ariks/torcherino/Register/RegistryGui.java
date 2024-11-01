@@ -1,6 +1,9 @@
 package com.ariks.torcherino.Register;
 
 import com.ariks.torcherino.Block.Aceleration.*;
+import com.ariks.torcherino.Block.EnergyGeneration.ContainerEnergyParticle;
+import com.ariks.torcherino.Block.EnergyGeneration.GuiEnergyParticle;
+import com.ariks.torcherino.Block.EnergyGeneration.TileEnergyParticle;
 import com.ariks.torcherino.Block.TimeCollector.*;
 import com.ariks.torcherino.Block.ParticleCollector.*;
 import com.ariks.torcherino.Block.TimeManipulator.ContainerTimeManipulator;
@@ -20,8 +23,10 @@ public class RegistryGui implements IGuiHandler {
     public static final int GUI_TIME_STORAGE = 1;
     public static final int GUI_TORCHERINO = 2;
     public static final int GUI_COLLECTORS_TIME = 3;
-    public static final int GUI_ACELERATION = 4;
+    public static final int GUI_ACCELERATION = 4;
     public static final int GUI_TIME_MANIPULATOR = 5;
+    public static final int GUI_ENERGY_PARTICLE = 6;
+
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         if (ID == GUI_TIME_STORAGE) {
@@ -33,14 +38,17 @@ public class RegistryGui implements IGuiHandler {
         if (ID == GUI_COLLECTORS_TIME) {
             return new ContainerTimeCollectors(player.inventory,(TileCollectors) world.getTileEntity(new BlockPos(x,y,z)),player);
         }
-        if (ID == GUI_ACELERATION) {
-            return new ContainerAceleration(player.inventory,(TileAcceleration) world.getTileEntity(new BlockPos(x,y,z)),player);
+        if (ID == GUI_ACCELERATION) {
+            return new ContainerAcceleration(player.inventory,(TileAcceleration) world.getTileEntity(new BlockPos(x,y,z)),player);
         }
         if (ID == GUI_TIME_MANIPULATOR) {
             return new ContainerTimeManipulator(player.inventory,(TileTimeManipulator) world.getTileEntity(new BlockPos(x,y,z)),player);
         }
         if (ID == GUI_TORCHERINO) {
             return new ContainerTorcherino(player.inventory, (TileTorcherinoBase) world.getTileEntity(new BlockPos(x, y, z)),player);
+        }
+        if (ID == GUI_ENERGY_PARTICLE) {
+            return new ContainerEnergyParticle(player.inventory, (TileEnergyParticle) world.getTileEntity(new BlockPos(x, y, z)),player);
         }
         return null;
     }
@@ -59,11 +67,14 @@ public class RegistryGui implements IGuiHandler {
         if (ID == GUI_TIME_MANIPULATOR) {
             return new GuiTimeManipulator(player.inventory, (TileTimeManipulator) world.getTileEntity(new BlockPos(x, y, z)),player);
         }
-        if (ID == GUI_ACELERATION) {
-            return new GuiAceleration(player.inventory, (TileAcceleration) world.getTileEntity(new BlockPos(x, y, z)),player);
+        if (ID == GUI_ACCELERATION) {
+            return new GuiAcceleration(player.inventory, (TileAcceleration) world.getTileEntity(new BlockPos(x, y, z)),player);
         }
         if (ID == GUI_TORCHERINO) {
             return new GuiTorcherino(player.inventory, (TileTorcherinoBase) world.getTileEntity(new BlockPos(x, y, z)),player);
+        }
+        if (ID == GUI_ENERGY_PARTICLE) {
+            return new GuiEnergyParticle(player.inventory, (TileEnergyParticle) world.getTileEntity(new BlockPos(x, y, z)),player);
         }
         return null;
     }

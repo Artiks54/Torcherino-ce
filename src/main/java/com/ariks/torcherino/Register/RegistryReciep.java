@@ -193,66 +193,79 @@ public class RegistryReciep {
                 'D', new ItemStack(Blocks.DIAMOND_BLOCK),
                 'E', new ItemStack(Blocks.EMERALD_BLOCK),
                 'B', new ItemStack(binding_Element));
-        //UpgradeModule
-        //uk1
+        //RF Particle Collector
         GameRegistry.addShapedRecipe(
-                new ResourceLocation(Torcherino.MOD_ID + ":" + "uk1"), null,
-                new ItemStack(upgrade_kit1),
+                new ResourceLocation(Torcherino.MOD_ID + ":" + "EnergyParticleCollector"), null,
+                new ItemStack(EnergyParticle),
+                "PCP",
+                "TMT",
+                "RSR",
+                'P', new ItemStack(time_plate),
+                'C', new ItemStack(Particle_collectors),
+                'T', new ItemStack(time_core),
+                'M', new ItemStack(upgrade_count_5),
+                'R', new ItemStack(redstone_Clock),
+                'S', new ItemStack(time_star));
+        //UpgradeModule
+        //upgrade_count_1
+        GameRegistry.addShapedRecipe(
+                new ResourceLocation(Torcherino.MOD_ID + ":" + "upgrade_count_1"), null,
+                new ItemStack(upgrade_count_1),
                 "III",
                 "CBC",
                 "III",
                 'I', new ItemStack(Items.IRON_INGOT),
                 'C', new ItemStack(Particle_collectors),
                 'B', new ItemStack(binding_Element));
-        //uk2
+        //upgrade_count_2
         GameRegistry.addShapedRecipe(
-                new ResourceLocation(Torcherino.MOD_ID + ":" + "uk2"), null,
-                new ItemStack(upgrade_kit2),
+                new ResourceLocation(Torcherino.MOD_ID + ":" + "upgrade_count_2"), null,
+                new ItemStack(upgrade_count_2),
                 "III",
                 "CBC",
                 "III",
-                'I', new ItemStack(Items.IRON_INGOT),
-                'C', new ItemStack(upgrade_kit1),
+                'I', new ItemStack(Blocks.IRON_BLOCK),
+                'C', new ItemStack(upgrade_count_1),
                 'B', new ItemStack(binding_Element));
-        //uk3
+        //upgrade_count_3
         GameRegistry.addShapedRecipe(
-                new ResourceLocation(Torcherino.MOD_ID + ":" + "uk3"), null,
-                new ItemStack(upgrade_kit3),
+                new ResourceLocation(Torcherino.MOD_ID + ":" + "upgrade_count_3"), null,
+                new ItemStack(upgrade_count_3),
                 "III",
                 "CBC",
                 "III",
                 'I', new ItemStack(Items.GOLD_INGOT),
-                'C', new ItemStack(upgrade_kit2),
+                'C', new ItemStack(upgrade_count_2),
                 'B', new ItemStack(binding_Element2));
-        //uk4
+        //upgrade_count_4
         GameRegistry.addShapedRecipe(
-                new ResourceLocation(Torcherino.MOD_ID + ":" + "uk4"), null,
-                new ItemStack(upgrade_kit4),
+                new ResourceLocation(Torcherino.MOD_ID + ":" + "upgrade_count_4"), null,
+                new ItemStack(upgrade_count_4),
                 "III",
                 "CBC",
                 "III",
-                'I', new ItemStack(Items.GOLD_INGOT),
-                'C', new ItemStack(upgrade_kit3),
+                'I', new ItemStack(Blocks.GOLD_BLOCK),
+                'C', new ItemStack(upgrade_count_3),
                 'B', new ItemStack(binding_Element2));
-        //uk5
+        //upgrade_count_5
         GameRegistry.addShapedRecipe(
-                new ResourceLocation(Torcherino.MOD_ID + ":" + "uk5"), null,
-                new ItemStack(upgrade_kit5),
+                new ResourceLocation(Torcherino.MOD_ID + ":" + "upgrade_count_5"), null,
+                new ItemStack(upgrade_count_5),
                 "III",
                 "CBC",
                 "III",
                 'I', new ItemStack(Items.DIAMOND),
-                'C', new ItemStack(upgrade_kit4),
+                'C', new ItemStack(upgrade_count_4),
                 'B', new ItemStack(binding_Element3));
-        //uk6
+        //upgrade_count_6
         GameRegistry.addShapedRecipe(
-                new ResourceLocation(Torcherino.MOD_ID + ":" + "uk6"), null,
-                new ItemStack(upgrade_kit6),
+                new ResourceLocation(Torcherino.MOD_ID + ":" + "upgrade_count_6"), null,
+                new ItemStack(upgrade_count_6),
                 "III",
                 "CBC",
                 "III",
-                'I', new ItemStack(Items.DIAMOND),
-                'C', new ItemStack(upgrade_kit5),
+                'I', new ItemStack(Blocks.DIAMOND_BLOCK),
+                'C', new ItemStack(upgrade_count_5),
                 'B', new ItemStack(binding_Element3));
         //GoldClock
         GameRegistry.addShapedRecipe(
@@ -502,7 +515,7 @@ public class RegistryReciep {
                 'B', new ItemStack(binding_Element),
                 'C', new ItemStack(Items.CLOCK),
                 'E', new ItemStack(time_particle_emerald),
-                'N', new ItemStack(Items.NETHER_STAR),
+                'N', new ItemStack(time_star),
                 'I', new ItemStack(time_ingot),
                 'D', new ItemStack(time_particle_diamond));
         //time_particle_redstone
@@ -551,13 +564,12 @@ public class RegistryReciep {
                 new ItemStack(time_nugget),
                 "BDB",
                 "GPR",
-                "IEI",
+                "BEB",
                 'B', new ItemStack(Items.BLAZE_POWDER),
                 'D', new ItemStack(time_particle_diamond),
                 'G', new ItemStack(time_particle_gold),
                 'P', new ItemStack(time_particle),
                 'R', new ItemStack(time_particle_redstone),
-                'I', new ItemStack(Items.IRON_INGOT),
                 'E', new ItemStack(time_particle_emerald));
         //time_ingot
         GameRegistry.addShapedRecipe(
@@ -585,11 +597,81 @@ public class RegistryReciep {
         GameRegistry.addShapedRecipe(
                 new ResourceLocation(Torcherino.MOD_ID + ":" + "time_casing"), null,
                 new ItemStack(time_casing),
-                "SDS",
-                "SCS",
-                "SDS",
+                "SGS",
+                "POP",
+                "SGS",
                 'S', new ItemStack(time_stick),
-                'D', new ItemStack(Items.GLOWSTONE_DUST),
-                'C', new ItemStack(Blocks.OBSIDIAN));
+                'G', new ItemStack(Items.GLOWSTONE_DUST),
+                'P', new ItemStack(time_plate),
+                'O', new ItemStack(Blocks.OBSIDIAN));
+        //Time_Plate
+        GameRegistry.addShapedRecipe(
+                new ResourceLocation(Torcherino.MOD_ID + ":" + "time_plate"), null,
+                new ItemStack(time_plate),
+                "TFT",
+                "FIF",
+                "TFT",
+                'T', new ItemStack(time_ingot),
+                'I', new ItemStack(Items.IRON_INGOT),
+                'F', new ItemStack(Items.FIRE_CHARGE));
+        //Time_Star
+        GameRegistry.addShapedRecipe(
+                new ResourceLocation(Torcherino.MOD_ID + ":" + "time_star"), null,
+                new ItemStack(time_star),
+                "DSD",
+                "TBT",
+                "DSD",
+                'T', new ItemStack(time_plate),
+                'B', new ItemStack(binding_Element),
+                'S', new ItemStack(Items.NETHER_STAR),
+                'D', new ItemStack(Blocks.DIAMOND_BLOCK));
+        //Grow_level_1
+        GameRegistry.addShapedRecipe(
+                new ResourceLocation(Torcherino.MOD_ID + ":" + "grow_level_1"), null,
+                new ItemStack(Grow_lvl1),
+                "DBD",
+                "BTB",
+                "DBD",
+                'D', new ItemStack(Blocks.DIRT),
+                'B', new ItemStack(Items.DYE,1,15),
+                'T', new ItemStack(time_particle));
+        //Grow_level_2
+        GameRegistry.addShapedRecipe(
+                new ResourceLocation(Torcherino.MOD_ID + ":" + "grow_level_2"), null,
+                new ItemStack(Grow_lvl2),
+                " B ",
+                "BGB",
+                " B ",
+                'B', new ItemStack(Items.DYE,1,15),
+                'G', new ItemStack(Grow_lvl1));
+        //Grow_level_3
+        GameRegistry.addShapedRecipe(
+                new ResourceLocation(Torcherino.MOD_ID + ":" + "grow_level_3"), null,
+                new ItemStack(Grow_lvl3),
+                "DBD",
+                "BGB",
+                "DBD",
+                'D', new ItemStack(Blocks.DIRT),
+                'B', new ItemStack(Items.DYE,1,15),
+                'G', new ItemStack(Grow_lvl2));
+        //Grow_level_4
+        GameRegistry.addShapedRecipe(
+                new ResourceLocation(Torcherino.MOD_ID + ":" + "grow_level_4"), null,
+                new ItemStack(Grow_lvl4),
+                " B ",
+                "BGB",
+                " B ",
+                'B', new ItemStack(Items.DYE,1,15),
+                'G', new ItemStack(Grow_lvl3));
+        //Grow_level_5
+        GameRegistry.addShapedRecipe(
+                new ResourceLocation(Torcherino.MOD_ID + ":" + "grow_level_5"), null,
+                new ItemStack(Grow_lvl5),
+                "DBD",
+                "BGB",
+                "DBD",
+                'D', new ItemStack(Blocks.DIRT),
+                'B', new ItemStack(Items.DYE,1,15),
+                'G', new ItemStack(Grow_lvl4));
     }
 }

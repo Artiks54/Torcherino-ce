@@ -1,33 +1,29 @@
 package com.ariks.torcherino.Block.TimeManipulator;
 
 import com.ariks.torcherino.Block.ExampleGuiContainer;
-import com.ariks.torcherino.util.GuiButtonNetwork;
+import com.ariks.torcherino.Gui.BarComponent;
+import com.ariks.torcherino.Gui.GuiButtonNetwork;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-@SideOnly(Side.CLIENT)
 public class GuiTimeManipulator extends ExampleGuiContainer {
+
     private final TileTimeManipulator tile;
     private GuiButtonNetwork buttonSetDay,buttonSetNight;
     public GuiTimeManipulator(InventoryPlayer inventory, TileTimeManipulator tileEntity, EntityPlayer player) {
         super(new ContainerTimeManipulator(inventory,tileEntity,player));
         this.tile = tileEntity;
-        SetTexture("textures/gui/gui2.png");
-        SetWidth(175);
-        SetHeight(167);
-        setBooleanBar(true);
-        setBooleanTooltip(true);
-        SetBarSettings(165,25,5,13,1,170);
+        setTexture("textures/gui/gui_time.png", 175, 167);
+        BarComponent barComponent = new BarComponent(this,1,8,16,0,19,159,16,"textures/gui/gui_component.png");
+        addBarComponent(barComponent);
     }
     @Override
-    public void UpdateBar() {
-        SetBarValue(tile.getValue(1),tile.getValue(2));
-    }
-    @Override
-    public void Update() {
+    public void Tick() {
+        String formattedValueMin = numberFormat.format(tile.getValue(1));
+        String formattedValueMax = numberFormat.format(tile.getValue(2));
+        setTooltipBar(1,"Time: "+formattedValueMin+ " / " + formattedValueMax);
+        setBarValue(1,tile.getValue(1),tile.getValue(2));
         if(tile.getValue(1) < tile.getValue(2)) {
             buttonSetDay.enabled = false;
             buttonSetNight.enabled = false;

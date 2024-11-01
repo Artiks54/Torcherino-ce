@@ -2,6 +2,7 @@
 
 itemGroup.torcherinoTab=Torcherino CE
 
+tce_jei_grow=Grow process
 tce_gui.text.speed=Speed
 tce_gui.text.radius=Radius
 tce_gui.text.working=Work
@@ -21,12 +22,12 @@ tce_item.wand.info=Durability:
 tce_item.tooltip.time_storage=Shift + Right-Click extracts time, Right-click inserts time
 tce_item.tooltip.time_wand=Shift + Right-click to accelerate
 
-item.tce_uk1.name=Module collector x2
-item.tce_uk2.name=Module collector x4
-item.tce_uk3.name=Module collector x8
-item.tce_uk4.name=Module collector x16
-item.tce_uk5.name=Module collector x32
-item.tce_uk6.name=Module collector x64
+item.tce_upgrade_count_1.name=Module collector x2
+item.tce_upgrade_count_2.name=Module collector x4
+item.tce_upgrade_count_3.name=Module collector x8
+item.tce_upgrade_count_4.name=Module collector x16
+item.tce_upgrade_count_5.name=Module collector x32
+item.tce_upgrade_count_6.name=Module collector x64
 item.tce_time_wand_lvl1.name=§9The Staff of Time lvl 1
 item.tce_time_wand_lvl2.name=§aThe Staff of Time lvl 2
 item.tce_time_wand_lvl3.name=§cThe Staff of Time lvl 3
@@ -60,6 +61,9 @@ item.tce_time_particle_redstone.name=Time particle redstone
 item.tce_time_particle_emerald.name=Time particle emerald
 item.tce_time_particle_gold.name=Time particle gold
 item.tce_time_particle_diamond.name=Time particle diamond
+item.tce_time_plate.name=Time plate
+item.tce_time_star.name=Time star
+
 
 tile.tce_torch_lvl1.name=§9Torcherino lvl 1
 tile.tce_torch_lvl2.name=§aTorcherino lvl 2
@@ -81,3 +85,10 @@ tile.tce_time_storage.name=§6Time Storage
 tile.tce_time_collectors.name=§6Temporary collector
 tile.tce_time_manipulator.name=§5Time manipulator
 tile.tce_particle_collector.name=§6Particle collector
+tile.tce_energy_particle.name=§4RF Particle collector
+
+tile.tce_grow_lvl1.name=Growth Accelerator lvl 1
+tile.tce_grow_lvl2.name=Growth Accelerator lvl 2
+tile.tce_grow_lvl3.name=Growth Accelerator lvl 3
+tile.tce_grow_lvl4.name=Growth Accelerator lvl 4
+tile.tce_grow_lvl5.name=Growth Accelerator lvl 5

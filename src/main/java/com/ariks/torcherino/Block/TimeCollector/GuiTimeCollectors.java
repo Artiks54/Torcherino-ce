@@ -1,26 +1,25 @@
 package com.ariks.torcherino.Block.TimeCollector;
 
 import com.ariks.torcherino.Block.ExampleGuiContainer;
+import com.ariks.torcherino.Gui.BarComponent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-@SideOnly(Side.CLIENT)
 public class GuiTimeCollectors extends ExampleGuiContainer {
     private final TileCollectors tile;
+
     public GuiTimeCollectors(InventoryPlayer inventory, TileCollectors tileEntity, EntityPlayer player) {
         super(new ContainerTimeCollectors(inventory,tileEntity,player));
         this.tile = tileEntity;
-        SetTexture("textures/gui/gui2.png");
-        SetWidth(175);
-        SetHeight(167);
-        setBooleanBar(true);
-        setBooleanTooltip(true);
-        SetBarSettings(165,25,5,13,1,170);
+        setTexture("textures/gui/gui_time.png", 175, 167);
+        BarComponent barComponent = new BarComponent(this,1,8,16,0,19,159,16,"textures/gui/gui_component.png");
+        addBarComponent(barComponent);
     }
     @Override
-    public void UpdateBar() {
-        SetBarValue(tile.getValue(1),tile.getValue(2));
+    public void Tick() {
+        String formattedValueMin = numberFormat.format(tile.getValue(1));
+        String formattedValueMax = numberFormat.format(tile.getValue(2));
+        setTooltipBar(1,"Time: "+formattedValueMin+ " / " + formattedValueMax);
+        setBarValue(1,tile.getValue(1),tile.getValue(2));
     }
 }

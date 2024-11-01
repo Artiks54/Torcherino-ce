@@ -1,0 +1,17 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tce:energy_particle",
+	    "textures": {
+        "base": "tce:blocks/base",
+		"material": "tce:blocks/part_energy",
+        "particle":  "tce:blocks/part_energy"
+        },
+    "transform": "forge:default-block"
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{}],
+    "destroyed": [{}]
+  }
+}

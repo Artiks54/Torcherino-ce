@@ -1,15 +1,12 @@
 package com.ariks.torcherino.Block.Aceleration;
 
 import com.ariks.torcherino.Block.TileExampleContainer;
+import com.ariks.torcherino.Register.RegistryGui;
 import com.ariks.torcherino.util.ITileTimeStorage;
 import com.ariks.torcherino.Register.RegistryAcceleration;
-import com.ariks.torcherino.Register.RegistryGui;
 import com.ariks.torcherino.util.Config;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumParticleTypes;
@@ -63,10 +60,10 @@ public class TileAcceleration extends TileExampleContainer implements ITickable,
         int AreaIncrY = pos.getY() + AreaModifier;
         int AreaIncrZ = pos.getZ() + AreaModifier;
         for (BlockPos pos : BlockPos.getAllInBox(AreaDecrX, AreaDecrY, AreaDecrZ, AreaIncrX, AreaIncrY, AreaIncrZ)) {
-            AcelerationTick(pos);
+            AccelerationTick(pos);
         }
     }
-    private void AcelerationTick(BlockPos pos) {
+    private void AccelerationTick(BlockPos pos) {
         IBlockState blockState = world.getBlockState(pos);
         Block block = blockState.getBlock();
         if (block instanceof BlockFluidBase || RegistryAcceleration.isBlockBlacklisted(block)) {
@@ -129,12 +126,8 @@ public class TileAcceleration extends TileExampleContainer implements ITickable,
         }
     }
     @Override
-    public Container createContainer(InventoryPlayer inventoryPlayer, EntityPlayer entityPlayer) {
-        return new ContainerAceleration(inventoryPlayer,this,entityPlayer);
-    }
-    @Override
-    public String getGuiID() {
-        return String.valueOf(RegistryGui.GUI_ACELERATION);
+    public @NotNull String getGuiID() {
+        return String.valueOf(RegistryGui.GUI_ACCELERATION);
     }
     @Override
     public void AddTimeStorage(int time) {

@@ -1,8 +1,8 @@
 package com.ariks.torcherino.Register;
 
 import com.ariks.torcherino.Torcherino;
-import com.ariks.torcherino.network.UpdateSlider;
-import com.ariks.torcherino.network.UpdateTilePacket;
+import com.ariks.torcherino.Gui.UpdateSlider;
+import com.ariks.torcherino.Gui.UpdateTilePacket;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;

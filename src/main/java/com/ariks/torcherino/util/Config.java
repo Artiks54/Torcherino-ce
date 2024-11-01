@@ -40,6 +40,7 @@ public class Config {
     public static int MaxStorageTimeCollectors;
     public static int Stored_Time_Bottle_Lvl_1,Stored_Time_Bottle_Lvl_2,Stored_Time_Bottle_Lvl_3,Stored_Time_Bottle_Lvl_4,Stored_Time_Bottle_Lvl_5,Stored_Time_Bottle_infinite;
     public static int SpeedWand_lvl1,SpeedWand_lvl2,SpeedWand_lvl3,SpeedWand_lvl4,SpeedWand_lvl5,SpeedWand_infinite;
+    public static int MaxEnergyParticle, RFPerTickEnergyParticle;
     public static void init(File file) {
         config = new Configuration(file);
         try {config.load();
@@ -96,7 +97,10 @@ public class Config {
 //Acceleration tile
             AccelerationSpeed = config.getInt("Tile_Time_Acceleration_Speed",Tile,3,1, Byte.MAX_VALUE,TextS);
             AccelerationRadius = config.getInt("Tile_Time_Acceleration_Radius",Tile,3,1,Byte.MAX_VALUE,TextR);
-//Torch_lvl_1
+//EnergyParticle
+            RFPerTickEnergyParticle = config.getInt("Tile_Energy_Particle_Collector_RF_Tick",Tile,540000,1,Integer.MAX_VALUE,"Rf need to generate 1 time element");
+            MaxEnergyParticle = config.getInt("Tile_Energy_Particle_Collector_Max_Energy",Tile,50000000,1,Integer.MAX_VALUE,"Max energy storage");
+ //Torch_lvl_1
             TileName = "Torcherino_lvl_1";
             Torch_lvl1_S = config.getInt(TileName+speed,TileTorcherino,1,1,Byte.MAX_VALUE,TextS);
             Torch_lvl1_M = config.getInt(TileName+modes,TileTorcherino,3,1,Byte.MAX_VALUE,TextM);

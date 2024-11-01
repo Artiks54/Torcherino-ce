@@ -4,9 +4,6 @@ import com.ariks.torcherino.util.ITileTimeStorage;
 import com.ariks.torcherino.Register.RegistryGui;
 import com.ariks.torcherino.Block.TileExampleContainer;
 import com.ariks.torcherino.util.Config;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.nbt.NBTTagCompound;
 import org.jetbrains.annotations.NotNull;
 
@@ -52,10 +49,6 @@ public class TileTimeStorage extends TileExampleContainer implements ITileTimeSt
         }
     }
     @Override
-    public Container createContainer(InventoryPlayer inventoryPlayer, EntityPlayer entityPlayer) {
-        return new ContainerTimeStorage(inventoryPlayer,this,entityPlayer);
-    }
-    @Override
     public @NotNull NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         nbt.setInteger("TimeStorage", TimeStorage);
         return super.writeToNBT(nbt);
@@ -66,5 +59,7 @@ public class TileTimeStorage extends TileExampleContainer implements ITileTimeSt
         super.readFromNBT(nbt);
     }
     @Override
-    public String getGuiID() {return String.valueOf(RegistryGui.GUI_TIME_STORAGE);}
+    public @NotNull String getGuiID() {
+        return String.valueOf(RegistryGui.GUI_TIME_STORAGE);
+    }
 }

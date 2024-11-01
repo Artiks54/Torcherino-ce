@@ -8,6 +8,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
@@ -118,6 +119,18 @@ public abstract class TileExampleInventory extends TileExampleContainer implemen
     @Override
     public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
         return invHandler.canExtract(index);
+    }
+    @Override
+    public @NotNull NBTTagCompound writeToNBT(@NotNull NBTTagCompound nbt) {
+        super.writeToNBT(nbt);
+        nbt.setTag("inventory", ItemStackHelper.saveAllItems(new NBTTagCompound(), inventory));
+        return nbt;
+    }
+    @Override
+    public void readFromNBT(@NotNull NBTTagCompound nbt) {
+        super.readFromNBT(nbt);
+        NBTTagCompound inventoryTag = nbt.getCompoundTag("inventory");
+        ItemStackHelper.loadAllItems(inventoryTag, inventory);
     }
     @Override
     public boolean hasCapability(net.minecraftforge.common.capabilities.Capability<?> capability, EnumFacing facing) {

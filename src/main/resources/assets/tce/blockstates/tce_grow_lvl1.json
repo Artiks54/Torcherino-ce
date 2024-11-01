@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "normal": { 
+      "model": "tce:tce_grow_lvl1" 
+    },
+    "inventory": { 
+      "model": "tce:tce_grow_lvl1" 
+    }
+  }
+}

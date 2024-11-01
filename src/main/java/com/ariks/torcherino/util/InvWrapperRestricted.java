@@ -3,6 +3,7 @@ package com.ariks.torcherino.util;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.wrapper.InvWrapper;
+import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,14 +36,14 @@ public class InvWrapperRestricted extends InvWrapper {
         return this.getSlotsExtract().contains(slot);
     }
     @Override
-    public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
+    public @NotNull ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
         if (!canInsert(slot)) {
             return stack;
         }
         return super.insertItem(slot, stack, simulate);
     }
     @Override
-    public ItemStack extractItem(int slot, int amount, boolean simulate) {
+    public @NotNull ItemStack extractItem(int slot, int amount, boolean simulate) {
         if (!canExtract(slot)) {
             return ItemStack.EMPTY;
         }

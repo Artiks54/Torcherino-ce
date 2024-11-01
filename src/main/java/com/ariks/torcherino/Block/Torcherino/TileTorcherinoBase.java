@@ -73,10 +73,10 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
     }
     private void UpdateTickArea() {
         for (BlockPos pos : BlockPos.getAllInBox(xMin, yMin, zMin, xMax, yMax, zMax)) {
-            AcelerationTick(pos);
+            AccelerationTick(pos);
         }
     }
-    private void AcelerationTick(BlockPos pos) {
+    private void AccelerationTick(BlockPos pos) {
         IBlockState blockState = world.getBlockState(pos);
         Block block = blockState.getBlock();
         if (block instanceof BlockFluidBase || RegistryAcceleration.isBlockBlacklisted(block)) {
@@ -116,7 +116,7 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
     }
     @Override
     @SideOnly(Side.CLIENT)
-    public AxisAlignedBB getRenderBoundingBox() {
+    public @NotNull AxisAlignedBB getRenderBoundingBox() {
         final int X = getPos().getX();
         final int Y = getPos().getY();
         final int Z = getPos().getZ();
@@ -245,7 +245,7 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
         return new ContainerTorcherino(inventoryPlayer,this,entityPlayer);
     }
     @Override
-    public String getGuiID() {
+    public @NotNull String getGuiID() {
         return String.valueOf(RegistryGui.GUI_TORCHERINO);
     }
 }

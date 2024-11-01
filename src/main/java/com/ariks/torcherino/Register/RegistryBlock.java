@@ -1,6 +1,8 @@
 package com.ariks.torcherino.Register;
 
 import com.ariks.torcherino.Block.Aceleration.BlockAcceleration;
+import com.ariks.torcherino.Block.EnergyGeneration.BlockEnergyParticle;
+import com.ariks.torcherino.Block.Other.BlockGrowAccelerator;
 import com.ariks.torcherino.Block.ParticleCollector.BlockParticleCollector;
 import com.ariks.torcherino.Block.TimeCollector.BlockCollectors;
 import com.ariks.torcherino.Block.TimeManipulator.BlockTimeManipulator;
@@ -23,6 +25,12 @@ import java.util.Objects;
 
 public class RegistryBlock {
     public static final String modid = Torcherino.MOD_ID + "_";
+    public static Block EnergyParticle = new BlockEnergyParticle(modid+"energy_particle");
+    public static Block Grow_lvl1 = new BlockGrowAccelerator(modid+"grow_lvl1",10);
+    public static Block Grow_lvl2 = new BlockGrowAccelerator(modid+"grow_lvl2",7);
+    public static Block Grow_lvl3 = new BlockGrowAccelerator(modid+"grow_lvl3",5);
+    public static Block Grow_lvl4 = new BlockGrowAccelerator(modid+"grow_lvl4",2);
+    public static Block Grow_lvl5 = new BlockGrowAccelerator(modid+"grow_lvl5",1);
     public static Block Torch_lvl_1 = new BlockTorcherino(modid+"torch_lvl1", TorcherinoEnumLevel.lvl_1);
     public static Block Torch_lvl_2 = new BlockTorcherino(modid+"torch_lvl2",TorcherinoEnumLevel.lvl_2);
     public static Block Torch_lvl_3 = new BlockTorcherino(modid+"torch_lvl3",TorcherinoEnumLevel.lvl_3);

@@ -4,8 +4,6 @@ import com.ariks.torcherino.Block.TileExampleContainer;
 import com.ariks.torcherino.util.ITileTimeStorage;
 import com.ariks.torcherino.Register.RegistryGui;
 import com.ariks.torcherino.util.Config;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ITickable;
@@ -29,6 +27,24 @@ public class TileCollectors extends TileExampleContainer implements ITickable, I
         }
     }
     @Override
+    public void AddTimeStorage(int time) {
+        this.TimeStorage += time;
+        this.UpdateTile();
+    }
+    @Override
+    public void RemoveTimeStorage(int time) {
+        this.TimeStorage -= time;
+        this.UpdateTile();
+    }
+    @Override
+    public int GetTimeStorage() {
+        return this.TimeStorage;
+    }
+    @Override
+    public int GetMaxStorage() {
+        return this.ConfigCollectorsMaxStorage;
+    }
+    @Override
     public int getValue(int id) {
         if (id == 1) {
             return this.TimeStorage;
@@ -48,11 +64,9 @@ public class TileCollectors extends TileExampleContainer implements ITickable, I
         }
     }
     @Override
-    public Container createContainer(InventoryPlayer inventoryPlayer, EntityPlayer entityPlayer) {
-        return new ContainerTimeCollectors(inventoryPlayer,this,entityPlayer);
+    public @NotNull String getGuiID() {
+        return String.valueOf(RegistryGui.GUI_COLLECTORS_TIME);
     }
-    @Override
-    public String getGuiID() {return String.valueOf(RegistryGui.GUI_COLLECTORS_TIME);}
     @Override
     public @NotNull NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         nbt.setInteger("TimeStorage", TimeStorage);
@@ -64,23 +78,5 @@ public class TileCollectors extends TileExampleContainer implements ITickable, I
         this.TimeStorage = nbt.getInteger("TimeStorage");
         this.Cooldown = nbt.getInteger("Cooldown");
         super.readFromNBT(nbt);
-    }
-    @Override
-    public void AddTimeStorage(int time) {
-        this.TimeStorage += time;
-        this.UpdateTile();
-    }
-    @Override
-    public void RemoveTimeStorage(int time) {
-        this.TimeStorage -= time;
-        this.UpdateTile();
-    }
-    @Override
-    public int GetTimeStorage() {
-        return this.TimeStorage;
-    }
-    @Override
-    public int GetMaxStorage() {
-        return this.ConfigCollectorsMaxStorage;
     }
 }

@@ -4,15 +4,12 @@ import com.ariks.torcherino.Block.TileExampleContainer;
 import com.ariks.torcherino.Register.RegistryGui;
 import com.ariks.torcherino.util.Config;
 import com.ariks.torcherino.util.ITileTimeStorage;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.nbt.NBTTagCompound;
 import org.jetbrains.annotations.NotNull;
 
 public class TileTimeManipulator extends TileExampleContainer implements ITileTimeStorage {
     private int TimeStorage;
-    private final int MaxCooldown = Config.RequiredTimeManipulator;
+    private final int TimeMaxStorage = Config.RequiredTimeManipulator;
     public void SetDay(){
         world.setWorldTime(1000);
         this.Reset();
@@ -31,7 +28,7 @@ public class TileTimeManipulator extends TileExampleContainer implements ITileTi
             return this.TimeStorage;
         }
         if (id == 2) {
-            return this.MaxCooldown;
+            return this.TimeMaxStorage;
         }
         return id;
     }
@@ -53,11 +50,7 @@ public class TileTimeManipulator extends TileExampleContainer implements ITileTi
         super.readFromNBT(nbt);
     }
     @Override
-    public Container createContainer(InventoryPlayer inventoryPlayer, EntityPlayer entityPlayer) {
-        return new ContainerTimeManipulator(inventoryPlayer,this,entityPlayer);
-    }
-    @Override
-    public String getGuiID() {return String.valueOf(RegistryGui.GUI_TIME_MANIPULATOR);
+    public @NotNull String getGuiID() {return String.valueOf(RegistryGui.GUI_TIME_MANIPULATOR);
     }
     @Override
     public void AddTimeStorage(int time) {
@@ -75,6 +68,6 @@ public class TileTimeManipulator extends TileExampleContainer implements ITileTi
     }
     @Override
     public int GetMaxStorage() {
-        return this.MaxCooldown;
+        return this.TimeMaxStorage;
     }
 }

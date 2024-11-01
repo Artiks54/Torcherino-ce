@@ -13,15 +13,10 @@ import org.jetbrains.annotations.NotNull;
 public class ExampleContainer extends Container {
 
     protected TileExampleContainer tile;
-    private boolean hasTile;
     private int[] tileMap;
     private void SetTile(TileExampleContainer tile) {
-        this.hasTile = true;
         this.tile = tile;
         this.tileMap = new int[tile.getValueList().length];
-    }
-    public ExampleContainer() {
-        this.hasTile = false;
     }
     public ExampleContainer(TileExampleContainer tile) {
         this.SetTile(tile);
@@ -69,7 +64,7 @@ public class ExampleContainer extends Container {
         return this.tile.isUsableByPlayer(entityPlayer);
     }
     @Override
-    public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
+    public @NotNull ItemStack transferStackInSlot(@NotNull EntityPlayer playerIn, int index) {
         return ItemStack.EMPTY;
     }
 }

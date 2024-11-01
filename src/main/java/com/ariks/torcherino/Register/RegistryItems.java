@@ -42,10 +42,19 @@ public final class RegistryItems {
     public static final Item time_particle_redstone = new ItemBase(modid+"time_particle_redstone");
     public static final Item time_particle_diamond = new ItemBase(modid+"time_particle_diamond");
     public static final Item time_particle_emerald = new ItemBase(modid+"time_particle_emerald");
-    public static final Item upgrade_kit1 = new ItemUpgrade(modid+"uk1");
-    public static final Item upgrade_kit2 = new ItemUpgrade(modid+"uk2");
-    public static final Item upgrade_kit3 = new ItemUpgrade(modid+"uk3");
-    public static final Item upgrade_kit4 = new ItemUpgrade(modid+"uk4");
-    public static final Item upgrade_kit5 = new ItemUpgrade(modid+"uk5");
-    public static final Item upgrade_kit6 = new ItemUpgrade(modid+"uk6");
+    public static final Item time_plate = new ItemBase(modid+"time_plate");
+    public static final Item time_star = new ItemBase(modid+"time_star");
+
+    public static final Item upgrade_count_1 = new ItemUpgradeCount(modid+"upgrade_count_1",2);
+    public static final Item upgrade_count_2 = new ItemUpgradeCount(modid+"upgrade_count_2",4);
+    public static final Item upgrade_count_3 = new ItemUpgradeCount(modid+"upgrade_count_3",8);
+    public static final Item upgrade_count_4 = new ItemUpgradeCount(modid+"upgrade_count_4",16);
+    public static final Item upgrade_count_5 = new ItemUpgradeCount(modid+"upgrade_count_5",32);
+    public static final Item upgrade_count_6 = new ItemUpgradeCount(modid+"upgrade_count_6",64);
+
+    public static final Item upgrade_speed_1 = new ItemUpgradeSpeed(modid+"upgrade_speed_1",2);
+    public static final Item upgrade_speed_2 = new ItemUpgradeSpeed(modid+"upgrade_speed_2",3);
+    public static final Item upgrade_speed_3 = new ItemUpgradeSpeed(modid+"upgrade_speed_3",4);
+    public static final Item upgrade_speed_4 = new ItemUpgradeSpeed(modid+"upgrade_speed_4",5);
+    public static final Item upgrade_speed_5 = new ItemUpgradeSpeed(modid+"upgrade_speed_5",6);
 }

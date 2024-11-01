@@ -19,7 +19,6 @@ public class LocalizedStringKey {
      //Time Manipulator tile
      public String StrTextDay = I18n.format(modid+"gui.text.tile_time_manipulator.day");
      public String StrTextNight = I18n.format(modid+"gui.text.tile_time_manipulator.night");
-     public String StrTextProgress = I18n.format(modid+"gui.text.tile_time_manipulator.progress");
      //Time Storage Tile
      public String TimeCollected = I18n.format(modid+"gui.text.time");
      //Item storage
@@ -27,4 +26,6 @@ public class LocalizedStringKey {
      //Item Wand
      public String StrWandInfoItem = I18n.format(modid+"item.wand.info");
      public String Str_Time_Wand_Tooltip = I18n.format(modid+"item.tooltip.time_wand");
+     //Grow jei
+     public String Jei_grow_tooltip = I18n.format(modid+"jei_grow");
 }

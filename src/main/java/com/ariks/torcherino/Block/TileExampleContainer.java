@@ -3,6 +3,8 @@ package com.ariks.torcherino.Block;
 import com.ariks.torcherino.util.ITileHas;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
@@ -13,9 +15,23 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class TileExampleContainer extends TileEntity implements ITileHas, IInteractionObject {
+    private Container container;
     @Override
     public boolean isUsableByPlayer(EntityPlayer player) {
         return !isInvalid() && player.getDistanceSq(pos.add(0.5, 0.5, 0.5)) <= 64;
+    }
+    public void setContainer(Container container) {
+        this.container = container;
+    }
+    public Container getContainer() {
+        return container;
+    }
+    @Override
+    public Container createContainer(InventoryPlayer inventoryPlayer, EntityPlayer entityPlayer) {
+        if(container != null){
+            return container;
+        }
+        return null;
     }
     @Override
     public @NotNull SPacketUpdateTileEntity getUpdatePacket() {

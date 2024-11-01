@@ -1,5 +1,9 @@
 package com.ariks.torcherino.Block.Torcherino;
 
+import com.ariks.torcherino.Gui.GuiButtonNetwork;
+import com.ariks.torcherino.Gui.GuiColorCube;
+import com.ariks.torcherino.Gui.GuiItemButton;
+import com.ariks.torcherino.Gui.GuiSliderInt;
 import com.ariks.torcherino.Torcherino;
 import com.ariks.torcherino.util.*;
 import net.minecraft.client.gui.GuiButton;
@@ -187,10 +191,6 @@ public class GuiTorcherino extends GuiContainer {
         int x = (this.width - xSize) / 2;
         int y = (this.height - ySize) / 2;
         this.fontRenderer.drawString(tile.getBlockType().getLocalizedName(), x+10,y+10, Color.WHITE.getRGB());
-    }
-    @Override
-    public boolean doesGuiPauseGame() {
-        return false;
     }
     private void AddCube(){
         if(drawCube) {

@@ -2,6 +2,7 @@
 
 itemGroup.torcherinoTab=Torcherino CE
 
+tce_jei_grow=Ускоритель роста
 tce_gui.text.speed=Скорость
 tce_gui.text.radius=Радиус
 tce_gui.text.working=Работа
@@ -21,12 +22,12 @@ tce_item.wand.info=Прочность:
 tce_item.tooltip.time_storage=Shift + ПКМ извлечь время,ПКМ вставить время
 tce_item.tooltip.time_wand=Shift + ПКМ для ускорение
 
-item.tce_uk1.name=Модуль коллектор x2
-item.tce_uk2.name=Модуль коллектор x4
-item.tce_uk3.name=Модуль коллектор x8
-item.tce_uk4.name=Модуль коллектор x16
-item.tce_uk5.name=Модуль коллектор x32
-item.tce_uk6.name=Модуль коллектор x64
+item.tce_upgrade_count_1.name=Модуль коллектор x2
+item.tce_upgrade_count_2.name=Модуль коллектор x4
+item.tce_upgrade_count_3.name=Модуль коллектор x8
+item.tce_upgrade_count_4.name=Модуль коллектор x16
+item.tce_upgrade_count_5.name=Модуль коллектор x32
+item.tce_upgrade_count_6.name=Модуль коллектор x64
 item.tce_time_wand_lvl1.name=§9Посох времени уровень 1
 item.tce_time_wand_lvl2.name=§aПосох времени уровень 2
 item.tce_time_wand_lvl3.name=§cПосох времени уровень 3
@@ -60,6 +61,9 @@ item.tce_time_particle_redstone.name=Врмееная частица редст�
 item.tce_time_particle_emerald.name=Врмееная частица изумруда
 item.tce_time_particle_gold.name=Врмееная частица золота
 item.tce_time_particle_diamond.name=Врмееная частица алмаза
+item.tce_time_plate.name=Временная пластина
+item.tce_time_star.name=Временная звезда
+
 
 tile.tce_torch_lvl1.name=§9Факел 1 уровня
 tile.tce_torch_lvl2.name=§aФакел 2 уровня
@@ -81,3 +85,10 @@ tile.tce_time_storage.name=§6Временное хранилище
 tile.tce_time_collectors.name=§6Временной сборщик
 tile.tce_time_manipulator.name=§5Временной манипулятор
 tile.tce_particle_collector.name=§6Коллектор частиц
+tile.tce_energy_particle.name=§4RF Коллектор частиц
+
+tile.tce_grow_lvl1.name=Ускоритель роста lvl 1
+tile.tce_grow_lvl2.name=Ускоритель роста lvl 2
+tile.tce_grow_lvl3.name=Ускоритель роста lvl 3
+tile.tce_grow_lvl4.name=Ускоритель роста lvl 4
+tile.tce_grow_lvl5.name=Ускоритель роста lvl 5
