@@ -1,13 +1,10 @@
 package com.ariks.torcherino.Block.ParticleCollector;
 
-import com.ariks.torcherino.Block.TileExampleInventory;
+import com.ariks.torcherino.Block.Core.TileExampleInventory;
 import com.ariks.torcherino.Register.RegistryGui;
 import com.ariks.torcherino.Register.RegistryItems;
 import com.ariks.torcherino.util.Config;
-import com.ariks.torcherino.util.SlotUpgradeCount;
-import com.ariks.torcherino.util.SlotUpgradeSpeed;
 import net.minecraft.inventory.ItemStackHelper;
-import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ITickable;
@@ -40,17 +37,22 @@ public class TileParticleCollector extends TileExampleInventory implements ITick
                     Progress = 0;
                 }
             }
+        } else {
+            this.UpdateTile();
+            Progress = 0;
         }
     }
     private boolean CanGenerate() {
         ItemStack item = new ItemStack(RegistryItems.time_particle);
+        boolean hasSpace = false;
         for (int i = 2; i < this.getSizeInventory(); i++) {
             ItemStack stack = this.getStackInSlot(i);
             if (stack.isEmpty() || (stack.getItem() == item.getItem() && ItemStack.areItemStackTagsEqual(stack, item) && stack.getCount() < stack.getMaxStackSize())) {
-                return true;
+                hasSpace = true;
+                break;
             }
         }
-        return false;
+        return hasSpace;
     }
     public void updateSpeed(int newSpeed) {
         this.AddProgress = newSpeed;

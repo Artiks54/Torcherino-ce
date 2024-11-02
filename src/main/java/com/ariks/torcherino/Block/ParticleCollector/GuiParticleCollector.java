@@ -1,6 +1,6 @@
 package com.ariks.torcherino.Block.ParticleCollector;
 
-import com.ariks.torcherino.Block.ExampleGuiContainer;
+import com.ariks.torcherino.Block.Core.ExampleGuiContainer;
 import com.ariks.torcherino.Gui.BarComponent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

@@ -1,6 +1,6 @@
 package com.ariks.torcherino.Gui;
 
-import com.ariks.torcherino.Block.TileExampleContainer;
+import com.ariks.torcherino.Block.Core.TileExampleContainer;
 import com.ariks.torcherino.Register.RegistryNetwork;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.client.config.GuiButtonExt;

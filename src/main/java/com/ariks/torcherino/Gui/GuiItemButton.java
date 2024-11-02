@@ -1,6 +1,6 @@
 package com.ariks.torcherino.Gui;
 
-import com.ariks.torcherino.Block.TileExampleContainer;
+import com.ariks.torcherino.Block.Core.TileExampleContainer;
 import com.ariks.torcherino.Register.RegistryNetwork;
 import com.ariks.torcherino.Torcherino;
 import net.minecraft.client.Minecraft;

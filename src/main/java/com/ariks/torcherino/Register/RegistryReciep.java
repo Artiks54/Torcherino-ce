@@ -203,70 +203,32 @@ public class RegistryReciep {
                 'P', new ItemStack(time_plate),
                 'C', new ItemStack(Particle_collectors),
                 'T', new ItemStack(time_core),
-                'M', new ItemStack(upgrade_count_5),
+                'M', new ItemStack(upgrade_count,64),
                 'R', new ItemStack(redstone_Clock),
                 'S', new ItemStack(time_star));
         //UpgradeModule
-        //upgrade_count_1
+        //upgrade_speed
         GameRegistry.addShapedRecipe(
-                new ResourceLocation(Torcherino.MOD_ID + ":" + "upgrade_count_1"), null,
-                new ItemStack(upgrade_count_1),
-                "III",
-                "CBC",
-                "III",
-                'I', new ItemStack(Items.IRON_INGOT),
-                'C', new ItemStack(Particle_collectors),
-                'B', new ItemStack(binding_Element));
-        //upgrade_count_2
+                new ResourceLocation(Torcherino.MOD_ID + ":" + "upgrade_speed"), null,
+                new ItemStack(upgrade_speed),
+                "STS",
+                "RTR",
+                "ITI",
+                'I', new ItemStack(time_ingot),
+                'S', new ItemStack(Blocks.STICKY_PISTON),
+                'R', new ItemStack(Blocks.REDSTONE_BLOCK),
+                'T', new ItemStack(time_particle_gold));
+        //upgrade_count
         GameRegistry.addShapedRecipe(
-                new ResourceLocation(Torcherino.MOD_ID + ":" + "upgrade_count_2"), null,
-                new ItemStack(upgrade_count_2),
-                "III",
-                "CBC",
-                "III",
-                'I', new ItemStack(Blocks.IRON_BLOCK),
-                'C', new ItemStack(upgrade_count_1),
-                'B', new ItemStack(binding_Element));
-        //upgrade_count_3
-        GameRegistry.addShapedRecipe(
-                new ResourceLocation(Torcherino.MOD_ID + ":" + "upgrade_count_3"), null,
-                new ItemStack(upgrade_count_3),
-                "III",
-                "CBC",
-                "III",
-                'I', new ItemStack(Items.GOLD_INGOT),
-                'C', new ItemStack(upgrade_count_2),
-                'B', new ItemStack(binding_Element2));
-        //upgrade_count_4
-        GameRegistry.addShapedRecipe(
-                new ResourceLocation(Torcherino.MOD_ID + ":" + "upgrade_count_4"), null,
-                new ItemStack(upgrade_count_4),
-                "III",
-                "CBC",
-                "III",
-                'I', new ItemStack(Blocks.GOLD_BLOCK),
-                'C', new ItemStack(upgrade_count_3),
-                'B', new ItemStack(binding_Element2));
-        //upgrade_count_5
-        GameRegistry.addShapedRecipe(
-                new ResourceLocation(Torcherino.MOD_ID + ":" + "upgrade_count_5"), null,
-                new ItemStack(upgrade_count_5),
-                "III",
-                "CBC",
-                "III",
-                'I', new ItemStack(Items.DIAMOND),
-                'C', new ItemStack(upgrade_count_4),
-                'B', new ItemStack(binding_Element3));
-        //upgrade_count_6
-        GameRegistry.addShapedRecipe(
-                new ResourceLocation(Torcherino.MOD_ID + ":" + "upgrade_count_6"), null,
-                new ItemStack(upgrade_count_6),
-                "III",
-                "CBC",
-                "III",
-                'I', new ItemStack(Blocks.DIAMOND_BLOCK),
-                'C', new ItemStack(upgrade_count_5),
-                'B', new ItemStack(binding_Element3));
+                new ResourceLocation(Torcherino.MOD_ID + ":" + "upgrade_count"), null,
+                new ItemStack(upgrade_count),
+                "STS",
+                "RTR",
+                "ITI",
+                'I', new ItemStack(time_ingot),
+                'S', new ItemStack(Blocks.PISTON),
+                'R', new ItemStack(Blocks.LAPIS_BLOCK),
+                'T', new ItemStack(time_particle_emerald));
         //GoldClock
         GameRegistry.addShapedRecipe(
                 new ResourceLocation(Torcherino.MOD_ID + ":" + "GoldClock"), null,

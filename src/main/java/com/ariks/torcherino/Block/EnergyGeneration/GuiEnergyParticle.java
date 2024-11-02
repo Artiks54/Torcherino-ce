@@ -1,7 +1,7 @@
 package com.ariks.torcherino.Block.EnergyGeneration;
 
 import com.ariks.torcherino.Gui.BarComponent;
-import com.ariks.torcherino.Block.ExampleGuiContainer;
+import com.ariks.torcherino.Block.Core.ExampleGuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 

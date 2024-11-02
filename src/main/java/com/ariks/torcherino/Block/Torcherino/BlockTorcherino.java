@@ -1,6 +1,6 @@
 package com.ariks.torcherino.Block.Torcherino;
 
-import com.ariks.torcherino.Block.BlockCustomModelTile;
+import com.ariks.torcherino.Block.Core.BlockCustomModelTile;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;

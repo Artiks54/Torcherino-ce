@@ -1,15 +1,21 @@
 package com.ariks.torcherino.Register;
 
-import com.ariks.torcherino.Block.Aceleration.*;
 import com.ariks.torcherino.Block.EnergyGeneration.ContainerEnergyParticle;
 import com.ariks.torcherino.Block.EnergyGeneration.GuiEnergyParticle;
 import com.ariks.torcherino.Block.EnergyGeneration.TileEnergyParticle;
-import com.ariks.torcherino.Block.TimeCollector.*;
+import com.ariks.torcherino.Block.Time.Aceleration.ContainerAcceleration;
+import com.ariks.torcherino.Block.Time.Aceleration.GuiAcceleration;
+import com.ariks.torcherino.Block.Time.Aceleration.TileAcceleration;
+import com.ariks.torcherino.Block.Time.TimeCollector.ContainerTimeCollectors;
+import com.ariks.torcherino.Block.Time.TimeCollector.GuiTimeCollectors;
+import com.ariks.torcherino.Block.Time.TimeCollector.TileCollectors;
 import com.ariks.torcherino.Block.ParticleCollector.*;
-import com.ariks.torcherino.Block.TimeManipulator.ContainerTimeManipulator;
-import com.ariks.torcherino.Block.TimeManipulator.GuiTimeManipulator;
-import com.ariks.torcherino.Block.TimeManipulator.TileTimeManipulator;
-import com.ariks.torcherino.Block.TimeStorage.*;
+import com.ariks.torcherino.Block.Time.TimeManipulator.ContainerTimeManipulator;
+import com.ariks.torcherino.Block.Time.TimeManipulator.GuiTimeManipulator;
+import com.ariks.torcherino.Block.Time.TimeManipulator.TileTimeManipulator;
+import com.ariks.torcherino.Block.Time.TimeStorage.ContainerTimeStorage;
+import com.ariks.torcherino.Block.Time.TimeStorage.GuiTimeStorage;
+import com.ariks.torcherino.Block.Time.TimeStorage.TileTimeStorage;
 import com.ariks.torcherino.Block.Torcherino.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;

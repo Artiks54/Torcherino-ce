@@ -34,10 +34,13 @@ public class Config {
             DTorch_lvl3_S, DTorch_lvl3_M, DTorch_lvl3_R, DTorch_lvl4_S, DTorch_lvl4_M, DTorch_lvl4_R,
             DTorch_lvl5_S, DTorch_lvl5_M, DTorch_lvl5_R;
     public static int AccelerationSpeed,AccelerationRadius;
-    public static int TimeStorageMaxTime;
+
     public static int RequiredGeneratorParticle;
     public static int RequiredTimeManipulator;
-    public static int MaxStorageTimeCollectors;
+    public static int MaxStorageTimeAcceleration;
+    public static int MaxStorageTimeManipulator;
+    public static int MaxStorageTimeCollector;
+    public static int MaxStorageTimeStorage;
     public static int Stored_Time_Bottle_Lvl_1,Stored_Time_Bottle_Lvl_2,Stored_Time_Bottle_Lvl_3,Stored_Time_Bottle_Lvl_4,Stored_Time_Bottle_Lvl_5,Stored_Time_Bottle_infinite;
     public static int SpeedWand_lvl1,SpeedWand_lvl2,SpeedWand_lvl3,SpeedWand_lvl4,SpeedWand_lvl5,SpeedWand_infinite;
     public static int MaxEnergyParticle, RFPerTickEnergyParticle;
@@ -86,17 +89,19 @@ public class Config {
             BooleanParcWand = config.getBoolean("Time_Wand_Parc",Render,true,"Spawn Particle Wand");
             BooleanVisualWork = config.getBoolean("Tile_Visual_Work",Render,true,"Tile spawn Particle flame");
             BooleanRender = config.getBoolean("Tile_Render",Render,true,"Tile render true/false");
-//Time manipulator tile
-            RequiredTimeManipulator = config.getInt("Tile_Time_Manipulator",Tile,1200,1,Short.MAX_VALUE,"Need time");
 //Generator particle tile
-            RequiredGeneratorParticle = config.getInt("Tile_Generator_Particle",Tile,1154,1,Short.MAX_VALUE,"Need ticks to generate 100%");
+            RequiredGeneratorParticle = config.getInt("Tile_Generator_Particle_NeedTick",Tile,1800,1,Short.MAX_VALUE,"Need ticks to generate 100%");
+//Time manipulator tile
+            RequiredTimeManipulator = config.getInt("Tile_Time_Manipulator_Need_Time",Tile,500,1,Short.MAX_VALUE,"Need time");
+            MaxStorageTimeManipulator = config.getInt("Tile_Time_Manipulator_MaxStorage",Tile,2500,1,Short.MAX_VALUE,"Time maximum storage");
 //Storage tile
-            TimeStorageMaxTime = config.getInt("Tile_Time_Storage",Tile,10000,1,Integer.MAX_VALUE,"Time max time Storage");
+            MaxStorageTimeStorage = config.getInt("Tile_Time_Storage_MaxStorage",Tile,10000,1,Integer.MAX_VALUE,"Time maximum storage");
 //Collectors tile
-            MaxStorageTimeCollectors = config.getInt("Tile_Time_Collectors_MaxStorage",Tile,1000,1,Integer.MAX_VALUE,"Maximum storage size");
+            MaxStorageTimeCollector = config.getInt("Tile_Time_Collectors_MaxStorage",Tile,1000,1,Integer.MAX_VALUE,"Time maximum storage");
 //Acceleration tile
             AccelerationSpeed = config.getInt("Tile_Time_Acceleration_Speed",Tile,3,1, Byte.MAX_VALUE,TextS);
             AccelerationRadius = config.getInt("Tile_Time_Acceleration_Radius",Tile,3,1,Byte.MAX_VALUE,TextR);
+            MaxStorageTimeAcceleration = config.getInt("Tile_Time_Acceleration_MaxStorage",Tile,3600,1,Integer.MAX_VALUE,"Time maximum storage");
 //EnergyParticle
             RFPerTickEnergyParticle = config.getInt("Tile_Energy_Particle_Collector_RF_Tick",Tile,540000,1,Integer.MAX_VALUE,"Rf need to generate 1 time element");
             MaxEnergyParticle = config.getInt("Tile_Energy_Particle_Collector_Max_Energy",Tile,50000000,1,Integer.MAX_VALUE,"Max energy storage");

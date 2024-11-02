@@ -40,7 +40,7 @@ public class TimeStorage extends ItemBase {
         }
     }
     @Override
-    public boolean showDurabilityBar(ItemStack stack) {
+    public boolean showDurabilityBar(@NotNull ItemStack stack) {
         return true;
     }
     @Override

@@ -1,6 +1,6 @@
 package com.ariks.torcherino.Block.EnergyGeneration;
 
-import com.ariks.torcherino.Block.ExampleContainer;
+import com.ariks.torcherino.Block.Core.ExampleContainer;
 import com.ariks.torcherino.util.SlotOut;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

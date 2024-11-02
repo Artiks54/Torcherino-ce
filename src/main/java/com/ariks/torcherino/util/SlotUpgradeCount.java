@@ -22,18 +22,17 @@ public class SlotUpgradeCount extends Slot {
     public int getUpgrade() {
         ItemStack stack = this.getStack();
         if (stack.getItem() instanceof ItemUpgradeCount) {
-            ItemUpgradeCount itemUpgrade = (ItemUpgradeCount) stack.getItem();
-            return itemUpgrade.getValue();
+            return 1 + stack.getCount();
         }
         return 1;
     }
     @Override
     public int getItemStackLimit(@NotNull ItemStack itemStack) {
-        return 1;
+        return 64;
     }
     @Override
     public int getSlotStackLimit() {
-        return 1;
+        return 64;
     }
     @Override
     public void onSlotChanged() {

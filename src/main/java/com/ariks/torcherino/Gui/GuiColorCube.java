@@ -7,11 +7,13 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import org.lwjgl.opengl.GL11;
 
 public class GuiColorCube {
-    private float size;
+    private float width, height;
     private float x, y;
     private float red, green, blue;
-    public void setCube(int size, int x, int y, float red, float green, float blue) {
-        this.size = size;
+
+    public void setCube(float width, float height, float x, float y, float red, float green, float blue) {
+        this.width = width;
+        this.height = height;
         this.x = x;
         this.y = y;
         this.red = red;
@@ -21,7 +23,6 @@ public class GuiColorCube {
     public void drawCube() {
         GlStateManager.pushMatrix();
         GlStateManager.translate(x, y, 0);
-        GlStateManager.scale(size, size, size);
         GlStateManager.disableTexture2D();
         GlStateManager.disableLighting();
         GlStateManager.disableCull();
@@ -31,10 +32,10 @@ public class GuiColorCube {
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder buffer = tessellator.getBuffer();
         buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION);
-        buffer.pos(-0.5, -0.5, 0).endVertex();
-        buffer.pos(0.5, -0.5, 0).endVertex();
-        buffer.pos(0.5, 0.5, 0).endVertex();
-        buffer.pos(-0.5, 0.5, 0).endVertex();
+        buffer.pos(0, 0, 0).endVertex();
+        buffer.pos(width, 0, 0).endVertex();
+        buffer.pos(width, height, 0).endVertex();
+        buffer.pos(0, height, 0).endVertex();
         tessellator.draw();
         GlStateManager.enableCull();
         GlStateManager.enableLighting();

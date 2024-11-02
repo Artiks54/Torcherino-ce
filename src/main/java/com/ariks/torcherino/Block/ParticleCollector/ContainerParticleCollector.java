@@ -1,6 +1,6 @@
 package com.ariks.torcherino.Block.ParticleCollector;
 
-import com.ariks.torcherino.Block.ExampleContainer;
+import com.ariks.torcherino.Block.Core.ExampleContainer;
 import com.ariks.torcherino.util.SlotOut;
 import com.ariks.torcherino.util.SlotUpgradeCount;
 import com.ariks.torcherino.util.SlotUpgradeSpeed;

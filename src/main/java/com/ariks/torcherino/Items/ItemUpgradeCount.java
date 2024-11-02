@@ -1,12 +1,9 @@
 package com.ariks.torcherino.Items;
 
 public class ItemUpgradeCount extends ItemBase{
-    private final int value;
-    public ItemUpgradeCount(String name, int value) {
+
+    public ItemUpgradeCount(String name) {
         super(name);
-        this.value = value;
-    }
-    public int getValue() {
-        return value;
+        this.setMaxStackSize(64);
     }
 }

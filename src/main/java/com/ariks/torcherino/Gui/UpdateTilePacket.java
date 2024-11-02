@@ -1,6 +1,6 @@
 package com.ariks.torcherino.Gui;
 
-import com.ariks.torcherino.Block.TimeManipulator.TileTimeManipulator;
+import com.ariks.torcherino.Block.Time.TimeManipulator.TileTimeManipulator;
 import com.ariks.torcherino.Block.Torcherino.TileTorcherinoBase;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.tileentity.TileEntity;
@@ -13,7 +13,9 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 public class UpdateTilePacket implements IMessage {
     private BlockPos pos;
     private int value;
-    public UpdateTilePacket() {}
+    public UpdateTilePacket() {
+
+    }
     public UpdateTilePacket(BlockPos pos, int value) {
         this.value = value;
         this.pos = pos;
@@ -48,6 +50,8 @@ public class UpdateTilePacket implements IMessage {
                         switch (message.value) {
                             case 1: TileTimeManipulator.SetDay();break;
                             case 2: TileTimeManipulator.SetNight();break;
+                            case 3: TileTimeManipulator.SetRain();break;
+                            case 4: TileTimeManipulator.ClearRain();break;
                         }
                     }
                 }

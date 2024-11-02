@@ -1,6 +1,6 @@
 package com.ariks.torcherino.Block.Torcherino;
 
-import com.ariks.torcherino.Block.TileExampleContainer;
+import com.ariks.torcherino.Block.Core.TileExampleContainer;
 import com.ariks.torcherino.Register.RegistryAcceleration;
 import com.ariks.torcherino.Register.RegistryGui;
 import net.minecraft.block.Block;
@@ -123,14 +123,14 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
         return new AxisAlignedBB(X-RadiusX,Y-RadiusY,Z-RadiusZ,X+RadiusX+1,Y+RadiusY+1,Z+RadiusZ+1);
     }
     public void ToogleWork(){
-        UpdateTile();
+        this.UpdateTile();
         booleanMode++;
         if(booleanMode > 3){
             booleanMode = 0;
         }
     }
     public void ToogleRender(){
-        UpdateTile();
+        this.UpdateTile();
         booleanRender++;
         if(booleanRender > 3){
             booleanRender = 0;

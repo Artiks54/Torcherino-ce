@@ -1,6 +1,6 @@
 package com.ariks.torcherino.Block.Other;
 
-import com.ariks.torcherino.Block.ExampleBlock;
+import com.ariks.torcherino.Block.Core.ExampleBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;

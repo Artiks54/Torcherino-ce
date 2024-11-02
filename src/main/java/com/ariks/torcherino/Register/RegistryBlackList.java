@@ -1,11 +1,11 @@
 package com.ariks.torcherino.Register;
 
-import com.ariks.torcherino.Block.Aceleration.TileAcceleration;
+import com.ariks.torcherino.Block.Time.Aceleration.TileAcceleration;
 import com.ariks.torcherino.Block.EnergyGeneration.TileEnergyParticle;
-import com.ariks.torcherino.Block.TimeCollector.TileCollectors;
+import com.ariks.torcherino.Block.Time.TimeCollector.TileCollectors;
 import com.ariks.torcherino.Block.ParticleCollector.TileParticleCollector;
-import com.ariks.torcherino.Block.TimeManipulator.TileTimeManipulator;
-import com.ariks.torcherino.Block.TimeStorage.TileTimeStorage;
+import com.ariks.torcherino.Block.Time.TimeManipulator.TileTimeManipulator;
+import com.ariks.torcherino.Block.Time.TimeStorage.TileTimeStorage;
 import com.ariks.torcherino.Block.Torcherino.TileTorcherinoBase;
 import com.ariks.torcherino.Torcherino;
 import com.ariks.torcherino.util.Config;

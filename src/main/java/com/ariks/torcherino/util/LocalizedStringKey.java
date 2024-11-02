@@ -19,6 +19,8 @@ public class LocalizedStringKey {
      //Time Manipulator tile
      public String StrTextDay = I18n.format(modid+"gui.text.tile_time_manipulator.day");
      public String StrTextNight = I18n.format(modid+"gui.text.tile_time_manipulator.night");
+     public String StrTextRain = I18n.format(modid+"gui.text.tile_time_manipulator.rain");
+     public String StrTextRainClear = I18n.format(modid+"gui.text.tile_time_manipulator.clear_rain");
      //Time Storage Tile
      public String TimeCollected = I18n.format(modid+"gui.text.time");
      //Item storage

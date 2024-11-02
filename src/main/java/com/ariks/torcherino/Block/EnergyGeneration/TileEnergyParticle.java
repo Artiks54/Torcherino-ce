@@ -1,11 +1,10 @@
 package com.ariks.torcherino.Block.EnergyGeneration;
 
-import com.ariks.torcherino.Block.TileExampleInventory;
+import com.ariks.torcherino.Block.Core.TileExampleInventory;
 import com.ariks.torcherino.Register.RegistryGui;
 import com.ariks.torcherino.Register.RegistryItems;
 import com.ariks.torcherino.util.Config;
 import com.ariks.torcherino.util.EnergyStorage;
-import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;

@@ -1,7 +1,7 @@
 package com.ariks.torcherino.Block.ParticleCollector;
 
 
-import com.ariks.torcherino.Block.BlockCustomModelTile;
+import com.ariks.torcherino.Block.Core.BlockCustomModelTile;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryHelper;

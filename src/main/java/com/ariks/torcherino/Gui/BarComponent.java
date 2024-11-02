@@ -1,6 +1,6 @@
 package com.ariks.torcherino.Gui;
 
-import com.ariks.torcherino.Block.ExampleGuiContainer;
+import com.ariks.torcherino.Block.Core.ExampleGuiContainer;
 import com.ariks.torcherino.Torcherino;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.ResourceLocation;

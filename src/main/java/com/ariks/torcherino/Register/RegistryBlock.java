@@ -1,12 +1,12 @@
 package com.ariks.torcherino.Register;
 
-import com.ariks.torcherino.Block.Aceleration.BlockAcceleration;
+import com.ariks.torcherino.Block.Time.Aceleration.BlockAcceleration;
 import com.ariks.torcherino.Block.EnergyGeneration.BlockEnergyParticle;
 import com.ariks.torcherino.Block.Other.BlockGrowAccelerator;
 import com.ariks.torcherino.Block.ParticleCollector.BlockParticleCollector;
-import com.ariks.torcherino.Block.TimeCollector.BlockCollectors;
-import com.ariks.torcherino.Block.TimeManipulator.BlockTimeManipulator;
-import com.ariks.torcherino.Block.TimeStorage.BlockTimeStorage;
+import com.ariks.torcherino.Block.Time.TimeCollector.BlockCollectors;
+import com.ariks.torcherino.Block.Time.TimeManipulator.BlockTimeManipulator;
+import com.ariks.torcherino.Block.Time.TimeStorage.BlockTimeStorage;
 import com.ariks.torcherino.Block.Torcherino.BlockTorcherino;
 import com.ariks.torcherino.Block.Torcherino.TorcherinoEnumLevel;
 import com.ariks.torcherino.Torcherino;

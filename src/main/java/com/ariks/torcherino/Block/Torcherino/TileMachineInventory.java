@@ -1,6 +1,6 @@
 package com.ariks.torcherino.Block.Torcherino;
 
-import com.ariks.torcherino.Block.TileExampleInventory;
+import com.ariks.torcherino.Block.Core.TileExampleInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ITickable;
