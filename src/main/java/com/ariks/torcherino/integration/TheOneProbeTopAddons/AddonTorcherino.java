@@ -26,6 +26,7 @@ public class AddonTorcherino extends AddonBlank {
             }
             if (tile instanceof TileTorcherinoBase) {
                 TileTorcherinoBase TileTorcherinoBase = (TileTorcherinoBase) tile;
+                probeInfo.text("test: "+TileTorcherinoBase.getValue(19));
                 if(TileTorcherinoBase.getValue(3) == 0){
                     probeInfo.text("Working off");
                 }

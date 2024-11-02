@@ -1,9 +1,6 @@
 package com.ariks.torcherino.Block.Torcherino;
 
-import com.ariks.torcherino.Gui.GuiButtonNetwork;
-import com.ariks.torcherino.Gui.GuiColorCube;
-import com.ariks.torcherino.Gui.GuiItemButton;
-import com.ariks.torcherino.Gui.GuiSliderInt;
+import com.ariks.torcherino.Gui.*;
 import com.ariks.torcherino.Torcherino;
 import com.ariks.torcherino.util.*;
 import net.minecraft.client.gui.GuiButton;
@@ -25,10 +22,10 @@ public class GuiTorcherino extends GuiContainer {
     private final LocalizedStringKey LS = new LocalizedStringKey();
     private final ResourceLocation texture = new ResourceLocation(Torcherino.MOD_ID, "textures/gui/gui_t2.png");
     private GuiSliderInt sliderSpeed,sliderR,sliderG,sliderB,sliderX,sliderY,sliderZ;
-    private GuiButtonNetwork buttonRender;
     private GuiItemButton buttonInfo,buttonWork;
     GuiColorCube colorCube = new GuiColorCube();
-    private String WorkString;
+    GuiButtonImage buttonRender;
+    private String WorkString,RenderString;
     private int ScaledX,ScaledY,MouseX,MouseY;
     public GuiTorcherino(InventoryPlayer inventory, TileTorcherinoBase tileEntity, EntityPlayer player) {
         super(new ContainerTorcherino(inventory, tileEntity, player));
@@ -41,7 +38,7 @@ public class GuiTorcherino extends GuiContainer {
         super.initGui();
         this.ScaledX = (this.width - xSize) / 2;
         this.ScaledY = (this.height - ySize) / 2;
-        buttonList.clear();
+        this.buttonList.clear();
         //Radius
         sliderX = new GuiSliderInt(tile, 1, ScaledX+40, ScaledY+5, 180, 20, 0, tile.getValue(5), 15,"",4);
         sliderY = new GuiSliderInt(tile, 2, ScaledX+40, ScaledY+28, 180, 20, 0, tile.getValue(5), 16,"",4);
@@ -52,23 +49,15 @@ public class GuiTorcherino extends GuiContainer {
         sliderR = new GuiSliderInt(tile, 4, ScaledX+40, ScaledY+104, 180, 20, 0, 255, 8,"",4);
         sliderG = new GuiSliderInt(tile, 5, ScaledX+40, ScaledY+127 , 180, 20, 0, 255, 9,"",4);
         sliderB = new GuiSliderInt(tile, 6, ScaledX+40, ScaledY+150, 180, 20, 0, 255, 10,"",4);
-        //ItemButton
+        //ItemButton-NetworkButton
         buttonInfo = new GuiItemButton(tile,8, ScaledX+230, ScaledY+5,0);
         buttonWork = new GuiItemButton(tile,9, ScaledX+256, ScaledY+5,1);
-        //NetworkButton
-        buttonRender = new GuiButtonNetwork(tile,12, ScaledX+230, ScaledY+28, 46, 20, "",2);
+        //ImageButton-NetworkButton
+        buttonRender = new GuiButtonImage(tile,12,ScaledX+230,ScaledY+28,2);
         //OTHER
         buttonInfo.setStackRender(new ItemStack(Items.PAPER));
-        buttonList.add(buttonInfo);
-        buttonList.add(buttonWork);
-        buttonList.add(buttonRender);
-        buttonList.add(sliderSpeed);
-        buttonList.add(sliderR);
-        buttonList.add(sliderG);
-        buttonList.add(sliderB);
-        buttonList.add(sliderX);
-        buttonList.add(sliderY);
-        buttonList.add(sliderZ);
+        this.CreateButton();
+        this.SettingOff();
     }
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
@@ -78,16 +67,39 @@ public class GuiTorcherino extends GuiContainer {
         drawModalRectWithCustomSizedTexture(ScaledX, ScaledY, 0, 0, xSize,ySize,xSize,ySize);
         this.cordScaled(mouseX,mouseY);
         this.DrawCube();
-        this.UpdateButton();
+        this.UpdateButtonTooltip();
         this.UpdateSliderString();
     }
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         super.drawScreen(mouseX, mouseY, partialTicks);
         this.renderHoveredToolTip(mouseX,mouseY);
-        this.DrawToolTip();
+        this.DrawToolTipInfoButton();
     }
-    private void DrawToolTip(){
+    private void CreateButton(){
+        buttonList.add(buttonRender);
+        buttonList.add(buttonInfo);
+        buttonList.add(buttonWork);
+    }
+    private void SettingOff(){
+        buttonList.add(sliderX);
+        buttonList.add(sliderY);
+        buttonList.add(sliderZ);
+        buttonList.add(sliderSpeed);
+        buttonList.remove(sliderR);
+        buttonList.remove(sliderG);
+        buttonList.remove(sliderB);
+    }
+    private void SettingOn(){
+        buttonList.add(sliderR);
+        buttonList.add(sliderG);
+        buttonList.add(sliderB);
+        buttonList.remove(sliderX);
+        buttonList.remove(sliderY);
+        buttonList.remove(sliderZ);
+        buttonList.remove(sliderSpeed);
+    }
+    private void DrawToolTipInfoButton(){
         for (GuiButton button : buttonList) {
             if (button.isMouseOver()) {
                 if (button == buttonInfo) {
@@ -101,6 +113,11 @@ public class GuiTorcherino extends GuiContainer {
             if (button.isMouseOver()) {
                 if (button == buttonWork) {
                     drawHoveringText(WorkString,MouseX,MouseY);
+                }
+            }
+            if (button.isMouseOver()) {
+                if (button == buttonRender) {
+                    drawHoveringText(RenderString,MouseX,MouseY);
                 }
             }
         }
@@ -122,14 +139,23 @@ public class GuiTorcherino extends GuiContainer {
         sliderB.displayString = stringB;
         sliderSpeed.displayString = speedString;
     }
-    private void UpdateButton() {
+    private void UpdateImageButton(){
+        if(tile.getValue(4) == 0){
+            buttonRender.setTexture(0,0);
+        }
+        if(tile.getValue(4) == 1){
+            buttonRender.setTexture(16,0);
+        }
+    }
+    private void UpdateButtonTooltip() {
         int renderGet = tile.getValue(4);
         int workGet = tile.getValue(3);
+        this.UpdateImageButton();
         switch (renderGet) {
-            case 0: buttonRender.displayString = LS.StrTextRenderNull;break;
-            case 1: buttonRender.displayString = LS.StrTextRenderLine;break;
-            case 2: buttonRender.displayString = LS.StrTextRenderBox;break;
-            case 3: buttonRender.displayString = LS.StrTextRenderComb;break;
+            case 0: RenderString = LS.StrTextRenderNull;break;
+            case 1: RenderString = LS.StrTextRenderLine;break;
+            case 2: RenderString = LS.StrTextRenderBox;break;
+            case 3: RenderString = LS.StrTextRenderComb;break;
         }
         switch (workGet) {
             case 0: WorkString = LS.StrTextWorking;buttonWork.setStackRender(new ItemStack(Blocks.REDSTONE_LAMP));break;
