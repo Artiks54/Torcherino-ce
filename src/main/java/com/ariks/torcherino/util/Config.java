@@ -21,6 +21,7 @@ public class Config {
     public static boolean BooleanHelloMsg;
     public static boolean BooleanParcWand,BooleanRender,BooleanVisualWork;
     public static boolean IntegrationProjectE,IntegrationTheOneProbeTA;
+    public static boolean TorcherinoEnergyMod;
     public static int
             Torch_lvl1_S,Torch_lvl1_M,Torch_lvl1_R, Torch_lvl2_S,Torch_lvl2_M,Torch_lvl2_R,
             Torch_lvl3_S,Torch_lvl3_M,Torch_lvl3_R, Torch_lvl4_S, Torch_lvl4_M,Torch_lvl4_R,
@@ -34,7 +35,6 @@ public class Config {
             DTorch_lvl3_S, DTorch_lvl3_M, DTorch_lvl3_R, DTorch_lvl4_S, DTorch_lvl4_M, DTorch_lvl4_R,
             DTorch_lvl5_S, DTorch_lvl5_M, DTorch_lvl5_R;
     public static int AccelerationSpeed,AccelerationRadius;
-
     public static int RequiredGeneratorParticle;
     public static int RequiredTimeManipulator;
     public static int MaxStorageTimeAcceleration;
@@ -44,6 +44,7 @@ public class Config {
     public static int Stored_Time_Bottle_Lvl_1,Stored_Time_Bottle_Lvl_2,Stored_Time_Bottle_Lvl_3,Stored_Time_Bottle_Lvl_4,Stored_Time_Bottle_Lvl_5,Stored_Time_Bottle_infinite;
     public static int SpeedWand_lvl1,SpeedWand_lvl2,SpeedWand_lvl3,SpeedWand_lvl4,SpeedWand_lvl5,SpeedWand_infinite;
     public static int MaxEnergyParticle, RFPerTickEnergyParticle;
+    public static int MaxStorageTorcherino, RFPerTickEnergyTorcherino;
     public static void init(File file) {
         config = new Configuration(file);
         try {config.load();
@@ -105,7 +106,11 @@ public class Config {
 //EnergyParticle
             RFPerTickEnergyParticle = config.getInt("Tile_Energy_Particle_Collector_RF_Tick",Tile,540000,1,Integer.MAX_VALUE,"Rf need to generate 1 time element");
             MaxEnergyParticle = config.getInt("Tile_Energy_Particle_Collector_Max_Energy",Tile,50000000,1,Integer.MAX_VALUE,"Max energy storage");
- //Torch_lvl_1
+//EnergyTorcherino
+            TorcherinoEnergyMod = config.getBoolean("Tile_Energy_Torcherino_Mode",Tile,true,"Do I need energy to work, Torcherino");
+            RFPerTickEnergyTorcherino = config.getInt("Tile_Energy_Torcherino_RF_Tick",Tile,500,1,Integer.MAX_VALUE,"Rf tick work");
+            MaxStorageTorcherino = config.getInt("Tile_Energy_Torcherino_Max_Energy",Tile,5000000,1,Integer.MAX_VALUE,"Max energy storage");
+//Torch_lvl_1
             TileName = "Torcherino_lvl_1";
             Torch_lvl1_S = config.getInt(TileName+speed,TileTorcherino,1,1,Byte.MAX_VALUE,TextS);
             Torch_lvl1_M = config.getInt(TileName+modes,TileTorcherino,3,1,Byte.MAX_VALUE,TextM);

@@ -1,5 +1,6 @@
 package com.ariks.torcherino.integration.Jei;
 
+import com.ariks.torcherino.Block.Torcherino.TileTorcherinoBase;
 import com.ariks.torcherino.Register.RegistryBlock;
 import com.ariks.torcherino.Register.RegistryItems;
 import com.ariks.torcherino.Torcherino;
@@ -24,7 +25,6 @@ public class AddonJei implements IModPlugin {
     private final String formattedValue = NumberFormat.getNumberInstance().format(Config.RFPerTickEnergyParticle);
 
     public void register(IModRegistry registry) {
-
         registry.addIngredientInfo(new ItemStack(RegistryBlock.Time_Manipulator), VanillaTypes.ITEM, "Allows you to change the time in the world.");
         registry.addIngredientInfo(new ItemStack(RegistryBlock.Time_Manipulator), VanillaTypes.ITEM, "Need time: "+Config.RequiredTimeManipulator);
         registry.addIngredientInfo(new ItemStack(RegistryBlock.Time_Acceleration), VanillaTypes.ITEM, "Uses time to accelerate by 500% within a 3x3x3 radius");
@@ -37,13 +37,16 @@ public class AddonJei implements IModPlugin {
         registry.addIngredientInfo(new ItemStack(RegistryBlock.Grow_lvl3),VanillaTypes.ITEM,"Placed a block under the block on which something is growing and this will accelerate growth.");
         registry.addIngredientInfo(new ItemStack(RegistryBlock.Grow_lvl4),VanillaTypes.ITEM,"Placed a block under the block on which something is growing and this will accelerate growth.");
         registry.addIngredientInfo(new ItemStack(RegistryBlock.Grow_lvl5),VanillaTypes.ITEM,"Placed a block under the block on which something is growing and this will accelerate growth.");
+
         registry.handleRecipes(ParticleRecipe.class, recipe -> recipe, idEnergy);
         registry.addRecipes(Collections.singletonList(new ParticleRecipe(null, null,new ItemStack(RegistryItems.time_particle))),idEnergy);
         registry.addRecipeCatalyst(new ItemStack(RegistryBlock.EnergyParticle),idEnergy);
+
         registry.handleRecipes(ParticleRecipe.class, recipe -> recipe, idParticle);
         registry.addRecipes(Collections.singletonList(new ParticleRecipe(new ItemStack(RegistryItems.upgrade_count),new ItemStack(RegistryItems.upgrade_speed), new ItemStack(RegistryItems.time_particle,2))),idParticle);
         registry.addRecipes(Collections.singletonList(new ParticleRecipe(null,null, new ItemStack(RegistryItems.time_particle))),idParticle);
         registry.addRecipeCatalyst(new ItemStack(RegistryBlock.Particle_collectors),idParticle);
+
         registry.handleRecipes(ImageRecipe.class, recipe -> recipe, idGrow);
         registry.addRecipes(Collections.singletonList(new ImageRecipe()),idGrow);
         registry.addRecipeCatalyst(new ItemStack(RegistryBlock.Grow_lvl1),idGrow);

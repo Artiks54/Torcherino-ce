@@ -217,7 +217,7 @@ public class RegistryReciep {
                 'I', new ItemStack(time_ingot),
                 'S', new ItemStack(Blocks.STICKY_PISTON),
                 'R', new ItemStack(Blocks.REDSTONE_BLOCK),
-                'T', new ItemStack(time_particle_gold));
+                'T', new ItemStack(time_particle_redstone));
         //upgrade_count
         GameRegistry.addShapedRecipe(
                 new ResourceLocation(Torcherino.MOD_ID + ":" + "upgrade_count"), null,
@@ -228,7 +228,7 @@ public class RegistryReciep {
                 'I', new ItemStack(time_ingot),
                 'S', new ItemStack(Blocks.PISTON),
                 'R', new ItemStack(Blocks.LAPIS_BLOCK),
-                'T', new ItemStack(time_particle_emerald));
+                'T', new ItemStack(time_particle_gold));
         //GoldClock
         GameRegistry.addShapedRecipe(
                 new ResourceLocation(Torcherino.MOD_ID + ":" + "GoldClock"), null,

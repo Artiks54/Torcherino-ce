@@ -29,13 +29,18 @@ public class ExampleGuiContainer extends GuiContainer {
     public ExampleGuiContainer(Container container) {
         super(container);
     }
-
     //Обновление
     private void UpdateScaled(int mouseX,int mouseY){
         ScaledX = (this.width - this.xSize) / 2;
         ScaledY = (this.height - this.ySize) / 2;
         MouseX = mouseX;
         MouseY = mouseY;
+    }
+    public int getMouseX() {
+        return MouseX;
+    }
+    public int getMouseY() {
+        return MouseY;
     }
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
@@ -56,6 +61,7 @@ public class ExampleGuiContainer extends GuiContainer {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         super.drawScreen(mouseX, mouseY, partialTicks);
         this.renderHoveredToolTip(mouseX, mouseY);
+        this.TickScreen();
         if(!barComponents.isEmpty()){
             for (BarComponent barComponent : barComponents){
                 if (barComponent.isMouseOver(MouseX, MouseY) && barComponent.getTooltip() != null) {
@@ -89,7 +95,11 @@ public class ExampleGuiContainer extends GuiContainer {
         this.GuiTexture = new ResourceLocation(Torcherino.MOD_ID,GuiTexture);
         this.WidthTexture = WidthTexture + 1;
         this.HeightTexture = HeightTexture + 1;
+        this.xSize = WidthTexture;
+        this.ySize = HeightTexture;
     }
     public void Tick(){
+    }
+    public void TickScreen(){
     }
 }

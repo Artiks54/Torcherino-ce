@@ -3,6 +3,8 @@ package com.ariks.torcherino.Block.Torcherino;
 import com.ariks.torcherino.Block.Core.TileExampleContainer;
 import com.ariks.torcherino.Register.RegistryAcceleration;
 import com.ariks.torcherino.Register.RegistryGui;
+import com.ariks.torcherino.util.Config;
+import com.ariks.torcherino.util.EnergyStorage;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,11 +12,13 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -30,6 +34,13 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
     private int B = 0;
     public int MaxRadius,MaxModes,MaxAcceleration;
     private boolean redstoneSignal,redstoneMode;
+    private final boolean EnergyWorking = Config.TorcherinoEnergyMod;
+    private final EnergyStorage storage;
+    private final int EnergyPerTick = Config.RFPerTickEnergyTorcherino;
+
+    public TileTorcherinoBase() {
+        storage = new EnergyStorage(Config.MaxStorageTorcherino, Integer.MAX_VALUE, 0);
+    }
     protected int speedBase(int base) {
         return base * MaxAcceleration;
     }
@@ -39,13 +50,20 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
     @Override
     public void update() {
         if (world.isRemote) return;
-        CheckRedstoneSignal();
+        this.CheckRedstoneSignal();
         if (booleanRender != 0 || booleanMode != 0) {
-            UpdateChangeArea();
+            this.UpdateChangeArea();
         }
         if ((RadiusX != 0 || RadiusY !=0 || RadiusZ !=0) && Speed != 0 && (booleanMode == 1 || redstoneMode)) {
-            UpdateTickArea();
-            WorkVisual();
+            if(EnergyWorking && storage.getEnergyStored() >= EnergyPerTick){
+                this.UpdateTickArea();
+                this.WorkVisual();
+                this.storage.consumeEnergy(EnergyPerTick);
+                this.UpdateTile();
+            } if (!EnergyWorking){
+                this.UpdateTickArea();
+                this.WorkVisual();
+            }
         }
     }
     private void CheckRedstoneSignal() {
@@ -149,6 +167,7 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
         nbt.setInteger("RadiusX", this.RadiusX);
         nbt.setInteger("RadiusY", this.RadiusY);
         nbt.setInteger("RadiusZ", this.RadiusZ);
+        nbt.setInteger("Stored",storage.getEnergyStored());
         nbt.setBoolean("Red",this.redstoneSignal);
         return super.writeToNBT(nbt);
     }
@@ -167,6 +186,7 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
         this.RadiusY = nbt.getInteger("RadiusY");
         this.RadiusZ = nbt.getInteger("RadiusZ");
         this.redstoneSignal = nbt.getBoolean("Red");
+        this.storage.setEnergy(nbt.getInteger("Stored"));
         super.readFromNBT(nbt);
     }
     @Override
@@ -206,6 +226,15 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
         }
         if (id == 17) {
             return this.RadiusZ;
+        }
+        if (id == 18) {
+            return this.storage.getEnergyStored();
+        }
+        if (id == 19) {
+            return this.storage.getMaxEnergyStored();
+        }
+        if (id == 20) {
+            return this.EnergyPerTick;
         }
         return id;
     }
@@ -247,5 +276,26 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
     @Override
     public @NotNull String getGuiID() {
         return String.valueOf(RegistryGui.GUI_TORCHERINO);
+    }
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> T getCapability(net.minecraftforge.common.capabilities.Capability<T> capability, EnumFacing facing) {
+        if (Config.TorcherinoEnergyMod) {
+            if (capability == CapabilityEnergy.ENERGY) {
+                return (T) storage;
+            }
+            return super.getCapability(capability, facing);
+        }
+        return super.getCapability(capability, facing);
+    }
+    @Override
+    public boolean hasCapability(net.minecraftforge.common.capabilities.Capability<?> capability, EnumFacing facing) {
+        if (Config.TorcherinoEnergyMod) {
+            if (capability == CapabilityEnergy.ENERGY) {
+                return true;
+            }
+            return super.hasCapability(capability, facing);
+        }
+        return super.hasCapability(capability, facing);
     }
 }

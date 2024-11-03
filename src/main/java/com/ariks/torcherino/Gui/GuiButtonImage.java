@@ -29,7 +29,7 @@ public class GuiButtonImage extends GuiButtonExt {
                 return true;
             }
         }
-        return false;
+        return super.mousePressed(mc, mouseX, mouseY);
     }
     public void setTexture(int textureX,int textureY) {
         this.textureX = textureX;

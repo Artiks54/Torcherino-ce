@@ -1,5 +1,6 @@
 package com.ariks.torcherino.integration.TheOneProbeTopAddons;
 
+import com.ariks.torcherino.Block.ParticleCollector.TileParticleCollector;
 import com.ariks.torcherino.Block.Time.TileTime;
 import com.ariks.torcherino.Block.Torcherino.TileTorcherinoBase;
 import com.ariks.torcherino.Torcherino;
@@ -23,6 +24,11 @@ public class AddonTorcherino extends AddonBlank {
             if (tile instanceof TileTime) {
                 TileTime TileTime = (TileTime) tile;
                 probeInfo.text("Time: "+TileTime.GetTimeStorage());
+            }
+            if (tile instanceof TileParticleCollector) {
+                TileParticleCollector TileParticleCollector = (TileParticleCollector) tile;
+                probeInfo.text("Progress:");
+                probeInfo.progress(TileParticleCollector.percent, 100);
             }
             if (tile instanceof TileTorcherinoBase) {
                 TileTorcherinoBase TileTorcherinoBase = (TileTorcherinoBase) tile;
