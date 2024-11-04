@@ -200,10 +200,10 @@ public class RegistryReciep {
                 "PCP",
                 "TMT",
                 "RSR",
-                'P', new ItemStack(time_plate),
+                'P', new ItemStack(time_casing),
                 'C', new ItemStack(Particle_collectors),
                 'T', new ItemStack(time_core),
-                'M', new ItemStack(upgrade_count,64),
+                'M', new ItemStack(binding_Element2),
                 'R', new ItemStack(redstone_Clock),
                 'S', new ItemStack(time_star));
         //UpgradeModule
@@ -312,10 +312,10 @@ public class RegistryReciep {
                 "BTB",
                 "TDT",
                 "BTB",
-                'D', new ItemStack(Blocks.DRAGON_EGG),
+                'D', new ItemStack(time_star),
                 'T', new ItemStack(time_element),
                 'B', new ItemStack(binding_Element));
-        //bindingelement2
+        //bindingelement3
         GameRegistry.addShapedRecipe(
                 new ResourceLocation(Torcherino.MOD_ID + ":" + "bindingelement3"), null,
                 new ItemStack(binding_Element3),

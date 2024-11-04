@@ -30,7 +30,6 @@ public class TileParticleCollector extends TileExampleInventory implements ITick
     private void Work() {
         if (this.CanGenerate()) {
             Progress += AddProgress;
-            percent = (Progress * 100) / MaxProgress;
             this.UpdateTile();
             if (Progress >= MaxProgress) {
                 if (this.Generate()) {
@@ -38,9 +37,10 @@ public class TileParticleCollector extends TileExampleInventory implements ITick
                 }
             }
         } else {
-            this.UpdateTile();
             Progress = 0;
+            this.UpdateTile();
         }
+        percent = (Progress * 100) / MaxProgress;
     }
     private boolean CanGenerate() {
         ItemStack item = new ItemStack(RegistryItems.time_particle);
