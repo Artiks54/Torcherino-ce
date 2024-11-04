@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
 import org.jetbrains.annotations.NotNull;
 
@@ -99,7 +100,7 @@ public class TileEnergyParticle extends TileExampleInventory implements ITickabl
 
     @SuppressWarnings("unchecked")
     @Override
-    public <T> T getCapability(net.minecraftforge.common.capabilities.Capability<T> capability, EnumFacing facing) {
+    public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
         if (capability == CapabilityEnergy.ENERGY)
         {
             return (T) storage;
@@ -107,7 +108,7 @@ public class TileEnergyParticle extends TileExampleInventory implements ITickabl
         return super.getCapability(capability, facing);
     }
     @Override
-    public boolean hasCapability(net.minecraftforge.common.capabilities.Capability<?> capability, EnumFacing facing) {
+    public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
         if (capability == CapabilityEnergy.ENERGY)
         {
             return true;

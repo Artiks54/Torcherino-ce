@@ -12,6 +12,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nonnull;
@@ -133,7 +134,7 @@ public abstract class TileExampleInventory extends TileExampleContainer implemen
         ItemStackHelper.loadAllItems(inventoryTag, inventory);
     }
     @Override
-    public boolean hasCapability(net.minecraftforge.common.capabilities.Capability<?> capability, EnumFacing facing) {
+    public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
         if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && this.getSizeInventory() > 0)
         {
             return true;
@@ -142,8 +143,8 @@ public abstract class TileExampleInventory extends TileExampleContainer implemen
     }
     @SuppressWarnings("unchecked")
     @Override
-    public <T> T getCapability(net.minecraftforge.common.capabilities.Capability<T> capability, EnumFacing facing) {
-        if (capability == net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+    public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
+        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
         {
             return (T) invHandler;
         }

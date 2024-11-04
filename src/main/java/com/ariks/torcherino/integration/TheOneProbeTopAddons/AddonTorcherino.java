@@ -19,8 +19,8 @@ import net.minecraft.world.World;
 public class AddonTorcherino extends AddonBlank {
     @Override
     public void addProbeInfo(final ProbeMode probeMode, final IProbeInfo probeInfo, final EntityPlayer entityPlayer, final World world, final IBlockState iBlockState, final IProbeHitData data) {
-        TileEntity tile = world.getTileEntity(data.getPos());
         if(Config.IntegrationTheOneProbeTA){
+            TileEntity tile = world.getTileEntity(data.getPos());
             if (tile instanceof TileTime) {
                 TileTime TileTime = (TileTime) tile;
                 probeInfo.text("Time: "+TileTime.GetTimeStorage());
@@ -32,9 +32,8 @@ public class AddonTorcherino extends AddonBlank {
             }
             if (tile instanceof TileTorcherinoBase) {
                 TileTorcherinoBase TileTorcherinoBase = (TileTorcherinoBase) tile;
-                probeInfo.text("test: "+TileTorcherinoBase.getValue(19));
                 if(TileTorcherinoBase.getValue(3) == 0){
-                    probeInfo.text("Working off");
+                    probeInfo.text("Working: not selected");
                 }
                 else if(TileTorcherinoBase.getValue(3) == 1){
                     probeInfo.text( "Always on");
@@ -57,10 +56,10 @@ public class AddonTorcherino extends AddonBlank {
                 if (TileTorcherinoBase.getValue(2) >= 1) {
                     probeInfo.text("Speed: " + TileTorcherinoBase.getValue(2) * TileTorcherinoBase.MaxAcceleration * 100 + "%");
                 } else {
-                    probeInfo.text("Speed");
+                    probeInfo.text("Speed: not selected");
                 }
                 if (TileTorcherinoBase.getValue(4) == 0 && Config.BooleanRender) {
-                    probeInfo.text("Render off");
+                    probeInfo.text("Render: not selected");
                 }
                 if (TileTorcherinoBase.getValue(4) == 1 && Config.BooleanRender) {
                     probeInfo.text("Render line");
