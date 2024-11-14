@@ -17,7 +17,6 @@ public class SlotOut extends Slot {
     public int getItemStackLimit(@NotNull ItemStack itemStack) {
         return 64;
     }
-
     @Override
     public int getSlotStackLimit() {
         return 64;

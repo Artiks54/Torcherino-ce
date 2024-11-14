@@ -533,20 +533,6 @@ public class RegistryReciep {
                 'P', new ItemStack(time_particle),
                 'R', new ItemStack(time_particle_redstone),
                 'E', new ItemStack(time_particle_emerald));
-        //time_ingot
-        GameRegistry.addShapedRecipe(
-                new ResourceLocation(Torcherino.MOD_ID + ":" + "time_ingot"), null,
-                new ItemStack(time_ingot),
-                "NNN",
-                "NNN",
-                "NNN",
-                'N', new ItemStack(time_nugget));
-        //Time_Ingot_To_Nugget
-        GameRegistry.addShapelessRecipe(
-                new ResourceLocation(Torcherino.MOD_ID + ":" + "Time_Ingot_To_Nugget"), null,
-                new ItemStack(time_nugget,9),
-                Ingredient.fromItems(time_ingot)
-        );
         //Time_Stick
         GameRegistry.addShapedRecipe(
                 new ResourceLocation(Torcherino.MOD_ID + ":" + "time_stick"), null,
@@ -635,5 +621,17 @@ public class RegistryReciep {
                 'D', new ItemStack(Blocks.DIRT),
                 'B', new ItemStack(Items.DYE,1,15),
                 'G', new ItemStack(Grow_lvl4));
+        //RF_Molecular
+        GameRegistry.addShapedRecipe(
+                new ResourceLocation(Torcherino.MOD_ID + ":" + "RF_Molecular"), null,
+                new ItemStack(RF_Molecular),
+                "BSB",
+                "NPN",
+                "PCP",
+                'B', new ItemStack(binding_Element),
+                'S', new ItemStack(Items.NETHER_STAR),
+                'C', new ItemStack(Particle_collectors),
+                'P', new ItemStack(time_particle_redstone),
+                'N', new ItemStack(time_nugget));
     }
 }

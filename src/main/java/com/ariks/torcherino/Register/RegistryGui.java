@@ -3,6 +3,9 @@ package com.ariks.torcherino.Register;
 import com.ariks.torcherino.Block.EnergyGeneration.ContainerEnergyParticle;
 import com.ariks.torcherino.Block.EnergyGeneration.GuiEnergyParticle;
 import com.ariks.torcherino.Block.EnergyGeneration.TileEnergyParticle;
+import com.ariks.torcherino.Block.RfMolecular.ContainerRfMolecular;
+import com.ariks.torcherino.Block.RfMolecular.GuiRfMolecular;
+import com.ariks.torcherino.Block.RfMolecular.TileRfMolecular;
 import com.ariks.torcherino.Block.Time.Aceleration.ContainerAcceleration;
 import com.ariks.torcherino.Block.Time.Aceleration.GuiAcceleration;
 import com.ariks.torcherino.Block.Time.Aceleration.TileAcceleration;
@@ -32,6 +35,7 @@ public class RegistryGui implements IGuiHandler {
     public static final int GUI_ACCELERATION = 4;
     public static final int GUI_TIME_MANIPULATOR = 5;
     public static final int GUI_ENERGY_PARTICLE = 6;
+    public static final int GUI_RF_MOLECULAR = 7;
 
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
@@ -55,6 +59,9 @@ public class RegistryGui implements IGuiHandler {
         }
         if (ID == GUI_ENERGY_PARTICLE) {
             return new ContainerEnergyParticle(player.inventory, (TileEnergyParticle) world.getTileEntity(new BlockPos(x, y, z)),player);
+        }
+        if (ID == GUI_RF_MOLECULAR) {
+            return new ContainerRfMolecular(player.inventory, (TileRfMolecular) world.getTileEntity(new BlockPos(x, y, z)),player);
         }
         return null;
     }
@@ -81,6 +88,9 @@ public class RegistryGui implements IGuiHandler {
         }
         if (ID == GUI_ENERGY_PARTICLE) {
             return new GuiEnergyParticle(player.inventory, (TileEnergyParticle) world.getTileEntity(new BlockPos(x, y, z)),player);
+        }
+        if (ID == GUI_RF_MOLECULAR) {
+            return new GuiRfMolecular(player.inventory, (TileRfMolecular) world.getTileEntity(new BlockPos(x, y, z)),player);
         }
         return null;
     }

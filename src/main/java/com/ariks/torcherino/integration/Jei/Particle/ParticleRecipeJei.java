@@ -1,4 +1,4 @@
-package com.ariks.torcherino.integration.Jei;
+package com.ariks.torcherino.integration.Jei.Particle;
 
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeWrapper;
@@ -7,12 +7,12 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class ParticleRecipe implements IRecipeWrapper {
+public class ParticleRecipeJei implements IRecipeWrapper {
     private final ItemStack input1;
     private final ItemStack input2;
     private final ItemStack output;
 
-    public ParticleRecipe(ItemStack input1, ItemStack input2, ItemStack output) {
+    public ParticleRecipeJei(ItemStack input1, ItemStack input2, ItemStack output) {
         this.input1 = input1;
         this.input2 = input2;
         this.output = output;

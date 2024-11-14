@@ -4,6 +4,7 @@ import com.ariks.torcherino.Register.RegistryItems;
 import com.ariks.torcherino.util.ITileTimeStorage;
 import com.ariks.torcherino.util.LocalizedStringKey;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -12,6 +13,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
@@ -30,6 +32,21 @@ public class TimeStorage extends ItemBase {
         super(name);
         this.enumStorage = enumStorage;
         this.setMaxStackSize(1);
+    }
+    @Override
+    public void getSubItems(@NotNull CreativeTabs tab, @NotNull NonNullList<ItemStack> items) {
+        if (this.isInCreativeTab(tab)) {
+            ItemStack emptyStack = new ItemStack(this);
+            emptyStack.setTagCompound(new NBTTagCompound());
+            assert emptyStack.getTagCompound() != null;
+            emptyStack.getTagCompound().setInteger("Time", 0);
+            items.add(emptyStack);
+            ItemStack fullStack = new ItemStack(this);
+            fullStack.setTagCompound(new NBTTagCompound());
+            assert fullStack.getTagCompound() != null;
+            fullStack.getTagCompound().setInteger("Time", MaxConfigStorageTimeItem());
+            items.add(fullStack);
+        }
     }
     @Override
     public void onUpdate(@NotNull ItemStack stack, @NotNull World worldIn, @NotNull Entity entityIn, int itemSlot, boolean isSelected) {

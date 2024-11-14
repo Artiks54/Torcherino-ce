@@ -1,5 +1,6 @@
 package com.ariks.torcherino.Register;
 
+import com.ariks.torcherino.Block.RfMolecular.TileRfMolecular;
 import com.ariks.torcherino.Block.Time.Aceleration.TileAcceleration;
 import com.ariks.torcherino.Block.EnergyGeneration.TileEnergyParticle;
 import com.ariks.torcherino.Block.Time.TimeCollector.TileCollectors;
@@ -41,9 +42,11 @@ public class RegistryBlackList {
         for (Block block : RegistryBlock.BLOCKS) {
             RegistryAcceleration.blacklistBlock(block);
             if (Config.DebugMod) {
-                Torcherino.logger.info(Torcherino.MOD_NAME + ": " + "Block add black list to aceleration: " + block.getUnlocalizedName());
+                Torcherino.logger.info(Torcherino.MOD_NAME + ": " + "Block add black list to acceleration: " + block.getUnlocalizedName());
             }
         }
+        //Tile-RF-Molecular
+        RegistryAcceleration.blacklistTile(TileRfMolecular.class);
         //Tile-Torcherino
         RegistryAcceleration.blacklistTile(TileTorcherinoBase.class);
         //Tile-Acceleration

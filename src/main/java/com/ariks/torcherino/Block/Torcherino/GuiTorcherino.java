@@ -131,11 +131,11 @@ public class GuiTorcherino extends ExampleGuiContainer {
                     int MaxRadius = tile.getValue(5);
                     int MaxSpeed = (tile.getValue(7) * 100 * tile.getValue(6));
                     String formattedValueRf = numberFormat.format(tile.getValue(20));
-                    drawHoveringText(TextFormatting.GREEN + "Info", getMouseX(), getMouseY() - 16);
+                    drawHoveringText(TextFormatting.GREEN + LS.StrTextInfo, getMouseX(), getMouseY() - 16);
                     drawHoveringText("Max " + LS.StrTextRadius + ": " + MaxRadius + "x" + MaxRadius + "x" + MaxRadius, getMouseX(), getMouseY() + 16);
                     drawHoveringText("Max " + LS.StrTextSpeed + ": " + MaxSpeed + "%", getMouseX(), getMouseY());
                     if(Config.TorcherinoEnergyMod) {
-                        drawHoveringText("RF per tick: " + formattedValueRf, getMouseX(), getMouseY() + 32);
+                        drawHoveringText(LS.StrRFTick + " " + formattedValueRf, getMouseX(), getMouseY() + 32);
                     }
                 } else if (button.equals(buttonWork)) {
                     drawHoveringText(WorkString, getMouseX(), getMouseY());
@@ -149,12 +149,12 @@ public class GuiTorcherino extends ExampleGuiContainer {
     }
     private void UpdateSliderString(){
         int speed = (tile.getValue(2) * 100 * tile.getValue(7));
-        sliderX.displayString = ("X Range: "+tile.getValue(15));
-        sliderY.displayString = ("Y Range: "+tile.getValue(16));
-        sliderZ.displayString = ("Z Range: "+tile.getValue(17));
-        sliderR.displayString = ("Red: " + tile.getValue(8));
-        sliderG.displayString = ("Green: " + tile.getValue(9));
-        sliderB.displayString = ("Blue: " + tile.getValue(10));
+        sliderX.displayString = ("X: "+LS.StrSliderRange + " " +tile.getValue(15));
+        sliderY.displayString = ("Y: "+LS.StrSliderRange + " " +tile.getValue(16));
+        sliderZ.displayString = ("Z: "+LS.StrSliderRange + " " +tile.getValue(17));
+        sliderR.displayString = (LS.StrSliderR + " " + tile.getValue(8));
+        sliderG.displayString = (LS.StrSliderG + " " + tile.getValue(9));
+        sliderB.displayString = (LS.StrSliderB + " " + tile.getValue(10));
         sliderSpeed.displayString = (LS.StrTextSpeed + ": " + speed + "%");
     }
     private void UpdateImageButtonRender(){

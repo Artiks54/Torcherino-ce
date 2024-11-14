@@ -16,6 +16,7 @@ public class CommonProxy {
 		RegistryTiles.preInit();
 		RegistryReciep.preInit();
 		RegistryBlackList.preInit();
+		RegisterRecipeMolecularRF.preInit();
 		NetworkRegistry.INSTANCE.registerGuiHandler(Torcherino.instance, new RegistryGui());
 	}
 	public void Init(){

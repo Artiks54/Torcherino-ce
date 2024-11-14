@@ -6,6 +6,11 @@ import net.minecraft.client.resources.I18n;
 public class LocalizedStringKey {
      public static final String modid = Torcherino.MOD_ID + "_";
      //TileTorcherino
+     public String StrSliderR = I18n.format(modid+"gui.slider.red");
+     public String StrSliderG = I18n.format(modid+"gui.slider.green");
+     public String StrSliderB = I18n.format(modid+"gui.slider.blue");
+     public String StrSliderRange = I18n.format(modid+"gui.slider.range");
+     public String StrTextInfo = I18n.format(modid+"gui.text.info");
      public String StrTextSpeed = I18n.format(modid+"gui.text.speed");
      public String StrRedstoneMode = I18n.format(modid+"gui.button.StrRedstone");
      public String StrRedstoneModeRevers = I18n.format(modid+"gui.button.StrRedstoneRevers");
@@ -22,6 +27,8 @@ public class LocalizedStringKey {
      public String StrTextNight = I18n.format(modid+"gui.text.tile_time_manipulator.night");
      public String StrTextRain = I18n.format(modid+"gui.text.tile_time_manipulator.rain");
      public String StrTextRainClear = I18n.format(modid+"gui.text.tile_time_manipulator.clear_rain");
+     public String jei_info_time_manipulator = I18n.format(modid+"jei_info_time_manipulator");
+     public String jei_info_time_manipulator_need_time = I18n.format(modid+"jei_info_time_manipulator_need_time");
      //Time Storage Tile
      public String TimeCollected = I18n.format(modid+"gui.text.time");
      //Item storage
@@ -31,4 +38,25 @@ public class LocalizedStringKey {
      public String Str_Time_Wand_Tooltip = I18n.format(modid+"item.tooltip.time_wand");
      //Grow jei
      public String Jei_grow_tooltip = I18n.format(modid+"jei_grow");
+     public String jei_info_grow = I18n.format(modid+"jei_info_grow");
+     //jei_time_accelerator
+     public String jei_info_time_accelerator = I18n.format(modid+"jei_info_time_accelerator");
+     //jei_time_collector
+     public String jei_info_time_collector = I18n.format(modid+"jei_info_time_collector");
+     //jei_time_storage
+     public String jei_info_time_storage = I18n.format(modid+"jei_info_time_storage");
+     //jei_particle_collector_need_tick
+     public String jei_particle_collector_need_tick = I18n.format(modid+"jei_particle_collector_need_tick");
+     //jei_rf_particle_collector
+     public String jei_rf_particle_collector = I18n.format(modid+"jei_rf_particle_collector");
+     //Tile RF Molecular
+     public String StrEnergy = I18n.format(modid+"gui.text.tile_rf_molecular.energy");
+     public String StrEnergyRecipe = I18n.format(modid+"gui.text.tile_rf_molecular.energy.recipe");
+     public String StrRecipe = I18n.format(modid+"gui.text.tile_rf_molecular.recipe");
+     public String StrRecipeOff = I18n.format(modid+"gui.text.tile_rf_molecular.recipe.off");
+     public String StrRFTick = I18n.format(modid+"gui.text.tile_rf_molecular.rf.tick");
+     //JEI Info Item
+     public String jei_maxItem = I18n.format(modid+"jei_max_item");
+     //Time TileTime
+     public String StrTime = I18n.format(modid+"str_time");
 }

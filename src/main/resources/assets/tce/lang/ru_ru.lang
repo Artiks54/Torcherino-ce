@@ -3,6 +3,14 @@
 itemGroup.torcherinoTab=Torcherino CE
 
 tce_jei_grow=Ускоритель роста
+tce_jei_info_grow=Поставьте блок под блоком на котором что либо растёт и он ускорит процесс роста
+tce_jei_max_item=Максимум 64 предмета
+tce_jei_info_time_manipulator=Позволяет менять время и управлять погодой
+tce_jei_info_time_manipulator_need_time=Необходимое количество времени для работы
+tce_jei_info_time_storage=Используется для хранения времени
+tce_jei_info_time_collector=Пасивно генерирует время
+tce_jei_info_time_accelerator=Использует время для ускорения
+tce_str_time=Время:
 tce_gui.text.speed=Скорость
 tce_gui.text.radius=Радиус
 tce_gui.text.working=Работа
@@ -12,6 +20,11 @@ tce_gui.text.render.box=Рендр куба
 tce_gui.text.render.comb=Коибинированный
 tce_gui.text.render.null=Не выбрано
 tce_gui.text.render.settings=Настройки рендера
+tce_gui.slider.red=Красный:
+tce_gui.slider.green=Зеленый:
+tce_gui.slider.blue=Синий:
+tce_gui.slider.range=Радиус:
+tce_gui.text.info=Информация:
 tce_gui.text.time=Время:
 tce_gui.button.StrRedstone=Редстоун режим
 tce_gui.button.StrRedstoneRevers=Обртаный редстоун режим
@@ -22,9 +35,21 @@ tce_gui.text.tile_time_manipulator.clear_rain=Убрать дождь
 tce_item.wand.info=Прочность:
 tce_item.tooltip.time_storage=Shift + ПКМ извлечь время,ПКМ вставить время
 tce_item.tooltip.time_wand=Shift + ПКМ для ускорение
+tce_gui.text.tile_rf_molecular.energy=Энергия:
+tce_gui.text.tile_rf_molecular.energy.recipe=Необходимая энергия:
+tce_gui.text.tile_rf_molecular.recipe=§aВход | Выход
+tce_gui.text.tile_rf_molecular.recipe.off=§4Рецепт не найден
+tce_gui.text.tile_rf_molecular.rf.tick=RF Тик:
+tce_jei_particle_collector_need_tick=Необходимо тиков:
+tce_jei_rf_particle_collector=Необходимо энергии для генерации одной частицы:
 
 item.tce_upgrade_count.name=Модуль количества
 item.tce_upgrade_speed.name=Модуль скорости
+item.tce_time_wand_lvl1.name=§9Посох времени уровень 1
+item.tce_time_wand_lvl2.name=§aПосох времени уровень 2
+item.tce_time_wand_lvl3.name=§cПосох времени уровень 3
+item.tce_time_wand_lvl4.name=§6Посох времени уровень 4
+item.tce_time_wand_lvl5.name=§bПосох времени уровень 5
 item.tce_time_wand_infinite.name=§5Бесконечный посох времени
 item.tce_time_storage_lvl1.name=§9Временное хранилище уровень 1
 item.tce_time_storage_lvl2.name=§aВременное хранилище уровень 2
@@ -56,7 +81,6 @@ item.tce_time_particle_diamond.name=Врмееная частица алмаза
 item.tce_time_plate.name=Временная пластина
 item.tce_time_star.name=Временная звезда
 
-
 tile.tce_torch_lvl1.name=§9Факел 1 уровня
 tile.tce_torch_lvl2.name=§aФакел 2 уровня
 tile.tce_torch_lvl3.name=§cФакел 3 уровня
@@ -84,3 +108,5 @@ tile.tce_grow_lvl2.name=Ускоритель роста lvl 2
 tile.tce_grow_lvl3.name=Ускоритель роста lvl 3
 tile.tce_grow_lvl4.name=Ускоритель роста lvl 4
 tile.tce_grow_lvl5.name=Ускоритель роста lvl 5
+
+tile.tce_molecular_rf.name=§4RF Молекулярнеый преобразователь

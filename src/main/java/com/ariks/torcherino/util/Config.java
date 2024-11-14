@@ -45,9 +45,13 @@ public class Config {
     public static int SpeedWand_lvl1,SpeedWand_lvl2,SpeedWand_lvl3,SpeedWand_lvl4,SpeedWand_lvl5,SpeedWand_infinite;
     public static int MaxEnergyParticle, RFPerTickEnergyParticle;
     public static int MaxStorageTorcherino, RFPerTickEnergyTorcherino;
+    public static int MTR_RecipeIngot,MTR_RecipeNugget;
+    public static int EMCParticle,EMCIngot;
     public static void init(File file) {
         config = new Configuration(file);
         try {config.load();
+            String Molecular = "Molecular_Transformer";
+            String ProjectE = "ProjectE";
             String General = "General";
             String Render = "Render";
             String Item = "Item";
@@ -57,6 +61,8 @@ public class Config {
             String TileTorcherino3 = "Tile_Torcherino_lvl3";
             String TileTorcherino4 = "Tile_Torcherino_lvl4";
             String TileTorcherino5 = "Tile_Torcherino_lvl5";
+            config.setCategoryComment(ProjectE,"Integration projectE");
+            config.setCategoryComment(Molecular,"RF Molecular Transformer recipes");
             config.setCategoryComment(General,"General settings");
             config.setCategoryComment(Item,"Item settings");
             config.setCategoryComment(Render,"Render settings");
@@ -71,13 +77,16 @@ public class Config {
             BooleanHelloMsg = config.getBoolean("Hello_Message",General,true,"Send chat hello message");
             DebugMod = config.getBoolean("Debug_Mode",General,false,"Debug modes");
             IntegrationTheOneProbeTA = config.getBoolean("integration_top_addons",General,true,"Integration TheOneProbe-TopAddons");
-            IntegrationProjectE = config.getBoolean("integration_ProjectE",General,true,"Integration ProjectE");
+//ProjectE
+            IntegrationProjectE = config.getBoolean("integration_ProjectE",ProjectE,true,"Integration ProjectE");
+            EMCIngot = config.getInt("emc_time_ingot",ProjectE,1998279,1,Integer.MAX_VALUE,"EMC Time_Ingot");
+            EMCParticle = config.getInt("emc_time_particle",ProjectE,5411,1,Integer.MAX_VALUE,"EMC Time_Particle");
 //Storage_Time_In_Bottle
-            Stored_Time_Bottle_Lvl_1 = config.getInt("Time_Storage_lvl_1",Item,120,1,Integer.MAX_VALUE,"Storage time bottle lvl 1");
-            Stored_Time_Bottle_Lvl_2 = config.getInt("Time_Storage_lvl_2",Item,360,1,Integer.MAX_VALUE,"Storage time bottle lvl 2");
-            Stored_Time_Bottle_Lvl_3 = config.getInt("Time_Storage_lvl_3",Item,1080,1,Integer.MAX_VALUE,"Storage time bottle lvl 3");
-            Stored_Time_Bottle_Lvl_4 = config.getInt("Time_Storage_lvl_4",Item,2400,1,Integer.MAX_VALUE,"Storage time bottle lvl 4");
-            Stored_Time_Bottle_Lvl_5 = config.getInt("Time_Storage_lvl_5",Item,7200,1,Integer.MAX_VALUE,"Storage time bottle lvl 5");
+            Stored_Time_Bottle_Lvl_1 = config.getInt("Time_Storage_lvl_1",Item,250,1,Integer.MAX_VALUE,"Storage time bottle lvl 1");
+            Stored_Time_Bottle_Lvl_2 = config.getInt("Time_Storage_lvl_2",Item,750,1,Integer.MAX_VALUE,"Storage time bottle lvl 2");
+            Stored_Time_Bottle_Lvl_3 = config.getInt("Time_Storage_lvl_3",Item,2250,1,Integer.MAX_VALUE,"Storage time bottle lvl 3");
+            Stored_Time_Bottle_Lvl_4 = config.getInt("Time_Storage_lvl_4",Item,6750,1,Integer.MAX_VALUE,"Storage time bottle lvl 4");
+            Stored_Time_Bottle_Lvl_5 = config.getInt("Time_Storage_lvl_5",Item,25000,1,Integer.MAX_VALUE,"Storage time bottle lvl 5");
             Stored_Time_Bottle_infinite = config.getInt("Time_Storage_infinite",Item,Integer.MAX_VALUE,1,Integer.MAX_VALUE,"Storage time infinite");
 //wand
             SpeedWand_lvl1 = config.getInt("Time_Wand_Speed_lvl1",Item,3,1,Byte.MAX_VALUE,"Speed Time Wand lvl 1. 1 = 100%.....");
@@ -88,28 +97,28 @@ public class Config {
             SpeedWand_infinite = config.getInt("Time_Wand_Speed_lvl6",Item,20,1,Byte.MAX_VALUE,"Speed Time Wand infinite. 1 = 100%.....");
 //Render
             BooleanParcWand = config.getBoolean("Time_Wand_Parc",Render,true,"Spawn Particle Wand");
-            BooleanVisualWork = config.getBoolean("Tile_Visual_Work",Render,true,"Tile spawn Particle flame");
+            BooleanVisualWork = config.getBoolean("Tile_Visual_Work",Render,true,"Tile spawn Particle");
             BooleanRender = config.getBoolean("Tile_Render",Render,true,"Tile render true/false");
 //Generator particle tile
-            RequiredGeneratorParticle = config.getInt("Tile_Generator_Particle_NeedTick",Tile,1800,1,Short.MAX_VALUE,"Need ticks to generate 100%");
+            RequiredGeneratorParticle = config.getInt("Tile_Generator_Particle_NeedTick",Tile,2450,1,Short.MAX_VALUE,"Need ticks to generate 100%");
 //Time manipulator tile
-            RequiredTimeManipulator = config.getInt("Tile_Time_Manipulator_Need_Time",Tile,500,1,Short.MAX_VALUE,"Need time");
-            MaxStorageTimeManipulator = config.getInt("Tile_Time_Manipulator_MaxStorage",Tile,2500,1,Short.MAX_VALUE,"Time maximum storage");
+            RequiredTimeManipulator = config.getInt("Tile_Time_Manipulator_Need_Time",Tile,750,1,Short.MAX_VALUE,"Need time");
+            MaxStorageTimeManipulator = config.getInt("Tile_Time_Manipulator_MaxStorage",Tile,3500,1,Short.MAX_VALUE,"Time maximum storage");
 //Storage tile
-            MaxStorageTimeStorage = config.getInt("Tile_Time_Storage_MaxStorage",Tile,10000,1,Integer.MAX_VALUE,"Time maximum storage");
+            MaxStorageTimeStorage = config.getInt("Tile_Time_Storage_MaxStorage",Tile,20000,1,Integer.MAX_VALUE,"Time maximum storage");
 //Collectors tile
-            MaxStorageTimeCollector = config.getInt("Tile_Time_Collectors_MaxStorage",Tile,1000,1,Integer.MAX_VALUE,"Time maximum storage");
+            MaxStorageTimeCollector = config.getInt("Tile_Time_Collectors_MaxStorage",Tile,2500,1,Integer.MAX_VALUE,"Time maximum storage");
 //Acceleration tile
             AccelerationSpeed = config.getInt("Tile_Time_Acceleration_Speed",Tile,3,1, Byte.MAX_VALUE,TextS);
             AccelerationRadius = config.getInt("Tile_Time_Acceleration_Radius",Tile,3,1,Byte.MAX_VALUE,TextR);
-            MaxStorageTimeAcceleration = config.getInt("Tile_Time_Acceleration_MaxStorage",Tile,3600,1,Integer.MAX_VALUE,"Time maximum storage");
+            MaxStorageTimeAcceleration = config.getInt("Tile_Time_Acceleration_MaxStorage",Tile,4500,1,Integer.MAX_VALUE,"Time maximum storage");
 //EnergyParticle
-            RFPerTickEnergyParticle = config.getInt("Tile_Energy_Particle_Collector_RF_Tick",Tile,540000,1,Integer.MAX_VALUE,"Rf need to generate 1 time element");
-            MaxEnergyParticle = config.getInt("Tile_Energy_Particle_Collector_Max_Energy",Tile,50000000,1,Integer.MAX_VALUE,"Max energy storage");
+            RFPerTickEnergyParticle = config.getInt("Tile_Energy_Particle_Collector_RF_Tick",Tile,54000,1,Integer.MAX_VALUE,"Rf need to generate 1 time element");
+            MaxEnergyParticle = config.getInt("Tile_Energy_Particle_Collector_Max_Energy",Tile,5000000,1,Integer.MAX_VALUE,"Max energy storage");
 //EnergyTorcherino
             TorcherinoEnergyMod = config.getBoolean("Tile_Energy_Torcherino_Mode",Tile,true,"Do I need energy to work, Torcherino");
-            RFPerTickEnergyTorcherino = config.getInt("Tile_Energy_Torcherino_RF_Tick",Tile,500,1,Integer.MAX_VALUE,"Rf tick work");
-            MaxStorageTorcherino = config.getInt("Tile_Energy_Torcherino_Max_Energy",Tile,5000000,1,Integer.MAX_VALUE,"Max energy storage");
+            RFPerTickEnergyTorcherino = config.getInt("Tile_Energy_Torcherino_RF_Tick",Tile,750,1,Integer.MAX_VALUE,"Rf tick work");
+            MaxStorageTorcherino = config.getInt("Tile_Energy_Torcherino_Max_Energy",Tile,6500000,1,Integer.MAX_VALUE,"Max energy storage");
 //Torch_lvl_1
             TileName = "Torcherino_lvl_1";
             Torch_lvl1_S = config.getInt(TileName+speed,TileTorcherino,1,1,Byte.MAX_VALUE,TextS);
@@ -185,12 +194,15 @@ public class Config {
             DTorch_lvl5_S = config.getInt(TileName+speed,TileTorcherino5,81,1,Byte.MAX_VALUE,TextS);
             DTorch_lvl5_M = config.getInt(TileName+modes,TileTorcherino5,15,1,Byte.MAX_VALUE,TextM);
             DTorch_lvl5_R = config.getInt(TileName+radius,TileTorcherino5,15,1,Byte.MAX_VALUE,TextR);
+//MolecularTransformers
+            MTR_RecipeIngot = config.getInt("Tile_Molecular_Recipe_Time_Ingot",Molecular,50_000, 1, Integer.MAX_VALUE, "Recipe time_ingot rf Energy");
+            MTR_RecipeNugget = config.getInt("Tile_Molecular_Recipe_Time_Nugget",Molecular,25_000,1,Integer.MAX_VALUE, "Recipe time_nugget rf Energy");
         } finally {
             if(config.hasChanged()) config.save();
         }
     }
     public static void registerConfig(@NotNull FMLPreInitializationEvent event){
-        Torcherino.config = new File(event.getModConfigurationDirectory()+"/"+Torcherino.MOD_NAME);
+        Torcherino.config = new File(event.getModConfigurationDirectory()+"/"+"AriksProject54");
         Torcherino.config.mkdirs();
         init(new File(Torcherino.config.getPath(),Torcherino.MOD_NAME+".cfg"));
     }

@@ -1,8 +1,9 @@
-package com.ariks.torcherino.integration.Jei;
+package com.ariks.torcherino.integration.Jei.Particle;
 
 import com.ariks.torcherino.Register.RegistryBlock;
 import com.ariks.torcherino.Torcherino;
 import com.ariks.torcherino.util.Config;
+import com.ariks.torcherino.util.LocalizedStringKey;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IDrawableAnimated;
@@ -16,12 +17,14 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Collections;
 import java.util.List;
 
-public class ParticleRecipeCategory implements IRecipeCategory<ParticleRecipe> {
+public class ParticleRecipeCategory implements IRecipeCategory<ParticleRecipeJei> {
     private final IDrawable background;
     private final String localizedName;
     private final String uid = Torcherino.MOD_ID + "_particle";
     private final IDrawableAnimated progressBar;
     private final IDrawableAnimated progressBar2;
+    private final IDrawableAnimated progressBar3;
+    public final LocalizedStringKey LS = new LocalizedStringKey();
 
     public ParticleRecipeCategory(IGuiHelper guiHelper) {
         ResourceLocation location = new ResourceLocation(Torcherino.MOD_ID, "textures/gui/gui_particle_jei.png");
@@ -29,27 +32,30 @@ public class ParticleRecipeCategory implements IRecipeCategory<ParticleRecipe> {
         localizedName = RegistryBlock.Particle_collectors.getLocalizedName();
 
         ResourceLocation progressLocation = new ResourceLocation(Torcherino.MOD_ID, "textures/gui/gui_component.png");
-        IDrawableStatic progressDrawable = guiHelper.createDrawable(progressLocation, 0, 38, 40, 42); // Размеры текстуры анимации
+        IDrawableStatic progressDrawable = guiHelper.createDrawable(progressLocation, 0, 38, 40, 42);
         progressBar = guiHelper.createAnimatedDrawable(progressDrawable, 100, IDrawableAnimated.StartDirection.LEFT, false);
 
-        IDrawableStatic progressDrawable2 = guiHelper.createDrawable(progressLocation, 0, 82, 40, 42); // Размеры текстуры анимации
+        IDrawableStatic progressDrawable2 = guiHelper.createDrawable(progressLocation, 0, 82, 40, 42);
         progressBar2 = guiHelper.createAnimatedDrawable(progressDrawable2, 100, IDrawableAnimated.StartDirection.RIGHT, false);
+
+        IDrawableStatic progressDrawable3 = guiHelper.createDrawable(progressLocation, 43, 42, 34, 9);
+        progressBar3 = guiHelper.createAnimatedDrawable(progressDrawable3, 100, IDrawableAnimated.StartDirection.TOP, false);
     }
 
     @Override
     public void drawExtras(@NotNull Minecraft minecraft) {
-        // Отрисовываем анимацию
         progressBar.draw(minecraft, 0, 26);
         progressBar2.draw(minecraft,80,26);
+        progressBar3.draw(minecraft,43,18);
     }
 
     @Override
     public @NotNull List<String> getTooltipStrings(int mouseX, int mouseY) {
         if (mouseX >= 0 && mouseX <= 39 && mouseY >= 26 && mouseY <= 67) {
-            return Collections.singletonList(Config.RequiredGeneratorParticle + " Need tick");
+            return Collections.singletonList(LS.jei_particle_collector_need_tick + " " + Config.RequiredGeneratorParticle);
         }
         if (mouseX >= 79 && mouseX <= 119 && mouseY >= 26 && mouseY <= 67) {
-            return Collections.singletonList(Config.RequiredGeneratorParticle + " Need tick");
+            return Collections.singletonList(LS.jei_particle_collector_need_tick + " " + Config.RequiredGeneratorParticle);
         }
         return Collections.emptyList();
     }
@@ -70,7 +76,7 @@ public class ParticleRecipeCategory implements IRecipeCategory<ParticleRecipe> {
         return background;
     }
     @Override
-    public void setRecipe(IRecipeLayout recipeLayout, ParticleRecipe recipeWrapper, @NotNull IIngredients ingredients) {
+    public void setRecipe(IRecipeLayout recipeLayout, ParticleRecipeJei recipeWrapper, @NotNull IIngredients ingredients) {
         recipeLayout.getItemStacks().init(0, false, 42, 29);
         recipeLayout.getItemStacks().set(0, recipeWrapper.getOutputs());
         recipeLayout.getItemStacks().init(1, true, 41, 0);

@@ -3,6 +3,14 @@
 itemGroup.torcherinoTab=Torcherino CE
 
 tce_jei_grow=Grow process
+tce_jei_info_grow=Placed a block under the block on which something is growing and this will accelerate growth
+tce_jei_max_item=Maximum 64 item
+tce_jei_info_time_manipulator=Allows you to change the time and control the weather
+tce_jei_info_time_manipulator_need_time=The required amount of time to work
+tce_jei_info_time_storage=It is used to store time
+tce_jei_info_time_collector=Passively generated time
+tce_jei_info_time_accelerator=Uses time to accelerate
+tce_str_time=Time:
 tce_gui.text.speed=Speed
 tce_gui.text.radius=Radius
 tce_gui.text.working=Work
@@ -12,6 +20,11 @@ tce_gui.text.render.box=Box Render
 tce_gui.text.render.comb=Combined
 tce_gui.text.render.null=Not selected
 tce_gui.text.render.settings=Render settings
+tce_gui.slider.red=Red:
+tce_gui.slider.green=Green:
+tce_gui.slider.blue=Blue:
+tce_gui.slider.range=Radius:
+tce_gui.text.info=Information:
 tce_gui.text.time=Time:
 tce_gui.button.StrRedstone=Redstone mode
 tce_gui.button.StrRedstoneRevers=Redstone reverse mode
@@ -22,10 +35,16 @@ tce_gui.text.tile_time_manipulator.clear_rain=Clear Rain
 tce_item.wand.info=Durability:
 tce_item.tooltip.time_storage=Shift + Right-Click extracts time, Right-click inserts time
 tce_item.tooltip.time_wand=Shift + Right-click to accelerate
+tce_gui.text.tile_rf_molecular.energy=Energy:
+tce_gui.text.tile_rf_molecular.energy.recipe=Required energy:
+tce_gui.text.tile_rf_molecular.recipe=Input | Output
+tce_gui.text.tile_rf_molecular.recipe.off=Recipe not found
+tce_gui.text.tile_rf_molecular.rf.tick=RF Tick:
+tce_jei_particle_collector_need_tick=Required tick:
+tce_jei_rf_particle_collector=Required energy for generated particle:
 
 item.tce_upgrade_count.name=Module count
 item.tce_upgrade_speed.name=Module speed
-
 item.tce_time_wand_lvl1.name=§9The Staff of Time lvl 1
 item.tce_time_wand_lvl2.name=§aThe Staff of Time lvl 2
 item.tce_time_wand_lvl3.name=§cThe Staff of Time lvl 3
@@ -62,7 +81,6 @@ item.tce_time_particle_diamond.name=Time particle diamond
 item.tce_time_plate.name=Time plate
 item.tce_time_star.name=Time star
 
-
 tile.tce_torch_lvl1.name=§9Torcherino lvl 1
 tile.tce_torch_lvl2.name=§aTorcherino lvl 2
 tile.tce_torch_lvl3.name=§cTorcherino lvl 3
@@ -90,3 +108,5 @@ tile.tce_grow_lvl2.name=Growth Accelerator lvl 2
 tile.tce_grow_lvl3.name=Growth Accelerator lvl 3
 tile.tce_grow_lvl4.name=Growth Accelerator lvl 4
 tile.tce_grow_lvl5.name=Growth Accelerator lvl 5
+
+tile.tce_molecular_rf.name=§4RF Molecular transformer

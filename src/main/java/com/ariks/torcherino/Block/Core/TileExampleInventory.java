@@ -93,7 +93,7 @@ public abstract class TileExampleInventory extends TileExampleContainer implemen
     @Override
     public void closeInventory(@Nonnull EntityPlayer player) {}
     @Override
-    public boolean isItemValidForSlot(int index, ItemStack itemStack) {return false;}
+    public boolean isItemValidForSlot(int index, ItemStack itemStack) {return true;}
     @Override
     public int getField(int i) {return 0;}
     @Override

@@ -25,7 +25,7 @@ public class GuiTimeManipulator extends ExampleGuiContainer {
     public void Tick() {
         String formattedValueMin = numberFormat.format(tile.getValue(1));
         String formattedValueMax = numberFormat.format(tile.getValue(2));
-        setTooltipBar(1,"Time: "+formattedValueMin+ " / " + formattedValueMax);
+        setTooltipBar(1,LS.StrTime+ " " +formattedValueMin+ " / " + formattedValueMax);
         setBarValue(1,tile.getValue(1),tile.getValue(2));
         if(tile.getValue(1) < tile.getValue(3)) {
             buttonSetDay.enabled = false;

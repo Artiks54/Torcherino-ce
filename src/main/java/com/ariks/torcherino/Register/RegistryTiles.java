@@ -1,5 +1,6 @@
 package com.ariks.torcherino.Register;
 
+import com.ariks.torcherino.Block.RfMolecular.TileRfMolecular;
 import com.ariks.torcherino.Block.Time.Aceleration.TileAcceleration;
 import com.ariks.torcherino.Block.EnergyGeneration.TileEnergyParticle;
 import com.ariks.torcherino.Block.Time.TimeCollector.TileCollectors;
@@ -14,6 +15,7 @@ import static com.ariks.torcherino.Torcherino.MOD_ID;
 public final class RegistryTiles {
     public static void preInit()
     {
+        GameRegistry.registerTileEntity(TileRfMolecular.class,new ResourceLocation(MOD_ID,"Tile_Rf_Molecular"));
         GameRegistry.registerTileEntity(TileEnergyParticle.class,new ResourceLocation(MOD_ID,"Tile_Particle_Energy"));
         GameRegistry.registerTileEntity(TileTorcherinoBase.class,new ResourceLocation(MOD_ID,"Tile_Torcherino"));
         GameRegistry.registerTileEntity(TileAcceleration.class,new ResourceLocation(MOD_ID,"Tile_Acceleration"));

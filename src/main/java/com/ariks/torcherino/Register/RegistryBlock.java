@@ -1,5 +1,6 @@
 package com.ariks.torcherino.Register;
 
+import com.ariks.torcherino.Block.RfMolecular.BlockMolecularRf;
 import com.ariks.torcherino.Block.Time.Aceleration.BlockAcceleration;
 import com.ariks.torcherino.Block.EnergyGeneration.BlockEnergyParticle;
 import com.ariks.torcherino.Block.Other.BlockGrowAccelerator;
@@ -51,6 +52,7 @@ public class RegistryBlock {
     public static Block Time_Manipulator = new BlockTimeManipulator(modid+"time_manipulator");
     public static Block Time_Storage = new BlockTimeStorage(modid+"time_storage");
     public static Block Particle_collectors = new BlockParticleCollector(modid+"particle_collector");
+    public static Block RF_Molecular = new BlockMolecularRf(modid+"molecular_rf");
     public static final List<Block> BLOCKS = new ArrayList<>();
     static {
         Field[] fields = RegistryBlock.class.getDeclaredFields();

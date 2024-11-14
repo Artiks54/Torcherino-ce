@@ -1,4 +1,4 @@
-package com.ariks.torcherino.integration.Jei;
+package com.ariks.torcherino.integration.Jei.GrowAccelerator;
 
 import com.ariks.torcherino.Torcherino;
 import com.ariks.torcherino.util.LocalizedStringKey;
@@ -9,7 +9,7 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
 import net.minecraft.util.ResourceLocation;
 
-public class ImageRecipeCategory implements IRecipeCategory<ImageRecipe> {
+public class ImageRecipeCategory implements IRecipeCategory<ImageRecipeJei> {
     private final IDrawable background;
     private final String localizedName;
     private final String uid = Torcherino.MOD_ID + "_grow";
@@ -37,6 +37,6 @@ public class ImageRecipeCategory implements IRecipeCategory<ImageRecipe> {
         return background;
     }
     @Override
-    public void setRecipe(IRecipeLayout iRecipeLayout, ImageRecipe imageRecipe, IIngredients iIngredients) {
+    public void setRecipe(IRecipeLayout iRecipeLayout, ImageRecipeJei imageRecipe, IIngredients iIngredients) {
     }
 }
