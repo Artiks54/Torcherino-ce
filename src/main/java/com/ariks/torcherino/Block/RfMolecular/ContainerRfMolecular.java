@@ -13,7 +13,14 @@ public class ContainerRfMolecular extends ExampleContainer {
         super(tileEntity);
         this.addSlotToContainer(new Slot(tileEntity,0,6,6));
         this.addSlotToContainer(new SlotOut(tileEntity,1,6,55));
-        PlayerInventory(inventoryPlayer);
+        for (int i = 0; i < 3; ++i) {
+            for (int j = 0; j < 9; ++j) {
+                this.addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 23 + j * 18, 87 + i * 18));
+            }
+        }
+        for (int k = 0; k < 9; ++k) {
+            this.addSlotToContainer(new Slot(inventoryPlayer, k, 23 + k * 18, 145));
+        }
     }
     @Override
     public @NotNull ItemStack transferStackInSlot(@NotNull EntityPlayer player, int slotIndex) {

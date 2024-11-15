@@ -19,12 +19,12 @@ public class GuiRfMolecular extends ExampleGuiContainer {
     private String EnergyNeed;
     private String Collected;
     private String RfPerTick;
-    private String Time,Recipe;
+    private String Time;
 
     public GuiRfMolecular(InventoryPlayer inventory, TileRfMolecular tileEntity, EntityPlayer player) {
         super(new ContainerRfMolecular(inventory, tileEntity, player));
         this.tile = tileEntity;
-        setTexture("textures/gui/gui_molecular.png", 175, 167);
+        setTexture("textures/gui/gui_molecular.png", 205, 170);
         BarComponent barComponent = new BarComponent(this, 1, 7, 24, 181, 0, 14, 29, "textures/gui/gui_component.png");
         barComponent.setSideDirection("down");
         addBarComponent(barComponent);
@@ -45,7 +45,6 @@ public class GuiRfMolecular extends ExampleGuiContainer {
             EnergyNeed = (LS.StrEnergyRecipe + " " + EnergyFormat.formatNumber(tile.energyRequired));
             Collected = (LS.StrEnergy + " " + EnergyFormat.formatNumber(tile.energyCollected));
             RfPerTick = (LS.StrRFTick + " " + numberFormat.format(tile.energyReceived));
-            Recipe = LS.StrRecipe;
             if (tile.energyReceived != 0) {
                 long ticks = (tile.energyRequired - tile.energyCollected) / tile.energyReceived;
                 long seconds = ticks / 20;
@@ -58,7 +57,6 @@ public class GuiRfMolecular extends ExampleGuiContainer {
             int progressPercentage = (int) ((tile.energyCollected * 100) / tile.energyRequired);
             setBarValue(1, progressPercentage, 100);
         } else {
-            Recipe = LS.StrRecipeOff;
             ItemInput = "";
             ItemOutput = "";
             EnergyNeed = "";
@@ -73,12 +71,11 @@ public class GuiRfMolecular extends ExampleGuiContainer {
         super.drawGuiContainerForegroundLayer(mouseX, mouseY);
         int xOffset = 35;
         int yOffset = 5;
-        this.fontRenderer.drawStringWithShadow(Recipe, xOffset, yOffset, Color.WHITE.getRGB());
-        this.fontRenderer.drawStringWithShadow(ItemInput, xOffset, yOffset+10, Color.WHITE.getRGB());
-        this.fontRenderer.drawStringWithShadow(ItemOutput, xOffset, yOffset + 20, Color.WHITE.getRGB());
-        this.fontRenderer.drawStringWithShadow(EnergyNeed, xOffset, yOffset + 30, Color.YELLOW.getRGB());
-        this.fontRenderer.drawStringWithShadow(Collected, xOffset, yOffset + 40, Color.YELLOW.getRGB());
-        this.fontRenderer.drawStringWithShadow(RfPerTick, xOffset, yOffset + 50, Color.YELLOW.getRGB());
-        this.fontRenderer.drawStringWithShadow(Time, xOffset, yOffset + 60, Color.YELLOW.getRGB());
+        this.fontRenderer.drawStringWithShadow(ItemInput, xOffset, yOffset, Color.RED.getRGB());
+        this.fontRenderer.drawStringWithShadow(ItemOutput, xOffset, yOffset + 10, Color.RED.getRGB());
+        this.fontRenderer.drawStringWithShadow(EnergyNeed, xOffset, yOffset + 20, Color.RED.getRGB());
+        this.fontRenderer.drawStringWithShadow(Collected, xOffset, yOffset + 30, Color.RED.getRGB());
+        this.fontRenderer.drawStringWithShadow(RfPerTick, xOffset, yOffset + 40, Color.RED.getRGB());
+        this.fontRenderer.drawStringWithShadow(Time, xOffset, yOffset + 50, Color.RED.getRGB());
     }
 }

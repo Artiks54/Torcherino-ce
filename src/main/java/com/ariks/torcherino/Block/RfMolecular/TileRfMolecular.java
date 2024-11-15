@@ -2,13 +2,11 @@ package com.ariks.torcherino.Block.RfMolecular;
 
 import com.ariks.torcherino.Block.Core.TileExampleInventory;
 import com.ariks.torcherino.Register.RegistryGui;
-import com.ariks.torcherino.util.Config;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
-import net.minecraft.world.WorldServer;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
 import org.jetbrains.annotations.NotNull;
@@ -21,8 +19,6 @@ public class TileRfMolecular extends TileExampleInventory implements ITickable {
     public long energyRequired;
     public long energyCollected;
     public boolean work;
-    private int cooldown;
-    TileRfMolecularRenderer renderer = new TileRfMolecularRenderer();
     public TileRfMolecular() {
         super(2);
         this.setSlotsForInsert(0);
@@ -33,39 +29,32 @@ public class TileRfMolecular extends TileExampleInventory implements ITickable {
         return MolecularRecipe.getRecipes();
     }
     public void findRecipe() {
-        if (currentRecipeID < 0) {
-            ItemStack inputStack = getStackInSlot(0);
-            ItemStack outputStack = getStackInSlot(1);
-            if (!inputStack.isEmpty()) {
-                for (int i = 0; i < currentRecipe().size(); i++) {
-                    MolecularRecipe recipe = currentRecipe().get(i);
-                    if (recipe.getInput().isItemEqual(inputStack) && ItemStack.areItemStackTagsEqual(recipe.getInput(), inputStack)) {
-                        if (inputStack.getCount() >= recipe.getInput().getCount()) {
-                            if (outputStack.isEmpty() || (outputStack.isItemEqual(recipe.getRecipeOutput()) && ItemStack.areItemStackTagsEqual(outputStack, recipe.getRecipeOutput()))) {
-                                currentRecipeID = i;
-                                work = true;
-                                energyRequired = MolecularRecipe.getRecipes().get(currentRecipeID).getEnergy();
-                                decrStackSize(0, recipe.getInput().getCount());
-                                this.UpdateTile();
-                                return;
-                            }
-                        }
-                    }
-                }
+        if (currentRecipeID >= 0) return;
+        ItemStack inputStack = getStackInSlot(0);
+        ItemStack outputStack = getStackInSlot(1);
+        if (inputStack.isEmpty()) return;
+        ArrayList<MolecularRecipe> recipes = currentRecipe();
+        for (int i = 0; i < recipes.size(); i++) {
+            MolecularRecipe recipe = recipes.get(i);
+            if (recipe.matches(inputStack, outputStack)) {
+                currentRecipeID = i;
+                work = true;
+                energyRequired = recipe.getEnergy();
+                decrStackSize(0, recipe.getInput().getCount());
+                this.UpdateTile();
+                return;
             }
         }
     }
     private void Work() {
-        if (work && canOutputRecipeResult()) {
-            storage.setCanReceiveEnergy(true);
-            energyReceived = storage.getEnergyStored();
-            if (energyReceived > 0) {
-                storage.consumeEnergy((int) energyReceived);
-                energyCollected += energyReceived;
-                this.WorkVisual();
-                this.UpdateTile();
-                this.RecipeOut();
-            }
+        if (!work || !canOutputRecipeResult()) return;
+        storage.setCanReceiveEnergy(true);
+        energyReceived = storage.getEnergyStored();
+        if (energyReceived > 0) {
+            storage.consumeEnergy((int) energyReceived);
+            energyCollected += energyReceived;
+            this.UpdateTile();
+            this.RecipeOut();
         }
     }
     private void Reset() {
@@ -77,31 +66,24 @@ public class TileRfMolecular extends TileExampleInventory implements ITickable {
         work = false;
     }
     private boolean canOutputRecipeResult() {
-        ItemStack outputStack = MolecularRecipe.getRecipes().get(currentRecipeID).getRecipeOutput();
+        if (currentRecipeID < 0) return false;
+        ItemStack outputStack = currentRecipe().get(currentRecipeID).getRecipeOutput();
         ItemStack currentOutputStack = getStackInSlot(1);
-        if (currentOutputStack.isEmpty()) {
-            return true;
-        } else if (currentOutputStack.isItemEqual(outputStack) && ItemStack.areItemStackTagsEqual(currentOutputStack, outputStack)) {
-            int maxStackSize = currentOutputStack.getMaxStackSize();
-            int currentCount = currentOutputStack.getCount();
-            int outputCount = outputStack.getCount();
-            return currentCount + outputCount <= maxStackSize;
-        } else {
-            return false;
-        }
+        if (currentOutputStack.isEmpty()) return true;
+        if (!currentOutputStack.isItemEqual(outputStack) || !ItemStack.areItemStackTagsEqual(currentOutputStack, outputStack)) return false;
+        return currentOutputStack.getCount() + outputStack.getCount() <= currentOutputStack.getMaxStackSize();
     }
     private void RecipeOut() {
-        if (energyCollected >= energyRequired) {
-            ItemStack outputStack = MolecularRecipe.getRecipes().get(currentRecipeID).getRecipeOutput();
-            if (getStackInSlot(1).isEmpty()) {
-                setInventorySlotContents(1, outputStack);
-            } else {
-                getStackInSlot(1).grow(outputStack.getCount());
-            }
-            this.Reset();
+        if (energyCollected < energyRequired) return;
+        ItemStack outputStack = currentRecipe().get(currentRecipeID).getRecipeOutput();
+        ItemStack currentOutputStack = getStackInSlot(1);
+        if (currentOutputStack.isEmpty()) {
+            setInventorySlotContents(1, outputStack.copy());
+        } else {
+            currentOutputStack.grow(outputStack.getCount());
         }
+        this.Reset();
     }
-
     @Override
     public void update() {
         if (!world.isRemote) {
@@ -115,19 +97,6 @@ public class TileRfMolecular extends TileExampleInventory implements ITickable {
             return currentRecipeID;
         }
         return id;
-    }
-    private void WorkVisual() {
-        if(Config.BooleanVisualWork) {
-            if (++cooldown >= 20) {
-                cooldown = 0;
-                double x = pos.getX();
-                double y = pos.getY();
-                double z = pos.getZ();
-                EnumParticleTypes parc = EnumParticleTypes.REDSTONE;
-                int[] colorData = {255, 0, 0};
-                ((WorldServer) world).spawnParticle(parc, x + 0.5, y + 0.5, z + 0.5, 15, 0, 0, 0, 0, colorData);
-            }
-        }
     }
     @Override
     public @NotNull NBTTagCompound writeToNBT(@NotNull NBTTagCompound nbt) {
@@ -148,6 +117,10 @@ public class TileRfMolecular extends TileExampleInventory implements ITickable {
         this.currentRecipeID = nbt.getInteger("RecipeID");
         this.work = nbt.getBoolean("Work");
         this.storage.setCanReceiveEnergy(work);
+    }
+    @Override
+    public @NotNull AxisAlignedBB getRenderBoundingBox() {
+        return INFINITE_EXTENT_AABB;
     }
     @SuppressWarnings("unchecked")
     @Override

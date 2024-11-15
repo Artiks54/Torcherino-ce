@@ -19,7 +19,6 @@ public class Config {
     public static boolean BooleanHelloMsg;
     public static boolean BooleanParcWand,BooleanRender,BooleanVisualWork;
     public static boolean IntegrationProjectE,IntegrationTheOneProbeTA;
-    public static boolean TorcherinoEnergyMod;
     public static int
             Torch_lvl1_S,Torch_lvl1_M,Torch_lvl1_R, Torch_lvl2_S,Torch_lvl2_M,Torch_lvl2_R,
             Torch_lvl3_S,Torch_lvl3_M,Torch_lvl3_R, Torch_lvl4_S, Torch_lvl4_M,Torch_lvl4_R,
@@ -111,7 +110,6 @@ public class Config {
             RFPerTickEnergyParticle = config.getInt("Tile_Energy_Particle_Collector_RF_Tick",Tile,54000,1,Integer.MAX_VALUE,"Rf need to generate 1 time element");
             MaxEnergyParticle = config.getInt("Tile_Energy_Particle_Collector_Max_Energy",Tile,5000000,1,Integer.MAX_VALUE,"Max energy storage");
 //EnergyTorcherino
-            TorcherinoEnergyMod = config.getBoolean("Tile_Energy_Torcherino_Mode",Tile,true,"Do I need energy to work, Torcherino");
             RFPerTickEnergyTorcherino = config.getInt("Tile_Energy_Torcherino_RF_Tick",Tile,750,1,Integer.MAX_VALUE,"Rf tick work");
             MaxStorageTorcherino = config.getInt("Tile_Energy_Torcherino_Max_Energy",Tile,6500000,1,Integer.MAX_VALUE,"Max energy storage");
 //Torch_lvl_1

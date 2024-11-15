@@ -31,6 +31,10 @@ public class MolecularRecipe {
     public static ArrayList<MolecularRecipe> getRecipes() {
         return recipes;
     }
+    public boolean matches(ItemStack inputStack, ItemStack outputStack) {
+        return input.isItemEqual(inputStack) &&
+                ItemStack.areItemStackTagsEqual(input, inputStack) && inputStack.getCount() >= input.getCount() && (outputStack.isEmpty() || (outputStack.isItemEqual(output) && ItemStack.areItemStackTagsEqual(outputStack, output)));
+    }
     public static void preInit() {
         MolecularRecipe.addRecipe(new MolecularRecipe(new ItemStack(RegistryItems.time_nugget,9), new ItemStack(RegistryItems.time_ingot,1), Config.MTR_RecipeIngot));
         MolecularRecipe.addRecipe(new MolecularRecipe(new ItemStack(RegistryItems.time_ingot,1), new ItemStack(RegistryItems.time_nugget,9), Config.MTR_RecipeNugget));
