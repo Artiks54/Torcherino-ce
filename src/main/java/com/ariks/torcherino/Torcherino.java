@@ -48,7 +48,6 @@ public class Torcherino {
 				continue;
 			}
 			String s = message.getStringValue();
-			RegistryAcceleration.blacklistString(s);
 		}
 	}
 }

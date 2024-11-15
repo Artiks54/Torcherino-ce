@@ -22,6 +22,7 @@ public class TileRfMolecular extends TileExampleInventory implements ITickable {
     public long energyCollected;
     public boolean work;
     private int cooldown;
+    TileRfMolecularRenderer renderer = new TileRfMolecularRenderer();
     public TileRfMolecular() {
         super(2);
         this.setSlotsForInsert(0);
@@ -100,6 +101,7 @@ public class TileRfMolecular extends TileExampleInventory implements ITickable {
             this.Reset();
         }
     }
+
     @Override
     public void update() {
         if (!world.isRemote) {

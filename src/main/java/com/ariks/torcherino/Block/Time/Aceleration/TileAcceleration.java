@@ -68,7 +68,7 @@ public class TileAcceleration extends TileTime {
     private void AccelerationTick(BlockPos pos) {
         IBlockState blockState = world.getBlockState(pos);
         Block block = blockState.getBlock();
-        if (block instanceof BlockFluidBase || RegistryAcceleration.isBlockBlacklisted(block)) {
+        if (block instanceof BlockFluidBase || RegistryAcceleration.isBlockBlacklisted(blockState)) {
             return;
         }
         if (block.getTickRandomly()) {

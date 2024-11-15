@@ -19,5 +19,5 @@ public class RegistryIntegration {
         }else {
             Torcherino.logger.info(Torcherino.MOD_NAME + " Integration topAddons : Disabled");
        }
-        }
+    }
 }

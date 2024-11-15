@@ -26,7 +26,7 @@ public class TileEnergyParticle extends TileExampleInventory implements ITickabl
     @Override
     public void update() {
         if (!world.isRemote) {
-            if(this.CanGenerate() && storage.getEnergyStored() > 0 ) {
+            if(this.CanGenerate() && storage.getEnergyStored() > 0) {
                 this.UpdateTile();
                 this.Generate();
             }

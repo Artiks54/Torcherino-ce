@@ -1,6 +1,8 @@
 package com.ariks.torcherino.Block.ParticleCollector;
 
 import com.ariks.torcherino.Block.Core.TileExampleInventory;
+import com.ariks.torcherino.Items.ItemUpgradeCount;
+import com.ariks.torcherino.Items.ItemUpgradeSpeed;
 import com.ariks.torcherino.Register.RegistryGui;
 import com.ariks.torcherino.Register.RegistryItems;
 import com.ariks.torcherino.util.Config;
@@ -113,6 +115,16 @@ public class TileParticleCollector extends TileExampleInventory implements ITick
             return this.MaxProgress;
         }
         return id;
+    }
+    @Override
+    public boolean isItemValidForSlot(int index, ItemStack itemStack) {
+        if(index == 0){
+            return itemStack.getItem() instanceof ItemUpgradeCount;
+        }
+        if(index == 1){
+            return itemStack.getItem() instanceof ItemUpgradeSpeed;
+        }
+        return false;
     }
     @Override
     public String getGuiID() {

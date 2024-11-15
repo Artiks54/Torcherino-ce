@@ -27,12 +27,6 @@ public class CommonProxy {
 	}
 	public void postInit(){
 		RegistryIntegration.Registry();
-		for (String block : blacklistedBlocks) {
-			RegistryAcceleration.blacklistString(block);
-		}
-		for (String tile : blacklistedTiles) {
-			RegistryAcceleration.blacklistString(tile);
-		}
 	}
 	public void registerItemRenderer(Item item, int meta, String id) {
 	}

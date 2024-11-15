@@ -8,8 +8,6 @@ import java.io.File;
 
 public class Config {
     protected static Configuration config;
-    public static String[] blacklistedBlocks;
-    public static String[] blacklistedTiles;
     public static String TileName;
     private final static String TextS = "Speed 1 = 100%";
     private final static String TextM = "Number of speed modes";
@@ -70,9 +68,6 @@ public class Config {
                     "If this is not possible, then in order for the value in TileEntity to change, it will need to be set again.");
             config.setCategoryComment(TileTorcherino,"TileEntity settings .Before changing these values, it is best to destroy the already installed TileEntity \n" +
                     "If this is not possible, then in order for the value in TileEntity to change, it will need to be set again.");
-//BlackList
-            blacklistedBlocks = config.getStringList("blacklistedBlocks", "blacklist", new String[]{}, "modid:unlocalized,  Example: projecte:collector_mk1");
-            blacklistedTiles = config.getStringList("blacklistedTiles", "blacklist", new String[]{}, "Fully qualified class name");
 //General
             BooleanHelloMsg = config.getBoolean("Hello_Message",General,true,"Send chat hello message");
             DebugMod = config.getBoolean("Debug_Mode",General,false,"Debug modes");

@@ -40,7 +40,7 @@ public class TimeWand extends ItemBase {
                 IBlockState blockState = worldIn.getBlockState(pos);
                 Block block = blockState.getBlock();
                 TileEntity tile = worldIn.getTileEntity(pos);
-                if (RegistryAcceleration.isBlockBlacklisted(block)) {
+                if (RegistryAcceleration.isBlockBlacklisted(blockState)) {
                     return EnumActionResult.FAIL;
                 }
                 if (!(block.getTickRandomly() || (tile instanceof ITickable && block.hasTileEntity(blockState)))) {

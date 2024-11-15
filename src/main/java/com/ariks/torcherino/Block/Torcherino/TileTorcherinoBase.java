@@ -7,9 +7,6 @@ import com.ariks.torcherino.util.Config;
 import com.ariks.torcherino.util.EnergyStorage;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -18,6 +15,7 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fml.relauncher.Side;
@@ -27,19 +25,19 @@ import java.util.Random;
 
 public class TileTorcherinoBase extends TileExampleContainer implements ITickable {
     private final Random rand = new Random();
-    private int RadiusX,RadiusY,RadiusZ;
-    private int Speed,booleanMode,booleanRender,xMin,xMax,yMin,yMax,zMin,zMax,cooldown;
+    private int RadiusX, RadiusY, RadiusZ;
+    private int Speed, booleanMode, booleanRender, xMin, xMax, yMin, yMax, zMin, zMax, cooldown;
     private int R = 255;
     private int G = 0;
     private int B = 0;
-    public int MaxRadius,MaxModes,MaxAcceleration;
-    private boolean redstoneSignal,redstoneMode;
-    private final boolean EnergyWorking = Config.TorcherinoEnergyMod;
+    public int MaxRadius, MaxModes, MaxAcceleration;
+    private boolean redstoneSignal, redstoneMode;
     private final EnergyStorage storage;
+    private final int MaxStorage = Config.MaxStorageTorcherino;
     private final int EnergyPerTick = Config.RFPerTickEnergyTorcherino;
 
     public TileTorcherinoBase() {
-        storage = new EnergyStorage(Config.MaxStorageTorcherino, Integer.MAX_VALUE, 0);
+        storage = new EnergyStorage(MaxStorage, Integer.MAX_VALUE, 0);
     }
     protected int speedBase(int base) {
         return base * MaxAcceleration;
@@ -49,21 +47,27 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
     }
     @Override
     public void update() {
-        if (world.isRemote) return;
-        this.CheckRedstoneSignal();
-        if (booleanRender != 0 || booleanMode != 0) {
-            this.UpdateChangeArea();
-        }
-        if ((RadiusX != 0 || RadiusY !=0 || RadiusZ !=0) && Speed != 0 && (booleanMode == 1 || redstoneMode)) {
-            if(EnergyWorking && storage.getEnergyStored() >= EnergyPerTick){
-                this.UpdateTickArea();
-                this.WorkVisual();
-                this.storage.consumeEnergy(EnergyPerTick);
-                this.UpdateTile();
-            } if (!EnergyWorking){
+        if (!world.isRemote) {
+            this.CheckRedstoneSignal();
+            if (booleanRender != 0 || booleanMode != 0) {
+                this.UpdateChangeArea();
+            }
+            if ((RadiusX != 0 || RadiusY != 0 || RadiusZ != 0) && Speed != 0 && (booleanMode == 1 || redstoneMode)) {
+                if (storage.getEnergyStored() >= EnergyPerTick) {
+                    this.UpdateTickArea();
+                    this.WorkVisual();
+                    this.storage.consumeEnergy(EnergyPerTick);
+                    this.UpdateTile();
+                }
                 this.UpdateTickArea();
                 this.WorkVisual();
             }
+            this.RFEnergy();
+        }
+    }
+    public void RFEnergy(){
+        if(storage.getEnergyStored() > 0){
+            this.UpdateTile();
         }
     }
     private void CheckRedstoneSignal() {
@@ -80,8 +84,8 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
         }
     }
     private void UpdateChangeArea() {
-        BlockPos minPos = pos.add(-RadiusX,-RadiusY,-RadiusZ);
-        BlockPos maxPos = pos.add(+RadiusX,+RadiusY,+RadiusZ);
+        BlockPos minPos = pos.add(-RadiusX, -RadiusY, -RadiusZ);
+        BlockPos maxPos = pos.add(+RadiusX, +RadiusY, +RadiusZ);
         xMin = minPos.getX();
         yMin = minPos.getY();
         zMin = minPos.getZ();
@@ -97,7 +101,7 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
     private void AccelerationTick(BlockPos pos) {
         IBlockState blockState = world.getBlockState(pos);
         Block block = blockState.getBlock();
-        if (block instanceof BlockFluidBase || RegistryAcceleration.isBlockBlacklisted(block)) {
+        if (block instanceof BlockFluidBase || RegistryAcceleration.isBlockBlacklisted(blockState)) {
             return;
         }
         if (block.getTickRandomly()) {
@@ -130,7 +134,7 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
     }
     @SideOnly(Side.CLIENT)
     public AxisAlignedBB getAABBForRender() {
-        return new AxisAlignedBB(-RadiusX,-RadiusY,-RadiusZ,RadiusX+1,RadiusY+1,RadiusZ+1);
+        return new AxisAlignedBB(-RadiusX, -RadiusY, -RadiusZ, RadiusX + 1, RadiusY + 1, RadiusZ + 1);
     }
     @Override
     @SideOnly(Side.CLIENT)
@@ -138,28 +142,28 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
         final int X = getPos().getX();
         final int Y = getPos().getY();
         final int Z = getPos().getZ();
-        return new AxisAlignedBB(X-RadiusX,Y-RadiusY,Z-RadiusZ,X+RadiusX+1,Y+RadiusY+1,Z+RadiusZ+1);
+        return new AxisAlignedBB(X - RadiusX, Y - RadiusY, Z - RadiusZ, X + RadiusX + 1, Y + RadiusY + 1, Z + RadiusZ + 1);
     }
-    public void ToogleWork(){
+    public void ToogleWork() {
         this.UpdateTile();
         booleanMode++;
-        if(booleanMode > 3){
+        if (booleanMode > 3) {
             booleanMode = 0;
         }
     }
-    public void ToogleRender(){
+    public void ToogleRender() {
         this.UpdateTile();
         booleanRender++;
-        if(booleanRender > 3){
+        if (booleanRender > 3) {
             booleanRender = 0;
         }
     }
     public @NotNull NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-        nbt.setInteger("MaxAcceleration",this.MaxAcceleration);
-        nbt.setInteger("MaxModes",this.MaxModes);
-        nbt.setInteger("MaxRadius",this.MaxRadius);
+        nbt.setInteger("MaxAcceleration", this.MaxAcceleration);
+        nbt.setInteger("MaxModes", this.MaxModes);
+        nbt.setInteger("MaxRadius", this.MaxRadius);
         nbt.setInteger("Speed", this.Speed);
-        nbt.setInteger("mode",this.booleanMode);
+        nbt.setInteger("mode", this.booleanMode);
         nbt.setInteger("render", this.booleanRender);
         nbt.setInteger("R", this.R);
         nbt.setInteger("G", this.G);
@@ -168,7 +172,7 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
         nbt.setInteger("RadiusY", this.RadiusY);
         nbt.setInteger("RadiusZ", this.RadiusZ);
         nbt.setInteger("Stored",storage.getEnergyStored());
-        nbt.setBoolean("Red",this.redstoneSignal);
+        nbt.setBoolean("Red", this.redstoneSignal);
         return super.writeToNBT(nbt);
     }
     @Override
@@ -186,7 +190,7 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
         this.RadiusY = nbt.getInteger("RadiusY");
         this.RadiusZ = nbt.getInteger("RadiusZ");
         this.redstoneSignal = nbt.getBoolean("Red");
-        this.storage.setEnergy(nbt.getInteger("Stored"));
+        storage.setEnergy(nbt.getInteger("Stored"));
         super.readFromNBT(nbt);
     }
     @Override
@@ -231,47 +235,43 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
             return this.storage.getEnergyStored();
         }
         if (id == 19) {
-            return this.storage.getMaxEnergyStored();
+            return this.MaxStorage;
         }
         if (id == 20) {
             return this.EnergyPerTick;
         }
         return id;
     }
+
     @Override
-    public void setValue(int id, int value)
-    {
+    public void setValue(int id, int value) {
         if (id == 2) {
             this.Speed = value;
         }
-        if(id == 3){
+        if (id == 3) {
             this.booleanMode = value;
         }
-        if(id == 4){
+        if (id == 4) {
             this.booleanRender = value;
         }
-        if(id == 8){
+        if (id == 8) {
             this.R = value;
         }
-        if(id == 9){
+        if (id == 9) {
             this.G = value;
         }
-        if(id == 10){
+        if (id == 10) {
             this.B = value;
         }
-        if(id == 15){
+        if (id == 15) {
             this.RadiusX = value;
         }
-        if(id == 16){
+        if (id == 16) {
             this.RadiusY = value;
         }
-        if(id == 17){
+        if (id == 17) {
             this.RadiusZ = value;
         }
-    }
-    @Override
-    public Container createContainer(InventoryPlayer inventoryPlayer, EntityPlayer entityPlayer) {
-        return new ContainerTorcherino(inventoryPlayer,this,entityPlayer);
     }
     @Override
     public @NotNull String getGuiID() {
@@ -279,22 +279,17 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
     }
     @SuppressWarnings("unchecked")
     @Override
-    public <T> T getCapability(net.minecraftforge.common.capabilities.Capability<T> capability, EnumFacing facing) {
-        if (Config.TorcherinoEnergyMod) {
-            if (capability == CapabilityEnergy.ENERGY) {
-                return (T) storage;
-            }
-            return super.getCapability(capability, facing);
+    public <T> T getCapability(@NotNull Capability<T> capability, EnumFacing facing) {
+        if (capability == CapabilityEnergy.ENERGY) {
+            return (T) storage;
         }
         return super.getCapability(capability, facing);
     }
+
     @Override
-    public boolean hasCapability(net.minecraftforge.common.capabilities.Capability<?> capability, EnumFacing facing) {
-        if (Config.TorcherinoEnergyMod) {
-            if (capability == CapabilityEnergy.ENERGY) {
-                return true;
-            }
-            return super.hasCapability(capability, facing);
+    public boolean hasCapability(@NotNull Capability<?> capability, EnumFacing facing) {
+        if (capability == CapabilityEnergy.ENERGY) {
+            return true;
         }
         return super.hasCapability(capability, facing);
     }

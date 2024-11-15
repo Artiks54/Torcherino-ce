@@ -32,14 +32,15 @@ public class GuiTorcherino extends ExampleGuiContainer {
         super(new ContainerTorcherino(inventory, tileEntity, player));
         this.tile = tileEntity;
         setTexture("textures/gui/torch.png", 255, 99);
-        if(Config.TorcherinoEnergyMod) {
-            BarComponent barComponent = new BarComponent(this, 1, 10, 6, 162, 0, 17, 85, "textures/gui/gui_component.png");
-            addBarComponent(barComponent);
-            barComponent.setSideDirection("up");
-        }
+        BarComponent barComponent = new BarComponent(this, 1, 10, 6, 162, 0, 17, 85, "textures/gui/gui_component.png");
+        barComponent.setSideDirection("up");
+        addBarComponent(barComponent);
     }
     @Override
     public void Tick() {
+        String formattedValueMin = numberFormat.format(tile.getValue(18));
+        String formattedValueMax = numberFormat.format(tile.getValue(19));
+        setTooltipBar(1, "RF: " + formattedValueMin + " / " + formattedValueMax);
         setBarValue(1, tile.getValue(18), tile.getValue(19));
     }
     @Override
@@ -49,11 +50,6 @@ public class GuiTorcherino extends ExampleGuiContainer {
         this.UpdateButtonTooltip();
         this.UpdateImageButtonRender();
         this.UpdateSliderString();
-        if(Config.TorcherinoEnergyMod) {
-            String formattedValueMin = numberFormat.format(tile.getValue(18));
-            String formattedValueMax = numberFormat.format(tile.getValue(19));
-            setTooltipBar(1, "RF: " + formattedValueMin + " / " + formattedValueMax);
-        }
     }
     @Override
     public void initGui() {
@@ -134,9 +130,7 @@ public class GuiTorcherino extends ExampleGuiContainer {
                     drawHoveringText(TextFormatting.GREEN + LS.StrTextInfo, getMouseX(), getMouseY() - 16);
                     drawHoveringText("Max " + LS.StrTextRadius + ": " + MaxRadius + "x" + MaxRadius + "x" + MaxRadius, getMouseX(), getMouseY() + 16);
                     drawHoveringText("Max " + LS.StrTextSpeed + ": " + MaxSpeed + "%", getMouseX(), getMouseY());
-                    if(Config.TorcherinoEnergyMod) {
-                        drawHoveringText(LS.StrRFTick + " " + formattedValueRf, getMouseX(), getMouseY() + 32);
-                    }
+                    drawHoveringText(LS.StrRFTick + " " + formattedValueRf, getMouseX(), getMouseY() + 32);
                 } else if (button.equals(buttonWork)) {
                     drawHoveringText(WorkString, getMouseX(), getMouseY());
                 } else if (button.equals(buttonRender)) {
