@@ -105,13 +105,13 @@ public class TimeStorage extends ItemBase {
                             int transferTime = Math.min(storedTime, freeSpace);
                             tagCompound.setInteger("Time", storedTime - transferTime);
                             tile.AddTimeStorage(transferTime);
-                            worldIn.notifyBlockUpdate(pos, worldIn.getBlockState(pos), worldIn.getBlockState(pos), 3); // Обновляем состояние тайла при добавлении времени
+                            worldIn.notifyBlockUpdate(pos, worldIn.getBlockState(pos), worldIn.getBlockState(pos), 3);
                         }
                     } else {
                         int transferTime = Math.min(tile.GetTimeStorage(), MaxConfigStorageTimeItem() - storedTime);
                         tagCompound.setInteger("Time", storedTime + transferTime);
                         tile.RemoveTimeStorage(transferTime);
-                        worldIn.notifyBlockUpdate(pos, worldIn.getBlockState(pos), worldIn.getBlockState(pos), 3); // Обновляем состояние тайла при уменьшении времени
+                        worldIn.notifyBlockUpdate(pos, worldIn.getBlockState(pos), worldIn.getBlockState(pos), 3);
                     }
                 }
             }

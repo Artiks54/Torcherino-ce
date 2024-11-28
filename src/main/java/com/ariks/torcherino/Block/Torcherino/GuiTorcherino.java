@@ -32,7 +32,7 @@ public class GuiTorcherino extends ExampleGuiContainer {
         super(new ContainerTorcherino(inventory, tileEntity, player));
         this.tile = tileEntity;
         setTexture("textures/gui/torch.png", 255, 99);
-        BarComponent barComponent = new BarComponent(this, 1, 10, 6, 162, 0, 17, 85, "textures/gui/gui_component.png");
+        BarComponent barComponent = new BarComponent(this, 1, 10, 7, 162, 0, 17, 84, "textures/gui/gui_component.png");
         barComponent.setSideDirection("up");
         addBarComponent(barComponent);
     }

@@ -20,7 +20,6 @@ import java.util.List;
 public class ParticleRecipeCategory implements IRecipeCategory<ParticleRecipeJei> {
     private final IDrawable background;
     private final String localizedName;
-    private final String uid = Torcherino.MOD_ID + "_particle";
     private final IDrawableAnimated progressBar;
     private final IDrawableAnimated progressBar2;
     private final IDrawableAnimated progressBar3;
@@ -61,7 +60,7 @@ public class ParticleRecipeCategory implements IRecipeCategory<ParticleRecipeJei
     }
     @Override
     public @NotNull String getUid() {
-        return uid;
+        return Torcherino.MOD_ID + "_particle";
     }
     @Override
     public @NotNull String getTitle() {

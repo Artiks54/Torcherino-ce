@@ -16,7 +16,6 @@ import org.jetbrains.annotations.NotNull;
 public class MolecularRfRecipeCategory implements IRecipeCategory<MolecularRecipeJei> {
     private final IDrawable background;
     private final String localizedName;
-    private final String uid = Torcherino.MOD_ID + "_molecular";
     private final IDrawableAnimated progressBar;
 
     public MolecularRfRecipeCategory(IGuiHelper guiHelper) {
@@ -34,7 +33,7 @@ public class MolecularRfRecipeCategory implements IRecipeCategory<MolecularRecip
     }
     @Override
     public @NotNull String getUid() {
-        return uid;
+        return Torcherino.MOD_ID + "_molecular";
     }
     @Override
     public @NotNull String getTitle() {

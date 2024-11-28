@@ -38,9 +38,9 @@ public class Config {
     public static int MaxStorageTimeManipulator;
     public static int MaxStorageTimeCollector;
     public static int MaxStorageTimeStorage;
-    public static int Stored_Time_Bottle_Lvl_1,Stored_Time_Bottle_Lvl_2,Stored_Time_Bottle_Lvl_3,Stored_Time_Bottle_Lvl_4,Stored_Time_Bottle_Lvl_5,Stored_Time_Bottle_infinite;
+    public static int Stored_Time_Bottle_Lvl_1,Stored_Time_Bottle_Lvl_2,Stored_Time_Bottle_Lvl_3,Stored_Time_Bottle_Lvl_4,Stored_Time_Bottle_Lvl_5;
     public static int SpeedWand_lvl1,SpeedWand_lvl2,SpeedWand_lvl3,SpeedWand_lvl4,SpeedWand_lvl5,SpeedWand_infinite;
-    public static int MaxEnergyParticle, RFPerTickEnergyParticle;
+    public static int MaxEnergyParticle, RFPerTickEnergyParticle,MaxEnergyParticleProgress;
     public static int MaxStorageTorcherino, RFPerTickEnergyTorcherino;
     public static int MTR_RecipeIngot,MTR_RecipeNugget;
     public static int EMCParticle,EMCIngot;
@@ -81,7 +81,6 @@ public class Config {
             Stored_Time_Bottle_Lvl_3 = config.getInt("Time_Storage_lvl_3",Item,2250,1,Integer.MAX_VALUE,"Storage time bottle lvl 3");
             Stored_Time_Bottle_Lvl_4 = config.getInt("Time_Storage_lvl_4",Item,6750,1,Integer.MAX_VALUE,"Storage time bottle lvl 4");
             Stored_Time_Bottle_Lvl_5 = config.getInt("Time_Storage_lvl_5",Item,25000,1,Integer.MAX_VALUE,"Storage time bottle lvl 5");
-            Stored_Time_Bottle_infinite = config.getInt("Time_Storage_infinite",Item,Integer.MAX_VALUE,1,Integer.MAX_VALUE,"Storage time infinite");
 //wand
             SpeedWand_lvl1 = config.getInt("Time_Wand_Speed_lvl1",Item,3,1,Byte.MAX_VALUE,"Speed Time Wand lvl 1. 1 = 100%.....");
             SpeedWand_lvl2 = config.getInt("Time_Wand_Speed_lvl2",Item,6,1,Byte.MAX_VALUE,"Speed Time Wand lvl 2. 1 = 100%.....");
@@ -107,8 +106,9 @@ public class Config {
             AccelerationRadius = config.getInt("Tile_Time_Acceleration_Radius",Tile,3,1,Byte.MAX_VALUE,TextR);
             MaxStorageTimeAcceleration = config.getInt("Tile_Time_Acceleration_MaxStorage",Tile,4500,1,Integer.MAX_VALUE,"Time maximum storage");
 //EnergyParticle
-            RFPerTickEnergyParticle = config.getInt("Tile_Energy_Particle_Collector_RF_Tick",Tile,54000,1,Integer.MAX_VALUE,"Rf need to generate 1 time element");
+            RFPerTickEnergyParticle = config.getInt("Tile_Energy_Particle_Collector_RF_Tick",Tile,2700,1,Integer.MAX_VALUE,"Rf need to generate 1 time element");
             MaxEnergyParticle = config.getInt("Tile_Energy_Particle_Collector_Max_Energy",Tile,5000000,1,Integer.MAX_VALUE,"Max energy storage");
+            MaxEnergyParticleProgress = config.getInt("Tile_Energy_Particle_Collector_Max_Progress",Tile,20,1,Integer.MAX_VALUE,"Max progress");
 //EnergyTorcherino
             RFPerTickEnergyTorcherino = config.getInt("Tile_Energy_Torcherino_RF_Tick",Tile,750,1,Integer.MAX_VALUE,"Rf tick work");
             MaxStorageTorcherino = config.getInt("Tile_Energy_Torcherino_Max_Energy",Tile,6500000,1,Integer.MAX_VALUE,"Max energy storage");

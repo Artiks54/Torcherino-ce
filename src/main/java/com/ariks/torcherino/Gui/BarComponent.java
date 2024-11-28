@@ -74,7 +74,7 @@ public class BarComponent {
             int drawX = cordX + startX + widthBar - drawWidth; // Начинаем с правого края
             Gui.drawModalRectWithCustomSizedTexture(drawX, cordY + startY, TextureX + widthBar - drawWidth, TextureY, drawWidth, heightBar, 256, 256);
         }
-        //Слево на право
+        //С лево на право
         if (Objects.equals(SideDirection, "left")) {
             int drawWidth = (int) ((float) currentValue / maxValue * widthBar);
             Gui.drawModalRectWithCustomSizedTexture(cordX + startX, cordY + startY, TextureX, TextureY, drawWidth, heightBar, 256, 256);

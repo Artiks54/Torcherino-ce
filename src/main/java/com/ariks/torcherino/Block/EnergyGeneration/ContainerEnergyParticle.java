@@ -11,11 +11,14 @@ import org.jetbrains.annotations.NotNull;
 public class ContainerEnergyParticle extends ExampleContainer {
     public ContainerEnergyParticle(InventoryPlayer inventoryPlayer, TileEnergyParticle tileEntity, EntityPlayer entityPlayer) {
         super(tileEntity);
-        for (int i = 0 ;i < 9; i++){
-            this.addSlotToContainer(new SlotOut(tileEntity,i,8 + i * 18,41));
+        for (int i = 0 ;i < 6; i++){
+            this.addSlotToContainer(new SlotOut(tileEntity,i,60 + i * 18,12));
         }
-        for (int i = 0 ;i < 9; i++){
-            this.addSlotToContainer(new SlotOut(tileEntity,i+9,8 + i * 18,59));
+        for (int i = 0 ;i < 6; i++){
+            this.addSlotToContainer(new SlotOut(tileEntity,i+6,60 + i * 18,30));
+        }
+        for (int i = 0 ;i < 6; i++){
+            this.addSlotToContainer(new SlotOut(tileEntity,i+12,60 + i * 18,48));
         }
         PlayerInventory(inventoryPlayer);
     }

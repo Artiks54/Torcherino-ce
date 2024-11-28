@@ -8,35 +8,34 @@ import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
 import net.minecraft.util.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 
 public class ImageRecipeCategory implements IRecipeCategory<ImageRecipeJei> {
     private final IDrawable background;
     private final String localizedName;
-    private final String uid = Torcherino.MOD_ID + "_grow";
-    private final LocalizedStringKey LS = new LocalizedStringKey();
-
     public ImageRecipeCategory(IGuiHelper guiHelper) {
         ResourceLocation location = new ResourceLocation(Torcherino.MOD_ID, "textures/gui/gui_jei_grow.png");
         background = guiHelper.createDrawable(location, 0, 0, 101, 101);
+        LocalizedStringKey LS = new LocalizedStringKey();
         localizedName = LS.Jei_grow_tooltip;
     }
     @Override
-    public String getUid() {
-        return uid;
+    public @NotNull String getUid() {
+        return Torcherino.MOD_ID + "_grow";
     }
     @Override
-    public String getTitle() {
+    public @NotNull String getTitle() {
         return localizedName;
     }
     @Override
-    public String getModName() {
+    public @NotNull String getModName() {
         return Torcherino.MOD_NAME;
     }
     @Override
-    public IDrawable getBackground() {
+    public @NotNull IDrawable getBackground() {
         return background;
     }
     @Override
-    public void setRecipe(IRecipeLayout iRecipeLayout, ImageRecipeJei imageRecipe, IIngredients iIngredients) {
+    public void setRecipe(@NotNull IRecipeLayout iRecipeLayout, @NotNull ImageRecipeJei imageRecipe, @NotNull IIngredients iIngredients) {
     }
 }

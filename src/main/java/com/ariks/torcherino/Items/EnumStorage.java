@@ -8,7 +8,7 @@ public enum EnumStorage {
         lvl_3(Config.Stored_Time_Bottle_Lvl_3),
         lvl_4(Config.Stored_Time_Bottle_Lvl_4),
         lvl_5(Config.Stored_Time_Bottle_Lvl_5),
-        infinite(Config.Stored_Time_Bottle_infinite);
+        infinite(Integer.MAX_VALUE);
         private final int storage;
     EnumStorage(int storage){
         this.storage = storage;
