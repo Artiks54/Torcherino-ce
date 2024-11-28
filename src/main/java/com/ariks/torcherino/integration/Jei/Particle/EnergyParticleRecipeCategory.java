@@ -62,7 +62,7 @@ public class EnergyParticleRecipeCategory implements IRecipeCategory<ParticleRec
     }
     @Override
     public void setRecipe(IRecipeLayout recipeLayout, ParticleRecipeJei recipeWrapper, @NotNull IIngredients ingredients) {
-        recipeLayout.getItemStacks().init(1, false, 60, 12);
+        recipeLayout.getItemStacks().init(1, false, 59, 11);
         recipeLayout.getItemStacks().set(1, recipeWrapper.getOutputs());
     }
 }
