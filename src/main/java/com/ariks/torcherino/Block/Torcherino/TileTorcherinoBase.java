@@ -37,7 +37,7 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
     private final int EnergyPerTick = Config.RFPerTickEnergyTorcherino;
 
     public TileTorcherinoBase() {
-        storage = new EnergyStorage(MaxStorage, Integer.MAX_VALUE, 0);
+        storage = new EnergyStorage(MaxStorage,Integer.MAX_VALUE,0,this);
     }
     protected int speedBase(int base) {
         return base * MaxAcceleration;
@@ -59,15 +59,7 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
                     this.storage.consumeEnergy(EnergyPerTick);
                     this.UpdateTile();
                 }
-                this.UpdateTickArea();
-                this.WorkVisual();
             }
-            this.RFEnergy();
-        }
-    }
-    public void RFEnergy(){
-        if(storage.getEnergyStored() > 0){
-            this.UpdateTile();
         }
     }
     private void CheckRedstoneSignal() {
@@ -145,18 +137,18 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
         return new AxisAlignedBB(X - RadiusX, Y - RadiusY, Z - RadiusZ, X + RadiusX + 1, Y + RadiusY + 1, Z + RadiusZ + 1);
     }
     public void ToogleWork() {
-        this.UpdateTile();
         booleanMode++;
         if (booleanMode > 3) {
             booleanMode = 0;
         }
+        this.UpdateTile();
     }
     public void ToogleRender() {
-        this.UpdateTile();
         booleanRender++;
         if (booleanRender > 3) {
             booleanRender = 0;
         }
+        this.UpdateTile();
     }
     public @NotNull NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         nbt.setInteger("MaxAcceleration", this.MaxAcceleration);

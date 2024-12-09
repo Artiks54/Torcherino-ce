@@ -1,16 +1,14 @@
 package com.ariks.torcherino.integration.Jei;
 
+import com.ariks.torcherino.Block.RfMolecular.GuiRfMolecular;
 import com.ariks.torcherino.Block.RfMolecular.MolecularRecipe;
 import com.ariks.torcherino.Register.RegistryBlock;
 import com.ariks.torcherino.Register.RegistryItems;
 import com.ariks.torcherino.Torcherino;
-import com.ariks.torcherino.integration.Jei.GrowAccelerator.ImageRecipeCategory;
-import com.ariks.torcherino.integration.Jei.GrowAccelerator.ImageRecipeJei;
-import com.ariks.torcherino.integration.Jei.Particle.EnergyParticleRecipeCategory;
-import com.ariks.torcherino.integration.Jei.Particle.ParticleRecipeCategory;
-import com.ariks.torcherino.integration.Jei.Particle.ParticleRecipeJei;
-import com.ariks.torcherino.integration.Jei.RfMolecular.MolecularRfRecipeCategory;
-import com.ariks.torcherino.integration.Jei.RfMolecular.MolecularRfWrapper;
+import com.ariks.torcherino.integration.Jei.*;
+import com.ariks.torcherino.integration.Jei.GrowAccelerator.*;
+import com.ariks.torcherino.integration.Jei.Particle.*;
+import com.ariks.torcherino.integration.Jei.RfMolecular.*;
 import com.ariks.torcherino.util.Config;
 import com.ariks.torcherino.util.LocalizedStringKey;
 import mezz.jei.api.IModPlugin;
@@ -65,6 +63,7 @@ public class AddonJei implements IModPlugin {
 
         registry.handleRecipes(MolecularRecipe.class, new MolecularRfWrapper(), idMolecular);
         registry.addRecipes(MolecularRecipe.getRecipes(), idMolecular);
+        registry.addRecipeClickArea(GuiRfMolecular.class, 7, 24, 14, 29, idMolecular);
         registry.addRecipeCatalyst(new ItemStack(RegistryBlock.RF_Molecular), idMolecular);
     }
     @Override

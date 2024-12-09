@@ -23,7 +23,7 @@ public class TileEnergyParticle extends TileExampleInventory implements ITickabl
     public TileEnergyParticle() {
         super(18);
         setSlotsForExtract(0,18);
-        storage = new EnergyStorage(MaxStorage,Integer.MAX_VALUE,0);
+        storage = new EnergyStorage(MaxStorage,Integer.MAX_VALUE,0,this);
     }
     @Override
     public void update() {
@@ -100,7 +100,6 @@ public class TileEnergyParticle extends TileExampleInventory implements ITickabl
     public String getGuiID() {
         return String.valueOf(RegistryGui.GUI_ENERGY_PARTICLE);
     }
-
     @SuppressWarnings("unchecked")
     @Override
     public <T> T getCapability(Capability<T> capability, EnumFacing facing) {

@@ -21,7 +21,7 @@ public class JoinDiscord {
         linkMessage.getStyle()
                 .setUnderlined(true)
                 .setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://discord.gg/Mp5sEpE3B3"))
-                .setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TextComponentString("Join the official discord link")));
+                .setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TextComponentString("Join the official discord link mod Torcherino CE")));
         event.player.sendMessage(linkMessage);
     }
 }
