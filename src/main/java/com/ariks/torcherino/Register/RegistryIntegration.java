@@ -5,7 +5,7 @@ import com.ariks.torcherino.integration.ProjectE.AddonProjectE;
 import com.ariks.torcherino.util.Config;
 import net.minecraftforge.fml.common.Loader;
 
-public class RegistryIntegration {
+public final class RegistryIntegration {
     public static void Registry() {
         if (Loader.isModLoaded("projecte") && Config.IntegrationProjectE) {
             AddonProjectE.registerEMC();

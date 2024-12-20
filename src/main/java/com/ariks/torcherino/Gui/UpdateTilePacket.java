@@ -1,5 +1,6 @@
 package com.ariks.torcherino.Gui;
 
+import com.ariks.torcherino.Block.Time.Aceleration.TileAcceleration;
 import com.ariks.torcherino.Block.Time.TimeManipulator.TileTimeManipulator;
 import com.ariks.torcherino.Block.Torcherino.TileTorcherinoBase;
 import io.netty.buffer.ByteBuf;
@@ -14,7 +15,6 @@ public class UpdateTilePacket implements IMessage {
     private BlockPos pos;
     private int value;
     public UpdateTilePacket() {
-
     }
     public UpdateTilePacket(BlockPos pos, int value) {
         this.value = value;
@@ -52,6 +52,13 @@ public class UpdateTilePacket implements IMessage {
                             case 2: TileTimeManipulator.SetNight();break;
                             case 3: TileTimeManipulator.SetRain();break;
                             case 4: TileTimeManipulator.ClearRain();break;
+                        }
+                    }
+                    if (tile instanceof TileAcceleration) {
+                        TileAcceleration TileAcceleration = (TileAcceleration) tile;
+                        switch (message.value) {
+                            case 1: TileAcceleration.ToogleWork();break;
+                            case 2: TileAcceleration.ToogleRender();break;
                         }
                     }
                 }

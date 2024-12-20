@@ -2,6 +2,8 @@ package com.ariks.torcherino.network;
 
 import com.ariks.torcherino.Block.RfMolecular.TileRfMolecular;
 import com.ariks.torcherino.Block.RfMolecular.TileRfMolecularRenderer;
+import com.ariks.torcherino.Block.Time.Aceleration.TileAcceleration;
+import com.ariks.torcherino.Block.Time.Aceleration.TileAccelerationBaseRender;
 import com.ariks.torcherino.Block.Torcherino.TileTorcherinoBase;
 import com.ariks.torcherino.Block.Torcherino.TileTorcherinoBaseRender;
 import com.ariks.torcherino.Register.RegistryBlock;
@@ -24,6 +26,7 @@ public class ClientProxy extends CommonProxy {
 	public void preInit() {
 		super.preInit();
 		ClientRegistry.bindTileEntitySpecialRenderer(TileTorcherinoBase.class, new TileTorcherinoBaseRender());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileAcceleration.class, new TileAccelerationBaseRender());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileRfMolecular.class, new TileRfMolecularRenderer());
 	}
 	@Override

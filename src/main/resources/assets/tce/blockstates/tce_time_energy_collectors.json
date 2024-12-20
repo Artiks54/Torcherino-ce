@@ -1,0 +1,17 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tce:collectors",
+	    "textures": {
+        "base": "tce:blocks/redstone",
+		"material": "tce:blocks/iron",
+        "particle":  "tce:blocks/iron"
+        },
+    "transform": "forge:default-block"
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{}],
+    "destroyed": [{}]
+  }
+}

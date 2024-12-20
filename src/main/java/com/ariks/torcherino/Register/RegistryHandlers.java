@@ -8,7 +8,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Mod.EventBusSubscriber
-public class RegistryHandlers {
+public final class RegistryHandlers {
     @SubscribeEvent
     public static void onItemRegister(RegistryEvent.Register<Item> register) {
         register.getRegistry().registerAll(RegistryItems.ITEMS.toArray(new Item[0]));

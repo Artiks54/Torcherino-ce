@@ -6,6 +6,8 @@ import com.ariks.torcherino.network.CommonProxy;
 import com.ariks.torcherino.util.TorchTab;
 import com.ariks.torcherino.util.Config;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import org.apache.logging.log4j.Logger;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -19,7 +21,7 @@ public class Torcherino {
 	public static File config;
 	public static CreativeTabs torcherinoTab = new TorchTab("torcherinoTab");
 	public static Logger logger;
-	public static final String MOD_ID = "tce", MOD_NAME = "TorcherinoCE", VERSION = "7.8.9";
+	public static final String MOD_ID = "tce", MOD_NAME = "TorcherinoCE", VERSION = "7.9.0";
 	@Mod.Instance(Torcherino.MOD_ID)
 	public static Torcherino instance;
 	@SidedProxy(clientSide = "com.ariks.torcherino.network.ClientProxy", serverSide = "com.ariks.torcherino.network.CommonProxy")

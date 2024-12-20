@@ -38,9 +38,9 @@ public class GuiTorcherino extends ExampleGuiContainer {
     }
     @Override
     public void Tick() {
-        String formattedValueMin = numberFormat.format(tile.getValue(18));
-        String formattedValueMax = numberFormat.format(tile.getValue(19));
-        setTooltipBar(1, "RF: " + formattedValueMin + " / " + formattedValueMax);
+        String formattedValueMin = EnergyFormat.formatNumber(tile.getValue(18));
+        String formattedValueMax = EnergyFormat.formatNumber(tile.getValue(19));
+        setTooltipBar(1, formattedValueMin + " / " + formattedValueMax);
         setBarValue(1, tile.getValue(18), tile.getValue(19));
     }
     @Override
@@ -126,7 +126,7 @@ public class GuiTorcherino extends ExampleGuiContainer {
                 if (button.equals(buttonInfo)) {
                     int MaxRadius = tile.getValue(5);
                     int MaxSpeed = (tile.getValue(7) * 100 * tile.getValue(6));
-                    String formattedValueRf = numberFormat.format(tile.getValue(20));
+                    String formattedValueRf = EnergyFormat.formatNumber(tile.getValue(20));
                     drawHoveringText(TextFormatting.GREEN + LS.StrTextInfo, getMouseX(), getMouseY() - 16);
                     drawHoveringText("Max " + LS.StrTextRadius + ": " + MaxRadius + "x" + MaxRadius + "x" + MaxRadius, getMouseX(), getMouseY() + 16);
                     drawHoveringText("Max " + LS.StrTextSpeed + ": " + MaxSpeed + "%", getMouseX(), getMouseY());

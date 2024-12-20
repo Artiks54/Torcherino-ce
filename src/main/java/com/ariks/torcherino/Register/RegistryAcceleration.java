@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-public class RegistryAcceleration {
+public final class RegistryAcceleration {
     private static final Set<IBlockState> blacklistedBlockStates = new HashSet<>();
     private static final Set<Class<? extends TileEntity>> blacklistedTiles = new HashSet<>();
 

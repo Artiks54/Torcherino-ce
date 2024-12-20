@@ -43,6 +43,7 @@ public class LocalizedStringKey {
      public String jei_info_time_accelerator = I18n.format(modid+"jei_info_time_accelerator");
      //jei_time_collector
      public String jei_info_time_collector = I18n.format(modid+"jei_info_time_collector");
+     public String jei_info_time_energy_collector = I18n.format(modid+"jei_info_time_energy_collector");
      //jei_time_storage
      public String jei_info_time_storage = I18n.format(modid+"jei_info_time_storage");
      //jei_particle_collector_need_tick

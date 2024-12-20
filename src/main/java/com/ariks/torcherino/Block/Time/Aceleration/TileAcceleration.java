@@ -10,15 +10,20 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.fluids.BlockFluidBase;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import java.util.Random;
 
-public class TileAcceleration extends TileTime {
+public class TileAcceleration extends TileTime implements ITickable {
     private final int speed = Config.AccelerationSpeed;
     private final int AreaModifier = Config.AccelerationRadius;
+    private boolean redstoneSignal, redstoneMode;
+    private int booleanMode,booleanRender;
     private int Cooldown;
     private final Random rand = new Random();
     protected int speedBase(int base) {
@@ -27,22 +32,45 @@ public class TileAcceleration extends TileTime {
     public TileAcceleration(){
         super(Config.MaxStorageTimeAcceleration);
     }
+    private void CheckRedstoneSignal() {
+        redstoneMode = (booleanMode == 2 && redstoneSignal) || (booleanMode == 3 && !redstoneSignal);
+    }
+    public void setRedstoneSignal(boolean redstoneSignal) {
+        this.redstoneSignal = redstoneSignal;
+    }
+    public void ToogleWork() {
+        booleanMode++;
+        if (booleanMode > 3) {
+            booleanMode = 0;
+        }
+        this.UpdateTile();
+    }
+    public void ToogleRender() {
+        booleanRender++;
+        if (booleanRender > 3) {
+            booleanRender = 0;
+        }
+        this.UpdateTile();
+    }
     @Override
     public void update() {
         if (!world.isRemote) {
-            this.TimeDecrees();
+            this.CheckRedstoneSignal();
+            if(booleanMode != 0) {
+                this.TimeDecrees();
+            }
         }
     }
     private void TimeDecrees(){
-        if(GetTimeStorage() > 0){
-            this.UpdateTile();
+        if(energyTime.getTimeStored() > 0  && (booleanMode == 1 || redstoneMode)){
             this.UpdateTickArea();
             Cooldown++;
             if(Cooldown >= 19){
                 Cooldown = 0;
-                this.RemoveTimeStorage(1);
+                this.energyTime.consumeTime(1);
                 this.WorkVisual();
             }
+            this.UpdateTile();
         }
     }
     private void WorkVisual() {
@@ -64,6 +92,18 @@ public class TileAcceleration extends TileTime {
         for (BlockPos pos : BlockPos.getAllInBox(AreaDecrX, AreaDecrY, AreaDecrZ, AreaIncrX, AreaIncrY, AreaIncrZ)) {
             AccelerationTick(pos);
         }
+    }
+    @SideOnly(Side.CLIENT)
+    public AxisAlignedBB getAABBForRender() {
+        return new AxisAlignedBB(-AreaModifier, -AreaModifier, -AreaModifier, AreaModifier + 1, AreaModifier + 1, AreaModifier + 1);
+    }
+    @Override
+    @SideOnly(Side.CLIENT)
+    public @NotNull AxisAlignedBB getRenderBoundingBox() {
+        final int X = getPos().getX();
+        final int Y = getPos().getY();
+        final int Z = getPos().getZ();
+        return new AxisAlignedBB(X - AreaModifier, Y - AreaModifier, Z - AreaModifier, X + AreaModifier + 1, Y + AreaModifier + 1, Z + AreaModifier + 1);
     }
     private void AccelerationTick(BlockPos pos) {
         IBlockState blockState = world.getBlockState(pos);
@@ -102,12 +142,28 @@ public class TileAcceleration extends TileTime {
     @Override
     public @NotNull NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         nbt.setInteger("Cooldown", Cooldown);
+        nbt.setInteger("mode", this.booleanMode);
+        nbt.setBoolean("Red", this.redstoneSignal);
+        nbt.setInteger("render", this.booleanRender);
         return super.writeToNBT(nbt);
     }
     @Override
-    public void readFromNBT(NBTTagCompound nbt) {
+    public void readFromNBT(@NotNull NBTTagCompound nbt) {
         this.Cooldown = nbt.getInteger("Cooldown");
+        this.booleanMode = nbt.getInteger("mode");
+        this.redstoneSignal = nbt.getBoolean("Red");
+        this.booleanRender = nbt.getInteger("render");
         super.readFromNBT(nbt);
+    }
+    @Override
+    public int getValue(int id) {
+        if(id == 3){
+            return booleanMode;
+        }
+        if (id == 4) {
+            return this.booleanRender;
+        }
+        return super.getValue(id);
     }
     @Override
     public @NotNull String getGuiID() {

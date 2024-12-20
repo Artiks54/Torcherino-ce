@@ -44,6 +44,7 @@ public class Config {
     public static int MaxStorageTorcherino, RFPerTickEnergyTorcherino;
     public static int MTR_RecipeIngot,MTR_RecipeNugget;
     public static int EMCParticle,EMCIngot;
+    public static int ETC_TimeStorage,ETC_EnergyStorage,ETC_EnergyPerTick,ETC_TimeGenerated;
     public static void init(File file) {
         config = new Configuration(file);
         try {config.load();
@@ -82,12 +83,12 @@ public class Config {
             Stored_Time_Bottle_Lvl_4 = config.getInt("Time_Storage_lvl_4",Item,6750,1,Integer.MAX_VALUE,"Storage time bottle lvl 4");
             Stored_Time_Bottle_Lvl_5 = config.getInt("Time_Storage_lvl_5",Item,25000,1,Integer.MAX_VALUE,"Storage time bottle lvl 5");
 //wand
-            SpeedWand_lvl1 = config.getInt("Time_Wand_Speed_lvl1",Item,3,1,Byte.MAX_VALUE,"Speed Time Wand lvl 1. 1 = 100%.....");
-            SpeedWand_lvl2 = config.getInt("Time_Wand_Speed_lvl2",Item,6,1,Byte.MAX_VALUE,"Speed Time Wand lvl 2. 1 = 100%.....");
-            SpeedWand_lvl3 = config.getInt("Time_Wand_Speed_lvl3",Item,9,1,Byte.MAX_VALUE,"Speed Time Wand lvl 3. 1 = 100%.....");
-            SpeedWand_lvl4 = config.getInt("Time_Wand_Speed_lvl4",Item,12,1,Byte.MAX_VALUE,"Speed Time Wand lvl 4. 1 = 100%.....");
-            SpeedWand_lvl5 = config.getInt("Time_Wand_Speed_lvl5",Item,15,1,Byte.MAX_VALUE,"Speed Time Wand lvl 5. 1 = 100%.....");
-            SpeedWand_infinite = config.getInt("Time_Wand_Speed_lvl6",Item,20,1,Byte.MAX_VALUE,"Speed Time Wand infinite. 1 = 100%.....");
+            SpeedWand_lvl1 = config.getInt("Time_Wand_Speed_lvl1",Item,1,1,Byte.MAX_VALUE,"Speed Time Wand lvl 1. 1 = 100%.....");
+            SpeedWand_lvl2 = config.getInt("Time_Wand_Speed_lvl2",Item,2,1,Byte.MAX_VALUE,"Speed Time Wand lvl 2. 1 = 100%.....");
+            SpeedWand_lvl3 = config.getInt("Time_Wand_Speed_lvl3",Item,4,1,Byte.MAX_VALUE,"Speed Time Wand lvl 3. 1 = 100%.....");
+            SpeedWand_lvl4 = config.getInt("Time_Wand_Speed_lvl4",Item,8,1,Byte.MAX_VALUE,"Speed Time Wand lvl 4. 1 = 100%.....");
+            SpeedWand_lvl5 = config.getInt("Time_Wand_Speed_lvl5",Item,16,1,Byte.MAX_VALUE,"Speed Time Wand lvl 5. 1 = 100%.....");
+            SpeedWand_infinite = config.getInt("Time_Wand_Speed_lvl6",Item,32,1,Byte.MAX_VALUE,"Speed Time Wand infinite. 1 = 100%.....");
 //Render
             BooleanParcWand = config.getBoolean("Time_Wand_Parc",Render,true,"Spawn Particle Wand");
             BooleanVisualWork = config.getBoolean("Tile_Visual_Work",Render,true,"Tile spawn Particle");
@@ -100,6 +101,11 @@ public class Config {
 //Storage tile
             MaxStorageTimeStorage = config.getInt("Tile_Time_Storage_MaxStorage",Tile,20000,1,Integer.MAX_VALUE,"Time maximum storage");
 //Collectors tile
+//EnergyCollectorsTime tile
+            ETC_TimeStorage = config.getInt("Tile_Time_Energy_Collectors_MaxStorageTime",Tile,5000,1,Integer.MAX_VALUE,"Time maximum storage");
+            ETC_EnergyStorage = config.getInt("Tile_Time_Energy_Collectors_MaxStorageEnergy",Tile,100000,1,Integer.MAX_VALUE,"Energy maximum storage");
+            ETC_EnergyPerTick = config.getInt("Tile_Time_Energy_Collectors_EnergyPerTick",Tile,1500,1,Integer.MAX_VALUE,"Use per tick energy");
+            ETC_TimeGenerated = config.getInt("Tile_Time_Energy_Collectors_TimeGenerated",Tile,1,1,Integer.MAX_VALUE,"Generated time per tick");
             MaxStorageTimeCollector = config.getInt("Tile_Time_Collectors_MaxStorage",Tile,2500,1,Integer.MAX_VALUE,"Time maximum storage");
 //Acceleration tile
             AccelerationSpeed = config.getInt("Tile_Time_Acceleration_Speed",Tile,3,1, Byte.MAX_VALUE,TextS);

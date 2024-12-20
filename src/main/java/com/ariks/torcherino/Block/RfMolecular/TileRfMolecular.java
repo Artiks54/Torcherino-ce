@@ -2,6 +2,7 @@ package com.ariks.torcherino.Block.RfMolecular;
 
 import com.ariks.torcherino.Block.Core.TileExampleInventory;
 import com.ariks.torcherino.Register.RegistryGui;
+import com.ariks.torcherino.util.Sound;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -19,6 +20,7 @@ public class TileRfMolecular extends TileExampleInventory implements ITickable {
     public long energyRequired;
     public long energyCollected;
     public boolean work;
+    private final Sound sound = new Sound();
     public TileRfMolecular() {
         super(2);
         this.setSlotsForInsert(0);
@@ -89,6 +91,8 @@ public class TileRfMolecular extends TileExampleInventory implements ITickable {
         if (!world.isRemote) {
             this.findRecipe();
             this.Work();
+        } else {
+            sound.play(world,pos,work,Sound.SOUND_MOLECULAR);
         }
     }
     @Override

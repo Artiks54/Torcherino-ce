@@ -7,7 +7,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 
-public class RegistryNetwork {
+public final class RegistryNetwork {
     public static SimpleNetworkWrapper network;
     public static void init() {
         network = NetworkRegistry.INSTANCE.newSimpleChannel(Torcherino.MOD_ID);

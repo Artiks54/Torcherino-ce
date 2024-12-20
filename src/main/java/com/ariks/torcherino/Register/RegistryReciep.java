@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import static com.ariks.torcherino.Register.RegistryItems.*;
 import static com.ariks.torcherino.Register.RegistryBlock.*;
 
-public class RegistryReciep {
+public final class RegistryReciep {
     public static void preInit() {
         String[] Level = {"lvl1", "lvl2", "lvl3", "lvl4", "lvl5"};
         Block[] torchBlocks = {Torch_lvl_1, Torch_lvl_2, Torch_lvl_3, Torch_lvl_4, Torch_lvl_5};
@@ -633,5 +633,18 @@ public class RegistryReciep {
                 'C', new ItemStack(Particle_collectors),
                 'P', new ItemStack(time_particle_redstone),
                 'N', new ItemStack(time_nugget));
+        //Time_Energy_Collector
+        GameRegistry.addShapedRecipe(
+                new ResourceLocation(Torcherino.MOD_ID + ":" + "Time_Energy_Collector"), null,
+                new ItemStack(Time_energy_collectors),
+                "YTY",
+                "SCS",
+                "MRM",
+                'T', new ItemStack(time_element),
+                'C', new ItemStack(Time_collectors),
+                'S', new ItemStack(time_casing),
+                'R', new ItemStack(upgrade_count),
+                'M', new ItemStack(upgrade_speed),
+                'Y', new ItemStack(time_star));
     }
 }

@@ -1,5 +1,6 @@
 package com.ariks.torcherino.integration.Jei;
 
+import com.ariks.torcherino.Block.EnergyGeneration.GuiEnergyParticle;
 import com.ariks.torcherino.Block.RfMolecular.GuiRfMolecular;
 import com.ariks.torcherino.Block.RfMolecular.MolecularRecipe;
 import com.ariks.torcherino.Register.RegistryBlock;
@@ -43,9 +44,11 @@ public class AddonJei implements IModPlugin {
         registry.addIngredientInfo(new ItemStack(RegistryBlock.Grow_lvl3),VanillaTypes.ITEM,LS.jei_info_grow);
         registry.addIngredientInfo(new ItemStack(RegistryBlock.Grow_lvl4),VanillaTypes.ITEM,LS.jei_info_grow);
         registry.addIngredientInfo(new ItemStack(RegistryBlock.Grow_lvl5),VanillaTypes.ITEM,LS.jei_info_grow);
+        registry.addIngredientInfo(new ItemStack(RegistryBlock.Time_energy_collectors),VanillaTypes.ITEM,LS.jei_info_time_energy_collector+" RF/PerTick: "+Config.ETC_EnergyPerTick);
 
         registry.handleRecipes(ParticleRecipeJei.class, recipe -> recipe, idEnergy);
         registry.addRecipes(Collections.singletonList(new ParticleRecipeJei(null, null,new ItemStack(RegistryItems.time_particle))),idEnergy);
+        registry.addRecipeClickArea(GuiEnergyParticle.class, 32, 29, 25, 18, idEnergy);
         registry.addRecipeCatalyst(new ItemStack(RegistryBlock.EnergyParticle),idEnergy);
 
         registry.handleRecipes(ParticleRecipeJei.class, recipe -> recipe, idParticle);
@@ -63,7 +66,7 @@ public class AddonJei implements IModPlugin {
 
         registry.handleRecipes(MolecularRecipe.class, new MolecularRfWrapper(), idMolecular);
         registry.addRecipes(MolecularRecipe.getRecipes(), idMolecular);
-        registry.addRecipeClickArea(GuiRfMolecular.class, 7, 24, 14, 29, idMolecular);
+        registry.addRecipeClickArea(GuiRfMolecular.class, 7, 24, 15, 30, idMolecular);
         registry.addRecipeCatalyst(new ItemStack(RegistryBlock.RF_Molecular), idMolecular);
     }
     @Override

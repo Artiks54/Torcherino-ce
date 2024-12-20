@@ -7,13 +7,12 @@ import com.ariks.torcherino.Torcherino;
 import com.ariks.torcherino.util.Config;
 import io.github.drmanganese.topaddons.addons.AddonBlank;
 import io.github.drmanganese.topaddons.api.TOPAddon;
-import mcjty.theoneprobe.api.IProbeHitData;
-import mcjty.theoneprobe.api.IProbeInfo;
-import mcjty.theoneprobe.api.ProbeMode;
+import mcjty.theoneprobe.api.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import java.awt.*;
 
 @TOPAddon(dependency = Torcherino.MOD_ID, order = 0)
 public class AddonTorcherino extends AddonBlank {
@@ -23,7 +22,12 @@ public class AddonTorcherino extends AddonBlank {
             TileEntity tile = world.getTileEntity(data.getPos());
             if (tile instanceof TileTime) {
                 TileTime TileTime = (TileTime) tile;
-                probeInfo.text("Time: "+TileTime.GetTimeStorage());
+                IProgressStyle progressStyle = probeInfo.defaultProgressStyle()
+                        .suffix("Time")
+                        .borderColor(Color.DARK_GRAY.getRGB())
+                        .filledColor(Color.gray.getRGB()).alternateFilledColor(Color.darkGray.getRGB())
+                        .numberFormat(NumberFormat.COMPACT);
+                probeInfo.progress(TileTime.energyTime.getTimeStored(),TileTime.energyTime.getMaxTimeStored(),progressStyle);
             }
             if (tile instanceof TileParticleCollector) {
                 TileParticleCollector TileParticleCollector = (TileParticleCollector) tile;

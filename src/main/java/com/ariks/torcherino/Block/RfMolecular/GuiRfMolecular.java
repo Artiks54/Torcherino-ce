@@ -8,12 +8,10 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import java.awt.*;
-import java.text.NumberFormat;
 
 @SideOnly(Side.CLIENT)
 public class GuiRfMolecular extends ExampleGuiContainer {
     private final TileRfMolecular tile;
-    public NumberFormat numberFormat = NumberFormat.getNumberInstance();
     private String ItemInput;
     private String ItemOutput;
     private String EnergyNeed;
@@ -44,7 +42,7 @@ public class GuiRfMolecular extends ExampleGuiContainer {
             ItemOutput = (no + " *" + io);
             EnergyNeed = (LS.StrEnergyRecipe + " " + EnergyFormat.formatNumber(tile.energyRequired));
             Collected = (LS.StrEnergy + " " + EnergyFormat.formatNumber(tile.energyCollected));
-            RfPerTick = (LS.StrRFTick + " " + numberFormat.format(tile.energyReceived));
+            RfPerTick = (LS.StrRFTick + " " + EnergyFormat.formatNumber(tile.energyReceived));
             if (tile.energyReceived != 0) {
                 long ticks = (tile.energyRequired - tile.energyCollected) / tile.energyReceived;
                 long seconds = ticks / 20;

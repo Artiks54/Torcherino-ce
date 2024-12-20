@@ -5,6 +5,7 @@ import com.ariks.torcherino.Block.ParticleCollector.TileParticleCollector;
 import com.ariks.torcherino.Block.RfMolecular.TileRfMolecular;
 import com.ariks.torcherino.Block.Time.Aceleration.TileAcceleration;
 import com.ariks.torcherino.Block.Time.TimeCollector.TileCollectors;
+import com.ariks.torcherino.Block.Time.TimeEnergyCollector.TileEnergyCollectors;
 import com.ariks.torcherino.Block.Time.TimeManipulator.TileTimeManipulator;
 import com.ariks.torcherino.Block.Time.TimeStorage.TileTimeStorage;
 import com.ariks.torcherino.Block.Torcherino.TileTorcherinoBase;
@@ -13,7 +14,7 @@ import com.ariks.torcherino.util.Config;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 
-public class RegistryBlackList {
+public final class RegistryBlackList {
     public static void preInit() {
         //Minecraft block
         RegistryAcceleration.blacklistBlock(Blocks.AIR);
@@ -39,6 +40,8 @@ public class RegistryBlackList {
         RegistryAcceleration.blacklistTile(TileTimeManipulator.class);
         //Tile-Energy-Particle
         RegistryAcceleration.blacklistTile(TileEnergyParticle.class);
+        //Tile-EnergyTime-Collector
+        RegistryAcceleration.blacklistTile(TileEnergyCollectors.class);
         for (Block block : RegistryBlock.BLOCKS) {
             RegistryAcceleration.blacklistBlock(block);
             if (Config.DebugMod) {

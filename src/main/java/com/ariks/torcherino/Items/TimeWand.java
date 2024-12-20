@@ -72,8 +72,9 @@ public class TimeWand extends ItemBase {
             tooltip.add(TextFormatting.GRAY + LS.Str_Time_Wand_Tooltip);
             if (stack.getItem() != RegistryItems.time_Wand_infinite) {
             tooltip.add(TextFormatting.GRAY + LS.StrWandInfoItem + " " + durability);
-            super.addInformation(stack, worldIn, tooltip, flagIn);
-        }
+            }
+            tooltip.add(TextFormatting.GRAY + LS.StrTextSpeed +": "+enumWands.getSpeed() * 100 + "%");
+        super.addInformation(stack, worldIn, tooltip, flagIn);
     }
     @Override
     public boolean showDurabilityBar(@NotNull ItemStack stack) {

@@ -1,7 +1,7 @@
 package com.ariks.torcherino.Items;
 
+import com.ariks.torcherino.Block.Time.TileTime;
 import com.ariks.torcherino.Register.RegistryItems;
-import com.ariks.torcherino.util.ITileTimeStorage;
 import com.ariks.torcherino.util.LocalizedStringKey;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
@@ -92,26 +92,26 @@ public class TimeStorage extends ItemBase {
     public @NotNull EnumActionResult onItemUse(@NotNull EntityPlayer player, World worldIn, @NotNull BlockPos pos, @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
             TileEntity tileEntity = worldIn.getTileEntity(pos);
-            if (tileEntity instanceof ITileTimeStorage) {
-                ITileTimeStorage tile = (ITileTimeStorage) tileEntity;
+            if (tileEntity instanceof TileTime) {
+                TileTime tile = (TileTime) tileEntity;
                 ItemStack heldItem = player.getHeldItem(hand);
                 if (heldItem.hasTagCompound()) {
                     NBTTagCompound tagCompound = heldItem.getTagCompound();
                     assert tagCompound != null;
                     int storedTime = tagCompound.getInteger("Time");
-                    int freeSpace = tile.GetMaxStorage() - tile.GetTimeStorage();
+                    int freeSpace = tile.energyTime.getMaxTimeStored() - tile.energyTime.getTimeStored();
                     if (!player.isSneaking()) {
                         if (freeSpace > 0) {
                             int transferTime = Math.min(storedTime, freeSpace);
                             tagCompound.setInteger("Time", storedTime - transferTime);
-                            tile.AddTimeStorage(transferTime);
-                            worldIn.notifyBlockUpdate(pos, worldIn.getBlockState(pos), worldIn.getBlockState(pos), 3);
+                            tile.energyTime.producedTime(transferTime);
+                            tile.UpdateTile();
                         }
                     } else {
-                        int transferTime = Math.min(tile.GetTimeStorage(), MaxConfigStorageTimeItem() - storedTime);
+                        int transferTime = Math.min(tile.energyTime.getTimeStored(), MaxConfigStorageTimeItem() - storedTime);
                         tagCompound.setInteger("Time", storedTime + transferTime);
-                        tile.RemoveTimeStorage(transferTime);
-                        worldIn.notifyBlockUpdate(pos, worldIn.getBlockState(pos), worldIn.getBlockState(pos), 3);
+                        tile.energyTime.consumeTime(transferTime);
+                        tile.UpdateTile();
                     }
                 }
             }

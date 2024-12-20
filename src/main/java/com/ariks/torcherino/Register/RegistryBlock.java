@@ -6,6 +6,7 @@ import com.ariks.torcherino.Block.EnergyGeneration.BlockEnergyParticle;
 import com.ariks.torcherino.Block.Other.BlockGrowAccelerator;
 import com.ariks.torcherino.Block.ParticleCollector.BlockParticleCollector;
 import com.ariks.torcherino.Block.Time.TimeCollector.BlockCollectors;
+import com.ariks.torcherino.Block.Time.TimeEnergyCollector.BlockEnergyCollector;
 import com.ariks.torcherino.Block.Time.TimeManipulator.BlockTimeManipulator;
 import com.ariks.torcherino.Block.Time.TimeStorage.BlockTimeStorage;
 import com.ariks.torcherino.Block.Torcherino.BlockTorcherino;
@@ -24,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class RegistryBlock {
+public final class RegistryBlock {
     public static final String modid = Torcherino.MOD_ID + "_";
     public static Block EnergyParticle = new BlockEnergyParticle(modid+"energy_particle");
     public static Block Grow_lvl1 = new BlockGrowAccelerator(modid+"grow_lvl1",10);
@@ -49,6 +50,7 @@ public class RegistryBlock {
     public static Block D_Compressed_Torch_lvl5 = new BlockTorcherino(modid+"d_compressed_torch_lvl5",TorcherinoEnumLevel.d_lvl_5);
     public static Block Time_Acceleration = new BlockAcceleration(modid+"time_acceleration");
     public static Block Time_collectors = new BlockCollectors(modid+"time_collectors");
+    public static Block Time_energy_collectors = new BlockEnergyCollector(modid+"time_energy_collectors");
     public static Block Time_Manipulator = new BlockTimeManipulator(modid+"time_manipulator");
     public static Block Time_Storage = new BlockTimeStorage(modid+"time_storage");
     public static Block Particle_collectors = new BlockParticleCollector(modid+"particle_collector");

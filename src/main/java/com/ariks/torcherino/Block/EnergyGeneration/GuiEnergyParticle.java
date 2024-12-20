@@ -2,6 +2,7 @@ package com.ariks.torcherino.Block.EnergyGeneration;
 
 import com.ariks.torcherino.Gui.BarComponent;
 import com.ariks.torcherino.Block.Core.ExampleGuiContainer;
+import com.ariks.torcherino.util.EnergyFormat;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 
@@ -21,9 +22,9 @@ public class GuiEnergyParticle extends ExampleGuiContainer {
     }
     @Override
     public void Tick() {
-        String formattedValueMin = numberFormat.format(tile.getValue(1));
-        String formattedValueMax = numberFormat.format(tile.getValue(2));
-        setTooltipBar(1,"RF: "+formattedValueMin+ " / " + formattedValueMax);
+        String formattedValueMin = EnergyFormat.formatNumber(tile.getValue(1));
+        String formattedValueMax = EnergyFormat.formatNumber(tile.getValue(2));
+        setTooltipBar(1,formattedValueMin+ " / " + formattedValueMax);
         setBarValue(1,tile.getValue(1),tile.getValue(2));
         setBarValue(2,tile.getValue(3),tile.getValue(4));
     }

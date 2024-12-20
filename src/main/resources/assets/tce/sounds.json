@@ -1,0 +1,11 @@
+{
+  "molecular": {
+    "category": "block",
+    "sounds": [
+      {
+        "name": "tce:molecular",
+        "stream": false
+      }
+    ]
+  }
+}

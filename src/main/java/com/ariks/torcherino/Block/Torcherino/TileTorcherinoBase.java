@@ -163,7 +163,7 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
         nbt.setInteger("RadiusX", this.RadiusX);
         nbt.setInteger("RadiusY", this.RadiusY);
         nbt.setInteger("RadiusZ", this.RadiusZ);
-        nbt.setInteger("Stored",storage.getEnergyStored());
+        nbt.setInteger("Stored",this.storage.getEnergyStored());
         nbt.setBoolean("Red", this.redstoneSignal);
         return super.writeToNBT(nbt);
     }
@@ -182,7 +182,7 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
         this.RadiusY = nbt.getInteger("RadiusY");
         this.RadiusZ = nbt.getInteger("RadiusZ");
         this.redstoneSignal = nbt.getBoolean("Red");
-        storage.setEnergy(nbt.getInteger("Stored"));
+        this.storage.setEnergy(nbt.getInteger("Stored"));
         super.readFromNBT(nbt);
     }
     @Override

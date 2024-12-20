@@ -31,7 +31,7 @@ public class TileTimeManipulator extends TileTime {
         this.Reset();
     }
     private void Reset(){
-        this.RemoveTimeStorage(RequiredTimeManipulator);
+        this.energyTime.consumeTime(RequiredTimeManipulator);
         this.UpdateTile();
     }
     @Override

@@ -43,7 +43,7 @@ public class EnergyStorage implements IEnergyStorage {
         return energyExtracted;
     }
     public void energyChange(){
-        tile.UpdateTile();
+        this.tile.markDirty();
     }
     @Override
     public int getEnergyStored() {
