@@ -15,6 +15,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 @Mod(modid = Tags.MODID, name = Tags.MODNAME, acceptedMinecraftVersions = "[1.12]", version = Tags.VERSION)
 public class torcherinoCe {
+	//12
 	public static File config;
 	public static CreativeTabs torcherinoTab = new TorchTab("torcherinoTab");
 	public static Logger logger;
