@@ -2,6 +2,9 @@ import mods.tce.TileRfMolecular
 
 TileRfMolecular.addRecipe(input, output, energy);
 
+TileRfMolecular.addRecipe(<minecraft:stone>*1, <minecraft:diamond_block>*2, 1000000000);
+TileRfMolecular.addRecipe(<minecraft:wool:11>*1, <minecraft:diamond_block>*2, 1000000000);
+
 
 //EXAMPLE:
 //TileRfMolecular.addRecipe(<minecraft:stone>*1, <minecraft:diamond_block>*2, 1000000000);
