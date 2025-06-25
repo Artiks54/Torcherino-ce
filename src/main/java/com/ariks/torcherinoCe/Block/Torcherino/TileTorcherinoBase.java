@@ -41,12 +41,10 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
     //Timer
     private int booleanTimer;
     private int timer;
-
     //Default !!! if null is not working NBT saves
     public TileTorcherinoBase() {
         this(TorcherinoEnumLevel.c_lvl_1);
     }
-
     public TileTorcherinoBase(TorcherinoEnumLevel tileType) {
         level = tileType;
         EnergyPerTick = level.getEnergyPerTick();
@@ -57,7 +55,6 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
         storage = new EnergyStorage(0,Integer.MAX_VALUE,0,this);
         storage.setCapacity(EnergyMaxStorage);
     }
-
     public void setRedstoneSignal(boolean redstoneSignal) {
         this.redstoneSignal = redstoneSignal;
     }
@@ -141,12 +138,10 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
     public void ToggleWork() {
         booleanMode++;
         if (booleanMode > 3) booleanMode = 0;
-        markDirty();
     }
     public void ToggleRender() {
         booleanRender++;
         if (booleanRender > 5) booleanRender = 0;
-        markDirty();
     }
     private int sec;
     private void HandleTimer() {
@@ -166,18 +161,15 @@ public class TileTorcherinoBase extends TileExampleContainer implements ITickabl
     }
     public void StartTimer(){
         booleanTimer = 1;
-        markDirty();
     }
     public void ResetTimer(){
         booleanTimer = 0;
         timer = 0;
         sec = 0;
-        markDirty();
     }
     private void EndTimer(){
         ResetTimer();
         booleanMode = 0;
-        markDirty();
     }
     @Override
     public int[] getValueList() {

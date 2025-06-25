@@ -17,6 +17,7 @@ public class GuiSliderInt extends GuiButtonExt {
     private final int mode;
     private final TileExampleContainer tile;
     private final int valueId;
+    private float r = 1.0F,g = 1.0F,b = 1.0F;
 
     public GuiSliderInt(TileExampleContainer tile, int idIn, int x, int y,
                         int widthIn, int heightIn,
@@ -31,7 +32,11 @@ public class GuiSliderInt extends GuiButtonExt {
         this.valueId = valueId;
         this.setSliderValue(tile.getValue(valueId), true);
     }
-
+    public void setColorDragged(float r, float g, float b){
+        this.r = r;
+        this.g = g;
+        this.b = b;
+    }
     public void setSliderValue(float value, boolean notifyResponder) {
         this.sliderPosition = (value - min) / (max - min);
         if (sliderPosition < 0) {
@@ -98,7 +103,7 @@ public class GuiSliderInt extends GuiButtonExt {
                 this.updateDisplay();
                 this.notifyResponder();
             }
-            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+            GlStateManager.color(r, g, b, 1.0F);
             this.drawTexturedModalRect(this.x + (int) (this.sliderPosition * (this.width - 8)), this.y, 0, 66, 4, height);
             this.drawTexturedModalRect(this.x + (int) (this.sliderPosition * (this.width - 8)) + 4, this.y, 196, 66, 4, height);
         }

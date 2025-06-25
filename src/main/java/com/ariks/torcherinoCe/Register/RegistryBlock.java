@@ -1,5 +1,6 @@
 package com.ariks.torcherinoCe.Register;
 
+import com.ariks.torcherinoCe.Block.MarkerAcceleration.blockMarker;
 import com.ariks.torcherinoCe.Block.ParticleCollector.EnergyGeneration.BlockEnergyParticle;
 import com.ariks.torcherinoCe.Block.Other.BlockGrowAccelerator;
 import com.ariks.torcherinoCe.Block.ParticleCollector.BlockParticleCollector;
@@ -57,6 +58,7 @@ public final class RegistryBlock {
     public static Block Time_Storage = new BlockTimeStorage(mod_id +"time_storage");
     public static Block Particle_collectors = new BlockParticleCollector(mod_id +"particle_collector");
     public static Block RF_Molecular = new BlockMolecularRf(mod_id +"molecular_rf");
+    public static Block Block_Marker = new blockMarker(mod_id +"block_marker");
     public static final List<Block> BLOCKS = new ArrayList<>();
     static {
         Field[] fields = RegistryBlock.class.getDeclaredFields();

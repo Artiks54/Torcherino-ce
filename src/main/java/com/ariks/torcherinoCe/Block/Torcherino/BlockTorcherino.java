@@ -28,6 +28,7 @@ public class BlockTorcherino extends BlockCustomModelTile {
     public boolean canConnectRedstone(@NotNull IBlockState state, @NotNull IBlockAccess world, @NotNull BlockPos pos, @Nullable EnumFacing side) {
         return true;
     }
+    @SuppressWarnings("deprecation")
     @Override
     public void neighborChanged(@NotNull IBlockState state, World worldIn, @NotNull BlockPos pos, @NotNull Block blockIn, @NotNull BlockPos fromPos) {
         if(!worldIn.isRemote){
@@ -35,6 +36,7 @@ public class BlockTorcherino extends BlockCustomModelTile {
             if(tile instanceof TileTorcherinoBase) ((TileTorcherinoBase) tile).setRedstoneSignal(worldIn.isBlockPowered(pos));
         }
     }
+    @SuppressWarnings("deprecation")
     @Override
     public @NotNull AxisAlignedBB getBoundingBox(@NotNull IBlockState state, @NotNull IBlockAccess source, @NotNull BlockPos pos) {
         return new AxisAlignedBB(0.312, 0, 0.312, 0.688, 0.812, 0.688);

@@ -11,7 +11,6 @@ import java.awt.*;
 
 @SideOnly(Side.CLIENT)
 public class TileTorcherinoBaseRender extends TileEntitySpecialRenderer<TileTorcherinoBase> {
-
     private static final class RenderSettings {
         // Основные настройки
         public static final float LINE_WIDTH = 4.5F;       // 1.0-10.0 толщина линий
@@ -21,8 +20,6 @@ public class TileTorcherinoBaseRender extends TileEntitySpecialRenderer<TileTorc
         public static final float CORNER_SIZE = 0.25F;       // 0.1-0.5 размер углов
         public static final float WAVE_AMPLITUDE = 0.6F;    // 0.1-1.0 амплитуда волн
     }
-
-
     @Override
     public void render(TileTorcherinoBase tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         if (!tile.isInvalid() && tile.hasWorld() && tile.getValue(11) > 0 && Config.BooleanRender) {

@@ -25,14 +25,15 @@ public class TileEnergyParticle extends TileExampleInventory implements ITickabl
         int maxEnergyParticle = Config.MaxEnergyParticle;
         storage = new EnergyStorage(maxEnergyParticle,Integer.MAX_VALUE,0);
     }
-
     public int getMaxProgress() {
         return maxProgress;
     }
     public int getMaxEnergyStorage(){
         return storage.getMaxEnergyStored();
     }
-
+    public int getEnergyPerTick() {
+        return energyPerTick;
+    }
     @Override
     public void update() {
         if (!world.isRemote) {

@@ -42,6 +42,7 @@ tce_gui.text.tile_time_manipulator.time=Required time
 tce_gui.text.tile_time_manipulator.energy=Required energy
 tce_item.wand.info=Durability:
 tce_item.tooltip.time_storage=Shift + Right-Click extracts time, Right-click inserts time
+tce_item.tooltip.gps_marker=Shift + Right-Click save, Right-click delete
 tce_item.tooltip.time_wand=Shift + Right-click to accelerate
 tce_gui.text.tile_rf_molecular.energy=Energy:
 tce_gui.text.tile_rf_molecular.energy.recipe=Required energy:
@@ -51,6 +52,9 @@ tce_gui.text.tile_rf_molecular.rf.tick=RF Tick:
 tce_jei_particle_collector_need_tick=Required tick:
 tce_jei_rf_particle_collector=Required energy for generated particle:
 
+item.tce_upgrade_gps.name=Speed upgrade x9
+item.tce_upgrade_gps_2.name=Speed upgrade x81
+item.tce_gps_marker.name=GPS-Marker
 item.tce_upgrade_count.name=Module count
 item.tce_upgrade_speed.name=Module speed
 item.tce_time_wand_lvl1.name=§9The Staff of Time lvl 1
@@ -113,6 +117,7 @@ tile.tce_time_manipulator.name=§5Time manipulator
 tile.tce_time_energy_manipulator.name=§cEnergy time manipulator
 tile.tce_particle_collector.name=§6Particle collector
 tile.tce_energy_particle.name=§4RF Particle collector
+tile.tce_block_marker.name=§6Torcherino-GPS
 
 tile.tce_grow_lvl1.name=Growth Accelerator lvl 1
 tile.tce_grow_lvl2.name=Growth Accelerator lvl 2

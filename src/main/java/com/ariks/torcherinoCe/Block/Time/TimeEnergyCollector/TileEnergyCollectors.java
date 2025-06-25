@@ -26,6 +26,9 @@ public class TileEnergyCollectors extends TileTime implements ITickable {
             }
         }
     }
+    public int getEnergyPerTick() {
+        return Config.ETC_EnergyPerTick;
+    }
     @Override
     public int getValue(int id) {
         if (id == 2) return EnergyStorage.getEnergyStored();

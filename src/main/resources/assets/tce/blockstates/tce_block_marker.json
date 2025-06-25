@@ -1,0 +1,17 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tce:time_manipulator",
+	    "textures": {
+        "base": "tce:blocks/base",
+		"material": "tce:blocks/gold",
+        "particle":  "tce:blocks/base"
+        },
+    "transform": "forge:default-block"
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{}],
+    "destroyed": [{}]
+  }
+}

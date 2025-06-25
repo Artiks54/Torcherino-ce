@@ -17,13 +17,11 @@ import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import net.minecraft.item.ItemStack;
-import java.text.NumberFormat;
 import java.util.Collections;
 
 @JEIPlugin
 public class AddonJei implements IModPlugin {
     public final LocalizedStringKey LS = new LocalizedStringKey();
-    private final String formattedValue = NumberFormat.getNumberInstance().format(Config.RFPerTickEnergyParticle);
 
     public void register(IModRegistry registry) {
         registry.addIngredientInfo(new ItemStack(RegistryBlock.Time_Manipulator), VanillaTypes.ITEM, LS.jei_info_time_manipulator);

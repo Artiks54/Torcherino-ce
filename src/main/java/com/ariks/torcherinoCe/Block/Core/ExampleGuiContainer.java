@@ -64,8 +64,13 @@ public class ExampleGuiContainer extends GuiContainer {
         this.renderHoveredToolTip(mouseX, mouseY);
         if(!barComponents.isEmpty()){
             for (BarComponent barComponent : barComponents){
-                if (barComponent.isMouseOver(MouseX, MouseY) && barComponent.getTooltip() != null) {
-                    drawHoveringText(barComponent.getTooltip(),MouseX,MouseY);
+                if (barComponent.isMouseOver(MouseX, MouseY)) {
+                    if(barComponent.getTooltip() != null){
+                        drawHoveringText(barComponent.getTooltip(),MouseX,MouseY);
+                    }
+                    if(barComponent.getTooltipLines() != null){
+                        drawHoveringText(barComponent.getTooltipLines(),MouseX,MouseY);
+                    }
                 }
             }
         }
@@ -78,6 +83,14 @@ public class ExampleGuiContainer extends GuiContainer {
         for (BarComponent barComponent : barComponents) {
             if (barComponent.getId() == id) {
                 barComponent.setTooltip(tooltip);
+                break;
+            }
+        }
+    }
+    public void setTooltipBarLines(int id,List<String> strings){
+        for (BarComponent barComponent : barComponents) {
+            if (barComponent.getId() == id) {
+                barComponent.setTooltipLines(strings);
                 break;
             }
         }

@@ -633,6 +633,50 @@ public final class RegistryRecipe {
                 'D', new ItemStack(Blocks.DIRT),
                 'B', new ItemStack(Items.DYE,1,15),
                 'G', new ItemStack(Grow_lvl4));
+        //gps_marker
+        GameRegistry.addShapedRecipe(
+                new ResourceLocation(Tags.MODID + ":" + "gps_marker"), null,
+                new ItemStack(gps_marker),
+                "  C",
+                " X ",
+                "D  ",
+                'D', new ItemStack(Items.STICK),
+                'X', new ItemStack(time_particle_redstone),
+                'C', new ItemStack(time_nugget));
+        //upgrade_gps
+        GameRegistry.addShapedRecipe(
+                new ResourceLocation(Tags.MODID + ":" + "upgrade_gps"), null,
+                new ItemStack(upgrade_gps),
+                "DCD",
+                "TST",
+                "MTM",
+                'D', new ItemStack(time_particle_diamond),
+                'C', new ItemStack(lapis_Clock),
+                'T', new ItemStack(Torch_lvl_1),
+                'S', new ItemStack(time_energy_star),
+                'M', new ItemStack(upgrade_speed));
+        //upgrade_gps_2
+        GameRegistry.addShapedRecipe(
+                new ResourceLocation(Tags.MODID + ":" + "upgrade_gps_2"), null,
+                new ItemStack(upgrade_gps_2),
+                "DDD",
+                "DMD",
+                "DDD",
+                'D', new ItemStack(upgrade_gps),
+                'M', new ItemStack(binding_Element3));
+        //gps_accelerator
+        GameRegistry.addShapedRecipe(
+                new ResourceLocation(Tags.MODID + ":" + "gps_accelerator"), null,
+                new ItemStack(Block_Marker),
+                "GSG",
+                "PCP",
+                "TET",
+                'G', new ItemStack(time_particle_gold),
+                'S', new ItemStack(gps_marker),
+                'P', new ItemStack(time_plate),
+                'C', new ItemStack(gold_Clock),
+                'T', new ItemStack(Torch_lvl_1),
+                'E', new ItemStack(time_energy_star));
         //RF_Molecular
         GameRegistry.addShapedRecipe(
                 new ResourceLocation(Tags.MODID + ":" + "RF_Molecular"), null,

@@ -1,5 +1,6 @@
 package com.ariks.torcherinoCe.network;
 
+import com.ariks.torcherinoCe.Block.MarkerAcceleration.TileMarker;
 import com.ariks.torcherinoCe.Block.Torcherino.TileTorcherinoBase;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.tileentity.TileEntity;
@@ -39,6 +40,9 @@ public class UpdateTileValue implements IMessage {
             world.addScheduledTask(() -> {
                 if (world.isBlockLoaded(pos)) {
                     TileEntity tile = world.getTileEntity(pos);
+                    if (tile instanceof TileMarker TileMarker) {
+                        TileMarker.setValue(message.id, message.value);
+                    }
                     if (tile instanceof TileTorcherinoBase TileTorcherinoBase) {
                         TileTorcherinoBase.setValue(message.id, message.value);
                         if(message.id == 50){

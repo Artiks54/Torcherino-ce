@@ -1,5 +1,8 @@
 package com.ariks.torcherinoCe.Register;
 
+import com.ariks.torcherinoCe.Block.MarkerAcceleration.ContainerMarker;
+import com.ariks.torcherinoCe.Block.MarkerAcceleration.GuiMarker;
+import com.ariks.torcherinoCe.Block.MarkerAcceleration.TileMarker;
 import com.ariks.torcherinoCe.Block.ParticleCollector.EnergyGeneration.ContainerEnergyParticle;
 import com.ariks.torcherinoCe.Block.ParticleCollector.EnergyGeneration.GuiEnergyParticle;
 import com.ariks.torcherinoCe.Block.ParticleCollector.EnergyGeneration.TileEnergyParticle;
@@ -48,6 +51,7 @@ public final class RegistryGui implements IGuiHandler {
     public static final int GUI_RF_MOLECULAR = 7;
     public static final int GUI_ENERGY_COLLECTORS_TIME = 8;
     public static final int GUI_ENERGY_TIME_MANIPULATOR = 9;
+    public static final int GUI_MARKER = 10;
 
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
@@ -80,6 +84,9 @@ public final class RegistryGui implements IGuiHandler {
         }
         if (ID == GUI_RF_MOLECULAR) {
             return new ContainerRfMolecular(player.inventory, (TileRfMolecular) world.getTileEntity(new BlockPos(x, y, z)),player);
+        }
+        if (ID == GUI_MARKER) {
+            return new ContainerMarker(player.inventory, (TileMarker) world.getTileEntity(new BlockPos(x, y, z)));
         }
         return null;
     }
@@ -115,6 +122,9 @@ public final class RegistryGui implements IGuiHandler {
         }
         if (ID == GUI_RF_MOLECULAR) {
             return new GuiRfMolecular(player.inventory, (TileRfMolecular) world.getTileEntity(new BlockPos(x, y, z)),player);
+        }
+        if (ID == GUI_MARKER) {
+            return new GuiMarker(player.inventory, (TileMarker) world.getTileEntity(new BlockPos(x, y, z)));
         }
         return null;
     }

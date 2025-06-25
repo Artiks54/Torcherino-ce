@@ -6,6 +6,8 @@ import com.ariks.torcherinoCe.utility.EnergyFormat;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import java.util.Arrays;
+import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public class GuiEnergyParticle extends ExampleGuiContainer {
@@ -28,7 +30,11 @@ public class GuiEnergyParticle extends ExampleGuiContainer {
     public void Tick() {
         String formattedValueMin = EnergyFormat.formatNumber(tileEntity.getValue(2));
         String formattedValueMax = EnergyFormat.formatNumber(tileEntity.getMaxEnergyStorage());
-        setTooltipBar(1,formattedValueMin+ " / " + formattedValueMax);
+        String formattedValueRf = EnergyFormat.formatNumber(tileEntity.getEnergyPerTick());
+        List<String> tooltipLines = Arrays.asList(
+                formattedValueMin+ " / " + formattedValueMax,
+                "RF-Tick: " + formattedValueRf);
+        setTooltipBarLines(1,tooltipLines);
         setBarValue(1,tileEntity.getValue(2),tileEntity.getMaxEnergyStorage());
         setBarValue(2,tileEntity.getValue(1),tileEntity.getMaxProgress());
     }

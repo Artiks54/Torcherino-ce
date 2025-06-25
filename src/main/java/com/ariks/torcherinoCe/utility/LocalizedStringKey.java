@@ -43,6 +43,7 @@ public class LocalizedStringKey {
      //Item Wand
      public String StrWandInfoItem = I18n.format(modid+"item.wand.info");
      public String Str_Time_Wand_Tooltip = I18n.format(modid+"item.tooltip.time_wand");
+     public String Str_Gps_marker = I18n.format(modid+"item.tooltip.gps_marker");
      //Grow jei
      public String Jei_grow_tooltip = I18n.format(modid+"jei_grow");
      public String jei_info_grow = I18n.format(modid+"jei_info_grow");
@@ -60,8 +61,6 @@ public class LocalizedStringKey {
      //Tile RF Molecular
      public String StrEnergy = I18n.format(modid+"gui.text.tile_rf_molecular.energy");
      public String StrEnergyRecipe = I18n.format(modid+"gui.text.tile_rf_molecular.energy.recipe");
-     public String StrRecipe = I18n.format(modid+"gui.text.tile_rf_molecular.recipe");
-     public String StrRecipeOff = I18n.format(modid+"gui.text.tile_rf_molecular.recipe.off");
      public String StrRFTick = I18n.format(modid+"gui.text.tile_rf_molecular.rf.tick");
      //JEI Info Item
      public String jei_maxItem = I18n.format(modid+"jei_max_item");

@@ -47,4 +47,7 @@ public final class RegistryItems {
     public static final Item time_energy_star = new ItemBase(mod_id +"time_energy_star");
     public static final Item upgrade_count = new ItemUpgradeCount(mod_id +"upgrade_count");
     public static final Item upgrade_speed = new ItemUpgradeSpeed(mod_id +"upgrade_speed");
+    public static final Item gps_marker = new itemMarker(mod_id +"gps_marker");
+    public static final Item upgrade_gps = new ItemBase(mod_id +"upgrade_gps");
+    public static final Item upgrade_gps_2 = new ItemBase(mod_id +"upgrade_gps_2");
 }

@@ -23,7 +23,6 @@ import java.util.List;
 public class GuiTorcherino extends ExampleGuiContainer {
 
     private final TileTorcherinoBase tile;
-    private final GuiColorCube colorCube = new GuiColorCube();
     private final LocalizedStringKey LS = new LocalizedStringKey();
     private GuiSliderInt sliderSpeed,sliderRGB,sliderRGBC,sliderX,sliderY,sliderZ,sliderAlpha;
     private GuiItemButton buttonInfo,buttonWork;
@@ -48,18 +47,22 @@ public class GuiTorcherino extends ExampleGuiContainer {
     public void Tick() {
         String formattedValueMin = EnergyFormat.formatNumber(tile.getValue(18));
         String formattedValueMax = EnergyFormat.formatNumber(tile.getValue(21));
-        setTooltipBar(1, formattedValueMin + " / " + formattedValueMax);
+        String formattedValueRf = EnergyFormat.formatNumber(tile.getValue(20));
+        List<String> tooltipLines = Arrays.asList(
+                formattedValueMin+ " / " + formattedValueMax,
+                "RF-Tick: " + formattedValueRf);
+        setTooltipBarLines(1,tooltipLines);
         setBarValue(1, tile.getValue(18), tile.getValue(21));
     }
     @Override
     public void TickScreen() {
         this.DrawToolTipInfoButton();
-        this.DrawCube();
         this.UpdateImageButton();
         this.UpdateButtonStringRender();
         this.UpdateSliderString();
         this.UpdateTimerButton();
         this.DrawTextTimer();
+        this.getSliderColor();
     }
     @Override
     public void initGui() {
@@ -73,14 +76,13 @@ public class GuiTorcherino extends ExampleGuiContainer {
         sliderZ = new GuiSliderInt(tile, 3, ScaledX+40, ScaledY+51, 155, 20, 0, tile.getValue(4), 17,"",4);
         sliderSpeed = new GuiSliderInt(tile, 4, ScaledX+40, ScaledY+74, 155, 20, 0, tile.getValue(6), 19,"",4);
         //Render
-        sliderRGB = new GuiSliderInt(tile, 5, ScaledX+40, ScaledY+5, 155, 20, 0, 800, 8,"Rgb-line",2);
-        sliderRGBC = new GuiSliderInt(tile, 6, ScaledX+40, ScaledY+28, 155, 20, 0, 800, 9,"Rgb-cube",2);
+        sliderRGB = new GuiSliderInt(tile, 5, ScaledX+40, ScaledY+5, 155, 20, 0, 800, 8,"",4);
+        sliderRGBC = new GuiSliderInt(tile, 6, ScaledX+40, ScaledY+28, 155, 20, 0, 800, 9,"",4);
         sliderAlpha = new GuiSliderInt(tile,7,ScaledX+40,ScaledY+51, 155, 20, 0, 100, 10, "Alpha", 2);
         buttonRender = new GuiButtonImage(tile,8,ScaledX+231,ScaledY+28,2);
         //ItemButton-NetworkButton
         buttonInfo = new GuiItemButton(tile,9, ScaledX+8, ScaledY+5,0);
         buttonWork = new GuiItemButton(tile,10, ScaledX+231, ScaledY+5,1);
-
         //ItemButton-Info
         buttonInfo.setStackRender(new ItemStack(Items.PAPER));
         //ItemButton-Settings
@@ -101,6 +103,16 @@ public class GuiTorcherino extends ExampleGuiContainer {
         this.CreateButton();
         this.ButtonTimerOff();
         this.SettingOff();
+    }
+    private void getSliderColor(){
+        Color color1 = Color.getHSBColor((sliderRGB.getSliderValue() / 600.0f) * 0.9f, 1.0f, 1.0f);
+        float[] rgb1 = {color1.getRed() / 255.0f, color1.getGreen() / 255.0f, color1.getBlue() / 255.0f};
+        Color color2 = Color.getHSBColor((sliderRGBC.getSliderValue() / 600.0f) * 0.9f, 1.0f, 1.0f);
+        float[] rgb2 = {color2.getRed() / 255.0f, color2.getGreen() / 255.0f, color2.getBlue() / 255.0f};
+        sliderRGB.setColorDragged(rgb1[0],rgb1[1],rgb1[2]);
+        sliderRGBC.setColorDragged(rgb2[0],rgb2[1],rgb2[2]);
+        sliderRGB.displayString =  "Rgb-line";
+        sliderRGBC.displayString = "Rgb-cube";
     }
     private void DrawTextTimer() {
         if (isSettingTimerOn) {
@@ -223,12 +235,10 @@ public class GuiTorcherino extends ExampleGuiContainer {
                 if (button.equals(buttonInfo)) {
                     int MaxRadius = tile.getValue(4);
                     int MaxSpeed = (tile.getValue(5) * 100 * tile.getValue(6));
-                    String formattedValueRf = EnergyFormat.formatNumber(tile.getValue(20));
                     List<String> tooltipLines = Arrays.asList(
                             TextFormatting.GREEN + LS.StrTextInfo,
                             TextFormatting.GRAY + "Max " + LS.StrTextRadius + ": " + MaxRadius + "x" + MaxRadius + "x" + MaxRadius,
-                            TextFormatting.GRAY + "Max " + LS.StrTextSpeed + ": " + MaxSpeed + "%",
-                            TextFormatting.RED + LS.StrRFTick + " " + formattedValueRf
+                            TextFormatting.GRAY + "Max " + LS.StrTextSpeed + ": " + MaxSpeed + "%"
                     );
                     drawHoveringText(tooltipLines, getMouseX(), getMouseY() - 16);
                 } else if (button.equals(buttonWork)) {
@@ -287,13 +297,5 @@ public class GuiTorcherino extends ExampleGuiContainer {
         };
         WorkString = workStrings[work];
         buttonWork.setStackRender(workIcons[work]);
-    }
-    private void DrawCube() {
-        Color color = Color.getHSBColor((sliderRGB.getSliderValue() / 600.0f) * 0.9f, 1.0f, 1.0f);
-        float[] rgb = {color.getRed() / 255.0f, color.getGreen() / 255.0f, color.getBlue() / 255.0f};
-        int posX = (this.width - this.xSize) / 2 + 205;
-        int posY = (this.height - this.ySize) / 2 + 58;
-        colorCube.setCube(46, 36, posX, posY, rgb[0], rgb[1], rgb[2]);
-        colorCube.drawCube();
     }
 }

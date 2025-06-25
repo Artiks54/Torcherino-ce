@@ -6,6 +6,7 @@ import com.ariks.torcherinoCe.Block.Time.Aceleration.TileAcceleration;
 import com.ariks.torcherinoCe.Block.Time.Aceleration.TileAccelerationBaseRender;
 import com.ariks.torcherinoCe.Block.Torcherino.TileTorcherinoBase;
 import com.ariks.torcherinoCe.Block.Torcherino.TileTorcherinoBaseRender;
+import com.ariks.torcherinoCe.Items.RenderHandler;
 import com.ariks.torcherinoCe.Register.RegistryBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -15,6 +16,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -32,6 +34,7 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void Init() {
 		super.Init();
+		MinecraftForge.EVENT_BUS.register(new RenderHandler());
 		RegistryBlock.registerRender();
 	}
 	@Override

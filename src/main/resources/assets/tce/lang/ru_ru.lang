@@ -42,6 +42,10 @@ tce_gui.text.tile_time_manipulator.time=Необходимое время
 tce_gui.text.tile_time_manipulator.energy=Необходимое количество энергии
 tce_item.wand.info=Прочность:
 tce_item.tooltip.time_storage=Shift + ПКМ извлечь время,ПКМ вставить время
+tce_item.tooltip.gps_marker=Shift + + ПКМ сохранить,ПКМ удалить
+
+item.tce_upgrade_gps.name=Улучшение скорости x9
+item.tce_upgrade_gps_2.name=Улучшение скорости x81
 tce_item.tooltip.time_wand=Shift + ПКМ для ускорение
 tce_gui.text.tile_rf_molecular.energy=Энергия:
 tce_gui.text.tile_rf_molecular.energy.recipe=Необходимая энергия:
@@ -51,6 +55,7 @@ tce_gui.text.tile_rf_molecular.rf.tick=RF Тик:
 tce_jei_particle_collector_need_tick=Необходимо тиков:
 tce_jei_rf_particle_collector=Необходимо энергии для генерации одной частицы:
 
+item.tce_gps_marker.name=GPS-Маркер
 item.tce_upgrade_count.name=Модуль количества
 item.tce_upgrade_speed.name=Модуль скорости
 item.tce_time_wand_lvl1.name=§9Посох времени уровень 1
@@ -113,6 +118,7 @@ tile.tce_time_manipulator.name=§5Временной манипулятор
 tile.tce_time_energy_manipulator.name=§cЭнергетический временной манипулятор
 tile.tce_particle_collector.name=§6Коллектор частиц
 tile.tce_energy_particle.name=§4RF Коллектор частиц
+tile.tce_block_marker.name=§6Факел-GPS
 
 tile.tce_grow_lvl1.name=Ускоритель роста lvl 1
 tile.tce_grow_lvl2.name=Ускоритель роста lvl 2

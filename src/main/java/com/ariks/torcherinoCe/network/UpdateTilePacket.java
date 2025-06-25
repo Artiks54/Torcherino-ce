@@ -1,5 +1,6 @@
 package com.ariks.torcherinoCe.network;
 
+import com.ariks.torcherinoCe.Block.MarkerAcceleration.TileMarker;
 import com.ariks.torcherinoCe.Block.RfMolecular.TileRfMolecular;
 import com.ariks.torcherinoCe.Block.Time.Aceleration.TileAcceleration;
 import com.ariks.torcherinoCe.Block.Time.EnergyTimeManipulator.TileEnergyTimeManipulator;
@@ -46,6 +47,11 @@ public class UpdateTilePacket implements IMessage {
                                 case 2: TileTorcherinoBase.ToggleRender();break;
                                 case 3: TileTorcherinoBase.StartTimer();break;
                                 case 4: TileTorcherinoBase.ResetTimer();break;
+                        }
+                    }
+                    if(tile instanceof TileMarker TileMarker) {
+                        if (message.value == 1) {
+                            TileMarker.ToggleWork();
                         }
                     }
                     if (tile instanceof TileTimeManipulator TileTimeManipulator) {

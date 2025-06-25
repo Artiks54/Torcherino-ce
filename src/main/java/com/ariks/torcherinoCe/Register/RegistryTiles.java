@@ -1,5 +1,6 @@
 package com.ariks.torcherinoCe.Register;
 
+import com.ariks.torcherinoCe.Block.MarkerAcceleration.TileMarker;
 import com.ariks.torcherinoCe.Block.RfMolecular.TileRfMolecular;
 import com.ariks.torcherinoCe.Block.Time.Aceleration.TileAcceleration;
 import com.ariks.torcherinoCe.Block.ParticleCollector.EnergyGeneration.TileEnergyParticle;
@@ -28,5 +29,6 @@ public final class RegistryTiles {
         GameRegistry.registerTileEntity(TileParticleCollector.class,new ResourceLocation(Tags.MODID,"Tile_Particle_Collector"));
         GameRegistry.registerTileEntity(TileTimeManipulator.class,new ResourceLocation(Tags.MODID,"Tile_Time_Manipulator"));
         GameRegistry.registerTileEntity(TileEnergyTimeManipulator.class,new ResourceLocation(Tags.MODID,"Tile_Energy_Time_Manipulator"));
+        GameRegistry.registerTileEntity(TileMarker.class,new ResourceLocation(Tags.MODID,"Tile_Marker"));
     }
 }

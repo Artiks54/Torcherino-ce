@@ -4,6 +4,7 @@ import com.ariks.torcherinoCe.Block.Core.ExampleGuiContainer;
 import com.ariks.torcherinoCe.Tags;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.ResourceLocation;
+import java.util.List;
 import java.util.Objects;
 
 public class BarComponent {
@@ -25,6 +26,7 @@ public class BarComponent {
     private float Value, maxValue;
     private int cordX, cordY;
     private final ExampleGuiContainer container;
+    private List<String> tooltipLines;
 
     public BarComponent(ExampleGuiContainer container, int id, int StartX, int StartY,int TextureX,int TextureY, int widthBar, int heightBar, String textures) {
         this.container = container;
@@ -64,8 +66,14 @@ public class BarComponent {
     public void setTooltip(String tooltip) {
         this.tooltip = tooltip;
     }
+    public void setTooltipLines(List<String> strings){
+        tooltipLines = strings;
+    }
     public String getTooltip() {
         return tooltip;
+    }
+    public List<String> getTooltipLines(){
+        return tooltipLines;
     }
     public void setSideDirection(String sideDirection) {
         SideDirection = sideDirection;
