@@ -14,7 +14,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
-public class    TileRfMolecular extends TileExampleInventory implements ITickable {
+public class TileRfMolecular extends TileExampleInventory implements ITickable {
     private final EnergyStorageMolecular storage;
     protected NetworkRegistry.TargetPoint packetTargetPoint;
     private int energyPerTick;
@@ -25,6 +25,8 @@ public class    TileRfMolecular extends TileExampleInventory implements ITickabl
     private int textureId = 0;
     private boolean redstoneSignal;
     private int booleanMode;
+    private int stackMode = 0;
+    private int numRecipes = 1;
 
     public TileRfMolecular() {
         super(2);
@@ -35,12 +37,17 @@ public class    TileRfMolecular extends TileExampleInventory implements ITickabl
     public void setRedstoneSignal(boolean redstoneSignal) {
         this.redstoneSignal = redstoneSignal;
     }
-
     public void ToggleWork() {
         booleanMode++;
         energyPerTick = 0;
         if (booleanMode > 3) {
             booleanMode = 0;
+        }
+    }
+    public void ToggleStackMode(){
+        stackMode++;
+        if(stackMode > 1){
+            stackMode = 0;
         }
     }
     public void findRecipe() {
@@ -53,33 +60,57 @@ public class    TileRfMolecular extends TileExampleInventory implements ITickabl
                 if (canOutputRecipeResult(recipe)) {
                     currentRecipe = recipe;
                     currentRecipeID = i;
-                    energyRequired = recipe.getEnergy();
-                    decrStackSize(0, recipe.getInput().getCount());
+                    if (stackMode == 1) {
+                        numRecipes = calculateNumRecipes(recipe);
+                    } else {
+                        numRecipes = 1;
+                    }
+                    energyRequired = recipe.getEnergy() * numRecipes;
+                    decrStackSize(0, recipe.getInput().getCount() * numRecipes);
                     return;
                 }
             }
         }
     }
+    private int calculateNumRecipes(MolecularRecipe recipe) {
+        ItemStack input = getStackInSlot(0);
+        int inputCount = input.getCount();
+        int inputRequired = recipe.getInput().getCount();
+        int maxFromInput = inputCount / inputRequired;
+        ItemStack outputStack = recipe.getRecipeOutput();
+        ItemStack currentOutput = getStackInSlot(1);
+        int maxFromOutput;
+        if (currentOutput.isEmpty()) {
+            maxFromOutput = outputStack.getMaxStackSize() / outputStack.getCount();
+        } else {
+            int availableSpace = currentOutput.getMaxStackSize() - currentOutput.getCount();
+            maxFromOutput = availableSpace / outputStack.getCount();
+        }
+        return Math.min(maxFromInput, maxFromOutput);
+    }
     private void processRecipe() {
-            storage.setMaxCapacity(Integer.MAX_VALUE);
-            int energyConsumed = storage.consumeAllEnergy();
-            if (energyConsumed > 0) {
-                energyCollected += energyConsumed;
-                energyPerTick = energyConsumed;
-                RegistryNetwork.network.sendToAllAround(new PacketMolecular(this.pos, energyCollected), packetTargetPoint);
-                if (energyCollected >= energyRequired) {
-                    completeRecipe();
+        storage.setMaxCapacity(Integer.MAX_VALUE);
+        int energyConsumed = storage.consumeAllEnergy();
+        if (energyConsumed > 0) {
+            energyCollected += energyConsumed;
+            energyPerTick = energyConsumed;
+            RegistryNetwork.network.sendToAllAround(new PacketMolecular(this.pos, energyCollected), packetTargetPoint);
+            if (energyCollected >= energyRequired) {
+                completeRecipe();
             }
         }
     }
     private void completeRecipe() {
         ItemStack outputStack = currentRecipe.getRecipeOutput();
         if (outputStack.isEmpty()) return;
+        int outputCount = outputStack.getCount() * numRecipes;
         ItemStack currentOutputStack = getStackInSlot(1);
         if (currentOutputStack.isEmpty()) {
-            setInventorySlotContents(1, outputStack.copy());
+            ItemStack newStack = outputStack.copy();
+            newStack.setCount(outputCount);
+            setInventorySlotContents(1, newStack);
         } else {
-            currentOutputStack.grow(outputStack.getCount());
+            currentOutputStack.grow(outputCount);
         }
         reset();
     }
@@ -90,6 +121,7 @@ public class    TileRfMolecular extends TileExampleInventory implements ITickabl
         energyPerTick = 0;
         storage.setMaxCapacity(0);
         currentRecipe = null;
+        numRecipes = 1;
     }
     private boolean canOutputRecipeResult(MolecularRecipe recipe) {
         if (recipe == null) return false;
@@ -129,15 +161,14 @@ public class    TileRfMolecular extends TileExampleInventory implements ITickabl
             }
         }
     }
-    public int getBooleanMode() {
-        return booleanMode;
-    }
     @Override
     public int getValue(int id) {
         if(id == 1) return currentRecipeID;
         if(id == 2) return textureId;
         if(id == 3) return booleanMode;
         if(id == 4) return energyPerTick;
+        if(id == 5) return numRecipes;
+        if(id == 6) return stackMode;
         return id;
     }
     @Override
@@ -146,10 +177,12 @@ public class    TileRfMolecular extends TileExampleInventory implements ITickabl
         if(id == 2) this.textureId = value;
         if(id == 3) this.booleanMode = value;
         if(id == 4) this.energyPerTick = value;
+        if(id == 5) this.numRecipes = value;
+        if(id == 6) this.stackMode = value;
     }
     @Override
     public int[] getValueList() {
-        return new int[]{1,2,3,4};
+        return new int[]{1,2,3,4,5,6};
     }
     public void SwitchTexture() {
         textureId++;
@@ -166,6 +199,8 @@ public class    TileRfMolecular extends TileExampleInventory implements ITickabl
         nbt.setInteger("textureId",textureId);
         nbt.setBoolean("Red",redstoneSignal);
         nbt.setInteger("mode",booleanMode);
+        nbt.setInteger("numRecipes",numRecipes);
+        nbt.setInteger("stackMode",stackMode);
         return nbt;
     }
     @Override
@@ -174,8 +209,10 @@ public class    TileRfMolecular extends TileExampleInventory implements ITickabl
         this.energyRequired = nbt.getLong("Er");
         this.energyCollected = nbt.getLong("Stored");
         this.textureId = nbt.getInteger("textureId");
+        this.numRecipes = nbt.getInteger("numRecipes");
         this.redstoneSignal = nbt.getBoolean("Red");
         this.booleanMode = nbt.getInteger("mode");
+        this.stackMode = nbt.getInteger("stackMode");
         this.currentRecipeID = nbt.getInteger("RecipeID");
         if (currentRecipeID != -1) {
             List<MolecularRecipe> recipes = MolecularRecipe.getRecipes();

@@ -80,6 +80,7 @@ public class UpdateTilePacket implements IMessage {
                         switch (message.value) {
                             case 1: TileRfMolecular.ToggleWork(); break;
                             case 2: TileRfMolecular.SwitchTexture(); break;
+                            case 3: TileRfMolecular.ToggleStackMode(); break;
                         }
                     }
                 }

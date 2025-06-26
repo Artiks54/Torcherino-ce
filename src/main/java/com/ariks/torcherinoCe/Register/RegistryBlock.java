@@ -69,6 +69,7 @@ public final class RegistryBlock {
                     BLOCKS.add(block);
                 }
             } catch (IllegalAccessException e) {
+                //noinspection CallToPrintStackTrace
                 e.printStackTrace();
             }
         }

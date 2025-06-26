@@ -57,7 +57,11 @@ public class TileRfMolecularRenderer extends TileEntitySpecialRenderer<TileRfMol
         if (this.ticker > 160) {
             this.ticker = 0;
         }
-        float progressPercentage = (float) (tile.getValue(5) * 100) / tile.getValue(6);
+        int RecipeID = tile.getValue(1);
+        int numRecipes = tile.getValue(5);
+        long value = tile.getEnergyCollected();
+        long max = (MolecularRecipe.getRecipes().get(RecipeID).getEnergy() * numRecipes);
+        float progressPercentage = (float) (value * 100) / max;
         float maxScale = 0.45F;
         float minScale = 0.01F;
         float getScale = maxScale - (progressPercentage / 100.0F) * (maxScale - minScale);
@@ -166,7 +170,9 @@ public class TileRfMolecularRenderer extends TileEntitySpecialRenderer<TileRfMol
     @Override
     public void render(TileRfMolecular tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         if (!tile.isInvalid() && tile.hasWorld() && tile.getValue(1) >= 0 && Config.BooleanRender) {
-            renderCore(tile, x, y, z, partialTicks);
+            if(tile.getWork()) {
+                renderCore(tile, x, y, z, partialTicks);
+            }
         }
     }
 }

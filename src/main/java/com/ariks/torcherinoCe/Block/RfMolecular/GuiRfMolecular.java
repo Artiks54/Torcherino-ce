@@ -19,11 +19,11 @@ import java.awt.*;
 @SideOnly(Side.CLIENT)
 public class GuiRfMolecular extends ExampleGuiContainer {
     private final TileRfMolecular tile;
-    private String WorkString;
+    private String WorkString,StackMode;
     private final BarComponent barComponentEnergy;
     private Color color;
     private GuiItemButton buttonWork;
-    private EntityPlayer entityPlayer;
+    private GuiButtonImage buttonStack,switchTexture;
     String itemOutput;
     String itemInput;
     String energyNeed;
@@ -39,7 +39,6 @@ public class GuiRfMolecular extends ExampleGuiContainer {
         addBarComponent(barComponentEnergy);
         this.updateTexture();
     }
-
     @Override
     public void initGui() {
         super.initGui();
@@ -47,25 +46,24 @@ public class GuiRfMolecular extends ExampleGuiContainer {
         int ScaledY = (this.height - this.ySize) / 2;
         this.buttonList.clear();
         buttonWork = new GuiItemButton(tile, 1, ScaledX + 180, ScaledY + 5, 1);
-        GuiButtonImage switchTexture = new GuiButtonImage(tile, 1, ScaledX + 180, ScaledY + 28, 2);
+        switchTexture = new GuiButtonImage(tile, 1, ScaledX + 180, ScaledY + 28, 2);
         switchTexture.setTexture(32, 16);
+        buttonStack = new GuiButtonImage(tile,2,ScaledX+180,ScaledY +51,3);
         buttonList.add(switchTexture);
         buttonList.add(buttonWork);
+        buttonList.add(buttonStack);
     }
-
     @Override
     public void TickScreen() {
         this.updateTexture();
         this.UpdateButtonStringRender();
         this.DrawToolTipInfoButton();
     }
-
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
         super.drawGuiContainerForegroundLayer(mouseX, mouseY);
         this.DrawInfo();
     }
-
     private void updateTexture() {
         int textureId = tile.getValue(2);
         if (textureId >= 0 && textureId < TextureMolecularChanger.TEXTURES.length) {
@@ -75,9 +73,9 @@ public class GuiRfMolecular extends ExampleGuiContainer {
             barComponentEnergy.setTextureTexture(data.textureX, 0);
         }
     }
-
     private void UpdateButtonStringRender() {
         int work = tile.getValue(3);
+        int stackMode = tile.getValue(6);
         switch (work) {
             case 0:
                 WorkString = TextFormatting.RED + LS.StrTextWorking;
@@ -96,34 +94,48 @@ public class GuiRfMolecular extends ExampleGuiContainer {
                 buttonWork.setStackRender(new ItemStack(Blocks.REDSTONE_TORCH));
                 break;
         }
+        switch (stackMode) {
+            case 0:
+                StackMode = TextFormatting.RED + "StackMode false";
+                buttonStack.setTexture(48,16);
+            break;
+            case 1:
+                StackMode = TextFormatting.GREEN + "StackMode true";
+                buttonStack.setTexture(64,16);
+                break;
+        }
     }
-
     private void DrawToolTipInfoButton() {
         for (GuiButton button : buttonList) {
             if (button.isMouseOver()) {
                 if (button.equals(buttonWork)) {
                     drawHoveringText(WorkString, getMouseX(), getMouseY());
                 }
+                if (button.equals(buttonStack)) {
+                    drawHoveringText(StackMode, getMouseX(), getMouseY());
+                }
             }
         }
     }
-
     private void DrawInfo() {
         int RecipeID = tile.getValue(1);
+        int numRecipes = tile.getValue(5);
         if (RecipeID != -1) {
             long value = tile.getEnergyCollected();
-            long max = MolecularRecipe.getRecipes().get(RecipeID).getEnergy();
+            long max = (MolecularRecipe.getRecipes().get(RecipeID).getEnergy() * numRecipes);
             int perTick = tile.getValue(4);
-            int ic = MolecularRecipe.getRecipes().get(RecipeID).getInput().getCount();
-            int io = MolecularRecipe.getRecipes().get(RecipeID).getRecipeOutput().getCount();
+            int ic = MolecularRecipe.getRecipes().get(RecipeID).getInput().getCount() * numRecipes;
+            int io = MolecularRecipe.getRecipes().get(RecipeID).getRecipeOutput().getCount() * numRecipes;
             String ni = MolecularRecipe.getRecipes().get(RecipeID).getInput().getDisplayName();
             String no = MolecularRecipe.getRecipes().get(RecipeID).getRecipeOutput().getDisplayName();
             itemInput = (ni + " *" + ic);
             itemOutput = (no + " *" + io);
-            energyNeed = (LS.StrEnergyRecipe + " " + EnergyFormat.formatNumber(MolecularRecipe.getRecipes().get(RecipeID).getEnergy()));
-            collected = (LS.StrEnergy + " " + EnergyFormat.formatNumber(value));
-            setBarValue(1, value, max);
+            energyNeed = (LS.StrEnergyRecipe + " " + EnergyFormat.formatNumber(MolecularRecipe.getRecipes().get(RecipeID).getEnergy() * numRecipes));
+            if(value != 0) {
+                collected = (LS.StrEnergy + " " + EnergyFormat.formatNumber(value));
+            }
             if (perTick != 0) {
+                setBarValue(1, value, max);
                 long ticks = (max - value + perTick - 1) / perTick;
                 long totalMilliseconds = ticks * 50L;
                 long milliseconds = totalMilliseconds % 1000;
