@@ -1,0 +1,16 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tce:molecular_rf",
+    "textures": {
+      "0": "tce:blocks/cobble_gen",
+      "particle":  "tce:blocks/cobble_gen"
+    },
+    "transform": "forge:default-block"
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{}],
+    "destroyed": [{}]
+  }
+}

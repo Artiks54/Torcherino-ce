@@ -1,0 +1,24 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tce:item_storage",
+	    "textures": {
+        "base": "tce:blocks/lapis",
+        "particle":  "tce:blocks/lapis"
+        },
+    "transform": "forge:default-block"
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{
+      "model": "tce:item_storage_inventory",
+      "textures": {
+        "base": "tce:blocks/lapis",
+        "storage": "tce:blocks/storage",
+        "particle": "tce:blocks/lapis"
+      },
+      "transform": "forge:default-block"
+    }],
+    "destroyed": [{}]
+  }
+}

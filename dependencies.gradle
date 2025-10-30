@@ -37,12 +37,26 @@
  * For more details, see https://docs.gradle.org/8.4/userguide/java_library_plugin.html#sec:java_library_configurations_graph
  */
 dependencies {
-    compileOnly "curse.maven:mekanism-268560:2835175"
-    runtimeOnly "curse.maven:mekanism-268560:2835175"
+    compileOnly "curse.maven:projecte-226410:2666545"
+    runtimeOnly "curse.maven:projecte-226410:2666545"
+    compileOnly "curse.maven:mekanism-ce-unofficial-840735:6907547"
+    runtimeOnly "curse.maven:mekanism-ce-unofficial-840735:6907547"
+
+    compileOnly "curse.maven:mixin-booter-419286:6344449"
+    runtimeOnly "curse.maven:mixin-booter-419286:6344449"
+    compileOnly "curse.maven:ae2-extended-life-570458:6302098"
+    runtimeOnly "curse.maven:ae2-extended-life-570458:6302098"
+    compileOnly "curse.maven:crazyae-1111042:6840104"
+    runtimeOnly "curse.maven:crazyae-1111042:6840104"
+
+   // compileOnly "curse.maven:mystical-agriculture-246640:2704562"
+    //runtimeOnly "curse.maven:mystical-agriculture-246640:2704562"
+
+   // compileOnly "curse.maven:cyclic-239286:4075832"
+   // runtimeOnly "curse.maven:cyclic-239286:4075832"
+
     compileOnly "curse.maven:crafttweaker-239197:5486112"
     runtimeOnly "curse.maven:crafttweaker-239197:5486112"
-    compileOnly "curse.maven:projecte-226410:2702991"
-    runtimeOnly "curse.maven:projecte-226410:2702991"
     compileOnly "curse.maven:top-addons-247111:2887479"
     runtimeOnly "curse.maven:top-addons-247111:2887479"
     compileOnly "curse.maven:worldedit-225608:2941712"

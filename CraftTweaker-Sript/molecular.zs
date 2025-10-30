@@ -7,8 +7,8 @@ TileRfMolecular.addRecipe(<minecraft:wool:11>*1, <minecraft:diamond_block>*2, 10
 
 
 //EXAMPLE:
-//TileRfMolecular.addRecipe(<minecraft:stone>*1, <minecraft:diamond_block>*2, 1000000000);
-//Input : <minecraft:stone>*1 -> stone, count 1;
+//TileRfMolecular.addRecipe(<minecraft:wool:11>*1, <minecraft:diamond_block>*2, 1000000000);
+//Input : <minecraft:wool:11>*1 -> wool, meta 11, count 1;
 //Output : <minecraft:diamond_block>*2 -> Diamond_block, Count 2;
 //Energy : 1000000000 -> 1 billion
 //Maximum energy MAX java Long value

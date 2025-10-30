@@ -1,0 +1,23 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "tce:furnace_luck",
+    "textures": {
+      "base_luck": "tce:blocks/base_luck",
+      "particle": "tce:blocks/base_luck"
+    },
+    "transform": "forge:default-block"
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{
+      "model": "tce:furnace_luck_inventory",
+      "textures": {
+        "base_luck": "tce:blocks/base_luck",
+        "particle": "tce:blocks/base_luck"
+      },
+      "transform": "forge:default-block"
+    }],
+    "destroyed": [{}]
+  }
+}

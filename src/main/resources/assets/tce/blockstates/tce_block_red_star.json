@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "normal": { 
+      "model": "tce:tce_block_red_star" 
+    },
+    "inventory": { 
+      "model": "tce:tce_block_red_star" 
+    }
+  }
+}
