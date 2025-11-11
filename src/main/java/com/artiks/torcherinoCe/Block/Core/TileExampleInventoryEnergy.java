@@ -7,7 +7,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
 import org.jetbrains.annotations.NotNull;
-
 import java.util.Map;
 
 public abstract class TileExampleInventoryEnergy extends TileExampleInventory implements IEnergyTile {
@@ -26,6 +25,7 @@ public abstract class TileExampleInventoryEnergy extends TileExampleInventory im
         }
         return super.getCapability(capability, facing);
     }
+
     @Override
     public boolean hasCapability(@NotNull Capability<?> capability, EnumFacing facing) {
         if (capability == CapabilityEnergy.ENERGY) {

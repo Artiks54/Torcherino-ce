@@ -29,7 +29,7 @@ public class GuiRfMolecularLegendary extends ExampleGuiContainer {
         int progress = (int) Math.max(0, Math.min(100, percentage));
         List<String> tooltipLines = Arrays.asList(
                 "Progress: " + progress + "%",
-                "Recipes: " + tile.getActiveCount(),
+                "Recipes: " + tile.getActiveCount() + " / 12",
                 "RF-Tick: " + EnergyFormat.formatNumber(tile.getEnergyPerTick()),
                 EnergyFormat.formatNumber(tile.getEnergyCollected()) + " / " + EnergyFormat.formatNumber(tile.getTotalEnergyRequired())
         );

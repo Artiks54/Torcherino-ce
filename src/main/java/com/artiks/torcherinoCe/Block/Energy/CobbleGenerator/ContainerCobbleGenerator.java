@@ -1,6 +1,7 @@
 package com.artiks.torcherinoCe.Block.Energy.CobbleGenerator;
 
 import com.artiks.torcherinoCe.Block.Core.ExampleContainer;
+import com.artiks.torcherinoCe.Block.Core.Slots.SlotEnergyModule;
 import com.artiks.torcherinoCe.Block.Core.Slots.SlotItemExport;
 import com.artiks.torcherinoCe.Block.Core.Slots.SlotOut;
 import com.artiks.torcherinoCe.Block.Core.Slots.SlotUpgradeGen;
@@ -12,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class ContainerCobbleGenerator extends ExampleContainer {
 
-    final int totalSlots = 32;
+    final int totalSlots = 33;
 
     public ContainerCobbleGenerator(InventoryPlayer inventoryPlayer, TileCobbleGenerator tileEntity) {
         super(tileEntity);
@@ -20,10 +21,12 @@ public class ContainerCobbleGenerator extends ExampleContainer {
         this.addSlotToContainer(new SlotItemExport(tileEntity, 0, 215, 5));
 //Upgrade id 1
         this.addSlotToContainer(new SlotUpgradeGen(tileEntity, 1, 215, 30));
-// Output id 2-31
+//Upgrade energy id 2
+        this.addSlotToContainer(new SlotEnergyModule(tileEntity,2,215,55));
+// Output id 3-32
         for (int i = 0; i < 3; ++i) {
             for (int j = 0; j < 10; ++j) {
-                this.addSlotToContainer(new SlotOut(tileEntity, j + i * 10 + 2,14 + j * 18, 8 + i * 18));
+                this.addSlotToContainer(new SlotOut(tileEntity, j + i * 10 + 3,14 + j * 18, 8 + i * 18));
             }
         }
         for (int i = 0; i < 3; ++i) {
@@ -48,7 +51,7 @@ public class ContainerCobbleGenerator extends ExampleContainer {
                     return ItemStack.EMPTY;
                 }
             } else {
-                if (!this.mergeItemStack(slotStack, 0, 2, false)) {
+                if (!this.mergeItemStack(slotStack, 0, 3, false)) {
                     return ItemStack.EMPTY;
                 }
             }

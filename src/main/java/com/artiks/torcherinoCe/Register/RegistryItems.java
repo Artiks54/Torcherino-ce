@@ -59,8 +59,4 @@ public final class RegistryItems {
     public static final Item raw_time_nugget = new ItemBase(mod_id +"raw_time_nugget");
     public static final Item upgrade_sand = new ItemBase(mod_id + "upgrade_sand");
     public static final Item upgrade_gravel = new ItemBase(mod_id + "upgrade_gravel");
-
-//    public static final Item StackModule = new ItemBase(mod_id +"stack_module");
-//    public static final Item InfiniteEngineModule = new ItemBase(mod_id +"infinite_module");
-//    public static final Item SmeltingModule = new ItemBase(mod_id +"smelting_module");
 }

@@ -882,7 +882,7 @@ public final class RegistryRecipe {
                 'B', new ItemStack(time_particle_gold),
                 'E', new ItemStack(binding_Element3),
                 'P', new ItemStack(Items.DIAMOND_PICKAXE));
-        String[] multipliers = {"x4", "x8", "x16", "x32", "x64", "x128", "x256", "x512", "x1024", "x2048"};
+        String[] multipliers = {"x4", "x8", "x16", "x32", "x64", "x128", "x256", "x512", "x1024"};
         for (int i = 0; i < multipliers.length; i++) {
             int meta = i + 1;
             GameRegistry.addShapedRecipe(

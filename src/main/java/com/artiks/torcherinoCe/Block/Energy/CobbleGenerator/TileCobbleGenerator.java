@@ -18,8 +18,8 @@ public class TileCobbleGenerator extends TileExampleInventoryEnergy implements I
     private ItemStack generation = new ItemStack(Blocks.COBBLESTONE,1920);
 
     public TileCobbleGenerator() {
-        super(32,100_000,Integer.MAX_VALUE,0);
-        setSlotsForExtract(2, 31);
+        super(33,100_000,Integer.MAX_VALUE,0);
+        setSlotsForExtract(3, 32);
     }
 
     @Override

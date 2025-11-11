@@ -10,7 +10,7 @@ import java.util.Objects;
 
 public class ItemFortuneModule extends ItemBase {
 
-    private static final int[] FORTUNE_LEVELS = {2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048};
+    private static final int[] FORTUNE_LEVELS = {2, 4, 8, 16, 32, 64, 128, 256, 512, 1024};
 
     public ItemFortuneModule(String name) {
         super(name);
