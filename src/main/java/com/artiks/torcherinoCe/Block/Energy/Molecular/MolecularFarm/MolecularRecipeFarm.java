@@ -66,51 +66,63 @@ public class MolecularRecipeFarm extends IForgeRegistryEntry.Impl<IRecipe> imple
         return new ArrayList<>(recipes);
     }
 
+    private static void addRecipe(ItemStack input, ItemStack output, long energy){
+        MolecularRecipeFarm.addRecipe(new MolecularRecipeFarm(input,output,energy));
+    }
+
     public static void postInit() {
         //Other vanilla
-        MolecularRecipeFarm.addRecipe(new MolecularRecipeFarm(new ItemStack(Blocks.DEADBUSH,1),new ItemStack(Blocks.DEADBUSH,1),75));
-        MolecularRecipeFarm.addRecipe(new MolecularRecipeFarm(new ItemStack(Blocks.VINE,1),new ItemStack(Blocks.VINE,1),75));
-        MolecularRecipeFarm.addRecipe(new MolecularRecipeFarm(new ItemStack(Blocks.WATERLILY,1),new ItemStack(Blocks.WATERLILY,1),75));
-        MolecularRecipeFarm.addRecipe(new MolecularRecipeFarm(new ItemStack(Blocks.TALLGRASS,1,1),new ItemStack(Blocks.TALLGRASS,1,1),75));
-        MolecularRecipeFarm.addRecipe(new MolecularRecipeFarm(new ItemStack(Blocks.TALLGRASS,1,2),new ItemStack(Blocks.TALLGRASS,1,2),75));
+        addRecipe(new ItemStack(Blocks.DEADBUSH,1),new ItemStack(Blocks.DEADBUSH,1),75);
+        addRecipe(new ItemStack(Blocks.VINE,1),new ItemStack(Blocks.VINE,1),75);
+        addRecipe(new ItemStack(Blocks.WATERLILY,1),new ItemStack(Blocks.WATERLILY,1),75);
+        addRecipe(new ItemStack(Blocks.TALLGRASS,1,1),new ItemStack(Blocks.TALLGRASS,1,1),75);
+        addRecipe(new ItemStack(Blocks.TALLGRASS,1,2),new ItemStack(Blocks.TALLGRASS,1,2),75);
         //Vanilla flowers
-        MolecularRecipeFarm.addRecipe(new MolecularRecipeFarm(new ItemStack(Blocks.YELLOW_FLOWER,1),new ItemStack(Blocks.YELLOW_FLOWER,1),100));
-        MolecularRecipeFarm.addRecipe(new MolecularRecipeFarm(new ItemStack(Blocks.RED_FLOWER,1),new ItemStack(Blocks.RED_FLOWER,1),100));
-        MolecularRecipeFarm.addRecipe(new MolecularRecipeFarm(new ItemStack(Blocks.RED_FLOWER,1,1),new ItemStack(Blocks.RED_FLOWER,1,1),100));
-        MolecularRecipeFarm.addRecipe(new MolecularRecipeFarm(new ItemStack(Blocks.RED_FLOWER,1,2),new ItemStack(Blocks.RED_FLOWER,1,2),100));
-        MolecularRecipeFarm.addRecipe(new MolecularRecipeFarm(new ItemStack(Blocks.RED_FLOWER,1,3),new ItemStack(Blocks.RED_FLOWER,1,3),100));
-        MolecularRecipeFarm.addRecipe(new MolecularRecipeFarm(new ItemStack(Blocks.RED_FLOWER,1,4),new ItemStack(Blocks.RED_FLOWER,1,4),100));
-        MolecularRecipeFarm.addRecipe(new MolecularRecipeFarm(new ItemStack(Blocks.RED_FLOWER,1,5),new ItemStack(Blocks.RED_FLOWER,1,5),100));
-        MolecularRecipeFarm.addRecipe(new MolecularRecipeFarm(new ItemStack(Blocks.RED_FLOWER,1,6),new ItemStack(Blocks.RED_FLOWER,1,6),100));
-        MolecularRecipeFarm.addRecipe(new MolecularRecipeFarm(new ItemStack(Blocks.RED_FLOWER,1,7),new ItemStack(Blocks.RED_FLOWER,1,7),100));
-        MolecularRecipeFarm.addRecipe(new MolecularRecipeFarm(new ItemStack(Blocks.RED_FLOWER,1,8),new ItemStack(Blocks.RED_FLOWER,1,8),100));
+        addRecipe(new ItemStack(Blocks.YELLOW_FLOWER,1),new ItemStack(Blocks.YELLOW_FLOWER,1),100);
+        addRecipe(new ItemStack(Blocks.RED_FLOWER,1),new ItemStack(Blocks.RED_FLOWER,1),100);
+        addRecipe(new ItemStack(Blocks.RED_FLOWER,1,1),new ItemStack(Blocks.RED_FLOWER,1,1),100);
+        addRecipe(new ItemStack(Blocks.RED_FLOWER,1,2),new ItemStack(Blocks.RED_FLOWER,1,2),100);
+        addRecipe(new ItemStack(Blocks.RED_FLOWER,1,3),new ItemStack(Blocks.RED_FLOWER,1,3),100);
+        addRecipe(new ItemStack(Blocks.RED_FLOWER,1,4),new ItemStack(Blocks.RED_FLOWER,1,4),100);
+        addRecipe(new ItemStack(Blocks.RED_FLOWER,1,5),new ItemStack(Blocks.RED_FLOWER,1,5),100);
+        addRecipe(new ItemStack(Blocks.RED_FLOWER,1,6),new ItemStack(Blocks.RED_FLOWER,1,6),100);
+        addRecipe(new ItemStack(Blocks.RED_FLOWER,1,7),new ItemStack(Blocks.RED_FLOWER,1,7),100);
+        addRecipe(new ItemStack(Blocks.RED_FLOWER,1,8),new ItemStack(Blocks.RED_FLOWER,1,8),100);
         //Vanilla flowers double
-        MolecularRecipeFarm.addRecipe(new MolecularRecipeFarm(new ItemStack(Blocks.DOUBLE_PLANT,1),new ItemStack(Blocks.DOUBLE_PLANT,1),125));
-        MolecularRecipeFarm.addRecipe(new MolecularRecipeFarm(new ItemStack(Blocks.DOUBLE_PLANT,1,1),new ItemStack(Blocks.DOUBLE_PLANT,1,1),125));
-        MolecularRecipeFarm.addRecipe(new MolecularRecipeFarm(new ItemStack(Blocks.DOUBLE_PLANT,1,4),new ItemStack(Blocks.DOUBLE_PLANT,1,4),125));
-        MolecularRecipeFarm.addRecipe(new MolecularRecipeFarm(new ItemStack(Blocks.DOUBLE_PLANT,1,5),new ItemStack(Blocks.DOUBLE_PLANT,1,5),125));
+        addRecipe(new ItemStack(Blocks.DOUBLE_PLANT,1),new ItemStack(Blocks.DOUBLE_PLANT,1),125);
+        addRecipe(new ItemStack(Blocks.DOUBLE_PLANT,1,1),new ItemStack(Blocks.DOUBLE_PLANT,1,1),125);
+        addRecipe(new ItemStack(Blocks.DOUBLE_PLANT,1,4),new ItemStack(Blocks.DOUBLE_PLANT,1,4),125);
+        addRecipe(new ItemStack(Blocks.DOUBLE_PLANT,1,5),new ItemStack(Blocks.DOUBLE_PLANT,1,5),125);
         //Default
-        MolecularRecipeFarm.addRecipe(new MolecularRecipeFarm(new ItemStack(Items.NETHER_WART,1),new ItemStack(Items.NETHER_WART,1),150));
-        MolecularRecipeFarm.addRecipe(new MolecularRecipeFarm(new ItemStack(Items.CHORUS_FRUIT,1),new ItemStack(Items.CHORUS_FRUIT,1),150));
-        MolecularRecipeFarm.addRecipe(new MolecularRecipeFarm(new ItemStack(Items.DYE,1,3),new ItemStack(Items.DYE,1,3),150));
-        MolecularRecipeFarm.addRecipe(new MolecularRecipeFarm(new ItemStack(Items.REEDS,1),new ItemStack(Items.REEDS,1),150));
-        MolecularRecipeFarm.addRecipe(new MolecularRecipeFarm(new ItemStack(Blocks.RED_MUSHROOM,1),new ItemStack(Blocks.RED_MUSHROOM,1),150));
-        MolecularRecipeFarm.addRecipe(new MolecularRecipeFarm(new ItemStack(Blocks.BROWN_MUSHROOM,1),new ItemStack(Blocks.BROWN_MUSHROOM,1),150));
-        MolecularRecipeFarm.addRecipe(new MolecularRecipeFarm(new ItemStack(Blocks.CACTUS,1),new ItemStack(Blocks.CACTUS,1),150));
-        MolecularRecipeFarm.addRecipe(new MolecularRecipeFarm(new ItemStack(Items.POTATO,1),new ItemStack(Items.POTATO,1),150));
-        MolecularRecipeFarm.addRecipe(new MolecularRecipeFarm(new ItemStack(Items.CARROT,1),new ItemStack(Items.CARROT,1),150));
-        MolecularRecipeFarm.addRecipe(new MolecularRecipeFarm(new ItemStack(Items.MELON_SEEDS,1),new ItemStack(Blocks.MELON_BLOCK,1),150));
-        MolecularRecipeFarm.addRecipe(new MolecularRecipeFarm(new ItemStack(Items.PUMPKIN_SEEDS,1),new ItemStack(Blocks.PUMPKIN,1),150));
-        MolecularRecipeFarm.addRecipe(new MolecularRecipeFarm(new ItemStack(Items.WHEAT_SEEDS,1),new ItemStack(Items.WHEAT,1),150));
-        MolecularRecipeFarm.addRecipe(new MolecularRecipeFarm(new ItemStack(Items.WHEAT,1),new ItemStack(Items.WHEAT_SEEDS,1),150));
-        MolecularRecipeFarm.addRecipe(new MolecularRecipeFarm(new ItemStack(Items.BEETROOT_SEEDS,1),new ItemStack(Items.BEETROOT,1),150));
-        MolecularRecipeFarm.addRecipe(new MolecularRecipeFarm(new ItemStack(Items.BEETROOT,1),new ItemStack(Items.BEETROOT_SEEDS,1),150));
+        addRecipe(new ItemStack(Items.NETHER_WART,1),new ItemStack(Items.NETHER_WART,1),150);
+        addRecipe(new ItemStack(Items.CHORUS_FRUIT,1),new ItemStack(Items.CHORUS_FRUIT,1),150);
+        addRecipe(new ItemStack(Items.DYE,1,3),new ItemStack(Items.DYE,1,3),150);
+        addRecipe(new ItemStack(Items.REEDS,1),new ItemStack(Items.REEDS,1),150);
+        addRecipe(new ItemStack(Blocks.RED_MUSHROOM,1),new ItemStack(Blocks.RED_MUSHROOM,1),150);
+        addRecipe(new ItemStack(Blocks.BROWN_MUSHROOM,1),new ItemStack(Blocks.BROWN_MUSHROOM,1),150);
+        addRecipe(new ItemStack(Blocks.CACTUS,1),new ItemStack(Blocks.CACTUS,1),150);
+        addRecipe(new ItemStack(Items.POTATO,1),new ItemStack(Items.POTATO,1),150);
+        addRecipe(new ItemStack(Items.CARROT,1),new ItemStack(Items.CARROT,1),150);
+        addRecipe(new ItemStack(Items.MELON_SEEDS,1),new ItemStack(Blocks.MELON_BLOCK,1),150);
+        addRecipe(new ItemStack(Items.PUMPKIN_SEEDS,1),new ItemStack(Blocks.PUMPKIN,1),150);
+        addRecipe(new ItemStack(Items.WHEAT_SEEDS,1),new ItemStack(Items.WHEAT,1),150);
+        addRecipe(new ItemStack(Items.WHEAT,1),new ItemStack(Items.WHEAT_SEEDS,1),150);
+        addRecipe(new ItemStack(Items.BEETROOT_SEEDS,1),new ItemStack(Items.BEETROOT,1),150);
+        addRecipe(new ItemStack(Items.APPLE,1),new ItemStack(Items.APPLE,1),150);
+        addRecipe(new ItemStack(Items.BEETROOT,1),new ItemStack(Items.BEETROOT_SEEDS,1),150);
+       //Sapling woods
+        addRecipe(new ItemStack(Blocks.SAPLING,1),new ItemStack(Blocks.LOG,1),175);
+        addRecipe(new ItemStack(Blocks.SAPLING,1,1),new ItemStack(Blocks.LOG,1,1),175);
+        addRecipe(new ItemStack(Blocks.SAPLING,1,2),new ItemStack(Blocks.LOG,1,2),175);
+        addRecipe(new ItemStack(Blocks.SAPLING,1,3),new ItemStack(Blocks.LOG,1,3),175);
+        addRecipe(new ItemStack(Blocks.SAPLING,1,4),new ItemStack(Blocks.LOG2,1),175);
+        addRecipe(new ItemStack(Blocks.SAPLING,1,5),new ItemStack(Blocks.LOG2,1,1),175);
         //Leaves
-        MolecularRecipeFarm.addRecipe(new MolecularRecipeFarm(new ItemStack(Blocks.LEAVES,1),new ItemStack(Blocks.LEAVES,1),75));
-        MolecularRecipeFarm.addRecipe(new MolecularRecipeFarm(new ItemStack(Blocks.LEAVES2,1),new ItemStack(Blocks.LEAVES2,1),95));
-        MolecularRecipeFarm.addRecipe(new MolecularRecipeFarm(new ItemStack(Blocks.LEAVES,1,1),new ItemStack(Blocks.LEAVES,1,1),75));
-        MolecularRecipeFarm.addRecipe(new MolecularRecipeFarm(new ItemStack(Blocks.LEAVES,1,2),new ItemStack(Blocks.LEAVES,1,2),75));
-        MolecularRecipeFarm.addRecipe(new MolecularRecipeFarm(new ItemStack(Blocks.LEAVES,1,3),new ItemStack(Blocks.LEAVES,1,3),75));
-        MolecularRecipeFarm.addRecipe(new MolecularRecipeFarm(new ItemStack(Blocks.LEAVES2,1,1),new ItemStack(Blocks.LEAVES2,1,1),95));
+        addRecipe(new ItemStack(Blocks.LEAVES,1),new ItemStack(Blocks.LEAVES,1),75);
+        addRecipe(new ItemStack(Blocks.LEAVES2,1),new ItemStack(Blocks.LEAVES2,1),75);
+        addRecipe(new ItemStack(Blocks.LEAVES,1,1),new ItemStack(Blocks.LEAVES,1,1),75);
+        addRecipe(new ItemStack(Blocks.LEAVES,1,2),new ItemStack(Blocks.LEAVES,1,2),75);
+        addRecipe(new ItemStack(Blocks.LEAVES,1,3),new ItemStack(Blocks.LEAVES,1,3),75);
+        addRecipe(new ItemStack(Blocks.LEAVES2,1,1),new ItemStack(Blocks.LEAVES2,1,1),75);
     }
 }
