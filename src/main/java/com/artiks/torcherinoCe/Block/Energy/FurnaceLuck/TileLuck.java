@@ -16,11 +16,13 @@ public class TileLuck extends TileExampleInventoryEnergy implements IFortuneModu
     private int Progress;
     private final int MaxProgress = 100;
     private int Fortune = 1;
+    private boolean isWorking;
     @Override public void setFortune(int fortune) {this.Fortune = fortune;}
     public int getMaxProgress() { return MaxProgress; }
     public int getEnergyPerTick() {return EnergyPerTick;}
     public int getProgress(){return Progress;}
     @Override public int getInventoryStackLimit() {return Integer.MAX_VALUE;}
+    public boolean isWorking() {return isWorking;}
 
     public TileLuck() {
         super(58,1_000_000,Integer.MAX_VALUE,0);
@@ -33,15 +35,18 @@ public class TileLuck extends TileExampleInventoryEnergy implements IFortuneModu
         super.update();
         if (world.isRemote) return;
         if (getEnergyStored() < EnergyPerTick) {
+            isWorking = false;
             return;
         }
         if (hasValidInputItems()) {
             consumeEnergy(EnergyPerTick);
+            isWorking = true;
             if (++Progress >= MaxProgress){
                 processAutoSmelting();
                 Progress = 0;
             }
         } else {
+            isWorking = false;
             Progress = 0;
         }
     }
@@ -146,6 +151,7 @@ public class TileLuck extends TileExampleInventoryEnergy implements IFortuneModu
     public void getSyncData(Map<String, Object> data) {
         super.getSyncData(data);
         data.put("Progress", Progress);
+        data.put("work",isWorking);
     }
 
     @Override
@@ -153,6 +159,9 @@ public class TileLuck extends TileExampleInventoryEnergy implements IFortuneModu
         super.setSyncData(data);
         if(data.containsKey("Progress")){
             this.Progress = (int) data.get("Progress");
+        }
+        if(data.containsKey("work")){
+            this.isWorking = (boolean) data.get("work");
         }
     }
 }
